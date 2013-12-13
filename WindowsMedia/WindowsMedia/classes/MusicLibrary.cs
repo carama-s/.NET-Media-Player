@@ -11,6 +11,7 @@ namespace MWMPV2.classes
     {
         public List<String> Sources { get; set; }
         public Dictionary<String, MusicArtist> Artists { get; private set; }
+        public static String[] Extensions = { ".mp3", ".flac" };
 
         public MusicLibrary(List<String> sources)
         {
@@ -32,10 +33,12 @@ namespace MWMPV2.classes
 
         public void GenerateLibrary()
         {
+            Artists.Clear();
             var musics = new List<string>();
             foreach (String dir in Sources)
             {
-                var files = Directory.GetFileSystemEntries(dir, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".flac"));
+                var files = Directory.GetFileSystemEntries(dir, "*.*", SearchOption.AllDirectories).Where(
+                    s => Extensions.Contains(Path.GetExtension(s)));
                 foreach (String file in files)
                 {
                     if (!musics.Contains(file))
@@ -50,7 +53,7 @@ namespace MWMPV2.classes
                         else
                             artist = Artists[tags.Tag.FirstPerformer];
                         var album = artist.GetOrCreateAlbum(tags.Tag.Album);
-                        album.AddTitle(tags);
+                        album.AddTitle(tags, file);
                         musics.Add(file);
                     }
                 }

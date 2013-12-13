@@ -27,9 +27,9 @@ namespace MWMPV2.classes
             }
         }
 
-        public MusicTitle AddTitle(TagLib.File tags)
+        public MusicTitle AddTitle(TagLib.File tags, String file)
         {
-            MusicTitle title = new MusicTitle(Artist, this, tags);
+            MusicTitle title = new MusicTitle(Artist, this, tags, file);
             Titles.Add(title);
             Titles.Sort((title1, title2) => title1.TrackNumber.CompareTo(title2.TrackNumber));
             return title;

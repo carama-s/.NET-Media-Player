@@ -3,75 +3,22 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:MWMPV2.classes">
 	<!-- Resource dictionary entries should be defined here. -->
-    <!-- Masque Header -->
-    <Style x:Key="HideHeader" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Visibility" Value="Hidden"/>
-    </Style>
-	<!-- Style listView Header -->
-    <Style x:Key="TransHeader" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Background" Value="Transparent"/>
-    </Style>
     <!-- Converter pour Duration (TimeSpan to String) -->
     <local:DurationConverter x:Key="durationConverter" />
-	<!--Template pour Menu en mode treeview-->
-    <HierarchicalDataTemplate x:Key="MenuTreeViewTemplate" ItemsSource="{Binding SubMenu}">
-        <Grid Width="109.6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="32*"/>
-            </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="1" Source="{Binding Image}" Stretch="Uniform" Margin="1"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" Margin="1,0,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Center" Height="Auto" Width="Auto" TextAlignment="Justify"/>
-        </Grid>
-        <HierarchicalDataTemplate.ItemTemplate>
-            <DataTemplate>
-                <Grid Width="109.6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="27">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24*"/>
-                        <ColumnDefinition Width="31*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="1" Source="{Binding Image}" Stretch="Uniform" Margin="0,2"/>
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" Margin="1.001,0,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Center" Height="Auto" Width="Auto" TextAlignment="Justify"/>
-                </Grid>
-            </DataTemplate>
-        </HierarchicalDataTemplate.ItemTemplate>
-    </HierarchicalDataTemplate>
-	<!--Grille de base pour la listview en mode Music-->
-    <GridView x:Key="ListViewMusic" ColumnHeaderContainerStyle="{DynamicResource HideHeader}" AllowsColumnReorder="False">
-        <GridViewColumn CellTemplate="{DynamicResource ListViewItemContent}"/>
-    </GridView>
-	<!--Template pour la listview en mode Music-->
-    <DataTemplate x:Key="ListViewItemContent">
-    	<Grid Height="172.8" Width="384">
-    		<Grid.ColumnDefinitions>
-    			<ColumnDefinition Width="111*"/>
-    			<ColumnDefinition Width="247*"/>
-    		</Grid.ColumnDefinitions>
-    		<Grid.RowDefinitions>
-    			<RowDefinition Height="*"/>
-    		</Grid.RowDefinitions>
-            <ListView Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="0,-2,0,0" VerticalAlignment="Stretch" ItemsSource="{Binding}">
-            	<ListView.View>
-            		<GridView>
-                        <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}"/>
-                        <GridViewColumn Header="#" DisplayMemberBinding="{Binding TrackNumber}"/>
-                        <GridViewColumn Header="Durée" DisplayMemberBinding="{Binding Duration, Converter={StaticResource durationConverter}}"/>
-                    </GridView>
-            	</ListView.View>
-            </ListView>
-            <StackPanel HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,20.4">
-            	<Image HorizontalAlignment="Stretch" Height="98" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-            	<TextBlock Height="19" TextWrapping="Wrap" Text="{Binding Name}" Background="{x:Null}" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
-            	<TextBlock Height="16.6" TextWrapping="Wrap" Text="{Binding Artist.Name}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" RenderTransformOrigin="0.5,0.5" Margin="0"/>
-            </StackPanel>
-        </Grid>
+    <!--Template pour ListBoxMain (Music)-->
+    <DataTemplate x:Key="MainMusicTemplate">
+        <StackPanel HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,20.4">
+            <Image HorizontalAlignment="Stretch" Height="98" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+            <TextBlock Height="19" TextWrapping="Wrap" Text="{Binding Name}" Background="{x:Null}" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
+            <TextBlock Height="16.6" TextWrapping="Wrap" Text="{Binding Artist.Name}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" RenderTransformOrigin="0.5,0.5" Margin="0"/>
+        </StackPanel>
     </DataTemplate>
-	<!--Grille d'intérieur pour la listview en mode Music-->
-    <DataTemplate x:Key="ListViewSong">
+    <!--Template pour ListBoxSecond (Music)-->
+    <DataTemplate x:Key="SecondMusicTemplate">
         <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
-           <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-           <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-           <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>
