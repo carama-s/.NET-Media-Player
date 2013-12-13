@@ -47,11 +47,18 @@ namespace WindowsMedia
             MediaPlayer.LoadedBehavior = MediaState.Manual;
             MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
+            //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg";
+            source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
+            //source_ = "E:\\HappinessTherapy.mkv";
+            //source_ = "C:\\Users\\Robert\\Music\\Assassin's Creed 4 Black Flag Original Soundtrack MP3 V0 Transcode\\04. The High Seas.mp3";
+            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
+            
             MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
             this.SliderVolume.Value = 50;
-            this.SliderTime.Value = 0;
+
+            this.SliderVolume.Value = 50;
+            this.SliderTime.Width = this.Width;
             SliderTime.IsMoveToPointEnabled = true;
 
             List<TreeMenuTemplateClass> root = new List<TreeMenuTemplateClass>();
@@ -83,7 +90,6 @@ namespace WindowsMedia
                 MediaPlayer.Play();
                 var tags = TagLib.File.Create(this.source_);
                 this.duree_ = tags.Properties.Duration;
-                SliderTime.Width = duree_.TotalSeconds;
             }
             else // this.state_ == State.PLAY
             {
@@ -168,6 +174,10 @@ namespace WindowsMedia
         private void SliderTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+            double SliderValue = (double)SliderTime.Value * (SliderTime.Width / 50);
+            double Position = (SliderValue * (double)duree_.TotalSeconds) / SliderTime.Width;
+            Console.Out.WriteLine(Position);
+            MediaPlayer.Position = TimeSpan.FromSeconds(Position);
         }
 
         private void EventClicMediaElement(object sender, MouseButtonEventArgs e)
@@ -177,6 +187,7 @@ namespace WindowsMedia
                 this.WindowStyle = WindowStyle.None;
                 this.WindowState = WindowState.Maximized;
                 MediaPlayer.Stretch = Stretch.Fill;
+                this.SliderTime.Width = this.Width;
                 this.isFullScreen_ = true;
             }
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
@@ -184,6 +195,7 @@ namespace WindowsMedia
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.WindowState = WindowState.Normal;
                 MediaPlayer.Stretch = Stretch.Uniform;
+                this.SliderTime.Width = this.Width;
                 this.isFullScreen_ = false;
             }
         }
