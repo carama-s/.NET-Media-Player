@@ -4,8 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
         Title="WindowsMedia" Height="350" Width="525">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="GridBibliotheque" Background="Red" OpacityMask="Red"/>
-        <Grid x:Name="GridLecture" Background="Black" OpacityMask="Black" Visibility="Hidden">
+        <Grid x:Name="GridBibliotheque" OpacityMask="Black" Background="#FF181515">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="208*"/>
+                <ColumnDefinition Width="176*"/>
+                <ColumnDefinition Width="135*" MaxWidth="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36*" MaxHeight="36"/>
+                <RowDefinition Height="225*"/>
+                <RowDefinition Height="72*" MaxHeight="72"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0.4" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+            <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="#FFA5AAB1" Margin="0,0,-0.663,0.4"/>
+        </Grid>
+        <Grid x:Name="GridLecture" Background="Black" OpacityMask="Black" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement"/>
         </Grid>
         <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">

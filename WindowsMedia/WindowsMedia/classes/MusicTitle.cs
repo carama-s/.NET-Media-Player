@@ -40,9 +40,11 @@ namespace MWMPV2.classes
         public string Composer { get; private set; }
         public TimeSpan Duration { get; private set; }
         public BitmapFrame Image { get; private set; }
+        public String Path { get; private set; }
 
-        public MusicTitle(MusicArtist artist, MusicAlbum album, TagLib.File tags)
+        public MusicTitle(MusicArtist artist, MusicAlbum album, TagLib.File tags, String file)
         {
+            this.Path = file;
             this.Artist = artist;
             this.Album = album;
             this.Genre = tags.Tag.FirstGenre;

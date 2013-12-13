@@ -47,28 +47,12 @@ namespace WindowsMedia
             MediaPlayer.LoadedBehavior = MediaState.Manual;
             MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
-            MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-
             this.SliderVolume.Value = 50;
             this.SliderTime.Value = 0;
             SliderTime.IsMoveToPointEnabled = true;
-
-            List<TreeMenuTemplateClass> root = new List<TreeMenuTemplateClass>();
-            root.Add(new TreeMenuTemplateClass("Sélections", ""));
-            TreeMenuTemplateClass music = new TreeMenuTemplateClass("Musiques", "");
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Interprète", ""));
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Album", ""));
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Genre", ""));
-            root.Add(music);
-            root.Add(new TreeMenuTemplateClass("Vidéos", ""));
-            root.Add(new TreeMenuTemplateClass("Images", ""));
-            /*
-            MenuTreeView.ItemsSource = root;
             var lib = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             lib.GenerateLibrary();
-            ListViewContent.ItemsSource = lib;
-            */
+            MainBox.ItemsSource = lib;
 
         }
 
