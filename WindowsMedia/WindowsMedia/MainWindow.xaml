@@ -1,0 +1,77 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
+        Title="WindowsMedia" Height="350" Width="525">
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="GridBibliotheque" Background="Red" OpacityMask="Red"/>
+        <Grid x:Name="GridLecture" Background="Black" OpacityMask="Black" Visibility="Hidden">
+            <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement"/>
+        </Grid>
+        <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">
+            <Slider x:Name="SliderTime" VerticalAlignment="Top" Margin="70,4.8,70,0" Grid.Row="1" ValueChanged="SliderTime_ValueChanged" Maximum="50"/>
+            <Label x:Name="LabelCurrentTime" Content="00.00.00" HorizontalAlignment="Left" Margin="12,0.8,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label x:Name="LabelLeftTime" Content="42.00.00" HorizontalAlignment="Right" Margin="0,0.8,12,0" Grid.Row="1" VerticalAlignment="Top"/>
+            <Grid HorizontalAlignment="Center" Height="47" Margin="0,22.8,0,0.6" VerticalAlignment="Center" Width="456" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="155*"/>
+                    <ColumnDefinition Width="44*"/>
+                    <ColumnDefinition Width="58*"/>
+                    <ColumnDefinition Width="44*"/>
+                    <ColumnDefinition Width="155*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonPlay" Content="" HorizontalAlignment="Center" Margin="11.6,6,11.8,6" VerticalAlignment="Center" Width="35" Height="35" BorderThickness="0" Grid.Column="2" Click="ButtonPlay_Click" Style="{DynamicResource ButtonPlayStyle}">
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-play-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-play-barre.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ButtonNext" Content="" Grid.Column="3" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0">
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="1" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                            <SkewTransform AngleY="0" AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ButtonStop" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Margin="117,11,13.2,11" Height="25" BorderThickness="0" Click="ButtonStop_Click">
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-stop-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-stop-barre.png"/>
+                    </Button.Background>
+                </Button>
+                <Slider x:Name="SliderVolume" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" Width="68" ValueChanged="SliderVolume_ValueChanged" Maximum="100"/>
+                <Button x:Name="ButtonVolume" Content="" Grid.Column="4" HorizontalAlignment="Left" Margin="29,-1,0,0" VerticalAlignment="Center" Width="30" Height="26" BorderThickness="0" Click="ButtonVolume_Click">
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Button x:Name="ButtonSwitch" Content="S" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="19" Margin="0,0,10,10" Height="19" Click="ButtonSwitch_Click"/>
+        </Grid>
+    </Grid>
+
+</Window>
