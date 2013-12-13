@@ -201,6 +201,5 @@ namespace WindowsMedia
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
         }
-
     }
 }
