@@ -63,23 +63,11 @@ namespace WindowsMedia
 
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.Width = this.Width - 160;
-            this.SliderTime.IsMoveToPointEnabled = true;
+            SliderTime.IsMoveToPointEnabled = true;
 
-            List<TreeMenuTemplateClass> root = new List<TreeMenuTemplateClass>();
-            root.Add(new TreeMenuTemplateClass("Sélections", ""));
-            TreeMenuTemplateClass music = new TreeMenuTemplateClass("Musiques", "");
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Interprète", ""));
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Album", ""));
-            music.SubMenu.Add(new TreeSubMenuTemplateClass("Genre", ""));
-            root.Add(music);
-            root.Add(new TreeMenuTemplateClass("Vidéos", ""));
-            root.Add(new TreeMenuTemplateClass("Images", ""));
-            /*
-            MenuTreeView.ItemsSource = root;
             var lib = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             lib.GenerateLibrary();
-            ListViewContent.ItemsSource = lib;
-            */
+            MainBox.ItemsSource = lib;
 
         }
 
