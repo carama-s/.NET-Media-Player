@@ -48,10 +48,10 @@ namespace WindowsMedia
             MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
             //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg";
-            source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
+            //source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
             //source_ = "E:\\HappinessTherapy.mkv";
             //source_ = "C:\\Users\\Robert\\Music\\Assassin's Creed 4 Black Flag Original Soundtrack MP3 V0 Transcode\\04. The High Seas.mp3";
-            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
+            this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
             
             MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
@@ -213,5 +213,6 @@ namespace WindowsMedia
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
         }
+
     }
 }

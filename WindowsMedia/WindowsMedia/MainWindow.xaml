@@ -8,7 +8,7 @@
         <Grid x:Name="GridLecture" Background="Black" OpacityMask="Black" Visibility="Hidden">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement"/>
         </Grid>
-        <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70" MouseLeave="GridControls_MouseLeave">
+        <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">
             <Slider x:Name="SliderTime" VerticalAlignment="Top" Margin="70,4.8,70,0" Grid.Row="1" ValueChanged="SliderTime_ValueChanged" Maximum="50"/>
             <Label x:Name="LabelCurrentTime" Content="00.00.00" HorizontalAlignment="Left" Margin="12,0.8,0,0" VerticalAlignment="Top" Grid.Row="1"/>
             <Label x:Name="LabelLeftTime" Content="42.00.00" HorizontalAlignment="Right" Margin="0,0.8,12,0" Grid.Row="1" VerticalAlignment="Top"/>
