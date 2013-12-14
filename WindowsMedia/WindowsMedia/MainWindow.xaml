@@ -6,7 +6,7 @@
     <Grid x:Name="MainGrid" LayoutUpdated="MainWindowUpdated">
         <Grid x:Name="GridBibliotheque" OpacityMask="Black" Background="#FF181515">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="208*"/>
+                <ColumnDefinition Width="208*" MaxWidth="350"/>
                 <ColumnDefinition Width="176*"/>
                 <ColumnDefinition Width="135*" MaxWidth="150"/>
             </Grid.ColumnDefinitions>
