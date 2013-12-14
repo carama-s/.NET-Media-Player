@@ -42,7 +42,7 @@
                         <ImageBrush ImageSource="assets/icon-play-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonNext" Content="" Grid.Column="3" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0">
+                <Button x:Name="ButtonNext" Content="" Grid.Column="3" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0" Click="ForwardButtonMediaElement">
                     <Button.OpacityMask>
                         <ImageBrush ImageSource="assets/icon-next-barre.png"/>
                     </Button.OpacityMask>
@@ -50,7 +50,7 @@
                         <ImageBrush ImageSource="assets/icon-next-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="1" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="1" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Click="BackButtonMediaElement">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1" ScaleX="-1"/>

@@ -272,5 +272,17 @@ namespace WindowsMedia
             MusicAlbum al = (MusicAlbum)e.AddedItems[0];
             SecondBox.ItemsSource = al;
         }
+
+        private void BackButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+            var List = this.SecondBox;
+            var Item = List.SelectedItems;
+            //List.ItemsSource
+        }
+
+        private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
