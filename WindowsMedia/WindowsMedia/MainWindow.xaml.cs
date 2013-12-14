@@ -192,15 +192,18 @@ namespace WindowsMedia
         // Gestion de la valeur du curseur du Slide
         private void SliderTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
             if (this.oldSize_ > (this.Width - 160))
                 this.timer_Tick(sender, e);
-            double SliderValue = (double)SliderTime.Value;
-            double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum ;
-            Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
-            Console.Out.WriteLine("slide value = " + SliderValue);
-            if (OldPosition != Position)
-                this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
+            else
+            {
+                double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+                double SliderValue = (double)SliderTime.Value;
+                double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
+                Console.Out.WriteLine("slide value = " + SliderValue);
+                if (OldPosition != Position)
+                    this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
+            }
         }
 
         // Gestion du FullScreen
