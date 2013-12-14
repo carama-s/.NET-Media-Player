@@ -52,13 +52,6 @@ namespace WindowsMedia
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg"; //donner un temps aux images
-            //this.source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
-            this.source_ = "E:\\Disney\\RoiLion.mp3";
-            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
-
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-
             this.SliderVolume.Value = 50;
 
             this.SliderTime.Maximum = this.Width - 160;
@@ -75,7 +68,9 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            if (this.state_ == State.STOP || this.state_ == State.PAUSE)
+            var MediaSource = this.SecondBox.Items;
+
+            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaSource.IsEmpty == false))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
