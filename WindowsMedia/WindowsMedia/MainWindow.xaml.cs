@@ -255,7 +255,9 @@ namespace WindowsMedia
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            MusicTitle ti = (MusicTitle)e.AddedItems[0];
+            this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
+            this.source_ = ti.Path;
         }
 
         private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
