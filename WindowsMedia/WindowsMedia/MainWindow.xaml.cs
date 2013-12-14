@@ -35,6 +35,7 @@ namespace WindowsMedia
         private bool            isFullScreen_;
         private DispatcherTimer timer_;
         private double          oldValue;
+        delegate void           DelegateTheme();
  
         public MainWindow()
         {
@@ -53,10 +54,10 @@ namespace WindowsMedia
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Vidéos", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" Sélections", "icon-selection-box.png"));
+            box.Add(new MenuTemplateClass(" Musiques", "icon-music-box.png"));
+            box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
             BoxSelectMedia.SelectedIndex = 1;
 
@@ -200,7 +201,7 @@ namespace WindowsMedia
             {
                 this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
 
-            }
+        }
         }
 
         // Gestion du FullScreen
@@ -230,7 +231,12 @@ namespace WindowsMedia
         {
             Console.Out.WriteLine("1 " + this.SliderTime.Maximum);
             this.SliderTime.Maximum = this.Width - 160;
-            Console.Out.WriteLine("2 " + this.SliderTime.Maximum);
+            if (MediaPlayer.Source != null)
+            {
+                double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
+                oldValue = value * (double)SliderTime.Maximum;
+                //this.SliderTime.Value = oldValue;
+            }
         }
 
         // Gestion Brush
@@ -319,6 +325,18 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 ButtonPlay_Click(sender, e);
             }
+        }
+
+        private void BoxSelectMedia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Test t = new Test();
+            //DelegateAff[] aff = new DelegateAff[4];
+            //aff[0] = new DelegateAff(t.Affiche1);
+            //aff[1] = new DelegateAff(t.Affiche2);
+            //aff[2] = new DelegateAff(t.Affiche3);
+            //aff[3] = new DelegateAff(t.Affiche4);
+
+            //aff[2]();
         }
     }
 }

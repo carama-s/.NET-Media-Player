@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\ListTemplateSelector.cs" />
     <Compile Include="classes\MenuTemplateClass.cs" />
     <Compile Include="classes\MovieFile.cs" />
     <Compile Include="classes\MovieLibrary.cs" />
@@ -127,6 +128,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\icon-photo-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-video-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-music-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-selection-box.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
