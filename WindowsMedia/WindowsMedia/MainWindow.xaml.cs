@@ -57,6 +57,14 @@ namespace WindowsMedia
             this.source_ = "E:\\Disney\\RoiLion.mp3";
             //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
 
+            List<MenuTemplateClass> box = new List<MenuTemplateClass>();
+            box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass("Vidéos", "icon-photo-box.png"));
+            BoxSelectMedia.ItemsSource = box;
+            BoxSelectMedia.SelectedIndex = 1;
+
             this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
             this.SliderVolume.Value = 50;
@@ -229,7 +237,7 @@ namespace WindowsMedia
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)SliderTime.Maximum;
-                this.SliderTime.Value = oldValue;
+                //this.SliderTime.Value = oldValue;
             }
         }
 
