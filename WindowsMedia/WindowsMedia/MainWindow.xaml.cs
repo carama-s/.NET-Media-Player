@@ -38,13 +38,13 @@ namespace WindowsMedia
  
         public MainWindow()
         {
+            this.state_ = State.STOP;
             this.Loaded += MainWindow_Loaded;
             InitializeComponent();
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.state_ = State.STOP;
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.oldValue = -1;
@@ -197,7 +197,10 @@ namespace WindowsMedia
             Console.Out.WriteLine("old position = " + OldPosition);
             Console.Out.WriteLine("new position = " + Position);
             if (OldPosition != Position)
+            {
                 this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
+
+            }
         }
 
         // Gestion du FullScreen
@@ -225,13 +228,9 @@ namespace WindowsMedia
         // Gestion de la modification de la MainWindow
         private void MainWindowUpdated(object sender, EventArgs e)
         {
+            Console.Out.WriteLine("1 " + this.SliderTime.Maximum);
             this.SliderTime.Maximum = this.Width - 160;
-            if (MediaPlayer.Source != null)
-            {
-                double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
-                oldValue = value * (double)SliderTime.Maximum;
-                //this.SliderTime.Value = oldValue;
-            }
+            Console.Out.WriteLine("2 " + this.SliderTime.Maximum);
         }
 
         // Gestion Brush
