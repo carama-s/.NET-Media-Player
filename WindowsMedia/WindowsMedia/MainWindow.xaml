@@ -15,14 +15,17 @@
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0.4" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" BorderThickness="0"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="#FFA5AAB1" Margin="0,0,-0.663,0.4"/>
+            <Grid x:Name="MenuGrid" Margin="0" Grid.ColumnSpan="3" Background="#FF2B407A">
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="6,5,0,0" ItemTemplate="{DynamicResource SelectMediaTemplate}" Height="24" BorderThickness="0" Padding="0"/>
+            </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="Black" OpacityMask="Black" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement"/>
         </Grid>
-        <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">
+        <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70" d:IsHidden="True">
             <Slider x:Name="SliderTime" VerticalAlignment="Top" Margin="70,4.8,70,0" Grid.Row="1" ValueChanged="SliderTime_ValueChanged" Maximum="50"/>
             <Label x:Name="LabelCurrentTime" Content="00.00.00" HorizontalAlignment="Left" Margin="12,0.8,0,0" VerticalAlignment="Top" Grid.Row="1"/>
             <Label x:Name="LabelLeftTime" Content="42.00.00" HorizontalAlignment="Right" Margin="0,0.8,12,0" Grid.Row="1" VerticalAlignment="Top"/>
@@ -86,6 +89,7 @@
             </Grid>
             <Button x:Name="ButtonSwitch" Content="S" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="19" Margin="0,0,10,10" Height="19" Click="ButtonSwitch_Click"/>
         </Grid>
+        <MediaElement HorizontalAlignment="Left" Height="3.2" Margin="545.2,-50.4,-28.2,0" VerticalAlignment="Top" Width="1.6"/>
     </Grid>
 
 </Window>

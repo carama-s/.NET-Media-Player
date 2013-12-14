@@ -22,33 +22,4 @@ namespace MWMPV2.classes
             this.Image = new BitmapImage(new Uri(packUri, UriKind.Relative));
         }
     }
-
-    class TreeMenuTemplateClass
-    {
-        public ObservableCollection<TreeSubMenuTemplateClass> SubMenu { get; set; }
-
-        public BitmapImage Image { get; set; }
-        public string Name { get; set; }
-
-        public TreeMenuTemplateClass(string name, string image)
-        {
-            this.SubMenu = new ObservableCollection<TreeSubMenuTemplateClass>();
-            this.Name = name;
-            string packUri = "../assets/"+ image;
-            this.Image = new BitmapImage(new Uri(packUri, UriKind.Relative));
-        }
-    }
-
-    class TreeSubMenuTemplateClass
-    {
-        public BitmapImage Image { get; set; }
-        public string Name { get; set; }
-        
-        public TreeSubMenuTemplateClass(string name, string image)
-        {
-            this.Name = name;
-            string packUri = "../assets/"+ image;
-            this.Image = new BitmapImage(new Uri(packUri, UriKind.Relative));
-        }
-    }
 }

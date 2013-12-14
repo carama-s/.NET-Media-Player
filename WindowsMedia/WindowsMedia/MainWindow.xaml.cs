@@ -47,6 +47,14 @@ namespace WindowsMedia
             MediaPlayer.LoadedBehavior = MediaState.Manual;
             MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
+            List<MenuTemplateClass> combo = new List<MenuTemplateClass>();
+            combo.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
+            combo.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
+            combo.Add(new MenuTemplateClass("Videos", "icon-photo-box.png"));
+            combo.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
+
+            BoxSelectMedia.ItemsSource = combo;
+            BoxSelectMedia.SelectedIndex = 1;
             //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg";
             //source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
             //source_ = "E:\\HappinessTherapy.mkv";

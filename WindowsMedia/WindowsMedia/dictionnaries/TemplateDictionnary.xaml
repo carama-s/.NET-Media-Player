@@ -21,4 +21,15 @@
             <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </StackPanel>
     </DataTemplate>
+	<!--Template pour SelectMediaBox-->
+    <DataTemplate x:Key="SelectMediaTemplate">
+    	<Grid Width="Auto" Height="Auto">
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition Width="9*"/>
+    			<ColumnDefinition Width="11*"/>
+    		</Grid.ColumnDefinitions>
+    		<Image HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+    		<Label Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Name}" Width="Auto" FontSize="10"/>
+    	</Grid>
+    </DataTemplate>
 </ResourceDictionary>
