@@ -36,7 +36,7 @@ namespace WindowsMedia
         private DispatcherTimer timer_;
         private double          oldValue;
         delegate void           DelegateTheme();
-        private int             oldSize_;
+        private double          oldSize_;
  
         public MainWindow()
         {
@@ -228,6 +228,7 @@ namespace WindowsMedia
         // Gestion de la modification de la MainWindow
         private void MainWindowUpdated(object sender, EventArgs e)
         {
+            this.oldSize_ = (double) this.SliderTime.Maximum;
             this.SliderTime.Maximum = this.Width - 160;
         }
 
