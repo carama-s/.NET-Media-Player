@@ -294,7 +294,6 @@ namespace WindowsMedia
         {
             if (SecondBox.SelectedItems.Count > 0)
             {
-                ImageBrush brush;
                 MusicTitle ti = (MusicTitle)SecondBox.SelectedItem;
                 this.source_ = ti.Path;
                 this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
