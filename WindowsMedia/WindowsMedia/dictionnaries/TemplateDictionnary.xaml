@@ -6,9 +6,9 @@
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
 	<DataTemplate x:Key="MainMusicTemplate">
-		<StackPanel HorizontalAlignment="Stretch" Height="122" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
-			<Image Height="120" Width="120" Source="{Binding Image}"/>
-			<StackPanel Width="Auto">
+		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+			<Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
+			<StackPanel Width="Auto" VerticalAlignment="Center">
 				<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold"/>
 				<TextBlock TextWrapping="Wrap" Text="{Binding Artist.Name}" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507"/>
 			</StackPanel>
@@ -17,8 +17,8 @@
     <!--Template pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
-			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16"/>
-			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
+			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
+			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Margin="10,0" FontSize="16"/>
 			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
 		</StackPanel>
 	</DataTemplate>

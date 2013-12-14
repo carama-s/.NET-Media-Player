@@ -60,7 +60,6 @@ namespace WindowsMedia
             box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
             box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
-            BoxSelectMedia.SelectedIndex = 1;
 
            this.SliderVolume.Value = 50;
 
