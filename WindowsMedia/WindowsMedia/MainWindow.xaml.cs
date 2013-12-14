@@ -152,6 +152,15 @@ namespace WindowsMedia
             }
             else
             {
+                if (this.isFullScreen_ == true)
+                {
+                    this.WindowStyle = WindowStyle.SingleBorderWindow;
+                    this.WindowState = WindowState.Normal;
+                    this.MediaPlayer.Stretch = Stretch.Uniform;
+                    this.SliderTime.Width = this.Width - 160;
+                    this.SliderTime.Maximum = this.Width - 160;
+                    this.isFullScreen_ = false;
+                }
                 GridBibliotheque.Visibility = System.Windows.Visibility.Visible;
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
