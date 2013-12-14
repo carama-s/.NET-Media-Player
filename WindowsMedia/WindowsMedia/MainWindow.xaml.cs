@@ -57,14 +57,6 @@ namespace WindowsMedia
             this.source_ = "E:\\Disney\\RoiLion.mp3";
             //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
 
-            List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Vidéos", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
-            BoxSelectMedia.ItemsSource = box;
-            BoxSelectMedia.SelectedIndex = 1;
-
             this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
             this.SliderVolume.Value = 50;
@@ -83,7 +75,9 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            if (this.state_ == State.STOP || this.state_ == State.PAUSE)
+            var MediaSource = this.SecondBox.Items;
+
+            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaSource.IsEmpty == false))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
@@ -279,6 +273,44 @@ namespace WindowsMedia
         {
             MusicAlbum al = (MusicAlbum)e.AddedItems[0];
             SecondBox.ItemsSource = al;
+        }
+
+        private void BackButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+            var List = this.SecondBox.Items;
+            List.MoveCurrentToPrevious();
+            if (List.IsCurrentBeforeFirst)
+                List.MoveCurrentToLast();
+            MusicTitle music = (MusicTitle)List.CurrentItem;
+            this.source_ = music.Path;
+            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            this.state_ = State.STOP;
+            this.ButtonPlay_Click(sender, e);
+        }
+
+        private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+            var List = this.SecondBox.Items;
+            List.MoveCurrentToNext();
+            if (List.IsCurrentAfterLast)
+                List.MoveCurrentToFirst();
+            MusicTitle music = (MusicTitle)List.CurrentItem;
+            this.source_ = music.Path;
+            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            this.state_ = State.STOP;
+            this.ButtonPlay_Click(sender, e);
+        }
+
+        private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SecondBox.SelectedItems.Count > 0)
+            {
+                MusicTitle ti = (MusicTitle)SecondBox.SelectedItem;
+                this.source_ = ti.Path;
+                this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                ButtonPlay_Click(sender, e);
+            }
         }
     }
 }

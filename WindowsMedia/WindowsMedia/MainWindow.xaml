@@ -11,12 +11,12 @@
                 <ColumnDefinition Width="135*" MaxWidth="150"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="38*" MaxHeight="38"/>
+                <RowDefinition Height="36*" MaxHeight="36"/>
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
             <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0.4" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged"/>
-            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}"/>
+            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="#FFA5AAB1" Margin="0,0,-0.663,0.4"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF9857E9">
                 <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,4,0,0" ItemTemplate="{DynamicResource ComboBoxSelectMedia}"/>
@@ -45,7 +45,7 @@
                         <ImageBrush ImageSource="assets/icon-play-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonNext" Content="" Grid.Column="3" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0">
+                <Button x:Name="ButtonNext" Content="" Grid.Column="3" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0" Click="ForwardButtonMediaElement">
                     <Button.OpacityMask>
                         <ImageBrush ImageSource="assets/icon-next-barre.png"/>
                     </Button.OpacityMask>
@@ -53,7 +53,7 @@
                         <ImageBrush ImageSource="assets/icon-next-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="1" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="1" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Click="BackButtonMediaElement">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="1" ScaleX="-1"/>
