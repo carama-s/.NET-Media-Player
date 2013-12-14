@@ -229,7 +229,7 @@ namespace WindowsMedia
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)SliderTime.Maximum;
-                this.SliderTime.Value = oldValue;
+                //this.SliderTime.Value = oldValue;
             }
         }
 
