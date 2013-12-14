@@ -52,11 +52,6 @@ namespace WindowsMedia
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg"; //donner un temps aux images
-            //this.source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
-            this.source_ = "E:\\Disney\\RoiLion.mp3";
-            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
-
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
             box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
             box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
@@ -65,9 +60,7 @@ namespace WindowsMedia
             BoxSelectMedia.ItemsSource = box;
             BoxSelectMedia.SelectedIndex = 1;
 
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-
-            this.SliderVolume.Value = 50;
+           this.SliderVolume.Value = 50;
 
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
