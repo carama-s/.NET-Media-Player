@@ -168,6 +168,34 @@ namespace WindowsMedia
             }
         }
 
+        // Gestion du bouton Back
+        private void BackButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+            var List = this.SecondBox.Items;
+            List.MoveCurrentToPrevious();
+            if (List.IsCurrentBeforeFirst)
+                List.MoveCurrentToLast();
+            MusicTitle music = (MusicTitle)List.CurrentItem;
+            this.source_ = music.Path;
+            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            this.state_ = State.STOP;
+            this.ButtonPlay_Click(sender, e);
+        }
+
+        // Gestion du bouton Forward
+        private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
+        {
+            var List = this.SecondBox.Items;
+            List.MoveCurrentToNext();
+            if (List.IsCurrentAfterLast)
+                List.MoveCurrentToFirst();
+            MusicTitle music = (MusicTitle)List.CurrentItem;
+            this.source_ = music.Path;
+            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            this.state_ = State.STOP;
+            this.ButtonPlay_Click(sender, e);
+        }
+
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
@@ -269,6 +297,13 @@ namespace WindowsMedia
             this.ButtonStop_Click(sender, e);
         }
 
+        // Gestion Box bibliothèque
+        private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+            SecondBox.ItemsSource = al;
+        }
+
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -277,38 +312,6 @@ namespace WindowsMedia
                 this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
                 this.source_ = ti.Path;
             }
-        }
-
-        private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
-            SecondBox.ItemsSource = al;
-        }
-
-        private void BackButtonMediaElement(object sender, RoutedEventArgs e)
-        {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToPrevious();
-            if (List.IsCurrentBeforeFirst)
-                List.MoveCurrentToLast();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
-        }
-
-        private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
-        {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToNext();
-            if (List.IsCurrentAfterLast)
-                List.MoveCurrentToFirst();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
         }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
