@@ -22,4 +22,14 @@
 			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
 		</StackPanel>
 	</DataTemplate>
+	<DataTemplate x:Key="ComboBoxSelectMedia">
+		<Grid Width="Auto">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="9*"/>
+				<ColumnDefinition Width="11*"/>
+			</Grid.ColumnDefinitions>
+			<Image Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Source="{Binding Image }" Height="Auto" Margin="0,0,-0.001,0" VerticalAlignment="Stretch" Width="Auto"/>
+            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name }" Margin="0" VerticalAlignment="Stretch" Padding="2"/>
+		</Grid>
+	</DataTemplate>
 </ResourceDictionary>
