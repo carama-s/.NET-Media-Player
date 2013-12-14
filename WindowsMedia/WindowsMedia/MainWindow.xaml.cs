@@ -54,16 +54,15 @@ namespace WindowsMedia
 
             //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg"; //donner un temps aux images
             //this.source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
-            //this.source_ = "E:\\Disney\\RoiLion.mp3";
-            this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
+            this.source_ = "E:\\Disney\\RoiLion.mp3";
+            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
 
             this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
             this.SliderVolume.Value = 50;
 
             this.SliderTime.Maximum = this.Width - 160;
-            this.SliderTime.Width = this.Width - 160;
-            SliderTime.IsMoveToPointEnabled = true;
+            this.SliderTime.IsMoveToPointEnabled = true;
 
             var lib = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             lib.GenerateLibrary();
@@ -152,6 +151,14 @@ namespace WindowsMedia
             }
             else
             {
+                if (this.isFullScreen_ == true)
+                {
+                    this.WindowStyle = WindowStyle.SingleBorderWindow;
+                    this.WindowState = WindowState.Normal;
+                    this.MediaPlayer.Stretch = Stretch.Uniform;
+                    this.SliderTime.Maximum = this.Width - 160;
+                    this.isFullScreen_ = false;
+                }
                 GridBibliotheque.Visibility = System.Windows.Visibility.Visible;
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -161,7 +168,7 @@ namespace WindowsMedia
         void timer_Tick(object sender, EventArgs e)
         {
             double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)duree_.TotalSeconds;
-            oldValue = value * (double)SliderTime.Width;
+            oldValue = value * (double)SliderTime.Maximum;
             this.SliderTime.Value = oldValue;
             this.CurrentTime.Text = this.MediaPlayer.Position.ToString();
         }
@@ -181,9 +188,9 @@ namespace WindowsMedia
         // Gestion de la valeur du curseur du Slide
         private void SliderTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double OldPosition = (oldValue * (double)duree_.TotalSeconds) / SliderTime.Width;
+            double OldPosition = (oldValue * (double)duree_.TotalSeconds) / SliderTime.Maximum;
             double SliderValue = (double)SliderTime.Value;
-            double Position = (SliderValue * (double)duree_.TotalSeconds) / SliderTime.Width;
+            double Position = (SliderValue * (double)duree_.TotalSeconds) / SliderTime.Maximum ;
             if (OldPosition != Position)
                 this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
         }
@@ -197,7 +204,6 @@ namespace WindowsMedia
                 this.WindowStyle = WindowStyle.None;
                 this.WindowState = WindowState.Maximized;
                 this.MediaPlayer.Stretch = Stretch.Fill;
-                this.SliderTime.Width = this.Width - 160;
                 this.SliderTime.Maximum = this.Width - 160;
                 this.isFullScreen_ = true;
             }
@@ -206,7 +212,6 @@ namespace WindowsMedia
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.WindowState = WindowState.Normal;
                 this.MediaPlayer.Stretch = Stretch.Uniform;
-                this.SliderTime.Width = this.Width - 160;
                 this.SliderTime.Maximum = this.Width - 160;
                 this.isFullScreen_ = false;
             }
@@ -215,7 +220,6 @@ namespace WindowsMedia
         // Gestion de la modification de la MainWindow
         private void MainWindowUpdated(object sender, EventArgs e)
         {
-            this.SliderTime.Width = this.Width - 160;
             this.SliderTime.Maximum = this.Width - 160;
         }
 
