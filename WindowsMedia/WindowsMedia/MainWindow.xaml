@@ -11,14 +11,16 @@
                 <ColumnDefinition Width="135*" MaxWidth="150"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40*" MaxHeight="40"/>
+                <RowDefinition Height="36*" MaxHeight="36"/>
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
             <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,0.4" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="#FFA5AAB1" Margin="0,0,-0.663,0.4"/>
-            <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF9857E9"/>
+            <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF9857E9">
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,4,0,0" ItemTemplate="{DynamicResource ComboBoxSelectMedia}"/>
+            </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement" MediaEnded="EventEndMedia"/>
