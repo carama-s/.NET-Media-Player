@@ -19,6 +19,7 @@ namespace MWMPV2.classes
         {
             this.Name = name;
             string packUri = "../assets/"+ image;
+            Uri ur = new Uri(packUri, UriKind.Relative);
             this.Image = new BitmapImage(new Uri(packUri, UriKind.Relative));
         }
     }

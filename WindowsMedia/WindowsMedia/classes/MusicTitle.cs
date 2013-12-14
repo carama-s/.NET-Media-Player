@@ -39,7 +39,7 @@ namespace MWMPV2.classes
         public string Title { get; private set; }
         public string Composer { get; private set; }
         public TimeSpan Duration { get; private set; }
-        public BitmapFrame Image { get; private set; }
+        public BitmapImage Image { get; private set; }
         public String Path { get; private set; }
 
         public MusicTitle(MusicArtist artist, MusicAlbum album, TagLib.File tags, String file)
@@ -54,9 +54,16 @@ namespace MWMPV2.classes
             this.Composer = tags.Tag.FirstComposer;
             this.Duration = tags.Properties.Duration;
             if (tags.Tag.Pictures.Length > 0)
-                this.Image = BitmapFrame.Create(new MemoryStream(tags.Tag.Pictures[0].Data.Data));
+            {
+                this.Image = new BitmapImage();
+                this.Image.BeginInit();
+                this.Image.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
+                this.Image.EndInit();
+            }
             else
-                this.Image = BitmapFrame.Create(new Uri("assets/defaultalbumart.png", UriKind.RelativeOrAbsolute));
+            {
+                this.Image = new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+            }
         }
     }
 }
