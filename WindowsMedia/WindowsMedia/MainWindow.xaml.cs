@@ -307,37 +307,11 @@ namespace WindowsMedia
         {
             if (SecondBox.SelectedItems.Count > 0)
             {
-                ImageBrush brush;
                 MusicTitle ti = (MusicTitle)SecondBox.SelectedItem;
                 this.source_ = ti.Path;
                 this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
-                if (this.state_ == State.STOP || this.state_ == State.PAUSE)
-                {
-                    brush = createBrush("assets/icon-pause-barre.png");
-                    this.state_ = State.PLAY;
-                    this.MediaPlayer.Play();
-                    if (oldValue == -1)
-                    {
-                        this.CurrentTime.Text = "00:00:00";
-                        this.SliderTime.Value = 0;
-                    }
-                    var tags = TagLib.File.Create(this.source_);
-                    this.duree_ = tags.Properties.Duration;
-                    this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
-                    this.TotalTime.Text = this.duree_.ToString();
-                    this.timer_ = new DispatcherTimer();
-                    this.timer_.Interval = TimeSpan.FromMilliseconds(100);
-                    this.timer_.Tick += new EventHandler(timer_Tick);
-                    this.timer_.Start();
-                }
-                else // this.state_ == State.PLAY
-                {
-                    brush = createBrush("assets/icon-play-barre.png");
-                    this.state_ = State.PAUSE;
-                    this.MediaPlayer.Pause();
-                }
-                this.ButtonPlay.Background = brush;
-                this.ButtonPlay.OpacityMask = brush;
+                this.state_ = State.STOP;
+                ButtonPlay_Click(sender, e);
             }
         }
     }
