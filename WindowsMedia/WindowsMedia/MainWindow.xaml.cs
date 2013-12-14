@@ -201,5 +201,15 @@ namespace WindowsMedia
             }
         }
 
+        private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }
