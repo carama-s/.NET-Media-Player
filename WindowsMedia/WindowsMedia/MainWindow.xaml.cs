@@ -36,10 +36,11 @@ namespace WindowsMedia
         private DispatcherTimer timer_;
         private double          oldValue;
         delegate void           DelegateTheme();
+        private int             oldSize_;
  
         public MainWindow()
         {
-            this.state_ = State.STOP;
+            this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
             InitializeComponent();
         }
@@ -193,15 +194,14 @@ namespace WindowsMedia
         private void SliderTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+            if (this.oldSize_ > (this.Width - 160))
+                this.timer_Tick(sender, e);
             double SliderValue = (double)SliderTime.Value;
             double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum ;
-            Console.Out.WriteLine("old position = " + OldPosition);
-            Console.Out.WriteLine("new position = " + Position);
+            Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
+            Console.Out.WriteLine("slide value = " + SliderValue);
             if (OldPosition != Position)
-            {
                 this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
-
-        }
         }
 
         // Gestion du FullScreen
@@ -229,14 +229,7 @@ namespace WindowsMedia
         // Gestion de la modification de la MainWindow
         private void MainWindowUpdated(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("1 " + this.SliderTime.Maximum);
             this.SliderTime.Maximum = this.Width - 160;
-            if (MediaPlayer.Source != null)
-            {
-                double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
-                oldValue = value * (double)SliderTime.Maximum;
-                //this.SliderTime.Value = oldValue;
-            }
         }
 
         // Gestion Brush
