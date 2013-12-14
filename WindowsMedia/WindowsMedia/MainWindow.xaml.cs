@@ -35,16 +35,17 @@ namespace WindowsMedia
         private bool            isFullScreen_;
         private DispatcherTimer timer_;
         private double          oldValue;
- 
+        delegate void           DelegateTheme();
+
         public MainWindow()
         {
+            this.state_ = State.STOP;
             this.Loaded += MainWindow_Loaded;
             InitializeComponent();
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.state_ = State.STOP;
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.oldValue = -1;
@@ -226,11 +227,11 @@ namespace WindowsMedia
         private void MainWindowUpdated(object sender, EventArgs e)
         {
             this.SliderTime.Maximum = this.Width - 160;
-            if (MediaPlayer.Source != null)
+            if (this.state_ != State.STOP && this.MediaPlayer.Source != null)
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)SliderTime.Maximum;
-                //this.SliderTime.Value = oldValue;
+                this.SliderTime.Value = oldValue;
             }
         }
 
@@ -320,6 +321,18 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 ButtonPlay_Click(sender, e);
             }
+        }
+
+        private void BoxSelectMedia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Test t = new Test();
+            //DelegateAff[] aff = new DelegateAff[4];
+            //aff[0] = new DelegateAff(t.Affiche1);
+            //aff[1] = new DelegateAff(t.Affiche2);
+            //aff[2] = new DelegateAff(t.Affiche3);
+            //aff[3] = new DelegateAff(t.Affiche4);
+
+            //aff[2]();
         }
     }
 }
