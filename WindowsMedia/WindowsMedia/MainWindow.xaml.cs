@@ -54,8 +54,8 @@ namespace WindowsMedia
 
             //source_ = "C:\\Users\\Robert\\Downloads\\destiny.jpg"; //donner un temps aux images
             //this.source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
-            //this.source_ = "E:\\Disney\\RoiLion.mp3";
-            this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
+            this.source_ = "E:\\Disney\\RoiLion.mp3";
+            //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
 
             this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
