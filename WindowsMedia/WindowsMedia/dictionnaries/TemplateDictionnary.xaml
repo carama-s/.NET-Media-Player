@@ -1,24 +1,25 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:MWMPV2.classes">
+    xmlns:local="clr-namespace:MWMPV2.classes" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
-    <local:DurationConverter x:Key="durationConverter" />
-    <!--Template pour ListBoxMain (Music)-->
-    <DataTemplate x:Key="MainMusicTemplate">
-        <StackPanel HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,20.4">
-            <Image HorizontalAlignment="Stretch" Height="98" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-            <TextBlock Height="19" TextWrapping="Wrap" Text="{Binding Name}" Background="{x:Null}" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
-            <TextBlock Height="16.6" TextWrapping="Wrap" Text="{Binding Artist.Name}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" RenderTransformOrigin="0.5,0.5" Margin="0"/>
-        </StackPanel>
-    </DataTemplate>
+	<local:DurationConverter x:Key="durationConverter" />
+	<DataTemplate x:Key="MainMusicTemplate">
+		<StackPanel HorizontalAlignment="Stretch" Height="122" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+			<Image Height="120" Width="120" Source="{Binding Image}"/>
+			<StackPanel Width="Auto">
+				<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold"/>
+				<TextBlock TextWrapping="Wrap" Text="{Binding Artist.Name}" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507"/>
+			</StackPanel>
+		</StackPanel>
+	</DataTemplate>
     <!--Template pour ListBoxSecond (Music)-->
-    <DataTemplate x:Key="SecondMusicTemplate">
-        <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
-            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"/>
-            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        </StackPanel>
-    </DataTemplate>
+	<DataTemplate x:Key="SecondMusicTemplate">
+		<StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
+			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16"/>
+			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
+			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
+		</StackPanel>
+	</DataTemplate>
 </ResourceDictionary>

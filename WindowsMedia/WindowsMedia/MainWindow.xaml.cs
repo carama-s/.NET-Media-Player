@@ -252,5 +252,16 @@ namespace WindowsMedia
         {
             this.ButtonStop_Click(sender, e);
         }
+
+        private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+            SecondBox.ItemsSource = al;
+        }
     }
 }
