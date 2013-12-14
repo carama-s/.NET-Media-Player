@@ -53,10 +53,10 @@ namespace WindowsMedia
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Vidéos", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" Sélections", "icon-selection-box.png"));
+            box.Add(new MenuTemplateClass(" Musiques", "icon-music-box.png"));
+            box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
             BoxSelectMedia.SelectedIndex = 1;
 
