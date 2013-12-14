@@ -56,7 +56,7 @@ namespace MWMPV2.classes
             if (tags.Tag.Pictures.Length > 0)
                 this.Image = BitmapFrame.Create(new MemoryStream(tags.Tag.Pictures[0].Data.Data));
             else
-                this.Image = BitmapFrame.Create(new Uri("assets/defaultalbumart.jpg", UriKind.RelativeOrAbsolute));
+                this.Image = BitmapFrame.Create(new Uri("assets/defaultalbumart.png", UriKind.RelativeOrAbsolute));
         }
     }
 }
