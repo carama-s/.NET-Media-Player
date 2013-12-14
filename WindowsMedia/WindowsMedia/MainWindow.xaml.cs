@@ -23,19 +23,19 @@ namespace WindowsMedia
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-
+    
     public enum State { PLAY, STOP, PAUSE };
 
     public partial class MainWindow : Window
     {
-        private TimeSpan duree_;
-        private String source_;
-        private State state_;
-        private bool isMuted_;
-        private bool isFullScreen_;
+        private TimeSpan        duree_;
+        private String          source_;
+        private State           state_;
+        private bool            isMuted_;
+        private bool            isFullScreen_;
         private DispatcherTimer timer_;
-        private double oldValue;
-
+        private double          oldValue;
+ 
         public MainWindow()
         {
             this.Loaded += MainWindow_Loaded;
@@ -56,15 +56,6 @@ namespace WindowsMedia
             //this.source_ = "C:\\Users\\Robert\\Downloads\\bestgame.avi";
             this.source_ = "E:\\Disney\\RoiLion.mp3";
             //this.source_ = "C:\\Users\\Stéphane\\Downloads\\lol.mp4";
-
-
-            List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass("Sélections", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Musiques", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Images", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass("Vidéos", "icon-photo-box.png"));
-            BoxSelectMedia.ItemsSource = box;
-            BoxSelectMedia.SelectedIndex = 1;
 
             this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
 
@@ -178,8 +169,8 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)duree_.TotalSeconds;
-            oldValue = value * (double)SliderTime.Maximum;
+            double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
+            oldValue = value * (double)this.SliderTime.Maximum;
             this.SliderTime.Value = oldValue;
             this.CurrentTime.Text = this.MediaPlayer.Position.ToString();
         }
@@ -199,9 +190,11 @@ namespace WindowsMedia
         // Gestion de la valeur du curseur du Slide
         private void SliderTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double OldPosition = (oldValue * (double)duree_.TotalSeconds) / SliderTime.Maximum;
+            double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
             double SliderValue = (double)SliderTime.Value;
-            double Position = (SliderValue * (double)duree_.TotalSeconds) / SliderTime.Maximum;
+            double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum ;
+            Console.Out.WriteLine("old position = " + OldPosition);
+            Console.Out.WriteLine("new position = " + Position);
             if (OldPosition != Position)
                 this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
         }
@@ -209,7 +202,7 @@ namespace WindowsMedia
         // Gestion du FullScreen
         private void EventClicMediaElement(object sender, MouseButtonEventArgs e)
         {
-
+            
             if (this.isFullScreen_ == false && e.ClickCount == 2)
             {
                 this.WindowStyle = WindowStyle.None;
@@ -232,6 +225,12 @@ namespace WindowsMedia
         private void MainWindowUpdated(object sender, EventArgs e)
         {
             this.SliderTime.Maximum = this.Width - 160;
+            if (MediaPlayer.Source != null)
+            {
+                double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
+                oldValue = value * (double)SliderTime.Maximum;
+                this.SliderTime.Value = oldValue;
+            }
         }
 
         // Gestion Brush
