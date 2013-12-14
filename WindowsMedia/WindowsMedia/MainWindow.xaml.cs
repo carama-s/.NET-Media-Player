@@ -276,18 +276,31 @@ namespace WindowsMedia
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
             var List = this.SecondBox.Items;
-            while (List.MoveCurrentToNext())
+            while (List.MoveCurrentToPrevious())
             {
+                if (List.IsCurrentBeforeFirst)
+                    List.MoveCurrentToLast();
                 MusicTitle music = (MusicTitle)List.CurrentItem;
                 this.source_ = music.Path;
                 this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
         }
 
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-
+            var List = this.SecondBox.Items;
+            while (List.MoveCurrentToNext())
+            {
+                if (List.IsCurrentAfterLast)
+                    List.MoveCurrentToFirst();
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
         }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
