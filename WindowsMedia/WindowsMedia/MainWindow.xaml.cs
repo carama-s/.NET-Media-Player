@@ -275,9 +275,14 @@ namespace WindowsMedia
 
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            var List = this.SecondBox;
-            var Item = List.SelectedItems;
-            //List.ItemsSource
+            var List = this.SecondBox.Items;
+            while (List.MoveCurrentToNext())
+            {
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.ButtonPlay_Click(sender, e);
+            }
         }
 
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
