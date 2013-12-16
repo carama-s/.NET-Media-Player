@@ -37,7 +37,7 @@ namespace WindowsMedia
         private bool            isShuffle_;
         private DispatcherTimer timer_;
         private double          oldValue;
-        delegate void           DelegateTheme();
+        delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
         public MusicLibrary     musicLib_;
         public MovieLibrary     movieLib_;
@@ -334,39 +334,14 @@ namespace WindowsMedia
 
         private void BoxSelectMedia_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //switch (BoxSelectMedia.SelectedIndex)
-            //{
-            //    case (0):
-            //        {
-            //            display_ = Display.PLAYLIST;
-            //            break;
-            //        }
-            //    case (1):
-            //        {
-            //            display_ = Display.ALBUM;
-            //            break;
-            //        }
-            //    case (2):
-            //        {
-            //            display_ = Display.IMAGES;
-            //            break;
-            //        }
-            //    case (3):
-            //        {
-            //            display_ = Display.VIDEOS;
-            //            break;
-            //        }
-            //    default:
-            //        break;
-            //}
-            //Test t = new Test();
-            //DelegateAff[] aff = new DelegateAff[4];
-            //aff[0] = new DelegateAff(t.Affiche1);
-            //aff[1] = new DelegateAff(t.Affiche2);
-            //aff[2] = new DelegateAff(t.Affiche3);
-            //aff[3] = new DelegateAff(t.Affiche4);
-
-            //aff[2]();
+            DelegateSourceClass del = new DelegateSourceClass();
+            DelegateSource[] bind = new DelegateSource[4];
+            bind[0] = new DelegateSource(del.PlaylistSource);
+            bind[1] = new DelegateSource(del.MusicSource);
+            bind[2] = new DelegateSource(del.ImageSource);
+            bind[3] = new DelegateSource(del.VideoSource);
+            if (BoxSelectMedia.SelectedIndex != -1)
+                bind[BoxSelectMedia.SelectedIndex](this);
         }
 
         private void ButtonRepeat_Click(object sender, RoutedEventArgs e)
