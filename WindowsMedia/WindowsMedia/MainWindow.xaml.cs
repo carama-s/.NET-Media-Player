@@ -61,8 +61,6 @@ namespace WindowsMedia
             box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
 
-            this.MediaPlayer.Source = new Uri("C:\\Users\\Stéphane\\Downloads\\lol.mp4", UriKind.RelativeOrAbsolute);
-
             this.SliderVolume.Value = 50;
 
             this.SliderTime.Maximum = this.Width - 160;
@@ -284,7 +282,7 @@ namespace WindowsMedia
 
             if (value == 0) // A voir si on met isMuted_ à TRUE?
                 brush = createBrush("assets/icon-volumemute-barre.png");
-            else if (value >= 1 && value < 34)
+            else if (value >= 0.1 && value < 34)
                 brush = createBrush("assets/icon-volume1-barre.png");
             else if (value >= 34 && value <= 67)
                 brush = createBrush("assets/icon-volume2-barre.png");

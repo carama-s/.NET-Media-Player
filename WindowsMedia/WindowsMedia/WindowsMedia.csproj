@@ -83,6 +83,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\ComboBoxWindows8.cs" />
     <Compile Include="classes\MainBoxTemplateSelector.cs" />
     <Compile Include="classes\MenuTemplateClass.cs" />
     <Compile Include="classes\MovieFile.cs" />
@@ -151,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\defaultalbumart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-repeat-barre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-shuffle-barre.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
