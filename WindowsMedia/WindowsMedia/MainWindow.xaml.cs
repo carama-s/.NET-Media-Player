@@ -89,9 +89,7 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            var MediaSource = this.SecondBox.Items;
-
-            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaSource.IsEmpty == false))
+            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaPlayer.Source != null))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
