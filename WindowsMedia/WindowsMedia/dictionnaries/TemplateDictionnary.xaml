@@ -5,6 +5,7 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
+    <!-- TemplateSelector-->
     <!-- Template pour ListBoxMain (Music)-->
 	<DataTemplate x:Key="MainMusicTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
@@ -15,7 +16,7 @@
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
-    <!--Template pour ListBoxSecond (Music)-->
+    <!-- Template pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
 			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
@@ -23,7 +24,7 @@
 			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
 		</StackPanel>
 	</DataTemplate>
-    <!--Template pour ComboBoxSelectMedia-->
+    <!-- Template pour ComboBoxSelectMedia-->
 	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
 		<Grid Width="Auto">
 			<Grid.ColumnDefinitions>
