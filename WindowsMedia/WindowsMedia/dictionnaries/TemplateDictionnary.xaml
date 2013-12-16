@@ -5,6 +5,7 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
+    <!-- Template pour ListBoxMain (Music)-->
 	<DataTemplate x:Key="MainMusicTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
 			<Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
@@ -22,7 +23,8 @@
 			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
 		</StackPanel>
 	</DataTemplate>
-	<DataTemplate x:Key="ComboBoxSelectMedia">
+    <!--Template pour ComboBoxSelectMedia-->
+	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
 		<Grid Width="Auto">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="9*"/>
