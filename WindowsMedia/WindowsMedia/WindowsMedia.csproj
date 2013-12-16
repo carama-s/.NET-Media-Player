@@ -143,6 +143,7 @@
     <Resource Include="assets\icon-volume2-barre.png" />
     <Resource Include="assets\icon-volumemax-barre.png" />
     <Resource Include="assets\icon-volumemute-barre.png" />
+    <Resource Include="wallpaper-2890510.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\icon-photo-box.png" />

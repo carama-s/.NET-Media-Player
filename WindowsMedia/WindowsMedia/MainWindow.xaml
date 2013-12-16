@@ -19,11 +19,38 @@
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="#FFA5AAB1" Margin="0,0,-0.663,0.4"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF00C4FF">
-                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,4,0,0" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" SelectionChanged="BoxSelectMedia_SelectionChanged" MinWidth="110" BorderThickness="0" SelectedIndex="1"/>
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,5.492,0,0" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" SelectionChanged="BoxSelectMedia_SelectionChanged" MinWidth="110" BorderThickness="0" SelectedIndex="1" Background="White"/>
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
-                    <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75"/>
-                    <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-190,0,0,0" VerticalAlignment="Center" Width="75"/>
-                    <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="190,0,0,0" VerticalAlignment="Center" Width="75"/>
+                    <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75">
+                    	<Button.Background>
+                    		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    			<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    			<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    			<GradientStop Color="White" Offset="1"/>
+                    		</LinearGradientBrush>
+                    	</Button.Background>
+                    </Button>
+                    <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-190,0,0,0" VerticalAlignment="Center" Width="75">
+                    	<Button.Background>
+                    		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    			<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    			<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    			<GradientStop Color="White" Offset="1"/>
+                    		</LinearGradientBrush>
+                    	</Button.Background>
+                    </Button>
+                    <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="190,0,0,0" VerticalAlignment="Center" Width="75">
+                    	<Button.Background>
+                    		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    			<GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    			<GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    			<GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    			<GradientStop Color="White" Offset="1"/>
+                    		</LinearGradientBrush>
+                    	</Button.Background>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>
