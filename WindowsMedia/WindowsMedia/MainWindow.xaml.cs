@@ -37,7 +37,8 @@ namespace WindowsMedia
         private double          oldValue;
         delegate void           DelegateTheme();
         private double          oldSize_;
-        public MusicLibrary musicLib_;
+        public MusicLibrary     musicLib_;
+        public MovieLibrary     movieLib_;
  
         public MainWindow()
         {
@@ -67,10 +68,11 @@ namespace WindowsMedia
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
-            var lib = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
-            lib.GenerateLibrary();
-            MainBox.ItemsSource = lib;
-
+            musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
+            musicLib_.GenerateLibrary();
+            MainBox.ItemsSource = musicLib_;
+            movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
+            movieLib_.GenerateLibrary();
         }
 
         // Gestion bouton Play/Pause

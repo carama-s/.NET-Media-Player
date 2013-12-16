@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WindowsMedia.classes
 {
-    class MusicArtist : System.Collections.IEnumerable
+    public class MusicArtist : System.Collections.IEnumerable
     {
         public String Name { get; private set; }
         public Dictionary<String, MusicAlbum> Albums { get; private set; }

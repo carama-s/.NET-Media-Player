@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WindowsMedia.classes
 {
-    class MovieFile
+    public class MovieFile
     {
         public String Path { get; private set; }
         public TimeSpan Duration { get; private set; }

@@ -29,7 +29,7 @@ namespace WindowsMedia.classes
         }
     }
 
-    class MusicTitle
+    public class MusicTitle
     {
         public MusicArtist Artist { get; private set; }
         public MusicAlbum Album { get; private set; }

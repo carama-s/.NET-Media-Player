@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
 {
-    class MenuTemplateClass
+    public class MenuTemplateClass
     {
         public string Name { get; set; }
 

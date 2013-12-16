@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsMedia.classes
 {
-    class MovieLibrary : System.Collections.IEnumerable
+    public class MovieLibrary : System.Collections.IEnumerable
     {
         public List<string> Sources { get; private set; }
         public List<MovieFile> Movies { get; private set; }

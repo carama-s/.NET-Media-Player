@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace WindowsMedia.classes
 {
-    class MainBoxTemplateSelector : DataTemplateSelector
+    public class MainBoxTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {

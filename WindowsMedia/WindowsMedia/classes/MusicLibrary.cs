@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsMedia.classes
 {
-    class MusicLibrary : System.Collections.IEnumerable
+    public class MusicLibrary : System.Collections.IEnumerable
     {
         public List<String> Sources { get; set; }
         public Dictionary<String, MusicArtist> Artists { get; private set; }

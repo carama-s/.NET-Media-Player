@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace WindowsMedia.classes
 {
-    class ComboBoxWindows8 : ComboBox
+    public class ComboBoxWindows8 : ComboBox
     {
         public ComboBoxWindows8()
         {
