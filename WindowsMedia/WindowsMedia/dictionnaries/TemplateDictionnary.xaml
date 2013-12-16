@@ -17,6 +17,10 @@
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
+    <!-- Template pour ListBoxMain (Video)-->
+    <DataTemplate x:Key="MainVideoTemplate">
+        <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
+    </DataTemplate>
     <!-- Template pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
