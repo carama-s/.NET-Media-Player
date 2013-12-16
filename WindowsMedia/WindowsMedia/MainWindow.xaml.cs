@@ -38,7 +38,7 @@ namespace WindowsMedia
         delegate void           DelegateTheme();
         private double          oldSize_;
         public MusicLibrary musicLib_;
-
+ 
         public MainWindow()
         {
             this.oldSize_ = -1;
@@ -283,7 +283,7 @@ namespace WindowsMedia
 
             if (value == 0) // A voir si on met isMuted_ à TRUE?
                 brush = createBrush("assets/icon-volumemute-barre.png");
-            else if (value >= 1 && value < 34)
+            else if (value >= 0.1 && value < 34)
                 brush = createBrush("assets/icon-volume1-barre.png");
             else if (value >= 34 && value <= 67)
                 brush = createBrush("assets/icon-volume2-barre.png");
