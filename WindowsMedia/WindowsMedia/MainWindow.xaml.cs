@@ -65,7 +65,6 @@ namespace WindowsMedia
             this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
-
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
             box.Add(new MenuTemplateClass(" Sélections", "icon-selection-box.png"));
             box.Add(new MenuTemplateClass(" Musiques", "icon-music-box.png"));
@@ -252,7 +251,7 @@ namespace WindowsMedia
             {
                 this.WindowStyle = WindowStyle.None;
                 this.WindowState = WindowState.Maximized;
-                this.MediaPlayer.Stretch = Stretch.Fill;
+                this.MediaPlayer.Stretch = Stretch.Uniform;
                 this.SliderTime.Maximum = this.Width - 160;
                 this.isFullScreen_ = true;
             }
