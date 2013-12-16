@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Source="{Binding Image }" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto" Stretch="None"/>
-            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name }" Margin="0" VerticalAlignment="Stretch" Padding="2" Foreground="White"/>
+            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name }" Margin="0" VerticalAlignment="Stretch" Padding="2" Foreground="Black"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
