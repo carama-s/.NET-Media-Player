@@ -89,9 +89,7 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            var MediaSource = this.SecondBox.Items;
-        
-            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaSource.IsEmpty == false))
+            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaPlayer.Source != null))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
@@ -239,6 +237,8 @@ namespace WindowsMedia
                 double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
                 double SliderValue = (double)SliderTime.Value;
                 double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
+                Console.Out.WriteLine("slide value = " + SliderValue);
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
