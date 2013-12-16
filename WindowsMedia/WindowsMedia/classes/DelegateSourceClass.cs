@@ -13,6 +13,7 @@ namespace WindowsMedia.classes
         }
         public void MusicSource(MainWindow win)
         {
+            win.clickStyle_ = ClickStyle.MUSIC;
             win.MainBox.ItemsSource = win.musicLib_;
         }
         public void ImageSource(MainWindow win)
@@ -20,6 +21,7 @@ namespace WindowsMedia.classes
         }
         public void VideoSource(MainWindow win)
         {
+            win.clickStyle_ = ClickStyle.VIDEO;
             win.MainBox.ItemsSource = win.movieLib_;
         }
     }
