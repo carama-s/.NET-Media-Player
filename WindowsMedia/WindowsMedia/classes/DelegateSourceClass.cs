@@ -11,6 +11,7 @@ namespace WindowsMedia.classes
         public void PlaylistSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
+            win.SecondBox.ItemsSource = null;
         }
         public void MusicSource(MainWindow win)
         {
@@ -21,10 +22,12 @@ namespace WindowsMedia.classes
         public void ImageSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
+            win.SecondBox.ItemsSource = null;
         }
         public void VideoSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
+            win.SecondBox.ItemsSource = null;
             win.clickStyle_ = ClickStyle.VIDEO;
             win.MainBox.ItemsSource = win.movieLib_;
         }
