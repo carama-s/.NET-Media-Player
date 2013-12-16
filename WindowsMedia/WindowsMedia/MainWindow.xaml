@@ -88,7 +88,7 @@
                         <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonRepeat" Style="{DynamicResource ButtonPlayStyle}" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,18,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1">
+                <Button x:Name="ButtonRepeat" Style="{DynamicResource ButtonPlayStyle}" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,18,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1" Click="ButtonRepeat_Click">
                     <Button.OpacityMask>
                         <ImageBrush ImageSource="assets/icon-repeat-barre.png"/>
                     </Button.OpacityMask>
@@ -96,13 +96,13 @@
                         <ImageBrush ImageSource="assets/icon-repeat-barre.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ButtonShuffle" Style="{DynamicResource ButtonPlayStyle}" Content="" HorizontalAlignment="Center" Margin="18,0,0,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1">
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-shuffle-barre.png"/>
-                    </Button.OpacityMask>
+                <Button x:Name="ButtonShuffle" Style="{DynamicResource ButtonPlayStyle}" Content="" HorizontalAlignment="Center" Margin="18,0,0,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1" Click="ButtonShuffle_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="assets/icon-shuffle-barre.png"/>
                     </Button.Background>
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-shuffle-barre.png"/>
+                    </Button.OpacityMask>
                 </Button>
             </Grid>
             <Button x:Name="ButtonSwitch" Content="S" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="19" Margin="0,0,10,10" Height="19" Click="ButtonSwitch_Click"/>

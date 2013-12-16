@@ -159,6 +159,12 @@
   <ItemGroup>
     <Resource Include="assets\icon-shuffle-barre.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-enable-repeat-barre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icon-enable-shuffle-barre.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

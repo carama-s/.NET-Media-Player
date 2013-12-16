@@ -33,6 +33,8 @@ namespace WindowsMedia
         private State           state_;
         private bool            isMuted_;
         private bool            isFullScreen_;
+        private bool            isRepeat_;
+        private bool            isShuffle_;
         private DispatcherTimer timer_;
         private double          oldValue;
         delegate void           DelegateTheme();
@@ -51,6 +53,8 @@ namespace WindowsMedia
         {
             this.isMuted_ = false;
             this.isFullScreen_ = false;
+            this.isRepeat_ = false;
+            this.isShuffle_ = false;
             this.oldValue = -1;
             this.state_ = State.STOP;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
@@ -363,6 +367,42 @@ namespace WindowsMedia
             //aff[3] = new DelegateAff(t.Affiche4);
 
             //aff[2]();
+        }
+
+        private void ButtonRepeat_Click(object sender, RoutedEventArgs e)
+        {
+            ImageBrush brush;
+
+            if (this.isRepeat_)
+            {
+                this.isRepeat_ = false;
+                brush = createBrush("assets/icon-repeat-barre.png");
+            }
+            else
+            {
+                this.isRepeat_ = true;
+                brush = createBrush("assets/icon-enable-repeat-barre.png");
+            }
+            this.ButtonRepeat.Background = brush;
+            this.ButtonRepeat.OpacityMask = brush;
+        }
+
+        private void ButtonShuffle_Click(object sender, RoutedEventArgs e)
+        {
+            ImageBrush brush;
+
+            if (this.isShuffle_)
+            {
+                this.isShuffle_ = false;
+                brush = createBrush("assets/icon-shuffle-barre.png");
+            }
+            else
+            {
+                this.isShuffle_ = true;
+                brush = createBrush("assets/icon-enable-shuffle-barre.png");
+            }
+            this.ButtonShuffle.Background = brush;
+            this.ButtonShuffle.OpacityMask = brush;
         }
     }
 }
