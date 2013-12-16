@@ -75,7 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="classes\ListTemplateSelector.cs" />
+    <Compile Include="classes\MainBoxTemplateSelector.cs" />
     <Compile Include="classes\MenuTemplateClass.cs" />
     <Compile Include="classes\MovieFile.cs" />
     <Compile Include="classes\MovieLibrary.cs" />
