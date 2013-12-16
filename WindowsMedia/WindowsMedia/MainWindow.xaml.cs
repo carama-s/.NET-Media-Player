@@ -343,7 +343,7 @@ namespace WindowsMedia
 
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (SecondBox.SelectedItems.Count > 0 && this.clickStyle_ != ClickStyle.MUSIC)
+            if (MainBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
             {
                 switch (this.clickStyle_)
                 {
@@ -362,6 +362,7 @@ namespace WindowsMedia
                             this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
                             this.state_ = State.STOP;
                             ButtonPlay_Click(sender, e);
+                            ButtonSwitch_Click(sender, e);
                             break;
                         }
                     default:
