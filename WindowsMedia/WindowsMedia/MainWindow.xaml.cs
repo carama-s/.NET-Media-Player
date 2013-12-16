@@ -321,6 +321,7 @@ namespace WindowsMedia
                         {
                             MusicAlbum al = (MusicAlbum)e.AddedItems[0];
                             SecondBox.ItemsSource = al;
+							testVIew.ItemsSource = al;
                             break;
                         }
                     case (ClickStyle.IMAGE):
