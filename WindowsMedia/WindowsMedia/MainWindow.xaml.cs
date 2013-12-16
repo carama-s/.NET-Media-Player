@@ -439,5 +439,21 @@ namespace WindowsMedia
             this.ButtonShuffle.Background = brush;
             this.ButtonShuffle.OpacityMask = brush;
         }
+
+        private void SliderTime_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.oldSize_ > (this.Width - 160))
+                this.timer_Tick(sender, e);
+            else
+            {
+                double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+                double SliderValue = (double)SliderTime.Value;
+                double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
+                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
+                Console.Out.WriteLine("slide value = " + SliderValue);
+                if (OldPosition != Position)
+                    this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
+            }
+        }
     }
 }
