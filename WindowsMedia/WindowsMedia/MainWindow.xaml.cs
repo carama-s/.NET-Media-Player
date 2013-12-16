@@ -37,6 +37,7 @@ namespace WindowsMedia
         private double          oldValue;
         delegate void           DelegateTheme();
         private double          oldSize_;
+        public MusicLibrary musicLib_;
  
         public MainWindow()
         {
