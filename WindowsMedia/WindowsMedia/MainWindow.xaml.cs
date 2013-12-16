@@ -25,12 +25,14 @@ namespace WindowsMedia
     /// </summary>
     
     public enum State { PLAY, STOP, PAUSE };
+    public enum Display { ALBUM, ARTIST, GENRE, IMAGES, VIDEOS};
 
     public partial class MainWindow : Window
     {
         private TimeSpan        duree_;
         private String          source_;
         private State           state_;
+        public Display          display_;
         private bool            isMuted_;
         private bool            isFullScreen_;
         private DispatcherTimer timer_;
@@ -52,7 +54,8 @@ namespace WindowsMedia
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.oldValue = -1;
-
+            this.state_ = State.STOP;
+            this.display_ = Display.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
