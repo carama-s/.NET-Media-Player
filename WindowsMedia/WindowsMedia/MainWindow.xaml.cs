@@ -25,12 +25,16 @@ namespace WindowsMedia
     /// </summary>
     
     public enum State { PLAY, STOP, PAUSE };
+    public enum MusicStyle { ALBUM, ARTIST, GENRE };
+    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
 
     public partial class MainWindow : Window
     {
         private TimeSpan        duree_;
         private String          source_;
         private State           state_;
+        public MusicStyle       musicStyle_;
+        public ClickStyle       clickStyle_;
         private bool            isMuted_;
         private bool            isFullScreen_;
         private bool            isRepeat_;
@@ -57,6 +61,8 @@ namespace WindowsMedia
             this.isShuffle_ = false;
             this.oldValue = -1;
             this.state_ = State.STOP;
+            this.clickStyle_ = ClickStyle.MUSIC;
+            this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
@@ -306,8 +312,64 @@ namespace WindowsMedia
         // Gestion Box bibliothèque
         private void MainBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
-            SecondBox.ItemsSource = al;
+            if (e.AddedItems.Count > 0)
+            {
+                switch(this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.MUSIC):
+                        {
+                            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+                            SecondBox.ItemsSource = al;
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)e.AddedItems[0];
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SecondBox.SelectedItems.Count > 0 && this.clickStyle_ != ClickStyle.MUSIC)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)MainBox.SelectedItem;
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            this.state_ = State.STOP;
+                            ButtonPlay_Click(sender, e);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
         }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
