@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MWMPV2.classes
+namespace WindowsMedia.classes
 {
     class MenuTemplateClass
     {

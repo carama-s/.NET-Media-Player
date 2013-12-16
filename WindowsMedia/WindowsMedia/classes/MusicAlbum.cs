@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MWMPV2.classes
+namespace WindowsMedia.classes
 {
     class MusicAlbum : System.Collections.IEnumerable
     {

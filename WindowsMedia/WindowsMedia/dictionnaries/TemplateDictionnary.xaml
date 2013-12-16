@@ -1,11 +1,14 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:MWMPV2.classes" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    xmlns:local="clr-namespace:WindowsMedia.classes" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
-    <!-- TemplateSelector-->
+    <!-- ItemTemplateSelector pour ListBoxMain-->
+    <local:MainBoxTemplateSelector x:Key="mainBoxTemplateSelector">
+        
+    </local:MainBoxTemplateSelector>
     <!-- Template pour ListBoxMain (Music)-->
 	<DataTemplate x:Key="MainMusicTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
@@ -32,7 +35,7 @@
 				<ColumnDefinition Width="11*"/>
 			</Grid.ColumnDefinitions>
 			<Image Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Source="{Binding Image }" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto" Stretch="None"/>
-            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name }" Margin="0" VerticalAlignment="Stretch" Padding="2"/>
+            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name }" Margin="0" VerticalAlignment="Stretch" Padding="2" Foreground="White"/>
 		</Grid>
 	</DataTemplate>
 </ResourceDictionary>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MWMPV2.classes
+namespace WindowsMedia.classes
 {
     class MovieLibrary : System.Collections.IEnumerable
     {
