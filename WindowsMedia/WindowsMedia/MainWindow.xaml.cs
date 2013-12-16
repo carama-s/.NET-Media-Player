@@ -37,7 +37,8 @@ namespace WindowsMedia
         private double          oldValue;
         delegate void           DelegateTheme();
         private double          oldSize_;
- 
+        public MusicLibrary musicLib_;
+
         public MainWindow()
         {
             this.oldSize_ = -1;
@@ -60,8 +61,6 @@ namespace WindowsMedia
             box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
             box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
-
-            this.MediaPlayer.Source = new Uri("C:\\Users\\Stéphane\\Downloads\\lol.mp4", UriKind.RelativeOrAbsolute);
 
             this.SliderVolume.Value = 50;
 
