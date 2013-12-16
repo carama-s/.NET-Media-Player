@@ -61,7 +61,9 @@ namespace WindowsMedia
             box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
 
-           this.SliderVolume.Value = 50;
+            this.MediaPlayer.Source = new Uri("C:\\Users\\Stéphane\\Downloads\\lol.mp4", UriKind.RelativeOrAbsolute);
+
+            this.SliderVolume.Value = 50;
 
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;

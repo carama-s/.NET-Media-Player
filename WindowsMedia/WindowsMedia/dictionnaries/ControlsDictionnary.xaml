@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 	<Style x:Key="FocusVisual">
 		<Setter Property="Control.Template">
 			<Setter.Value>
@@ -38,9 +38,7 @@
 						<Trigger Property="IsDefaulted" Value="true">
 							<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
 						</Trigger>
-						<Trigger Property="IsMouseOver" Value="true">
-							
-						</Trigger>
+						<Trigger Property="IsMouseOver" Value="true"/>
 						<Trigger Property="IsPressed" Value="true">
 							<Setter Property="Background" TargetName="border" Value="White"/>
 			
@@ -55,5 +53,4 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	<!-- Les entrées du dictionnaire de ressources sont définies ici. -->
 </ResourceDictionary>
