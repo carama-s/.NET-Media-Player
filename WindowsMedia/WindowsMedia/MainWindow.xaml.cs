@@ -64,7 +64,6 @@ namespace WindowsMedia
             BoxSelectMedia.ItemsSource = box;
 
             this.SliderVolume.Value = 50;
-
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
