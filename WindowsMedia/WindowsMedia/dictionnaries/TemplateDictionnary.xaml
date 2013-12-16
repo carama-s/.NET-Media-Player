@@ -8,26 +8,41 @@
     <!-- ItemTemplateSelector pour ListBoxMain-->
     <local:MainBoxTemplateSelector x:Key="MyMainBoxTemplateSelector"/>
     <!-- Template pour ListBoxMain (Music)-->
-	<DataTemplate x:Key="MainMusicTemplate">
-		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
-			<Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
-			<StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
-				<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold"/>
-				<TextBlock TextWrapping="Wrap" Text="{Binding Artist.Name}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507"/>
-			</StackPanel>
-		</StackPanel>
-	</DataTemplate>
+    <DataTemplate x:Key="MainMusicTemplate">
+        <StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+            <Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
+            <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Artist.Name}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
     <!-- Template pour ListBoxMain (Video)-->
     <DataTemplate x:Key="MainVideoTemplate">
         <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
     </DataTemplate>
+    <!-- TEMPLATE TEMPORAIRE POUR GARDER LES BINDING SOUS LE COUDE-->
+    <DataTemplate x:Key="SecondMusicTempTemplate">
+        <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Margin="10,0" FontSize="16"/>
+            <TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
+        </StackPanel>
+    </DataTemplate>
     <!-- Template pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
-		<StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Stretch" Height="Auto">
-			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding TrackNumber}" Background="#FF686262" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="20" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
-			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="White" Margin="10,0" FontSize="16"/>
-			<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="0,0,10,0" FontSize="16"/>
-		</StackPanel>
+		<Grid Width="Auto" Height="Auto">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="35*"/>
+				<ColumnDefinition Width="60*" MaxWidth="60" MinWidth="60"/>
+				<ColumnDefinition Width="216*"/>
+				<ColumnDefinition Width="60*" MaxWidth="60" MinWidth="60"/>
+				<ColumnDefinition Width="35*"/>
+			</Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Stretch" Margin="0" TextWrapping="Wrap" VerticalAlignment="Stretch" Text="{Binding TrackNumber}" Background="#FF686262" Foreground="White"/>
+			<TextBlock Grid.Column="2" HorizontalAlignment="Stretch" Margin="-0.001,0,0,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Stretch" Height="Auto" Width="Auto" Foreground="White"/>
+            <TextBlock Grid.Column="4" HorizontalAlignment="Stretch" Margin="0" TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" VerticalAlignment="Stretch" Height="Auto" Foreground="White"/>
+		</Grid>
 	</DataTemplate>
     <!-- Template pour ComboBoxSelectMedia-->
     <DataTemplate x:Key="ComboBoxSelectMediaTemplate">
