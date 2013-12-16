@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\ComboBoxWindows8.cs" />
+    <Compile Include="classes\DelegateSourceClass.cs" />
     <Compile Include="classes\MainBoxTemplateSelector.cs" />
     <Compile Include="classes\MenuTemplateClass.cs" />
     <Compile Include="classes\MovieFile.cs" />
