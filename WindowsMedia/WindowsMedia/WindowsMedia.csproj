@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icone.ico</ApplicationIcon>
+    <ApplicationIcon>assets\icone.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MyToolkit">
@@ -179,7 +179,7 @@
     <Resource Include="assets\icon-switch-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icone.ico" />
+    <Resource Include="assets\icone.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
