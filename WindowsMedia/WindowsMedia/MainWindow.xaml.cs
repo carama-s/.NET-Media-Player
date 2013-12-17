@@ -175,29 +175,35 @@ namespace WindowsMedia
         // Gestion du bouton Back
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToPrevious();
-            if (List.IsCurrentBeforeFirst)
-                List.MoveCurrentToLast();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
+            if (MediaPlayer.Source != null)
+            {
+                var List = this.SecondBox.Items;
+                List.MoveCurrentToPrevious();
+                if (List.IsCurrentBeforeFirst)
+                    List.MoveCurrentToLast();
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
         }
 
         // Gestion du bouton Forward
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToNext();
-            if (List.IsCurrentAfterLast)
-                List.MoveCurrentToFirst();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
+            if (MediaPlayer.Source != null)
+            {
+                var List = this.SecondBox.Items;
+                List.MoveCurrentToNext();
+                if (List.IsCurrentAfterLast)
+                    List.MoveCurrentToFirst();
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
         }
 
         // Gestion du Slide de la video
@@ -231,8 +237,6 @@ namespace WindowsMedia
                 double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
                 double SliderValue = (double)SliderTime.Value;
                 double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
-                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
-                Console.Out.WriteLine("slide value = " + SliderValue);
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
