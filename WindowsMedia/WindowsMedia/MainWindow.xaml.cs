@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using System.IO;
+using MahApps.Metro.Controls;
 
 namespace WindowsMedia
 {
@@ -28,7 +29,7 @@ namespace WindowsMedia
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
     public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private TimeSpan        duree_;
         private String          source_;
