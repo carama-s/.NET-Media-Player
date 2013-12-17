@@ -166,13 +166,7 @@ namespace WindowsMedia
             else
             {
                 if (this.isFullScreen_ == true)
-                {
-                    this.WindowStyle = WindowStyle.SingleBorderWindow;
-                    this.WindowState = WindowState.Normal;
-                    this.MediaPlayer.Stretch = Stretch.Uniform;
-                    this.SliderTime.Maximum = this.Width - 160;
-                    this.isFullScreen_ = false;
-                }
+                    this.FulllScreenOff();
                 GridBibliotheque.Visibility = System.Windows.Visibility.Visible;
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -244,26 +238,37 @@ namespace WindowsMedia
             }
         }
 
+        //fullscren fonction
+        private void FullScreenOn()
+        {
+            this.ShowTitleBar = false;
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
+            this.IgnoreTaskbarOnMaximize = true;
+            this.WindowStyle = WindowStyle.None;
+            this.WindowState = WindowState.Maximized;
+            this.MediaPlayer.Stretch = Stretch.Uniform;
+            this.SliderTime.Maximum = this.Width - 160;
+            this.isFullScreen_ = true;
+        }
+
+        private void FulllScreenOff()
+        {
+            this.ShowTitleBar = true;
+            this.IgnoreTaskbarOnMaximize = false;
+            this.WindowState = WindowState.Normal;
+            this.MediaPlayer.Stretch = Stretch.Uniform;
+            this.SliderTime.Maximum = this.Width - 160;
+            this.isFullScreen_ = false;
+        }
+
         // Gestion du FullScreen
         private void EventClicMediaElement(object sender, MouseButtonEventArgs e)
         {
-            
+
             if (this.isFullScreen_ == false && e.ClickCount == 2)
-            {
-                this.WindowStyle = WindowStyle.None;
-                this.WindowState = WindowState.Maximized;
-                this.MediaPlayer.Stretch = Stretch.Uniform;
-                this.SliderTime.Maximum = this.Width - 160;
-                this.isFullScreen_ = true;
-            }
+                this.FullScreenOn();
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
-            {
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.WindowState = WindowState.Normal;
-                this.MediaPlayer.Stretch = Stretch.Uniform;
-                this.SliderTime.Maximum = this.Width - 160;
-                this.isFullScreen_ = false;
-            }
+                this.FulllScreenOff();
         }
 
         // Gestion de la modification de la MainWindow
