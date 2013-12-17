@@ -258,7 +258,7 @@ namespace WindowsMedia
             }
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
             {
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                //this.WindowStyle = WindowStyle.SingleBorderWindow;
                 this.WindowState = WindowState.Normal;
                 this.MediaPlayer.Stretch = Stretch.Uniform;
                 this.SliderTime.Maximum = this.Width - 160;
