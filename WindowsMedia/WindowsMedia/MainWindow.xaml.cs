@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using System.IO;
 using MahApps.Metro.Controls;
+using MahApps.Metro;
 
 namespace WindowsMedia
 {
