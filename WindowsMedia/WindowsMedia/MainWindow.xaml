@@ -92,7 +92,7 @@
                     </Button.Background>
                 </Button>
                 <Slider x:Name="SliderVolume" Grid.Column="6" HorizontalAlignment="Right" Margin="0,15,20,15" VerticalAlignment="Center" Width="68" ValueChanged="SliderVolume_ValueChanged" Maximum="100" Height="17"/>
-                <Button x:Name="ButtonVolume" Content="" Grid.Column="6" HorizontalAlignment="Left" Margin="34,10,0,11" VerticalAlignment="Center" Width="30" Height="26" BorderThickness="0" Click="ButtonVolume_Click">
+                <Button x:Name="ButtonVolume" Content="" Grid.Column="6" HorizontalAlignment="Left" Margin="34,10,0,11" VerticalAlignment="Center" Width="30" Height="26" BorderThickness="0" Click="ButtonVolume_Click" Style="{DynamicResource ButtonPlayStyle}">
                     <Button.OpacityMask>
                         <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
                     </Button.OpacityMask>
