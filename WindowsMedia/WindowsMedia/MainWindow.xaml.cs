@@ -242,7 +242,6 @@ namespace WindowsMedia
         private void FullScreenOn()
         {
             this.ShowTitleBar = false;
-            this.ResizeMode = System.Windows.ResizeMode.NoResize;
             this.IgnoreTaskbarOnMaximize = true;
             this.WindowStyle = WindowStyle.None;
             this.WindowState = WindowState.Maximized;
