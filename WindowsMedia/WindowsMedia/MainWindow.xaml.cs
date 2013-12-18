@@ -455,8 +455,6 @@ namespace WindowsMedia
                 double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
                 double SliderValue = (double)SliderTime.Value;
                 double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
-                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
-                Console.Out.WriteLine("slide value = " + SliderValue);
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
