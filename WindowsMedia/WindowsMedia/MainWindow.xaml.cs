@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using Microsoft.Win32;
 
 namespace WindowsMedia
 {
@@ -89,7 +90,6 @@ namespace WindowsMedia
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush brush;
-
             if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaPlayer.Source != null))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
