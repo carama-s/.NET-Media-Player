@@ -68,10 +68,10 @@ namespace WindowsMedia
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass(" Sélections", "icon-selection-box.png"));
-            box.Add(new MenuTemplateClass(" Musiques", "icon-music-box.png"));
-            box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
+            box.Add(new MenuTemplateClass(" SELECTIONS", "icon-selection-box.png"));
+            box.Add(new MenuTemplateClass(" MUSIQUES", "icon-music-box.png"));
+            box.Add(new MenuTemplateClass(" IMAGES", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" VIDEOS", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
 
             this.SliderVolume.Value = 50;
@@ -464,6 +464,42 @@ namespace WindowsMedia
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
+        }
+        
+        private void ResetSelectionFilterMusic()
+        {
+            BrushConverter bc = new BrushConverter();
+
+            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+        }
+
+        private void ButtonAlbums_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.ALBUM;
+        }
+
+        private void ButtonArtists_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.ARTIST;
+        }
+
+        private void ButtonGenres_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.GENRE;
         }
     }
 }

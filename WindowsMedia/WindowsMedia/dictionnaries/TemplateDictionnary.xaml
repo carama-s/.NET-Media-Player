@@ -49,13 +49,13 @@
 	</GridView>
     <!-- Template pour ComboBoxSelectMedia-->
 	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
-		<Grid Width="Auto">
+		<Grid Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="9*"/>
-				<ColumnDefinition Width="11*"/>
+				<ColumnDefinition Width="30*"/>
 			</Grid.ColumnDefinitions>
-			<Image Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Source="{Binding Image}" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto" Stretch="None"/>
-			<Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="0" VerticalAlignment="Stretch" Padding="2" Foreground="Black"/>
+			<Image Grid.ColumnSpan="1" HorizontalAlignment="Center" Source="{Binding Image}" Height="Auto" Margin="0" VerticalAlignment="Center" Width="Auto" Stretch="None"/>
+            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1" FontWeight="Black"/>
 		</Grid>
 	</DataTemplate>
 	
