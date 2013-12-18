@@ -457,5 +457,30 @@ namespace WindowsMedia
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
         }
+
+        private void PlayItem(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "MP3/MP4/MKV/AVI/JPEG/PNG/JPG Files (*.mp3, *.mp4, *.avi, *.jpeg, *.png, *.jpg) | *.mp3; *.mp4; *.avi; *.jpeg; *.png; *.jpg"; 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                this.source_ = dlg.FileName;
+                MediaPlayer.Stop();
+                MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
+        }
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+  
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();            
+            dlg.ShowDialog();
+            string filename = dlg.SelectedPath;
+            Console.Out.WriteLine(filename);
+        }
     }
 }

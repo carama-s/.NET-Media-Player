@@ -36,6 +36,13 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-190,0,0,0" VerticalAlignment="Center" Width="75" Style="{DynamicResource ButtonFilterStyle}"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="190,0,0,0" VerticalAlignment="Center" Width="75" Style="{DynamicResource ButtonFilterStyle}"/>
                 </Grid>
+                <Menu IsMainMenu ="True" HorizontalAlignment="Left" Height="27.2" Margin="679.6,3.8,0,0" VerticalAlignment="Top" Width="70">                   
+                    <MenuItem Header="Menu">
+                        <MenuItem Header="Ouvrir..." Click="PlayItem" />
+                        <MenuItem Header="Importer..." Click="OpenFile"/>
+                        <MenuItem Header="Options"/>
+                    </MenuItem>
+                </Menu>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
