@@ -107,11 +107,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -165,9 +160,6 @@
     <Resource Include="assets\icon-selection-box.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\defaultalbumart.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="assets\defaultalbumart.png" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\icon-switch-barre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\defaultvideoart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

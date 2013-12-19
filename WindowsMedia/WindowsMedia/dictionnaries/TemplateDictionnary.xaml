@@ -7,12 +7,6 @@
 	<local:DurationConverter x:Key="durationConverter" />
     <!-- ItemTemplateSelector pour ListBoxMain-->
 	<local:MainBoxTemplateSelector x:Key="MyMainBoxTemplateSelector"/>
-    <!---->
-	<Style x:Key="BlackHeader" TargetType="{x:Type GridViewColumnHeader}">
-		<Setter Property="Background" Value="Black"/>
-		<Setter Property="Foreground" Value="White"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
     <!-- Template pour ListBoxMain (Music)-->
 	<DataTemplate x:Key="MainMusicTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
@@ -25,7 +19,14 @@
 	</DataTemplate>
     <!-- Template pour ListBoxMain (Video)-->
 	<DataTemplate x:Key="MainVideoTemplate">
-		<TextBlock Height="Auto" TextWrapping="Wrap" Text="{Binding Title}" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Foreground="Snow" FontSize="16" TextAlignment="Center"/>
+		<Grid Width="449.8" Height="153.6" VerticalAlignment="Center">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="167*" MaxWidth="167"/>
+				<ColumnDefinition Width="283*"/>
+			</Grid.ColumnDefinitions>
+			<Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+			<TextBlock Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,35.6" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Stretch" Height="Auto" FontSize="14.667" FontWeight="Bold" Foreground="White"/>
+		</Grid>
 	</DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
@@ -41,12 +42,6 @@
 			<Label Content="{Binding TrackNumber}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
 		</Grid>
 	</DataTemplate>
-	<!-- TEMPLATE TEMP-->
-	<GridView x:Key="TempTemplate" ColumnHeaderContainerStyle="{StaticResource BlackHeader}">
-		<GridViewColumn Header="#" DisplayMemberBinding="{Binding TrackNumber}"/>
-		<GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}"/>
-		<GridViewColumn Header="Durée" DisplayMemberBinding="{Binding Duration, Converter={StaticResource durationConverter}}"/>
-	</GridView>
     <!-- Template pour ComboBoxSelectMedia-->
 	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
 		<Grid Width="Auto">
