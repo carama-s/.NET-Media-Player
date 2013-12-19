@@ -12,20 +12,19 @@
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
 			<Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
 			<StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
-				<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
-				<TextBlock TextWrapping="Wrap" Text="{Binding Artist.Name}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507" TextTrimming="WordEllipsis"/>
+				<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+				<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Artist.Name}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507" TextTrimming="WordEllipsis"/>
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
     <!-- Template pour ListBoxMain (Video)-->
 	<DataTemplate x:Key="MainVideoTemplate">
-		<Grid Width="449.8" Height="153.6" VerticalAlignment="Center">
+		<Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="167*" MaxWidth="167"/>
-				<ColumnDefinition Width="283*"/>
+				<ColumnDefinition Width="*" MaxWidth="167"/>
 			</Grid.ColumnDefinitions>
 			<Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
-			<TextBlock Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,35.6" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Stretch" Height="Auto" FontSize="14.667" FontWeight="Bold" Foreground="White"/>
+			<TextBlock HorizontalAlignment="Stretch" Margin="0" TextWrapping="WrapWithOverflow" Text="{Binding Title}" VerticalAlignment="Stretch" Height="Auto" TextAlignment="Center" TextTrimming="WordEllipsis" Foreground="White" FontSize="13.333"/>
 		</Grid>
 	</DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->
@@ -36,8 +35,8 @@
 				<ColumnDefinition Width="236*"/>
 			</Grid.ColumnDefinitions>
 			<StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
-				<TextBlock TextWrapping="Wrap" Text="{Binding Title}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
-				<TextBlock TextWrapping="Wrap" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
+				<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+				<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
 			</StackPanel>
 			<Label Content="{Binding TrackNumber}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
 		</Grid>

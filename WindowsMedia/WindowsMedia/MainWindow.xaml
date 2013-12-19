@@ -26,7 +26,7 @@
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplateSelector="{DynamicResource MyMainBoxTemplateSelector}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick"/>
+            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplateSelector="{DynamicResource MyMainBoxTemplateSelector}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" d:IsHidden="True"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" d:IsHidden="True" Padding="0,20,0,0"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,-0.663,0.4"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
@@ -44,6 +44,7 @@
                 </Menu>
                 <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Height="26" Background="#FF181515"/>
             </Grid>
+            <Controls:Panorama x:Name="PanoramaDisplay" Margin="0,0,0,0.4" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{DynamicResource MainVideoTemplate}"/>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement" MediaEnded="EventEndMedia"/>
