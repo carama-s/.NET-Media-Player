@@ -35,6 +35,13 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
+                <Menu IsMainMenu ="True" HorizontalAlignment="Left" Height="27.2" Margin="679.6,3.8,0,0" VerticalAlignment="Top" Width="70">                   
+                    <MenuItem Header="Menu">
+                        <MenuItem Header="Ouvrir..." Click="PlayItem" />
+                        <MenuItem Header="Importer..." Click="OpenFile"/>
+                        <MenuItem Header="Options"/>
+                    </MenuItem>
+                </Menu>
                 <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Height="26" Background="#FF181515"/>
             </Grid>
         </Grid>

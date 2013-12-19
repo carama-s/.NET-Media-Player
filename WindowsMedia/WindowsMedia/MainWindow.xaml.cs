@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using Microsoft.Win32;
 
 namespace WindowsMedia
 {
@@ -89,7 +90,6 @@ namespace WindowsMedia
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush brush;
-
             if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaPlayer.Source != null))
             {
                 brush = createBrush("assets/icon-pause-barre.png");
@@ -176,8 +176,6 @@ namespace WindowsMedia
         // Gestion du bouton Back
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            if (MediaPlayer.Source != null)
-            {
                 var List = this.SecondBox.Items;
                 List.MoveCurrentToPrevious();
                 if (List.IsCurrentBeforeFirst)
@@ -188,13 +186,10 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
-        }
 
         // Gestion du bouton Forward
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            if (MediaPlayer.Source != null)
-            {
                 var List = this.SecondBox.Items;
                 List.MoveCurrentToNext();
                 if (List.IsCurrentAfterLast)
@@ -205,7 +200,6 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
-        }
 
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
@@ -459,8 +453,6 @@ namespace WindowsMedia
                 double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
                 double SliderValue = (double)SliderTime.Value;
                 double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
-                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
-                Console.Out.WriteLine("slide value = " + SliderValue);
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
@@ -500,6 +492,31 @@ namespace WindowsMedia
             ResetSelectionFilterMusic();
             this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
             this.musicStyle_ = MusicStyle.GENRE;
+        }
+
+        private void PlayItem(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "MP3/MP4/MKV/AVI/JPEG/PNG/JPG Files (*.mp3, *.mp4, *.avi, *.jpeg, *.png, *.jpg) | *.mp3; *.mp4; *.avi; *.jpeg; *.png; *.jpg"; 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                this.source_ = dlg.FileName;
+                MediaPlayer.Stop();
+                MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
+        }
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+  
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();            
+            dlg.ShowDialog();
+            string filename = dlg.SelectedPath;
+            Console.Out.WriteLine(filename);
         }
     }
 }
