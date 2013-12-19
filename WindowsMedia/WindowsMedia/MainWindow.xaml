@@ -30,7 +30,6 @@
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" d:IsHidden="True" Padding="0,20,0,0"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,-0.663,0.4"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
-                <!-- <ComboBox x:Name="BoxSelectMedia" Style="{DynamicResource ComboBoxMedaSelectionStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"  SelectionChanged="BoxSelectMedia_SelectionChanged" SelectedIndex="1" Padding="0" Height="23" MinHeight="23"/> -->
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
                     <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
