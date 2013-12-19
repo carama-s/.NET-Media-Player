@@ -43,6 +43,7 @@ namespace WindowsMedia
         private bool            isRepeat_;
         private bool            isShuffle_;
         private DispatcherTimer timer_;
+        private DispatcherTimer timer_2;
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
@@ -62,6 +63,7 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
+            this.timer_ = new DispatcherTimer();
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -90,6 +92,13 @@ namespace WindowsMedia
             movieLib_.GenerateLibrary();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string lettreSupprimer = this.NomVideo.Text.Substring(0, 1);
+            this.NomVideo.Text = this.NomVideo.Text.Remove(0, 1);
+            this.NomVideo.Text += lettreSupprimer;
+        }
+
         // Gestion bouton Play/Pause
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
@@ -99,6 +108,12 @@ namespace WindowsMedia
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
                 this.MediaPlayer.Play();
+                this.NomVideo.Width = 150;
+                String[] titreParse = this.source_.Split('\\');
+                this.NomVideo.Text = titreParse[titreParse.Length - 1] + "          ";
+                this.timer_.Interval = TimeSpan.FromMilliseconds(80);
+                this.timer_.Tick += new EventHandler(timer1_Tick);
+                this.timer_.Start();
                 if (oldValue == -1)
                 {
                     this.CurrentTime.Text = "00:00:00";
@@ -108,10 +123,10 @@ namespace WindowsMedia
                 this.duree_ = tags.Properties.Duration;
                 this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
                 this.TotalTime.Text = this.duree_.ToString();
-                this.timer_ = new DispatcherTimer();
-                this.timer_.Interval = TimeSpan.FromMilliseconds(100);
-                this.timer_.Tick += new EventHandler(timer_Tick);
-                this.timer_.Start();
+                this.timer_2 = new DispatcherTimer();
+                this.timer_2.Interval = TimeSpan.FromMilliseconds(100);
+                this.timer_2.Tick += new EventHandler(timer_Tick);
+                this.timer_2.Start();
             }
             else // this.state_ == State.PLAY
             {
