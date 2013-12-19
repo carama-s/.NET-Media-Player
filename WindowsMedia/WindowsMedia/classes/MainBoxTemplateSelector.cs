@@ -19,7 +19,7 @@ namespace WindowsMedia.classes
                 if (item is MusicAlbum)
                     return elem.FindResource("MainMusicTemplate") as DataTemplate;
                 else if (item is MovieFile)
-                    return elem.FindResource("MainVideoTemplate") as DataTemplate;
+                   return elem.FindResource("MainVideoTemplate") as DataTemplate;
             }
             return base.SelectTemplate(item, container);
         }

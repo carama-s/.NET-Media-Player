@@ -48,5 +48,8 @@
             <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1"/>
 		</Grid>
 	</DataTemplate>
-	
+	<!-- Panel Template pour VideoBox-->
+    <ItemsPanelTemplate x:Key="VideoBoxPanelTemplate">
+        <WrapPanel Orientation="Horizontal"/>
+    </ItemsPanelTemplate>
 </ResourceDictionary>
