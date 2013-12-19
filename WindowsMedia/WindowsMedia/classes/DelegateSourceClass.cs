@@ -17,7 +17,7 @@ namespace WindowsMedia.classes
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.Visibility = System.Windows.Visibility.Visible;
-            win.VideoBox.Visibility = System.Windows.Visibility.Visible;
+            win.VideoBox.Visibility = System.Windows.Visibility.Hidden;
             win.clickStyle_ = ClickStyle.MUSIC;
             win.VideoBox.ItemsSource = null;
             win.MainBox.ItemsSource = win.musicLib_;
