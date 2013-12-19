@@ -151,18 +151,6 @@
     <Resource Include="assets\icone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-photo-box.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assets\icon-video-box.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assets\icon-music-box.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assets\icon-selection-box.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="assets\defaultalbumart.png" />
   </ItemGroup>
   <ItemGroup>
