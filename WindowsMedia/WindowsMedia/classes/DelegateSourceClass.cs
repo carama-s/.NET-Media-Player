@@ -16,8 +16,6 @@ namespace WindowsMedia.classes
         public void MusicSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Visible;
-            win.PanoramaDisplay.Visibility = System.Windows.Visibility.Hidden;
-            win.MainBox.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.Visibility = System.Windows.Visibility.Visible;
             win.clickStyle_ = ClickStyle.MUSIC;
             win.MainBox.ItemsSource = win.musicLib_;
@@ -30,13 +28,10 @@ namespace WindowsMedia.classes
         public void VideoSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
-            win.MainBox.Visibility = System.Windows.Visibility.Hidden;
-            win.PanoramaDisplay.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.Visibility = System.Windows.Visibility.Hidden;
             win.SecondBox.ItemsSource = null;
             win.clickStyle_ = ClickStyle.VIDEO;
-            win.PanoramaDisplay.ItemsSource = win.movieLib_;
-            win.MainBox.ItemsSource = null;
+            win.MainBox.ItemsSource = win.movieLib_;
         }
     }
 }

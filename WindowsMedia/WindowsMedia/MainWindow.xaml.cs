@@ -522,5 +522,15 @@ namespace WindowsMedia
             string filename = dlg.SelectedPath;
             Console.Out.WriteLine(filename);
         }
+
+        private void PanoramaDisplay_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void PanoramaDisplay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -20,11 +20,7 @@
     <!-- Template pour ListBoxMain (Video)-->
 	<DataTemplate x:Key="MainVideoTemplate">
 		<Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" MaxWidth="167"/>
-			</Grid.ColumnDefinitions>
 			<Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
-			<TextBlock HorizontalAlignment="Stretch" Margin="0" TextWrapping="WrapWithOverflow" Text="{Binding Title}" VerticalAlignment="Stretch" Height="Auto" TextAlignment="Center" TextTrimming="WordEllipsis" Foreground="White" FontSize="13.333"/>
 		</Grid>
 	</DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->

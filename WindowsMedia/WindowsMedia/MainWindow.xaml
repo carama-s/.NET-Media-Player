@@ -51,7 +51,6 @@
                 </Menu>
                 <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515"/>
             </Grid>
-            <Controls:Panorama x:Name="PanoramaDisplay" Margin="0,0,0,0.4" Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{DynamicResource MainVideoTemplate}"/>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement" MediaEnded="EventEndMedia"/>
