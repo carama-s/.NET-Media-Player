@@ -74,13 +74,14 @@ namespace WindowsMedia
             this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
+            /*
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
             box.Add(new MenuTemplateClass(" SELECTIONS", ""));
             box.Add(new MenuTemplateClass(" MUSIQUES", ""));
             box.Add(new MenuTemplateClass(" IMAGES", ""));
             box.Add(new MenuTemplateClass(" VIDEOS", ""));
             BoxSelectMedia.ItemsSource = box;
-
+            */
             this.SliderVolume.Value = 50;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;

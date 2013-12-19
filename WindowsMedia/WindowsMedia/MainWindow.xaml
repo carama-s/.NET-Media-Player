@@ -49,7 +49,11 @@
                         <MenuItem Header="Quitter"/>
                     </MenuItem>
                 </Menu>
-                <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515"/>
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515">
+                    <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="118.4"/>
+                    <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="118.4"/>
+                </ComboBox>
+
             </Grid>
             <ListBox x:Name="VideoBox" Margin="0,0.4,0,0" Grid.Column="0" Grid.Row="1" ItemTemplate="{DynamicResource MainVideoTemplate}" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource VideoBoxPanelTemplate}" Visibility="Hidden"/>
         </Grid>

@@ -21,6 +21,7 @@ namespace WindowsMedia.classes
             win.clickStyle_ = ClickStyle.MUSIC;
             win.VideoBox.ItemsSource = null;
             win.MainBox.ItemsSource = win.musicLib_;
+            win.MainBox.Visibility = System.Windows.Visibility.Visible;
         }
         public void ImageSource(MainWindow win)
         {
