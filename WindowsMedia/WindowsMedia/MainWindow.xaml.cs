@@ -146,6 +146,8 @@ namespace WindowsMedia
                 ImageBrush brush = createBrush("assets/icon-play-barre.png");
                 this.ButtonPlay.Background = brush;
                 this.ButtonPlay.OpacityMask = brush;
+                this.timer_.Stop();
+                this.NomVideo.Text = "";
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
                 this.oldValue = -1;
