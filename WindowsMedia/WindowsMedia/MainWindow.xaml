@@ -52,6 +52,9 @@
                 <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515">
                     <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="118.4"/>
                     <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="118.4"/>
+                    <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="118.4"/>
+                    <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="118.4"/>
+
                 </ComboBox>
 
             </Grid>
