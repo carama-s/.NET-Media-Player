@@ -49,11 +49,11 @@
                         <MenuItem Header="Quitter"/>
                     </MenuItem>
                 </Menu>
-                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515">
-                    <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="118.4"/>
-                    <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="118.4"/>
-                    <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="118.4"/>
-                    <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="118.4"/>
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="105" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" Style="{DynamicResource ComboBoxStyle}" BorderThickness="0" VerticalAlignment="Center">
+                    <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="105"/>
+                    <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="105"/>
+                    <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="105"/>
+                    <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="105"/>
 
                 </ComboBox>
 
