@@ -73,10 +73,10 @@ namespace WindowsMedia
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass(" SELECTIONS", "icon-selection-box.png"));
-            box.Add(new MenuTemplateClass(" MUSIQUES", "icon-music-box.png"));
-            box.Add(new MenuTemplateClass(" IMAGES", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass(" VIDEOS", "icon-video-box.png"));
+            box.Add(new MenuTemplateClass(" SELECTIONS", ""));
+            box.Add(new MenuTemplateClass(" MUSIQUES", ""));
+            box.Add(new MenuTemplateClass(" IMAGES", ""));
+            box.Add(new MenuTemplateClass(" VIDEOS", ""));
             BoxSelectMedia.ItemsSource = box;
 
             this.SliderVolume.Value = 50;
