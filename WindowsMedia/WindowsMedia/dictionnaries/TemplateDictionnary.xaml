@@ -50,7 +50,7 @@
 				<ColumnDefinition Width="30*"/>
 			</Grid.ColumnDefinitions>
 			<Image Grid.ColumnSpan="1" HorizontalAlignment="Center" Source="{Binding Image}" Height="Auto" Margin="0" VerticalAlignment="Center" Width="Auto" Stretch="None"/>
-            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1" FontWeight="Black"/>
+            <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1"/>
 		</Grid>
 	</DataTemplate>
 	

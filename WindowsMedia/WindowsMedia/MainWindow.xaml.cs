@@ -58,6 +58,10 @@ namespace WindowsMedia
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            BrushConverter bc = new BrushConverter();
+
+            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
