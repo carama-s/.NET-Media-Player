@@ -7,6 +7,10 @@
 	<local:DurationConverter x:Key="durationConverter" />
     <!-- ItemTemplateSelector pour ListBoxMain-->
 	<local:MainBoxTemplateSelector x:Key="MyMainBoxTemplateSelector"/>
+    <!-- Panel Template pour VideoBox-->
+    <ItemsPanelTemplate x:Key="VideoBoxPanelTemplate">
+        <WrapPanel Orientation="Horizontal"/>
+    </ItemsPanelTemplate>
     <!-- Template pour ListBoxMain (Music)-->
 	<DataTemplate x:Key="MainMusicTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
@@ -48,8 +52,4 @@
             <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1"/>
 		</Grid>
 	</DataTemplate>
-	<!-- Panel Template pour VideoBox-->
-    <ItemsPanelTemplate x:Key="VideoBoxPanelTemplate">
-        <WrapPanel Orientation="Horizontal"/>
-    </ItemsPanelTemplate>
 </ResourceDictionary>
