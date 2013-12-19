@@ -69,10 +69,10 @@ namespace WindowsMedia
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass(" Sélections", "icon-selection-box.png"));
-            box.Add(new MenuTemplateClass(" Musiques", "icon-music-box.png"));
-            box.Add(new MenuTemplateClass(" Images", "icon-photo-box.png"));
-            box.Add(new MenuTemplateClass(" Vidéos", "icon-video-box.png"));
+            box.Add(new MenuTemplateClass(" SELECTIONS", "icon-selection-box.png"));
+            box.Add(new MenuTemplateClass(" MUSIQUES", "icon-music-box.png"));
+            box.Add(new MenuTemplateClass(" IMAGES", "icon-photo-box.png"));
+            box.Add(new MenuTemplateClass(" VIDEOS", "icon-video-box.png"));
             BoxSelectMedia.ItemsSource = box;
 
             this.SliderVolume.Value = 50;
@@ -176,30 +176,30 @@ namespace WindowsMedia
         // Gestion du bouton Back
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToPrevious();
-            if (List.IsCurrentBeforeFirst)
-                List.MoveCurrentToLast();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
-        }
+                var List = this.SecondBox.Items;
+                List.MoveCurrentToPrevious();
+                if (List.IsCurrentBeforeFirst)
+                    List.MoveCurrentToLast();
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
 
         // Gestion du bouton Forward
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            var List = this.SecondBox.Items;
-            List.MoveCurrentToNext();
-            if (List.IsCurrentAfterLast)
-                List.MoveCurrentToFirst();
-            MusicTitle music = (MusicTitle)List.CurrentItem;
-            this.source_ = music.Path;
-            this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-            this.state_ = State.STOP;
-            this.ButtonPlay_Click(sender, e);
-        }
+                var List = this.SecondBox.Items;
+                List.MoveCurrentToNext();
+                if (List.IsCurrentAfterLast)
+                    List.MoveCurrentToFirst();
+                MusicTitle music = (MusicTitle)List.CurrentItem;
+                this.source_ = music.Path;
+                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
 
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
@@ -232,8 +232,6 @@ namespace WindowsMedia
                 double OldPosition = (oldValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
                 double SliderValue = (double)SliderTime.Value;
                 double Position = (SliderValue * (double)this.duree_.TotalSeconds) / this.SliderTime.Maximum;
-                Console.Out.WriteLine("size slide = " + SliderTime.Width + " max = " + SliderTime.Maximum);
-                Console.Out.WriteLine("slide value = " + SliderValue);
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
@@ -458,6 +456,67 @@ namespace WindowsMedia
                 if (OldPosition != Position)
                     this.MediaPlayer.Position = TimeSpan.FromSeconds(Position);
             }
+        }
+        
+        private void ResetSelectionFilterMusic()
+        {
+            BrushConverter bc = new BrushConverter();
+
+            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FFFFFFFF");
+        }
+
+        private void ButtonAlbums_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.ALBUM;
+        }
+
+        private void ButtonArtists_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.ARTIST;
+        }
+
+        private void ButtonGenres_Click(object sender, RoutedEventArgs e)
+        {
+            BrushConverter bc = new BrushConverter();
+
+            ResetSelectionFilterMusic();
+            this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            this.musicStyle_ = MusicStyle.GENRE;
+        }
+
+        private void PlayItem(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "MP3/MP4/MKV/AVI/JPEG/PNG/JPG Files (*.mp3, *.mp4, *.avi, *.jpeg, *.png, *.jpg) | *.mp3; *.mp4; *.avi; *.jpeg; *.png; *.jpg"; 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                this.source_ = dlg.FileName;
+                MediaPlayer.Stop();
+                MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(sender, e);
+            }
+        }
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+  
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();            
+            dlg.ShowDialog();
+            string filename = dlg.SelectedPath;
+            Console.Out.WriteLine(filename);
         }
     }
 }

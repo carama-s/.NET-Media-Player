@@ -29,13 +29,20 @@
             <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplateSelector="{DynamicResource MyMainBoxTemplateSelector}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" d:IsHidden="True" Padding="0,20,0,0"/>
             <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,-0.663,0.4"/>
-            <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF41b1e1">
-                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,5,0,0" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" SelectionChanged="BoxSelectMedia_SelectionChanged" MinWidth="110" BorderThickness="0" SelectedIndex="1" Padding="8,3,5,3" Style="{DynamicResource ComboBoxMedaSelectionStyle}"/>
+            <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
-                    <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Style="{DynamicResource ButtonFilterStyle}"/>
-                    <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-190,0,0,0" VerticalAlignment="Center" Width="75" Style="{DynamicResource ButtonFilterStyle}"/>
-                    <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="190,0,0,0" VerticalAlignment="Center" Width="75" Style="{DynamicResource ButtonFilterStyle}"/>
+                    <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
+                    <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
+                    <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
+                <Menu IsMainMenu ="True" HorizontalAlignment="Left" Height="27.2" Margin="679.6,3.8,0,0" VerticalAlignment="Top" Width="70">                   
+                    <MenuItem Header="Menu">
+                        <MenuItem Header="Ouvrir..." Click="PlayItem" />
+                        <MenuItem Header="Importer..." Click="OpenFile"/>
+                        <MenuItem Header="Options"/>
+                    </MenuItem>
+                </Menu>
+                <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Height="26" Background="#FF181515"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
