@@ -35,14 +35,21 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
-                <Menu IsMainMenu ="True" HorizontalAlignment="Left" Height="27.2" Margin="679.6,3.8,0,0" VerticalAlignment="Top" Width="70">                   
-                    <MenuItem Header="Menu">
+                <Menu IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
+                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20">
+                        <MenuItem.OpacityMask>
+                            <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
+                        </MenuItem.OpacityMask>
+                        <MenuItem.Background>
+                            <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
+                        </MenuItem.Background>
                         <MenuItem Header="Ouvrir..." Click="PlayItem" />
                         <MenuItem Header="Importer..." Click="OpenFile"/>
                         <MenuItem Header="Options"/>
+                        <MenuItem Header="Quitter"/>
                     </MenuItem>
                 </Menu>
-                <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Height="26" Background="#FF181515"/>
+                <ComboBox x:Name="BoxSelectMedia" ItemTemplate="{DynamicResource ComboBoxSelectMediaTemplate}" HorizontalAlignment="Right" Margin="10,4,0,6" SelectedIndex="1" Width="120" Style="{DynamicResource ComboBoxSelectorStyle}" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
@@ -62,7 +69,7 @@
                     <ColumnDefinition Width="44*"/>
                     <ColumnDefinition Width="167*"/>
                 </Grid.ColumnDefinitions>
-               <Button x:Name="ButtonPlay" Content="" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="35" Height="35" BorderThickness="0" Grid.Column="4" Click="ButtonPlay_Click" Style="{DynamicResource ButtonPlayStyle}">
+                <Button x:Name="ButtonPlay" Content="" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="35" Height="35" BorderThickness="0" Grid.Column="4" Click="ButtonPlay_Click" Style="{DynamicResource ButtonPlayStyle}">
                     <Button.OpacityMask>
                         <ImageBrush ImageSource="assets/icon-play-barre.png"/>
                     </Button.OpacityMask>
@@ -70,12 +77,12 @@
                         <ImageBrush ImageSource="assets/icon-play-barre.png"/>
                     </Button.Background>
                 </Button>
-               <Button x:Name="ButtonNext" Content="" Grid.Column="5" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0" Click="ForwardButtonMediaElement" Style="{DynamicResource ButtonPlayStyle}">
-                   <Button.OpacityMask>
-                       <ImageBrush ImageSource="assets/icon-next-barre.png"/>
-                   </Button.OpacityMask>
-                   <Button.Background>
-                       <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                <Button x:Name="ButtonNext" Content="" Grid.Column="5" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0" Click="ForwardButtonMediaElement" Style="{DynamicResource ButtonPlayStyle}">
+                    <Button.OpacityMask>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                    </Button.OpacityMask>
+                    <Button.Background>
+                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="3" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Click="BackButtonMediaElement" Style="{DynamicResource ButtonPlayStyle}">
