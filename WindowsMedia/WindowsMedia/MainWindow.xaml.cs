@@ -538,5 +538,68 @@ namespace WindowsMedia
             string filename = dlg.SelectedPath;
             Console.Out.WriteLine(filename);
         }
+
+        private void VideoBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.MUSIC):
+                        {
+                            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+                            SecondBox.ItemsSource = al;
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)e.AddedItems[0];
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void VideoBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (VideoBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)VideoBox.SelectedItem;
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            this.state_ = State.STOP;
+                            ButtonPlay_Click(sender, e);
+                            ButtonSwitch_Click(sender, e);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
