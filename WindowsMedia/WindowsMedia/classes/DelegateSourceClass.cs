@@ -15,12 +15,17 @@ namespace WindowsMedia.classes
         }
         public void MusicSource(MainWindow win)
         {
+            if (win.IsLoaded)
+            { 
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.Visibility = System.Windows.Visibility.Visible;
             win.VideoBox.Visibility = System.Windows.Visibility.Hidden;
+                win.MainBox.Visibility = System.Windows.Visibility.Visible;
             win.clickStyle_ = ClickStyle.MUSIC;
             win.VideoBox.ItemsSource = null;
             win.MainBox.ItemsSource = win.musicLib_;
+            win.MainBox.Visibility = System.Windows.Visibility.Visible;
+        }
         }
         public void ImageSource(MainWindow win)
         {

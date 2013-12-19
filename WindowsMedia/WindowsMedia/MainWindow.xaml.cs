@@ -74,13 +74,14 @@ namespace WindowsMedia
             this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
+            /*
             List<MenuTemplateClass> box = new List<MenuTemplateClass>();
             box.Add(new MenuTemplateClass(" SELECTIONS", ""));
             box.Add(new MenuTemplateClass(" MUSIQUES", ""));
             box.Add(new MenuTemplateClass(" IMAGES", ""));
             box.Add(new MenuTemplateClass(" VIDEOS", ""));
             BoxSelectMedia.ItemsSource = box;
-
+            */
             this.SliderVolume.Value = 50;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
@@ -538,6 +539,69 @@ namespace WindowsMedia
             dlg.ShowDialog();
             string filename = dlg.SelectedPath;
             Console.Out.WriteLine(filename);
+        }
+
+        private void VideoBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.MUSIC):
+                        {
+                            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+                            SecondBox.ItemsSource = al;
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)e.AddedItems[0];
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void VideoBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (VideoBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            MovieFile mv = (MovieFile)VideoBox.SelectedItem;
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            this.state_ = State.STOP;
+                            ButtonPlay_Click(sender, e);
+                            ButtonSwitch_Click(sender, e);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
