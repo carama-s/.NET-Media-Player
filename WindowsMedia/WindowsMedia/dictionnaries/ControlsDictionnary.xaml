@@ -168,11 +168,12 @@
 		</Setter>
 	</Style>
 
+	<!-- Combo Box -->
     <Style x:Key="ComboBoxItemSelectorStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Background" Value="#FF181515"/>
 		<Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontSize" Value="9" />
+        <Setter Property="FontSize" Value="10" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
 
@@ -296,7 +297,7 @@
     					<Rectangle x:Name="DisabledVisualElement" Fill="{DynamicResource DisabledWhiteBrush}" IsHitTestVisible="False" Opacity="0"/>
     					<Popup x:Name="PART_Popup" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
     						<Border x:Name="PopupBorder" HorizontalAlignment="Stretch" Height="Auto">
-    							<ScrollViewer x:Name="DropDownScrollViewer" HorizontalContentAlignment="Right">
+    							<ScrollViewer x:Name="DropDownScrollViewer" HorizontalContentAlignment="Center">
     								<ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained"/>
     							</ScrollViewer>
     						</Border>
@@ -319,5 +320,15 @@
     		</Setter.Value>
     	</Setter>
     </Style>
+
+	<!-- Menu -->
+
+    <Style x:Key="submenuStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="#FF181515" />
+        <Setter Property="Foreground" Value="White" />
+
+    </Style>
+    
     
 </ResourceDictionary>

@@ -36,25 +36,26 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
+                
                 <Menu IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
-                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20">
+                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" >
                         <MenuItem.OpacityMask>
                             <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
                         </MenuItem.OpacityMask>
                         <MenuItem.Background>
                             <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
                         </MenuItem.Background>
-                        <MenuItem Header="Ouvrir..." Click="PlayItem" />
-                        <MenuItem Header="Importer..." Click="OpenFile"/>
+                        <MenuItem Header="Ouvrir..." Click="PlayItem" BorderThickness="0" Background="#FF181515" Foreground="White" Padding="0" />
+                        <MenuItem Header="Importer..." Click="OpenFile" BorderThickness="0" Foreground="White" Background="#FF181515" Padding="0"/>
                         <MenuItem Header="Options"/>
                         <MenuItem Header="Quitter"/>
                     </MenuItem>
                 </Menu>
-                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="105" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" Style="{DynamicResource ComboBoxStyle}" BorderThickness="0" VerticalAlignment="Center">
-                    <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="105"/>
-                    <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="105"/>
-                    <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="105"/>
-                    <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="105"/>
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="92" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" Style="{DynamicResource ComboBoxStyle}" BorderThickness="0" VerticalAlignment="Center">
+                    <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="92"/>
+                    <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="92"/>
+                    <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="92"/>
+                    <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="92"/>
 
                 </ComboBox>
             </Grid>
