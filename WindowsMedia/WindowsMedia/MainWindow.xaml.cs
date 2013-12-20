@@ -88,7 +88,7 @@ namespace WindowsMedia
 
             musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             musicLib_.GenerateLibrary();
-            MainBox.ItemsSource = musicLib_;
+            MainBox.ItemsSource = new AlbumIterator(musicLib_);
 
             Debug.WriteLine("Time music: " + watch.ElapsedMilliseconds);
             watch.Reset();
@@ -124,12 +124,6 @@ namespace WindowsMedia
                 this.state_ = State.PLAY;
                 this.MediaPlayer.Play();
                 this.NomVideo.Width = 150;
-                String[] titreParse = this.source_.Split('\\');
-                this.NomVideo.Text = titreParse[titreParse.Length - 1] + "          ";
-                this.timer_ = new DispatcherTimer();
-                this.timer_.Interval = TimeSpan.FromMilliseconds(80);
-                this.timer_.Tick += new EventHandler(timer1_Tick);
-                this.timer_.Start();
                 if (oldValue == -1)
                 {
                     this.CurrentTime.Text = "00:00:00";
@@ -637,14 +631,14 @@ namespace WindowsMedia
         }
         private void EventMouseMove(object sender, MouseEventArgs e)
         {
-            GridControls.Opacity = 100;
+           /* GridControls.Opacity = 100;
             if (this.state_ == State.PLAY)
             {
                 this.timer_3 = new DispatcherTimer();
                 this.timer_3.Interval = TimeSpan.FromSeconds(2);
                 this.timer_3.Tick += new EventHandler(timer_Slide);
                 this.timer_3.Start();
-            }
+            }*/
         }
     }
 }
