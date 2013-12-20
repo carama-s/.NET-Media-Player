@@ -5,6 +5,8 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
+    <!-- ItemContainerStyleSelector WrapBox-->
+    <local:WrapBoxContainerSelector x:Key="WrapContainerSelector"/>
     <!-- Panel Template pour WrapBox-->
     <ItemsPanelTemplate x:Key="WrapBoxPanelTemplate">
         <WrapPanel Orientation="Horizontal"/>
@@ -37,6 +39,12 @@
             	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
             	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333"/>
             </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <!-- Template pour ListBoxWrap (Image)-->
+    <DataTemplate x:Key="WrapImageTemplateItem">
+        <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
+            <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
         </Grid>
     </DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->

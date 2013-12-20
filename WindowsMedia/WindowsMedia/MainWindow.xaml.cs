@@ -50,6 +50,8 @@ namespace WindowsMedia
         private double          oldSize_;
         public MusicLibrary     musicLib_;
         public MovieLibrary     movieLib_;
+        public ImageLibrary     imageLib_;
+
  
         public MainWindow()
         {
@@ -85,6 +87,8 @@ namespace WindowsMedia
             MainBox.ItemsSource = musicLib_;
             movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
             movieLib_.GenerateLibrary();
+            imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
+            imageLib_.GenerateLibrary();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

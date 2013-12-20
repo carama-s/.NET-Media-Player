@@ -177,7 +177,12 @@
         </Style.Triggers>
     </Style>
 
-	<!-- ComboBox Item -->
+    <!-- ItemContainerStyle pour ListBoxVideo (Image)-->
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="WrapBoxImageContainer">
+        <Setter Property="ContentTemplate" Value="{StaticResource WrapImageTemplateItem}" />
+    </Style>
+    
+    <!-- ComboBox Item -->
     <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
 		<Setter Property="Foreground" Value="White"/>
     	<Setter Property="Background" Value="#FF181515"/>
