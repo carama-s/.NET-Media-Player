@@ -31,6 +31,7 @@ namespace WindowsMedia.classes
 
     public class MusicTitle
     {
+        static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
         public String Artist { get; private set; }
         public String Album { get; private set; }
         public String Genre { get; private set; }
@@ -50,7 +51,7 @@ namespace WindowsMedia.classes
                 }
                 catch (FileNotFoundException)
                 {
-                    return new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+                    return new BitmapImage(DefaultImagePath);
                 }
                 if (tags.Tag.Pictures.Length > 0)
                 {
@@ -61,7 +62,7 @@ namespace WindowsMedia.classes
                     return img;
                 }
                 else
-                    return new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+                    return new BitmapImage(DefaultImagePath);
             }
 
             private set
