@@ -23,7 +23,7 @@ namespace WindowsMedia.classes
                 win.MainBox.Visibility = System.Windows.Visibility.Visible;
             win.clickStyle_ = ClickStyle.MUSIC;
             win.WrapBox.ItemsSource = null;
-            win.MainBox.ItemsSource = win.musicLib_;
+            win.MainBox.ItemsSource = new AlbumIterator(win.musicLib_);
             win.MainBox.Visibility = System.Windows.Visibility.Visible;
         }
         }

@@ -84,7 +84,7 @@ namespace WindowsMedia
 
             musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             musicLib_.GenerateLibrary();
-            MainBox.ItemsSource = musicLib_;
+            MainBox.ItemsSource = new AlbumIterator(musicLib_);
             movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
             movieLib_.GenerateLibrary();
             imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });

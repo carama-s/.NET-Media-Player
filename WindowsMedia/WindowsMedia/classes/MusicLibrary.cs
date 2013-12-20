@@ -9,7 +9,70 @@ using System.Threading.Tasks;
 
 namespace WindowsMedia.classes
 {
-    public class MusicLibrary : System.Collections.IEnumerable
+    public class AlbumIterator : System.Collections.IEnumerable
+    {
+        public MusicLibrary Library { get; private set; }
+
+        public AlbumIterator(MusicLibrary lib)
+        {
+            Library = lib;
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var albums = from title in Library.Titles
+                         orderby title.Album, title.Artist, title.TrackNumber
+                         group title by new { title.Artist, title.Album };
+            foreach (var album in albums)
+            {
+                yield return new List<MusicTitle>(album);
+            }
+        }
+    }
+
+    public class ArtistIterator : System.Collections.IEnumerable
+    {
+        public MusicLibrary Library { get; private set; }
+
+        public ArtistIterator(MusicLibrary lib)
+        {
+            Library = lib;
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var albums = from title in Library.Titles
+                         orderby title.Artist, title.Album, title.TrackNumber
+                         group title by new { title.Artist, title.Album };
+            foreach (var album in albums)
+            {
+                yield return new List<MusicTitle>(album);
+            }
+        }
+    }
+
+    public class GenreIterator : System.Collections.IEnumerable
+    {
+        public MusicLibrary Library { get; private set; }
+
+        public GenreIterator(MusicLibrary lib)
+        {
+            Library = lib;
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var albums = from title in Library.Titles
+                         orderby title.Genre, title.Album, title.Artist, title.TrackNumber
+                         group title by new { title.Artist, title.Album };
+            foreach (var album in albums)
+            {
+                yield return new List<MusicTitle>(album);
+            }
+        }
+    }
+
+    public class MusicLibrary
     {
         public List<String> Sources { get; set; }
         public List<MusicTitle> Titles { get; private set; }
@@ -19,17 +82,6 @@ namespace WindowsMedia.classes
         {
             Titles = new List<MusicTitle>();
             Sources = sources;
-        }
-
-        public System.Collections.IEnumerator GetEnumerator()
-        {
-            var albums = from title in Titles
-                         orderby title.Album, title.Artist, title.TrackNumber
-                         group title by new { title.Artist, title.Album };
-            foreach (var album in albums)
-            {
-                yield return new List<MusicTitle>(album);
-            }
         }
 
         public void GenerateOneFile(object param)
