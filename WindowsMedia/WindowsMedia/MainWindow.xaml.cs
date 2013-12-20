@@ -358,7 +358,7 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.MUSIC):
                         {
-                            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+                            var al = (List<MusicTitle>)e.AddedItems[0];
                             SecondBox.ItemsSource = al;
                             break;
                         }
@@ -566,7 +566,7 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.MUSIC):
                         {
-                            MusicAlbum al = (MusicAlbum)e.AddedItems[0];
+                            var al = (List<MusicTitle>)e.AddedItems[0];
                             SecondBox.ItemsSource = al;
                             break;
                         }
