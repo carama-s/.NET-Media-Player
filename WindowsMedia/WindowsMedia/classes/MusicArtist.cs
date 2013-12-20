@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace WindowsMedia.classes
 {
@@ -27,10 +28,17 @@ namespace WindowsMedia.classes
 
         public MusicAlbum GetOrCreateAlbum(String name)
         {
-            if (Albums.ContainsKey(name))
-                return Albums[name];
-            MusicAlbum album = new MusicAlbum(this, name);
-            Albums.Add(name, album);
+            MusicAlbum album = null;
+            lock (Albums)
+            {
+                if (Albums.ContainsKey(name))
+                    album = Albums[name];
+                else
+                {
+                    album = new MusicAlbum(this, name);
+                    Albums.Add(name, album);
+                }
+            }
             return album;
         }
     }
