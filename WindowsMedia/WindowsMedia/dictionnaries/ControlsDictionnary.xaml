@@ -320,7 +320,7 @@
     		</Setter.Value>
     	</Setter>
     </Style>
-
+    
 	<!-- Menu -->
 
     <Style x:Key="submenuStyle" TargetType="{x:Type MenuItem}">
@@ -331,4 +331,13 @@
     </Style>
     
     
+    <!-- ItemContainerStyle pour ListBoxVideo (Video)-->
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="VideoBoxVideoContainer">
+        <Setter Property="ContentTemplate" Value="{StaticResource VideoTemplateItem}" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource VideoTemplatedSelected}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
