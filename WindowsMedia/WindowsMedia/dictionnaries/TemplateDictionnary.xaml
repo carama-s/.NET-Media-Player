@@ -5,10 +5,10 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
-    <!-- ItemTemplateSelector pour ListBoxMain-->
-	<local:MainBoxTemplateSelector x:Key="MyMainBoxTemplateSelector"/>
-    <!-- Panel Template pour VideoBox-->
-    <ItemsPanelTemplate x:Key="VideoBoxPanelTemplate">
+    <!-- ItemContainerStyleSelector WrapBox-->
+    <local:WrapBoxContainerSelector x:Key="WrapContainerSelector"/>
+    <!-- Panel Template pour WrapBox-->
+    <ItemsPanelTemplate x:Key="WrapBoxPanelTemplate">
         <WrapPanel Orientation="Horizontal"/>
     </ItemsPanelTemplate>
     <!-- Template pour ListBoxMain (Music)-->
@@ -21,12 +21,32 @@
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
-    <!-- Template pour ListBoxMain (Video)-->
-	<DataTemplate x:Key="MainVideoTemplate">
-		<Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
-			<Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
-		</Grid>
-	</DataTemplate>
+    <!-- Template pour ListBoxWrap (Video Unselected)-->
+    <DataTemplate x:Key="WrapVideoTemplateItem">
+        <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
+            <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+        </Grid>
+    </DataTemplate>
+    <!-- Template pour ListBoxWrap (Video Selected)-->
+    <DataTemplate x:Key="WrapVideoTemplatedSelected">
+        <Grid Width="379.4" Height="153.6" VerticalAlignment="Center">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="154*"/>
+        		<ColumnDefinition Width="225*"/>
+        	</Grid.ColumnDefinitions>
+            <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Grid.ColumnSpan="1"/>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="153.6" VerticalAlignment="Top" Width="225.237">
+            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <!-- Template pour ListBoxWrap (Image)-->
+    <DataTemplate x:Key="WrapImageTemplateItem">
+        <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
+            <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+        </Grid>
+    </DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">

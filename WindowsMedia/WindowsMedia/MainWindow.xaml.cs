@@ -44,11 +44,14 @@ namespace WindowsMedia
         private bool            isShuffle_;
         private DispatcherTimer timer_;
         private DispatcherTimer timer_2;
+        private DispatcherTimer timer_3;
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
         public MusicLibrary     musicLib_;
         public MovieLibrary     movieLib_;
+        public ImageLibrary     imageLib_;
+
  
         public MainWindow()
         {
@@ -63,7 +66,7 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
-            this.timer_ = new DispatcherTimer();
+            
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -74,14 +77,7 @@ namespace WindowsMedia
             this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
-            /*
-            List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass(" SELECTIONS", ""));
-            box.Add(new MenuTemplateClass(" MUSIQUES", ""));
-            box.Add(new MenuTemplateClass(" IMAGES", ""));
-            box.Add(new MenuTemplateClass(" VIDEOS", ""));
-            BoxSelectMedia.ItemsSource = box;
-            */
+
             this.SliderVolume.Value = 50;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
@@ -91,10 +87,14 @@ namespace WindowsMedia
             MainBox.ItemsSource = musicLib_;
             movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
             movieLib_.GenerateLibrary();
+            imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
+            imageLib_.GenerateLibrary();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (this.state_ == State.STOP)
+                this.timer_.Stop();
             string lettreSupprimer = this.NomVideo.Text.Substring(0, 1);
             this.NomVideo.Text = this.NomVideo.Text.Remove(0, 1);
             this.NomVideo.Text += lettreSupprimer;
@@ -112,6 +112,7 @@ namespace WindowsMedia
                 this.NomVideo.Width = 150;
                 String[] titreParse = this.source_.Split('\\');
                 this.NomVideo.Text = titreParse[titreParse.Length - 1] + "          ";
+                this.timer_ = new DispatcherTimer();
                 this.timer_.Interval = TimeSpan.FromMilliseconds(80);
                 this.timer_.Tick += new EventHandler(timer1_Tick);
                 this.timer_.Start();
@@ -147,7 +148,6 @@ namespace WindowsMedia
                 ImageBrush brush = createBrush("assets/icon-play-barre.png");
                 this.ButtonPlay.Background = brush;
                 this.ButtonPlay.OpacityMask = brush;
-                this.timer_.Stop();
                 this.NomVideo.Text = "";
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
@@ -541,7 +541,7 @@ namespace WindowsMedia
             Console.Out.WriteLine(filename);
         }
 
-        private void VideoBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
@@ -574,9 +574,9 @@ namespace WindowsMedia
             }
         }
 
-        private void VideoBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (VideoBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            if (WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
             {
                 switch (this.clickStyle_)
                 {
@@ -590,7 +590,7 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.VIDEO):
                         {
-                            MovieFile mv = (MovieFile)VideoBox.SelectedItem;
+                            MovieFile mv = (MovieFile)WrapBox.SelectedItem;
                             this.source_ = mv.Path;
                             this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
                             this.state_ = State.STOP;
@@ -601,6 +601,22 @@ namespace WindowsMedia
                     default:
                         break;
                 }
+            }
+        }
+
+        private void timer_Slide(object sender, EventArgs e)
+        {
+            GridControls.Opacity = 0;
+        }
+        private void EventMouseMove(object sender, MouseEventArgs e)
+        {
+            GridControls.Opacity = 100;
+            if (this.state_ == State.PLAY)
+            {
+                this.timer_3 = new DispatcherTimer();
+                this.timer_3.Interval = TimeSpan.FromSeconds(2);
+                this.timer_3.Tick += new EventHandler(timer_Slide);
+                this.timer_3.Start();
             }
         }
     }
