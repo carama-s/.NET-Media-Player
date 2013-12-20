@@ -44,26 +44,27 @@ namespace WindowsMedia.classes
 
         public MusicTitle(MusicArtist artist, MusicAlbum album, TagLib.File tags, String file)
         {
-            this.Path = file;
-            this.Artist = artist;
-            this.Album = album;
-            this.Genre = tags.Tag.FirstGenre;
-            this.Year = tags.Tag.Year;
-            this.TrackNumber = tags.Tag.Track;
-            this.Title = tags.Tag.Title;
-            this.Composer = tags.Tag.FirstComposer;
-            this.Duration = tags.Properties.Duration;
+            Path = file;
+            Artist = artist;
+            Album = album;
+            Genre = tags.Tag.FirstGenre;
+            Year = tags.Tag.Year;
+            TrackNumber = tags.Tag.Track;
+            Title = tags.Tag.Title;
+            Composer = tags.Tag.FirstComposer;
+            Duration = tags.Properties.Duration;
             if (tags.Tag.Pictures.Length > 0)
             {
-                this.Image = new BitmapImage();
-                this.Image.BeginInit();
-                this.Image.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
-                this.Image.EndInit();
+                Image = new BitmapImage();
+                Image.BeginInit();
+                Image.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
+                Image.EndInit();
             }
             else
             {
-                this.Image = new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+                Image = new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
             }
+            Image.Freeze();
         }
     }
 }

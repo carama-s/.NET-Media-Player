@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace WindowsMedia.classes
 {
@@ -30,8 +31,11 @@ namespace WindowsMedia.classes
         public MusicTitle AddTitle(TagLib.File tags, String file)
         {
             MusicTitle title = new MusicTitle(Artist, this, tags, file);
-            Titles.Add(title);
-            Titles.Sort((title1, title2) => title1.TrackNumber.CompareTo(title2.TrackNumber));
+            lock (Titles)
+            {
+                Titles.Add(title);
+                Titles.Sort((title1, title2) => title1.TrackNumber.CompareTo(title2.TrackNumber));
+            }
             return title;
         }
     }
