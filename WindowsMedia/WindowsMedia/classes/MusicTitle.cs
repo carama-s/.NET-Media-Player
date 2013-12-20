@@ -31,22 +31,23 @@ namespace WindowsMedia.classes
 
     public class MusicTitle
     {
-        public MusicArtist Artist { get; private set; }
-        public MusicAlbum Album { get; private set; }
-        public string Genre { get; private set; }
+        public String Artist { get; private set; }
+        public String Album { get; private set; }
+        public String Genre { get; private set; }
         public uint Year { get; private set; }
         public uint TrackNumber { get; private set; }
-        public string Title { get; private set; }
-        public string Composer { get; private set; }
+        public String Title { get; private set; }
+        public String Composer { get; private set; }
         public TimeSpan Duration { get; private set; }
         public BitmapImage Image { get; private set; }
         public String Path { get; private set; }
 
-        public MusicTitle(MusicArtist artist, MusicAlbum album, TagLib.File tags, String file)
+        public MusicTitle(String file)
         {
+            var tags = TagLib.File.Create(file);
             Path = file;
-            Artist = artist;
-            Album = album;
+            Artist = tags.Tag.FirstPerformer;
+            Album = tags.Tag.Album;
             Genre = tags.Tag.FirstGenre;
             Year = tags.Tag.Year;
             TrackNumber = tags.Tag.Track;
