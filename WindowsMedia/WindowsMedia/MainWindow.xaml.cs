@@ -44,7 +44,7 @@ namespace WindowsMedia
         private bool            isFullScreen_;
         private bool            isRepeat_;
         private bool            isShuffle_;
-        private DispatcherTimer timer_;
+        private DispatcherTimer timer_text;
         private DispatcherTimer timer_2;
         private DispatcherTimer timer_3;
         private double          oldValue;
@@ -69,6 +69,12 @@ namespace WindowsMedia
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
             
+            this.timer_3 = new DispatcherTimer();
+            this.timer_3.Interval = TimeSpan.FromSeconds(2);
+            this.timer_3.Tick += new EventHandler(timer_Slide);
+            this.timer_text = new DispatcherTimer();
+            this.timer_text.Interval = TimeSpan.FromMilliseconds(100);
+            this.timer_text.Tick += new EventHandler(timer_Text);
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -105,13 +111,11 @@ namespace WindowsMedia
             Debug.WriteLine("Time pictures: " + watch.ElapsedMilliseconds);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Text(object sender, EventArgs e)
         {
-            if (this.state_ == State.STOP)
-                this.timer_.Stop();
-            string lettreSupprimer = this.NomVideo.Text.Substring(0, 1);
+            String letter = this.NomVideo.Text.Substring(0, 1);
             this.NomVideo.Text = this.NomVideo.Text.Remove(0, 1);
-            this.NomVideo.Text += lettreSupprimer;
+            this.NomVideo.Text += letter;
         }
 
         // Gestion bouton Play/Pause
@@ -129,7 +133,9 @@ namespace WindowsMedia
                     this.CurrentTime.Text = "00:00:00";
                     this.SliderTime.Value = 0;
                 }
-               
+                String[] media = this.source_.Split('\\');
+                this.NomVideo.Text = media[media.Length - 1] + "     ";
+                this.timer_text.Start();
                 var tags = TagLib.File.Create(this.source_);
                 this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
                 this.duree_ = tags.Properties.Duration;
@@ -163,8 +169,10 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
                 this.oldValue = -1;
+                this.timer_text.Stop();
+                this.NomVideo.Text = "";
                 this.MediaPlayer.Stop();
-                this.MediaPlayer.Visibility = Visibility.Hidden;
+                this.MediaPlayer.Visibility = Visibility.Visible;
             }
         }
 
@@ -627,18 +635,26 @@ namespace WindowsMedia
 
         private void timer_Slide(object sender, EventArgs e)
         {
-            GridControls.Opacity = 0;
+            if (MediaPlayer.IsVisible)
+            {
+                GridControls.Visibility = Visibility.Hidden;
+            }
+            this.timer_3.Stop();
         }
         private void EventMouseMove(object sender, MouseEventArgs e)
         {
-           /* GridControls.Opacity = 100;
-            if (this.state_ == State.PLAY)
+           Point point = Mouse.GetPosition(MediaPlayer);
+           Console.Out.WriteLine("(y, Y) = "+ point.Y+" , " +MediaPlayer.ActualHeight);
+           if ((this.state_ == State.PLAY) && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight))
             {
-                this.timer_3 = new DispatcherTimer();
-                this.timer_3.Interval = TimeSpan.FromSeconds(2);
-                this.timer_3.Tick += new EventHandler(timer_Slide);
+                GridControls.Visibility = Visibility.Visible;
                 this.timer_3.Start();
-            }*/
+            }
+           else
+           {
+               this.timer_3.Stop();
+               GridControls.Visibility = Visibility.Visible;
+           }
         }
     }
 }
