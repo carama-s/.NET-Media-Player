@@ -44,6 +44,7 @@ namespace WindowsMedia
         private bool            isShuffle_;
         private DispatcherTimer timer_;
         private DispatcherTimer timer_2;
+        private DispatcherTimer timer_3;
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
@@ -63,7 +64,7 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
-            this.timer_ = new DispatcherTimer();
+            
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -95,6 +96,8 @@ namespace WindowsMedia
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (this.state_ == State.STOP)
+                this.timer_.Stop();
             string lettreSupprimer = this.NomVideo.Text.Substring(0, 1);
             this.NomVideo.Text = this.NomVideo.Text.Remove(0, 1);
             this.NomVideo.Text += lettreSupprimer;
@@ -112,6 +115,7 @@ namespace WindowsMedia
                 this.NomVideo.Width = 150;
                 String[] titreParse = this.source_.Split('\\');
                 this.NomVideo.Text = titreParse[titreParse.Length - 1] + "          ";
+                this.timer_ = new DispatcherTimer();
                 this.timer_.Interval = TimeSpan.FromMilliseconds(80);
                 this.timer_.Tick += new EventHandler(timer1_Tick);
                 this.timer_.Start();
@@ -147,6 +151,7 @@ namespace WindowsMedia
                 ImageBrush brush = createBrush("assets/icon-play-barre.png");
                 this.ButtonPlay.Background = brush;
                 this.ButtonPlay.OpacityMask = brush;
+                this.NomVideo.Text = "";
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
                 this.oldValue = -1;
@@ -599,6 +604,22 @@ namespace WindowsMedia
                     default:
                         break;
                 }
+            }
+        }
+
+        private void timer_Slide(object sender, EventArgs e)
+        {
+            GridControls.Opacity = 0;
+        }
+        private void EventMouseMove(object sender, MouseEventArgs e)
+        {
+            GridControls.Opacity = 100;
+            if (this.state_ == State.PLAY)
+            {
+                this.timer_3 = new DispatcherTimer();
+                this.timer_3.Interval = TimeSpan.FromSeconds(2);
+                this.timer_3.Tick += new EventHandler(timer_Slide);
+                this.timer_3.Start();
             }
         }
     }
