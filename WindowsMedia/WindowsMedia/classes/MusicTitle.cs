@@ -39,7 +39,36 @@ namespace WindowsMedia.classes
         public String Title { get; private set; }
         public String Composer { get; private set; }
         public TimeSpan Duration { get; private set; }
-        public BitmapImage Image { get; private set; }
+        public BitmapImage Image
+        {
+            get
+            {
+                TagLib.File tags = null;
+                try
+                { 
+                    tags = TagLib.File.Create(Path);
+                }
+                catch (FileNotFoundException)
+                {
+                    return new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+                }
+                if (tags.Tag.Pictures.Length > 0)
+                {
+                    var img = new BitmapImage();
+                    img.BeginInit();
+                    img.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
+                    img.EndInit();
+                    return img;
+                }
+                else
+                    return new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
+            }
+
+            private set
+            {
+
+            }
+        }
         public String Path { get; private set; }
 
         public MusicTitle(String file)
@@ -54,18 +83,6 @@ namespace WindowsMedia.classes
             Title = tags.Tag.Title;
             Composer = tags.Tag.FirstComposer;
             Duration = tags.Properties.Duration;
-            if (tags.Tag.Pictures.Length > 0)
-            {
-                Image = new BitmapImage();
-                Image.BeginInit();
-                Image.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
-                Image.EndInit();
-            }
-            else
-            {
-                Image = new BitmapImage(new Uri("../assets/defaultalbumart.png", UriKind.Relative));
-            }
-            Image.Freeze();
         }
     }
 }
