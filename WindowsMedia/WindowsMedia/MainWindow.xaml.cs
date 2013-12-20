@@ -50,6 +50,8 @@ namespace WindowsMedia
         private double          oldSize_;
         public MusicLibrary     musicLib_;
         public MovieLibrary     movieLib_;
+        public ImageLibrary     imageLib_;
+
  
         public MainWindow()
         {
@@ -75,14 +77,7 @@ namespace WindowsMedia
             this.musicStyle_ = MusicStyle.ALBUM;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
-            /*
-            List<MenuTemplateClass> box = new List<MenuTemplateClass>();
-            box.Add(new MenuTemplateClass(" SELECTIONS", ""));
-            box.Add(new MenuTemplateClass(" MUSIQUES", ""));
-            box.Add(new MenuTemplateClass(" IMAGES", ""));
-            box.Add(new MenuTemplateClass(" VIDEOS", ""));
-            BoxSelectMedia.ItemsSource = box;
-            */
+
             this.SliderVolume.Value = 50;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
@@ -92,6 +87,8 @@ namespace WindowsMedia
             MainBox.ItemsSource = musicLib_;
             movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
             movieLib_.GenerateLibrary();
+            imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
+            imageLib_.GenerateLibrary();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -177,7 +177,12 @@
         </Style.Triggers>
     </Style>
 
-	<!-- ComboBox Item -->
+    <!-- ItemContainerStyle pour ListBoxVideo (Image)-->
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="WrapBoxImageContainer">
+        <Setter Property="ContentTemplate" Value="{StaticResource WrapImageTemplateItem}" />
+    </Style>
+    
+    <!-- ComboBox Item -->
     <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
 		<Setter Property="Foreground" Value="White"/>
     	<Setter Property="Background" Value="#FF181515"/>
@@ -333,4 +338,31 @@
     		</Setter.Value>
     	</Setter>
     </Style>
+
+	<!-- Menu -->
+	<Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+		<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+		<Style.Triggers>
+            <Trigger Property="Role" Value="TopLevelHeader">
+                <Setter Property="Padding" Value="7,5,8,6"/>
+                <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+            </Trigger>
+			<Trigger Property="Role" Value="TopLevelItem">
+				<Setter Property="Padding" Value="7,5,8,6"/>
+				<Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+			</Trigger>
+			<Trigger Property="Role" Value="SubmenuHeader">
+				<Setter Property="Padding" Value="2,6"/>
+				<Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"/>
+			</Trigger>
+			<Trigger Property="Role" Value="SubmenuItem">
+				<Setter Property="Padding" Value="2,6"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
 </ResourceDictionary>

@@ -30,7 +30,13 @@ namespace WindowsMedia.classes
         public void ImageSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
+            win.MainBox.Visibility = System.Windows.Visibility.Hidden;
+            win.SecondBox.Visibility = System.Windows.Visibility.Hidden;
+            win.WrapBox.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.ItemsSource = null;
+            win.clickStyle_ = ClickStyle.IMAGE;
+            win.WrapBox.ItemsSource = win.imageLib_;
+            win.MainBox.ItemsSource = null;
         }
         public void VideoSource(MainWindow win)
         {
