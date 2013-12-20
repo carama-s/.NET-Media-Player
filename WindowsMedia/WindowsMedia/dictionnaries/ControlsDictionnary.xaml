@@ -167,7 +167,7 @@
 		</Setter>
 	</Style> 
     
-    <!-- ItemContainerStyle pour ListBoxVideo (Video)-->
+    <!-- ItemContainerStyle pour ListBoxWrap (Video)-->
     <Style TargetType="{x:Type ListBoxItem}" x:Key="WrapBoxVideoContainer">
         <Setter Property="ContentTemplate" Value="{StaticResource WrapVideoTemplateItem}" />
         <Style.Triggers>
