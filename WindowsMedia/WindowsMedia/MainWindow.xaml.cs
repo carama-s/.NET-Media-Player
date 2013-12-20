@@ -20,6 +20,7 @@ using System.IO;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace WindowsMedia
 {
@@ -82,13 +83,25 @@ namespace WindowsMedia
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
+            var watch = Stopwatch.StartNew();
+
             musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
             musicLib_.GenerateLibrary();
             MainBox.ItemsSource = new AlbumIterator(musicLib_);
+
+            Debug.WriteLine("Time music: " + watch.ElapsedMilliseconds);
+            watch.Reset();
+
             movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
             movieLib_.GenerateLibrary();
+
+            Debug.WriteLine("Time movie: " + watch.ElapsedMilliseconds);
+            watch.Reset();
+
             imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
             imageLib_.GenerateLibrary();
+
+            Debug.WriteLine("Time pictures: " + watch.ElapsedMilliseconds);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
