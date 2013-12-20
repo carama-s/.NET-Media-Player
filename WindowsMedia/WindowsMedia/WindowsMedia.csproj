@@ -106,6 +106,8 @@
     <Compile Include="classes\MusicArtist.cs" />
     <Compile Include="classes\MusicLibrary.cs" />
     <Compile Include="classes\MusicTitle.cs" />
+    <Compile Include="classes\Playlist.cs" />
+    <Compile Include="classes\PlaylistElement.cs" />
     <Compile Include="classes\WrapBoxContainerSelector.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
