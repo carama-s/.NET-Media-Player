@@ -45,13 +45,13 @@
                         <MenuItem.Background>
                             <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
                         </MenuItem.Background>
-                        <MenuItem Header="Ouvrir..." Click="PlayItem" BorderThickness="0" Background="#FF181515" Foreground="White" Padding="0" />
-                        <MenuItem Header="Importer..." Click="OpenFile" BorderThickness="0" Foreground="White" Background="#FF181515" Padding="0"/>
+                        <MenuItem Header="Ouvrir..." Click="PlayItem"/>
+                        <MenuItem Header="Importer..." Click="OpenFile"/>
                         <MenuItem Header="Options"/>
                         <MenuItem Header="Quitter"/>
                     </MenuItem>
                 </Menu>
-                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="92" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" Style="{DynamicResource ComboBoxStyle}" BorderThickness="0" VerticalAlignment="Center">
+                <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="92" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" BorderThickness="0" VerticalAlignment="Center" Style="{DynamicResource ComboBoxMediaStyle}">
                     <ComboBoxItem Content="SELECTIONS" HorizontalAlignment="Left" Width="92"/>
                     <ComboBoxItem Content="MUSIQUES" HorizontalAlignment="Left" Width="92"/>
                     <ComboBoxItem Content="IMAGES" HorizontalAlignment="Left" Width="92"/>
