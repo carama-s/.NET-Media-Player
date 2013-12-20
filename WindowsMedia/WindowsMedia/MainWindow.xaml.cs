@@ -172,6 +172,7 @@ namespace WindowsMedia
                 this.timer_text.Stop();
                 this.NomVideo.Text = "";
                 this.MediaPlayer.Stop();
+                Mouse.OverrideCursor = null;
                 this.MediaPlayer.Visibility = Visibility.Visible;
             }
         }
@@ -637,6 +638,7 @@ namespace WindowsMedia
         {
             if (MediaPlayer.IsVisible)
             {
+                Mouse.OverrideCursor = Cursors.None;
                 GridControls.Visibility = Visibility.Hidden;
             }
             this.timer_3.Stop();
@@ -644,17 +646,13 @@ namespace WindowsMedia
         private void EventMouseMove(object sender, MouseEventArgs e)
         {
            Point point = Mouse.GetPosition(MediaPlayer);
+           Mouse.OverrideCursor = null;
+           GridControls.Visibility = Visibility.Visible;
            Console.Out.WriteLine("(y, Y) = "+ point.Y+" , " +MediaPlayer.ActualHeight);
-           if ((this.state_ == State.PLAY) && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight))
-            {
-                GridControls.Visibility = Visibility.Visible;
+           if ((this.state_ == State.PLAY) && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight))                
                 this.timer_3.Start();
-            }
            else
-           {
                this.timer_3.Stop();
-               GridControls.Visibility = Visibility.Visible;
-           }
         }
     }
 }
