@@ -51,6 +51,7 @@
     <Reference Include="policy.2.0.taglib-sharp">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,8 +99,6 @@
     </Compile>
     <Compile Include="classes\ComboBoxWindows8.cs" />
     <Compile Include="classes\DelegateSourceClass.cs" />
-    <Compile Include="classes\MainBoxTemplateSelector.cs" />
-    <Compile Include="classes\MenuTemplateClass.cs" />
     <Compile Include="classes\MovieFile.cs" />
     <Compile Include="classes\MovieLibrary.cs" />
     <Compile Include="classes\MusicAlbum.cs" />

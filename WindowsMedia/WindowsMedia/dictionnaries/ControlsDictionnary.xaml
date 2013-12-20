@@ -168,11 +168,11 @@
 	</Style> 
     
     <!-- ItemContainerStyle pour ListBoxVideo (Video)-->
-    <Style TargetType="{x:Type ListBoxItem}" x:Key="VideoBoxVideoContainer">
-        <Setter Property="ContentTemplate" Value="{StaticResource VideoTemplateItem}" />
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="WrapBoxVideoContainer">
+        <Setter Property="ContentTemplate" Value="{StaticResource WrapVideoTemplateItem}" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="ContentTemplate" Value="{StaticResource VideoTemplatedSelected}" />
+                <Setter Property="ContentTemplate" Value="{StaticResource WrapVideoTemplatedSelected}" />
             </Trigger>
         </Style.Triggers>
     </Style>

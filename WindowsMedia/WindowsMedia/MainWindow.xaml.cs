@@ -544,7 +544,7 @@ namespace WindowsMedia
             Console.Out.WriteLine(filename);
         }
 
-        private void VideoBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
@@ -577,9 +577,9 @@ namespace WindowsMedia
             }
         }
 
-        private void VideoBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (VideoBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            if (WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
             {
                 switch (this.clickStyle_)
                 {
@@ -593,7 +593,7 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.VIDEO):
                         {
-                            MovieFile mv = (MovieFile)VideoBox.SelectedItem;
+                            MovieFile mv = (MovieFile)WrapBox.SelectedItem;
                             this.source_ = mv.Path;
                             this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
                             this.state_ = State.STOP;

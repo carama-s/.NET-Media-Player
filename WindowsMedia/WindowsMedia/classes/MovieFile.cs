@@ -20,7 +20,7 @@ namespace WindowsMedia.classes
             Path = path;
             var tags = TagLib.File.Create(path);
             this.Duration = tags.Properties.Duration;
-            this.Title = tags.Name.Substring(0,tags.Name.LastIndexOf('.'));
+            this.Title = tags.Name.Substring(0,tags.Name.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
             this.Image = new BitmapImage(new Uri("../assets/defaultvideoart.png", UriKind.Relative));
         }
     }
