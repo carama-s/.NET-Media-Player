@@ -5,10 +5,8 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
-    <!-- ItemTemplateSelector pour ListBoxMain-->
-	<local:MainBoxTemplateSelector x:Key="MyMainBoxTemplateSelector"/>
-    <!-- Panel Template pour VideoBox-->
-    <ItemsPanelTemplate x:Key="VideoBoxPanelTemplate">
+    <!-- Panel Template pour WrapBox-->
+    <ItemsPanelTemplate x:Key="WrapBoxPanelTemplate">
         <WrapPanel Orientation="Horizontal"/>
     </ItemsPanelTemplate>
     <!-- Template pour ListBoxMain (Music)-->
@@ -21,14 +19,14 @@
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
-    <!-- Template pour ListBoxVideo (Video Unselected)-->
-    <DataTemplate x:Key="VideoTemplateItem">
+    <!-- Template pour ListBoxWrap (Video Unselected)-->
+    <DataTemplate x:Key="WrapVideoTemplateItem">
         <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
         </Grid>
     </DataTemplate>
-    <!-- Template pour ListBoxVideo (Video Selected)-->
-    <DataTemplate x:Key="VideoTemplatedSelected">
+    <!-- Template pour ListBoxWrap (Video Selected)-->
+    <DataTemplate x:Key="WrapVideoTemplatedSelected">
         <Grid Width="379.4" Height="153.6" VerticalAlignment="Center">
         	<Grid.ColumnDefinitions>
         		<ColumnDefinition Width="154*"/>
