@@ -386,8 +386,8 @@ namespace WindowsMedia
                             this.source_ = mv.Path;
                             this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
                             this.state_ = State.STOP;
-                            ButtonPlay_Click(sender, e);
                             ButtonSwitch_Click(sender, e);
+                            ButtonPlay_Click(sender, e);
                             break;
                         }
                     default:
@@ -586,6 +586,11 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.IMAGE):
                         {
+                            ImageFile im = (ImageFile)WrapBox.SelectedItem;
+                            this.source_ = im.Path;
+                            this.MediaPlayer.Source = new Uri(im.Path, UriKind.RelativeOrAbsolute);
+                            ButtonSwitch_Click(sender, e);
+                            ButtonPlay_Click(sender, e);
                             break;
                         }
                     case (ClickStyle.VIDEO):
