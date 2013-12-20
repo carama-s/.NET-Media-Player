@@ -37,6 +37,7 @@ namespace WindowsMedia
         private TimeSpan        duree_;
         private String          source_;
         private State           state_;
+        private String          typeCurrentMedia_;
         public MusicStyle       musicStyle_;
         public ClickStyle       clickStyle_;
         private bool            isMuted_;
@@ -134,7 +135,9 @@ namespace WindowsMedia
                     this.CurrentTime.Text = "00:00:00";
                     this.SliderTime.Value = 0;
                 }
+               
                 var tags = TagLib.File.Create(this.source_);
+                this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
                 this.duree_ = tags.Properties.Duration;
                 this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
                 this.TotalTime.Text = this.duree_.ToString();
@@ -142,6 +145,7 @@ namespace WindowsMedia
                 this.timer_2.Interval = TimeSpan.FromMilliseconds(100);
                 this.timer_2.Tick += new EventHandler(timer_Tick);
                 this.timer_2.Start();
+
             }
             else // this.state_ == State.PLAY
             {
@@ -239,10 +243,14 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
-            oldValue = value * (double)this.SliderTime.Maximum;
-            this.SliderTime.Value = oldValue;
-            this.CurrentTime.Text = this.MediaPlayer.Position.ToString();
+            Console.Out.WriteLine(typeCurrentMedia_);
+            if (typeCurrentMedia_ != "Photo")
+            {
+                double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
+                oldValue = value * (double)this.SliderTime.Maximum;
+                this.SliderTime.Value = oldValue;
+                this.CurrentTime.Text = this.MediaPlayer.Position.ToString();
+            }
         }
 
         // Gestion du Slide du volume
@@ -602,6 +610,7 @@ namespace WindowsMedia
                             ImageFile im = (ImageFile)WrapBox.SelectedItem;
                             this.source_ = im.Path;
                             this.MediaPlayer.Source = new Uri(im.Path, UriKind.RelativeOrAbsolute);
+
                             ButtonSwitch_Click(sender, e);
                             ButtonPlay_Click(sender, e);
                             break;

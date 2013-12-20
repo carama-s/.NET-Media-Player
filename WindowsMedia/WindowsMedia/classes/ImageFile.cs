@@ -18,7 +18,7 @@ namespace WindowsMedia.classes
         public ImageFile(String path)
         {
             Path = path;
-            this.Duration = new TimeSpan(3);
+            this.Duration = TimeSpan.FromSeconds(10);
             this.Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
             this.Image = new BitmapImage(new Uri(Path, UriKind.Absolute));
         }
