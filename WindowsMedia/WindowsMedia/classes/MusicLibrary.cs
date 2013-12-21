@@ -21,7 +21,7 @@ namespace WindowsMedia.classes
         public System.Collections.IEnumerator GetEnumerator()
         {
             var albums = from title in Library.Titles
-                         orderby title.Album, title.Artist, title.TrackNumber
+                         orderby title.Album, title.Artist, title.TrackNumber, title.Title
                          group title by new { title.Artist, title.Album };
             foreach (var album in albums)
             {
@@ -42,7 +42,7 @@ namespace WindowsMedia.classes
         public System.Collections.IEnumerator GetEnumerator()
         {
             var albums = from title in Library.Titles
-                         orderby title.Artist, title.Album, title.TrackNumber
+                         orderby title.Artist, title.Album, title.TrackNumber, title.Title
                          group title by new { title.Artist, title.Album };
             foreach (var album in albums)
             {
@@ -63,7 +63,7 @@ namespace WindowsMedia.classes
         public System.Collections.IEnumerator GetEnumerator()
         {
             var albums = from title in Library.Titles
-                         orderby title.Genre, title.Album, title.Artist, title.TrackNumber
+                         orderby title.Genre, title.Album, title.Artist, title.TrackNumber, title.Title
                          group title by new { title.Artist, title.Album };
             foreach (var album in albums)
             {
