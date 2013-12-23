@@ -21,6 +21,8 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
+using MyToolkit.Multimedia;
+using System.Net.Http;
 
 namespace WindowsMedia
 {
@@ -414,21 +416,19 @@ namespace WindowsMedia
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0)
-            {
-                PlaylistBox.Items.Clear();
-                var items = (List<MusicTitle>)MainBox.SelectedItems[0];
-                foreach (var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
-                PlaylistBox.SelectedIndex = 0;
-                this.state_ = State.STOP;
+                        {
+                            MovieFile mv = (MovieFile)MainBox.SelectedItem;
+                            this.source_ = mv.Path;
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            this.state_ = State.STOP;
 
-                ButtonPlay_Click(sender, e);
+                            ButtonPlay_Click(sender, e);
             }
         }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-        }
+            }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -570,7 +570,7 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-        }
+                        }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
