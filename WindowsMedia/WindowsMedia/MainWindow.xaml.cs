@@ -684,7 +684,6 @@ namespace WindowsMedia
             this.sourceVideo_ = this.YoutubeDownload.Text;
             this.YoutubeDownload.Text = "Entrez votre URL...";
 
-
         }
         
     }
