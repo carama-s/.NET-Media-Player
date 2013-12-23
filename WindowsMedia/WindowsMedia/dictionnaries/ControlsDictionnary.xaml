@@ -187,8 +187,9 @@
 		<Setter Property="Foreground" Value="White"/>
     	<Setter Property="Background" Value="#FF181515"/>
 		<Setter Property="FontSize" Value="10"/>
-		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="FontWeight" Value="Bold"/>
 		<Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="19" />
 	</Style>
 
 	<!-- ComboBox -->
