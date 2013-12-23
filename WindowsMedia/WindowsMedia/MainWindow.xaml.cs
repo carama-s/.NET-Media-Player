@@ -233,15 +233,6 @@ namespace WindowsMedia
         // Gestion du bouton Back
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-            /*
-                var List = this.PlaylistBox.Items;
-                Console.Out.WriteLine(List.MoveCurrentToPrevious().ToString());
-                if (List.IsCurrentBeforeFirst)
-                    List.MoveCurrentToLast();
-                MediaItem item = (MediaItem)List.CurrentItem;
-                this.source_ = item.Path;
-                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-             */
             if (PlaylistBox.Items.Count > 0)
             {
                 if (PlaylistBox.SelectedIndex == 0)
@@ -258,29 +249,18 @@ namespace WindowsMedia
         // Gestion du bouton Forward
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-                /*
-                var List = this.PlaylistBox.Items;
-                List.MoveCurrentToNext();
-                if (List.IsCurrentAfterLast)
-                    List.MoveCurrentToFirst();
-                MediaItem music = (MediaItem)List.CurrentItem;
-                this.source_ = music.Path;
-                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            if (PlaylistBox.Items.Count > 0)
+            {
+                if (PlaylistBox.SelectedIndex == (PlaylistBox.Items.Count - 1))
+                    PlaylistBox.SelectedIndex = 0;
+                else
+                    PlaylistBox.SelectedIndex += 1;
+
+                this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
-                 */
-                if (PlaylistBox.Items.Count > 0)
-                {
-                    if (PlaylistBox.SelectedIndex == (PlaylistBox.Items.Count - 1))
-                        PlaylistBox.SelectedIndex = 0;
-                    else
-                        PlaylistBox.SelectedIndex += 1;
-
-                    this.source_ = null;
-                    this.state_ = State.STOP;
-                    this.ButtonPlay_Click(sender, e);
             }
-            }
+        }
 
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
@@ -423,17 +403,6 @@ namespace WindowsMedia
                             SecondBox.ItemsSource = al;
                             break;
                         }
-                    case (ClickStyle.IMAGE):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.VIDEO):
-                        {
-                            MovieFile mv = (MovieFile)e.AddedItems[0];
-                            this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
-                            break;
-                        }
                     default:
                         break;
                 }
@@ -449,11 +418,11 @@ namespace WindowsMedia
                 foreach (var title in items)
                     PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
                 PlaylistBox.SelectedIndex = 0;
-                            this.state_ = State.STOP;
+                this.state_ = State.STOP;
 
-                            ButtonPlay_Click(sender, e);
-                        }
-                }
+                ButtonPlay_Click(sender, e);
+            }
+        }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
