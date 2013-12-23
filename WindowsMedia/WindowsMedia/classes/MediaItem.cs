@@ -1,13 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
 {
+    [ValueConversion(typeof(Object), typeof(String))]
+    public class MediaItemTitleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var obj = (MediaItem)value;
+            if (obj != null)
+                return obj.Title;
+            else
+                return "";
+        }
+
+        public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
+        {
+            return (Object)value;
+        }
+    }
+
+    [ValueConversion(typeof(Object), typeof(String))]
+    public class MediaItemArtistConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var obj = (MediaItem)value;
+            if (obj != null)
+                return obj.Artist;
+            else
+                return "";
+        }
+
+        public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
+        {
+            return (Object)value;
+        }
+    }
+
+    [ValueConversion(typeof(Object), typeof(BitmapImage))]
+    public class MediaItemImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var obj = (MediaItem)value;
+            if (obj != null)
+                return obj.Image;
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
+        {
+            return (Object)value;
+        }
+    }
+
     public class MediaItem
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);

@@ -17,5 +17,11 @@ namespace WindowsMedia.classes
             this.Name = name;
             this.Path = path;
         }
+
+        public PlaylistElement(MediaItem item)
+        {
+            this.Name = item.Title;
+            this.Path = item.Path;
+        }
     }
 }
