@@ -416,7 +416,7 @@ namespace WindowsMedia
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0)
-                        {
+            {
                             MovieFile mv = (MovieFile)MainBox.SelectedItem;
                             this.source_ = mv.Path;
                             this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
@@ -588,8 +588,7 @@ namespace WindowsMedia
 
                             var items = WrapBox.ItemsSource;
                             foreach (var title in items)
-                                PlaylistBox.Items.Add(new MediaItem(title as ImageFile));
-
+                            PlaylistBox.Items.Add(new MediaItem(title as ImageFile));
                             PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
