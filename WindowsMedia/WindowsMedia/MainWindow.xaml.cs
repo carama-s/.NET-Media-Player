@@ -45,7 +45,7 @@ namespace WindowsMedia
         private bool            isRepeat_;
         private bool            isShuffle_;
         private DispatcherTimer timer_text;
-        private DispatcherTimer timer_2;
+        private DispatcherTimer timer_Slide;
         private DispatcherTimer timer_3;
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
@@ -68,13 +68,18 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
+            this.timer_Slide = new DispatcherTimer();
+            this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
+            this.timer_Slide.Tick += new EventHandler(timer_Tick);
             
             this.timer_3 = new DispatcherTimer();
             this.timer_3.Interval = TimeSpan.FromSeconds(2);
-            this.timer_3.Tick += new EventHandler(timer_Slide);
+            this.timer_3.Tick += new EventHandler(timer_tick_Slide);
+            
             this.timer_text = new DispatcherTimer();
             this.timer_text.Interval = TimeSpan.FromMilliseconds(100);
             this.timer_text.Tick += new EventHandler(timer_Text);
+            
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -140,11 +145,9 @@ namespace WindowsMedia
                 this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
                 this.duree_ = tags.Properties.Duration;
                 this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
+
                 this.TotalTime.Text = this.duree_.ToString();
-                this.timer_2 = new DispatcherTimer();
-                this.timer_2.Interval = TimeSpan.FromMilliseconds(100);
-                this.timer_2.Tick += new EventHandler(timer_Tick);
-                this.timer_2.Start();
+                this.timer_Slide.Start();
 
             }
             else // this.state_ == State.PLAY
@@ -634,7 +637,7 @@ namespace WindowsMedia
             }
         }
 
-        private void timer_Slide(object sender, EventArgs e)
+        private void timer_tick_Slide(object sender, EventArgs e)
         {
             if (MediaPlayer.IsVisible)
             {
