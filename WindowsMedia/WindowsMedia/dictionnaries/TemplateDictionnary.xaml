@@ -72,4 +72,10 @@
             <Label Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding Name}" Margin="4,0,0,0" VerticalAlignment="Stretch" Padding="0" Width="Auto" Foreground="#FF41B1E1"/>
 		</Grid>
 	</DataTemplate>
+    <!-- Template pour PlaylistBox -->
+    <DataTemplate x:Key="PlaylistTemplate">
+        <Grid>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

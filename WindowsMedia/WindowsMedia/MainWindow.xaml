@@ -26,10 +26,9 @@
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick"/>
-            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0"/>
-            <ListBox x:Name="PlaylistBox" Grid.Column="2" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,-0.663,0.4"/>
-            <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick"/>
+            <ListBox x:Name="MainBox" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp"/>
+            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
+            <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
                     <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
@@ -57,6 +56,14 @@
                     <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="114"/>
 
                 </ComboBox>
+            </Grid>
+            <Grid x:Name="GirdPlaylist" Grid.Column="2" Margin="0" Grid.Row="1">
+            	<Grid.RowDefinitions>
+            		<RowDefinition Height="100*" MinHeight="100"/>
+            		<RowDefinition Height="364*"/>
+            	</Grid.RowDefinitions>
+            	<ListBox x:Name="PlaylistBox" Background="#FF2088FF" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource PlaylistTemplate}" Grid.Row="1" MouseDoubleClick="PlaylistBox_MouseDoubleClick"/>
+            	<Grid x:Name="GridTopPlaylist" Margin="0" Background="#FF686868" />
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
