@@ -129,8 +129,17 @@ namespace WindowsMedia
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush brush;
-            if ((this.state_ == State.STOP || this.state_ == State.PAUSE) && (MediaPlayer.Source != null))
+
+            if ((this.state_ == State.STOP || this.state_ == State.PAUSE))
             {
+                if (PlaylistBox.Items.Count > 0 && this.state_ != State.PAUSE)
+                {
+                    MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
+                    this.source_ = item.Path;
+                    this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
+                }
+                if (MediaPlayer.Source != null)
+                {
                 brush = createBrush("assets/icon-pause-barre.png");
                 this.state_ = State.PLAY;
                 this.MediaPlayer.Play();
@@ -151,6 +160,9 @@ namespace WindowsMedia
                 this.TotalTime.Text = this.duree_.ToString();
                 this.timer_Slide.Start();
 
+            }
+                else
+                    brush = createBrush("assets/icon-play-barre.png");
             }
             else // this.state_ == State.PLAY
             {
@@ -223,35 +235,38 @@ namespace WindowsMedia
         // Gestion du bouton Back
         private void BackButtonMediaElement(object sender, RoutedEventArgs e)
         {
-                var List = this.SecondBox.Items;
-                List.MoveCurrentToPrevious();
-                if (List.IsCurrentBeforeFirst)
-                    List.MoveCurrentToLast();
-                MusicTitle music = (MusicTitle)List.CurrentItem;
-                this.source_ = music.Path;
-                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            if (PlaylistBox.Items.Count > 0)
+            {
+                if (PlaylistBox.SelectedIndex == 0)
+                    PlaylistBox.SelectedIndex = PlaylistBox.Items.Count - 1;
+                else
+                    PlaylistBox.SelectedIndex -= 1;
+
+                this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
+        }
 
         // Gestion du bouton Forward
         private void ForwardButtonMediaElement(object sender, RoutedEventArgs e)
         {
-                var List = this.SecondBox.Items;
-                List.MoveCurrentToNext();
-                if (List.IsCurrentAfterLast)
-                    List.MoveCurrentToFirst();
-                MusicTitle music = (MusicTitle)List.CurrentItem;
-                this.source_ = music.Path;
-                this.MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
+            if (PlaylistBox.Items.Count > 0)
+            {
+                if (PlaylistBox.SelectedIndex == (PlaylistBox.Items.Count - 1))
+                    PlaylistBox.SelectedIndex = 0;
+                else
+                    PlaylistBox.SelectedIndex += 1;
+
+                this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
+        }
 
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            Console.Out.WriteLine(typeCurrentMedia_);
             if (typeCurrentMedia_ != "Photo")
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
@@ -359,6 +374,18 @@ namespace WindowsMedia
         private void EventEndMedia(object sender, RoutedEventArgs e)
         {
             this.ButtonStop_Click(sender, e);
+
+            if (PlaylistBox.SelectedIndex < (PlaylistBox.Items.Count - 1))
+                ForwardButtonMediaElement(sender, e);
+            else if (isRepeat_)
+                ForwardButtonMediaElement(sender, e);
+            else
+            {
+                PlaylistBox.SelectedIndex = 0;
+                this.source_ = null;
+                this.state_ = State.STOP;
+        }
+
         }
 
         // Gestion Box bibliothèque
@@ -378,17 +405,6 @@ namespace WindowsMedia
                             SecondBox.ItemsSource = al;
                             break;
                         }
-                    case (ClickStyle.IMAGE):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.VIDEO):
-                        {
-                            MovieFile mv = (MovieFile)e.AddedItems[0];
-                            this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
-                            break;
-                        }
                     default:
                         break;
                 }
@@ -397,57 +413,32 @@ namespace WindowsMedia
 
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (MainBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
-            {
-                switch (this.clickStyle_)
-                {
-                    case (ClickStyle.SELECTION):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.IMAGE):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.VIDEO):
+            if (MainBox.SelectedItems.Count > 0)
                         {
                             MovieFile mv = (MovieFile)MainBox.SelectedItem;
                             this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);*/
-                            /*HttpClient client = new HttpClient();
-                            Task<string> getStringTask = client.GetStringAsync("http://www.youtube.com/watch?v=FcMRkyoHKeA");
-                            var url = await YouTube.GetVideoUriAsync("/v/FcMRkyoHKeA", YouTubeQuality.Quality720P);
-                            MediaPlayer.Source = url.Uri;*/
-                            
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
                             this.state_ = State.STOP;
-                            ButtonSwitch_Click(sender, e);
+
                             ButtonPlay_Click(sender, e);
-                            break;
-                        }
-                    default:
-                        break;
-                }
             }
         }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
-            {
-                MusicTitle ti = (MusicTitle)e.AddedItems[0];
-                this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
-                this.source_ = ti.Path;
             }
-        }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            PlaylistBox.Items.Clear();
             if (SecondBox.SelectedItems.Count > 0)
             {
-                MusicTitle ti = (MusicTitle)SecondBox.SelectedItem;
-                this.source_ = ti.Path;
-                this.MediaPlayer.Source = new Uri(ti.Path, UriKind.RelativeOrAbsolute);
+                var items = (List<MusicTitle>)MainBox.SelectedItems[0];
+                foreach (var title in items)
+                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                PlaylistBox.SelectedIndex = SecondBox.SelectedIndex;
                 this.state_ = State.STOP;
+
                 ButtonPlay_Click(sender, e);
             }
         }
@@ -577,36 +568,7 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
-            {
-                switch (this.clickStyle_)
-                {
-                    case (ClickStyle.SELECTION):
-                        {
-                            break;
                         }
-                    case (ClickStyle.MUSIC):
-                        {
-                            var al = (List<MusicTitle>)e.AddedItems[0];
-                            SecondBox.ItemsSource = al;
-                            break;
-                        }
-                    case (ClickStyle.IMAGE):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.VIDEO):
-                        {
-                            MovieFile mv = (MovieFile)e.AddedItems[0];
-                            this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
-                            break;
-                        }
-                    default:
-                        break;
-                }
-            }
-        }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -620,22 +582,29 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.IMAGE):
                         {
-                            ImageFile im = (ImageFile)WrapBox.SelectedItem;
-                            this.source_ = im.Path;
-                            this.MediaPlayer.Source = new Uri(im.Path, UriKind.RelativeOrAbsolute);
+                            PlaylistBox.Items.Clear();
 
+                            var items = WrapBox.ItemsSource;
+                            foreach (var title in items)
+                                PlaylistBox.Items.Add(new MediaItem(title as ImageFile));
+
+                            PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
+                            this.state_ = State.STOP;
+                            MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
                             ButtonPlay_Click(sender, e);
+
                             break;
                         }
                     case (ClickStyle.VIDEO):
                         {
-                            MovieFile mv = (MovieFile)WrapBox.SelectedItem;
-                            this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            PlaylistBox.Items.Clear();
+                            PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+                            PlaylistBox.SelectedIndex = 0;
                             this.state_ = State.STOP;
-                            ButtonPlay_Click(sender, e);
+                            MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
+                            ButtonPlay_Click(sender, e);
                             break;
                         }
                     default:
@@ -664,5 +633,42 @@ namespace WindowsMedia
            else
                this.timer_3.Stop();
         }
+
+        private void SecondBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (SecondBox.SelectedItems.Count > 0)
+                PlaylistBox.Items.Add(new MediaItem(SecondBox.SelectedItem as MusicTitle));
+        }
+
+        private void MainBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (MainBox.SelectedItems.Count > 0)
+            {
+                var items = (List<MusicTitle>)MainBox.SelectedItems[0];
+                foreach(var title in items)
+                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+            }
+        }
+
+        private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (clickStyle_ == ClickStyle.IMAGE)
+                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as ImageFile));
+            else if (clickStyle_ == ClickStyle.VIDEO)
+                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+        }
+
+        private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (PlaylistBox.SelectedItems.Count > 0)
+            {
+                MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
+                this.source_ = item.Path;
+                this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
+                this.state_ = State.STOP;   
+                ButtonPlay_Click(sender, e);
+            }
+        }
+        
     }
 }
