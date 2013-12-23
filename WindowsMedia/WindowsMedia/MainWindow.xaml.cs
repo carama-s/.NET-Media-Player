@@ -45,7 +45,7 @@ namespace WindowsMedia
         private bool            isRepeat_;
         private bool            isShuffle_;
         private DispatcherTimer timer_text;
-        private DispatcherTimer timer_2;
+        private DispatcherTimer timer_Slide;
         private DispatcherTimer timer_3;
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
@@ -68,13 +68,18 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
+            this.timer_Slide = new DispatcherTimer();
+            this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
+            this.timer_Slide.Tick += new EventHandler(timer_Tick);
             
             this.timer_3 = new DispatcherTimer();
             this.timer_3.Interval = TimeSpan.FromSeconds(2);
-            this.timer_3.Tick += new EventHandler(timer_Slide);
+            this.timer_3.Tick += new EventHandler(timer_tick_Slide);
+            
             this.timer_text = new DispatcherTimer();
             this.timer_text.Interval = TimeSpan.FromMilliseconds(100);
             this.timer_text.Tick += new EventHandler(timer_Text);
+            
             this.isMuted_ = false;
             this.isFullScreen_ = false;
             this.isRepeat_ = false;
@@ -133,28 +138,27 @@ namespace WindowsMedia
                 }
                 if (MediaPlayer.Source != null)
                 {
-                    brush = createBrush("assets/icon-pause-barre.png");
-                    this.state_ = State.PLAY;
-                    this.MediaPlayer.Play();
-                    this.NomVideo.Width = 150;
-                    if (oldValue == -1)
-                    {
-                        this.CurrentTime.Text = "00:00:00";
-                        this.SliderTime.Value = 0;
-                    }
-                    String[] media = this.source_.Split('\\');
-                    this.NomVideo.Text = media[media.Length - 1] + "     ";
-                    this.timer_text.Start();
-                    var tags = TagLib.File.Create(this.source_);
-                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                    this.duree_ = tags.Properties.Duration;
-                    this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
-                    this.TotalTime.Text = this.duree_.ToString();
-                    this.timer_2 = new DispatcherTimer();
-                    this.timer_2.Interval = TimeSpan.FromMilliseconds(100);
-                    this.timer_2.Tick += new EventHandler(timer_Tick);
-                    this.timer_2.Start();
+                brush = createBrush("assets/icon-pause-barre.png");
+                this.state_ = State.PLAY;
+                this.MediaPlayer.Play();
+                this.NomVideo.Width = 150;
+                if (oldValue == -1)
+                {
+                    this.CurrentTime.Text = "00:00:00";
+                    this.SliderTime.Value = 0;
                 }
+                String[] media = this.source_.Split('\\');
+                this.NomVideo.Text = media[media.Length - 1] + "     ";
+                this.timer_text.Start();
+                var tags = TagLib.File.Create(this.source_);
+                this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
+                this.duree_ = tags.Properties.Duration;
+                this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
+
+                this.TotalTime.Text = this.duree_.ToString();
+                this.timer_Slide.Start();
+
+            }
                 else
                     brush = createBrush("assets/icon-play-barre.png");
             }
@@ -275,7 +279,7 @@ namespace WindowsMedia
                     this.source_ = null;
                     this.state_ = State.STOP;
                     this.ButtonPlay_Click(sender, e);
-                }
+            }
             }
 
         // Gestion du Slide de la video
@@ -398,7 +402,7 @@ namespace WindowsMedia
                 PlaylistBox.SelectedIndex = 0;
                 this.source_ = null;
                 this.state_ = State.STOP;
-            }
+        }
 
         }
 
@@ -445,11 +449,11 @@ namespace WindowsMedia
                 foreach (var title in items)
                     PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
                 PlaylistBox.SelectedIndex = 0;
-                this.state_ = State.STOP;
+                            this.state_ = State.STOP;
 
-                ButtonPlay_Click(sender, e);
-            }
-        }
+                            ButtonPlay_Click(sender, e);
+                        }
+                }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -640,7 +644,7 @@ namespace WindowsMedia
             }
         }
 
-        private void timer_Slide(object sender, EventArgs e)
+        private void timer_tick_Slide(object sender, EventArgs e)
         {
             if (MediaPlayer.IsVisible)
             {
