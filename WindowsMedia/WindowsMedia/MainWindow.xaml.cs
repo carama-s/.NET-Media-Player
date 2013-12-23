@@ -53,9 +53,7 @@ namespace WindowsMedia
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
-        public MusicLibrary     musicLib_;
-        public MovieLibrary     movieLib_;
-        public ImageLibrary     imageLib_;
+        public Library          lib_;
 
  
         public MainWindow()
@@ -100,23 +98,13 @@ namespace WindowsMedia
 
             var watch = Stopwatch.StartNew();
 
-            musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
-            musicLib_.GenerateLibrary();
-            MainBox.ItemsSource = new AlbumIterator(musicLib_);
-
-            Debug.WriteLine("Time music: " + watch.ElapsedMilliseconds);
-            watch.Reset();
-
-            movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
-            movieLib_.GenerateLibrary();
-
-            Debug.WriteLine("Time movie: " + watch.ElapsedMilliseconds);
-            watch.Reset();
-
-            imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
-            imageLib_.GenerateLibrary();
-
-            Debug.WriteLine("Time pictures: " + watch.ElapsedMilliseconds);
+            lib_ = new Library(new List<string> {
+                Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
+                Environment.GetFolderPath(Environment.SpecialFolder.MyVideos),
+                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+            });
+            lib_.GenerateLibrary();
+            MainBox.ItemsSource = new AlbumIterator(lib_);
         }
 
         private void timer_Text(object sender, EventArgs e)
@@ -419,7 +407,7 @@ namespace WindowsMedia
                 PlaylistBox.Items.Clear();
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = 0;
                             this.state_ = State.STOP;
 
@@ -438,7 +426,7 @@ namespace WindowsMedia
             {
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = SecondBox.SelectedIndex;
                 this.state_ = State.STOP;
 
@@ -589,7 +577,7 @@ namespace WindowsMedia
 
                             var items = WrapBox.ItemsSource;
                             foreach (var title in items)
-                                PlaylistBox.Items.Add(new MediaItem(title as ImageFile));
+                                PlaylistBox.Items.Add(title);
                             PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
@@ -601,7 +589,7 @@ namespace WindowsMedia
                     case (ClickStyle.VIDEO):
                         {
                             PlaylistBox.Items.Clear();
-                            PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+                            PlaylistBox.Items.Add(WrapBox.SelectedItem);
                             PlaylistBox.SelectedIndex = 0;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
@@ -641,7 +629,7 @@ namespace WindowsMedia
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
             if (SecondBox.SelectedItems.Count > 0)
-                PlaylistBox.Items.Add(new MediaItem(SecondBox.SelectedItem as MusicTitle));
+                PlaylistBox.Items.Add(SecondBox.SelectedItem);
         }
 
         private void MainBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -652,7 +640,7 @@ namespace WindowsMedia
                     PlaylistBox.SelectedIndex = 0;
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach(var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
             }
         }
 
@@ -661,9 +649,9 @@ namespace WindowsMedia
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
             if (clickStyle_ == ClickStyle.IMAGE)
-                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as ImageFile));
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
             else if (clickStyle_ == ClickStyle.VIDEO)
-                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

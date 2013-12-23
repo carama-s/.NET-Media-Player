@@ -117,11 +117,9 @@
     </Compile>
     <Compile Include="classes\DelegateSourceClass.cs" />
     <Compile Include="classes\ImageFile.cs" />
-    <Compile Include="classes\ImageLibrary.cs" />
     <Compile Include="classes\MediaItem.cs" />
     <Compile Include="classes\MovieFile.cs" />
-    <Compile Include="classes\MovieLibrary.cs" />
-    <Compile Include="classes\MusicLibrary.cs" />
+    <Compile Include="classes\Library.cs" />
     <Compile Include="classes\MusicTitle.cs" />
     <Compile Include="classes\Playlist.cs" />
     <Compile Include="classes\PlaylistElement.cs" />

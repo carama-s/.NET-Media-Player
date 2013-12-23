@@ -74,9 +74,9 @@
                 		<ColumnDefinition Width="13*"/>
                 		<ColumnDefinition Width="17*"/>
                 	</Grid.ColumnDefinitions>
-                	<Image Grid.RowSpan="2" Source="{Binding SelectedItem, Converter={StaticResource mediaImageConverter}, ElementName=PlaylistBox}"/>
-                	<TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedItem, Converter={StaticResource mediaTitleConverter}, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
-                    <TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedItem, Converter={StaticResource mediaArtistConverter}, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
+                	<Image Grid.RowSpan="2" Source="{Binding SelectedItem.Image, ElementName=PlaylistBox}"/>
+                	<TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedItem.Artist, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
                 </Grid>
             </Grid>
         </Grid>
