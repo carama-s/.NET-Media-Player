@@ -36,6 +36,7 @@ namespace WindowsMedia
 
     public partial class MainWindow : MetroWindow
     {
+        private String          sourceVideo_;
         private TimeSpan        duree_;
         private String          source_;
         private State           state_;
@@ -675,6 +676,15 @@ namespace WindowsMedia
                 this.state_ = State.STOP;   
                 ButtonPlay_Click(sender, e);
             }
+        }
+
+
+        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
+        {
+            this.sourceVideo_ = this.YoutubeDownload.Text;
+            this.YoutubeDownload.Text = "Entrez votre URL...";
+
+
         }
         
     }

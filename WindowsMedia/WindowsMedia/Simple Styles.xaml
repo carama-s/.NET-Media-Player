@@ -1,0 +1,1121 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	
+	<!-- SimpleStyles.XAML définit un ensemble de styles de contrôles qui sont des points de départ simplifiés pour la création de vos propres contrôles. -->
+	
+	<!-- Pinceaux : ils sont utilisés pour définir la couleur de l’arrière-plan, du premier plan, de la sélection, activée, etc. de tous les contrôles.
+	Si vous voulez modifier la couleur d’un contrôle, il vous suffit de changer le pinceau ; si vous voulez ajouter une nouvelle forme ou modifier l’arrangement, modifiez également le modèle. -->
+	
+	<!-- NormalBrush est utilisé en tant que Background pour SimpleButton et SimpleRepeatButton. -->
+	<LinearGradientBrush x:Key="NormalBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#EEE" Offset="0.0"/>
+		<GradientStop Color="#CCC" Offset="1.0"/>
+	</LinearGradientBrush>
+	<LinearGradientBrush x:Key="NormalBorderBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#CCC" Offset="0.0"/>
+		<GradientStop Color="#444" Offset="1.0"/>
+	</LinearGradientBrush>
+	
+	<!-- Le LightBrush est utilisé pour les zones de contenu telles que les arrière-plans des contrôles Menu et Tab. -->
+	<LinearGradientBrush x:Key="LightBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#FFF" Offset="0.0"/>
+		<GradientStop Color="#EEE" Offset="1.0"/>
+	</LinearGradientBrush>
+	
+	<!-- MouseOverBrush est utilisé en tant que MouseOver dans Button, RadioButton et CheckBox. -->
+	<LinearGradientBrush x:Key="MouseOverBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#FFF" Offset="0.0"/>
+		<GradientStop Color="#AAA" Offset="1.0"/>
+	</LinearGradientBrush>
+	
+	<!-- PressedBrush est utilisé en tant que Pressed dans Button, RadioButton et CheckBox. -->
+	<LinearGradientBrush x:Key="PressedBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#BBB" Offset="0.0"/>
+		<GradientStop Color="#EEE" Offset="0.1"/>
+		<GradientStop Color="#EEE" Offset="0.9"/>
+		<GradientStop Color="#FFF" Offset="1.0"/>
+	</LinearGradientBrush>
+	<LinearGradientBrush x:Key="PressedBorderBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#444" Offset="0.0"/>
+		<GradientStop Color="#888" Offset="1.0"/>
+	</LinearGradientBrush>
+
+	<!-- SelectedBackgroundBrush est utilisé en tant qu’élément Selected dans ListBoxItem et ComboBoxItem.-->
+	<SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD"/>	
+
+	<!-- Les pinceaux Disabled sont utilisés pour l’aspect Disabled de chaque contrôle. -->
+	<SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888"/>
+	<SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE"/>
+	<SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA"/>
+
+	<!-- Utilisé comme arrière-plan des contrôles ScrollViewer, TreeView, ListBox, Expander, TextBox et Tab. -->
+	<SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF"/>
+	
+	<!-- DefaultedBorderBrush est utilisé pour afficher KeyBoardFocus. -->
+	<LinearGradientBrush x:Key="DefaultedBorderBrush" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#777" Offset="0.0"/>
+		<GradientStop Color="#000" Offset="1.0"/>
+	</LinearGradientBrush>
+
+	<SolidColorBrush x:Key="SolidBorderBrush" Color="#888"/>
+	<SolidColorBrush x:Key="LightBorderBrush" Color="#AAA"/>
+	<SolidColorBrush x:Key="LightColorBrush" Color="#DDD"/>
+	
+	<!-- Utilisé pour les glyphes Checkmark, RadioButton, TreeViewItem, Expander et ToggleButton. -->
+	<SolidColorBrush x:Key="GlyphBrush" Color="#444"/>
+	
+	
+	<!-- Les paires Style et Template sont utilisées pour définir chaque partie de contrôle. -->
+	<!-- Le Style fournit les valeurs par défaut du contrôle, tandis que le Template indique les éléments de chaque contrôle. -->
+	
+	<!-- SimpleButtonFocusVisual est utilisé pour afficher le focus du clavier autour d’un contrôle SimpleButton. -->
+	<Style x:Key="SimpleButtonFocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Border>
+						<Rectangle Margin="2" Stroke="#60000000" StrokeThickness="1" StrokeDashArray="1 2"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Button - Ce contrôle définit les pinceaux dans chaque état. Notez que ces pinceaux doivent être listés ci-dessus, car ce sont des ressources statiques. -->
+	<Style x:Key="SimpleButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+		<Setter Property="FocusVisualStyle" Value="{DynamicResource SimpleButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					
+					<!-- On utilise un contrôle Grid en tant que racine, car on peut facilement ajouter de nouveaux éléments pour personnaliser le bouton. -->
+					<Grid x:Name="Grid">
+						<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"/>
+						
+						<!-- La zone de contenu est l’endroit où le contenu texte, etc. est placé par le contrôle. -->
+						<!-- Les liaisons sont utiles, car elles permettent de paramétrer le contrôle sans modifier le modèle. -->
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+					</Grid>
+					
+					<!--Chaque état définit un pinceau sur le Border dans le modèle. -->
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="BorderBrush" Value="{DynamicResource DefaultedBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Background" Value="{DynamicResource MouseOverBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="true">
+							<Setter Property="Background" Value="{DynamicResource PressedBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource PressedBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="true"/>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="RadioButtonFocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Border>
+						<Rectangle Margin="15,0,0,0" Stroke="#60000000" StrokeThickness="1" StrokeDashArray="1 2"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="CheckBoxFocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Border>
+						<Rectangle Margin="15,0,0,0" Stroke="#60000000" StrokeThickness="1" StrokeDashArray="1 2"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple CheckBox -->
+	<Style x:Key="SimpleCheckBox" TargetType="{x:Type CheckBox}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}"/>
+		<Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type CheckBox}">
+					
+					<!-- La classe BulletDecorator est utilisée pour aligner la ligne de base de la coche avec celle du contenu. -->
+					<BulletDecorator Background="Transparent">
+						<BulletDecorator.Bullet>
+							<Grid Width="13" Height="13">
+								<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+								<Path x:Name="CheckMark" Stroke="{DynamicResource GlyphBrush}" StrokeThickness="2" SnapsToDevicePixels="False" Data="M 0 0 L 13 13 M 0 13 L 13 0"/>
+							</Grid>
+						</BulletDecorator.Bullet>
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+					</BulletDecorator>
+					
+					<!-- Utilise Visibility pour masquer et afficher le CheckMark sur IsChecked. -->
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsChecked" Value="false">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="CheckMark"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Background" Value="{DynamicResource MouseOverBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="true">
+							<Setter Property="Background" Value="{DynamicResource PressedBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource PressedBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+					
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Radio Button -->
+	<Style x:Key="SimpleRadioButton" TargetType="{x:Type RadioButton}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="FocusVisualStyle" Value="{DynamicResource RadioButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type RadioButton}">
+				
+					<!-- La classe BulletDecorator est utilisée pour aligner la ligne de base de la coche avec celle du contenu. -->
+					<BulletDecorator Background="Transparent">
+						<BulletDecorator.Bullet>
+							<Grid Width="13" Height="13">
+								<Ellipse x:Name="Ellipse_Border" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"/>
+								<Ellipse Margin="4" x:Name="CheckMark" Fill="{DynamicResource GlyphBrush}"/>
+							</Grid>
+						</BulletDecorator.Bullet>
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+					</BulletDecorator>
+					
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsChecked" Value="false">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="CheckMark"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Fill" Value="{DynamicResource MouseOverBrush}" TargetName="Ellipse_Border"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="true">
+							<Setter Property="Fill" Value="{DynamicResource PressedBrush}" TargetName="Ellipse_Border"/>
+							<Setter Property="Stroke" Value="{DynamicResource GlyphBrush}" TargetName="Ellipse_Border"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Fill" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Ellipse_Border"/>
+							<Setter Property="Stroke" Value="#40000000" TargetName="Ellipse_Border"/>
+							<Setter Property="Foreground" Value="#80000000"/>
+						</Trigger>
+						
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Repeat Button - Utilisé par le Simple ScrollBar pour les boutons de défilement vers le haut et vers le bas. -->
+	<Style x:Key="SimpleRepeatButton" d:IsControlPart="True" TargetType="{x:Type RepeatButton}" BasedOn="{x:Null}">
+		<Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type RepeatButton}">
+					<Grid>
+						<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+						<ContentPresenter HorizontalAlignment="Center" x:Name="ContentPresenter" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsKeyboardFocused" Value="true">
+							<Setter Property="BorderBrush" Value="{DynamicResource DefaultedBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Background" Value="{DynamicResource MouseOverBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="true">
+							<Setter Property="Background" Value="{DynamicResource PressedBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource PressedBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Thumb - Le Thumb est la partie du Scrollbar que l’on peut faire glisser. -->
+	<Style x:Key="SimpleThumbStyle" d:IsControlPart="True" TargetType="{x:Type Thumb}" BasedOn="{x:Null}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Thumb}">
+					<Grid Margin="0,0,0,0" x:Name="Grid">
+						<Rectangle HorizontalAlignment="Stretch" x:Name="Rectangle" VerticalAlignment="Stretch" Width="Auto" Height="Auto" RadiusX="2" RadiusY="2" Fill="{DynamicResource NormalBrush}" Stroke="{DynamicResource NormalBorderBrush}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsFocused" Value="True"/>
+						<Trigger Property="IsMouseOver" Value="True"/>
+						<Trigger Property="IsEnabled" Value="False"/>
+						<Trigger Property="IsDragging" Value="True"/>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ScrollRepeatButton Style - Ce RepeatButton est utilisé au-dessus et en dessous du Thumb dans le Scrollbar. Il est défini comme étant transparent de manière à ne pas s’afficher au-dessus de la barre de défilement. -->
+	<Style x:Key="SimpleScrollRepeatButtonStyle" d:IsControlPart="True" TargetType="{x:Type RepeatButton}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="IsTabStop" Value="false"/>
+		<Setter Property="Focusable" Value="false"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type RepeatButton}">
+					<Grid>
+						<Rectangle Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ScrollBar - Utilise SimpleThumb, SimpleRepeatButton et SimpleScrollRepeatButton. -->
+	
+	<Style x:Key="SimpleScrollBar" TargetType="{x:Type ScrollBar}">
+		<Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ScrollBar}">
+					<Grid x:Name="GridRoot" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Background="{TemplateBinding Background}">
+						<Grid.RowDefinitions>
+							<RowDefinition MaxHeight="18"/>
+							<RowDefinition Height="0.00001*"/>
+							<RowDefinition MaxHeight="18"/>
+						</Grid.RowDefinitions>
+						
+						<RepeatButton x:Name="DecreaseRepeat" Style="{DynamicResource SimpleRepeatButton}" Command="ScrollBar.LineUpCommand">
+							<Grid>
+								<Path x:Name="DecreaseArrow" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Data="M 0 4 L 8 4 L 4 0 Z"/>
+							</Grid>
+						</RepeatButton>
+						
+						<!-- Le Track est un conteneur de disposition spécial qui dimensionne le curseur et le bouton de répétition qui effectuent un défilement de saut de chaque côté de lui. -->
+						<Track Grid.Row="1" x:Name="PART_Track" Orientation="Vertical" IsDirectionReversed="true">
+							<Track.Thumb>
+								<Thumb Style="{DynamicResource SimpleThumbStyle}"/>
+							</Track.Thumb>
+							<Track.IncreaseRepeatButton>
+								<RepeatButton x:Name="PageUp" Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="ScrollBar.PageDownCommand"/>
+							</Track.IncreaseRepeatButton>
+							<Track.DecreaseRepeatButton>
+								<RepeatButton x:Name="PageDown" Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="ScrollBar.PageUpCommand"/>
+							</Track.DecreaseRepeatButton>
+						</Track>
+						
+						<RepeatButton Grid.Row="2" x:Name="IncreaseRepeat" Style="{DynamicResource SimpleRepeatButton}" Command="ScrollBar.LineDownCommand">
+							<Grid>
+								<Path x:Name="IncreaseArrow" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Data="M 0 0 L 4 4 L 8 0 Z"/>
+							</Grid>
+						</RepeatButton>
+					</Grid>
+					
+					<!-- Il utilise un modèle unique pour le ScrollBar et le fait tourner en position horizontale.
+					Il change également les commandes Left et Right en commandes Up et Down. -->
+					<ControlTemplate.Triggers>
+						<Trigger Property="Orientation" Value="Horizontal">
+
+							<!-- Faites tourner le ScrollBar de la position verticale à la position horizontale. -->
+							<Setter Property="LayoutTransform" TargetName="GridRoot">
+								<Setter.Value>
+									<RotateTransform Angle="-90"/>
+								</Setter.Value>
+							</Setter>
+							
+							<!-- Le Track est lié de manière interne à l’élément Orientation et il faut donc le replacer en position verticale. -->
+							<Setter TargetName="PART_Track" Property="Orientation" Value="Vertical"/>
+					
+							<!-- Changez les commandes en commandes Horizontal. -->
+							<Setter Property="Command" Value="ScrollBar.LineLeftCommand" TargetName="DecreaseRepeat"/>
+							<Setter Property="Command" Value="ScrollBar.LineRightCommand" TargetName="IncreaseRepeat"/>
+							<Setter Property="Command" Value="ScrollBar.PageLeftCommand" TargetName="PageDown"/>
+							<Setter Property="Command" Value="ScrollBar.PageRightCommand" TargetName="PageUp"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ScrollViewer 
+	Le ScrollViewer est un contrôle Grid qui possède un ContentPresenter ainsi qu’un ScrollBar Horizontal et Vertical. 
+	Il est utilisé par ListBox, MenuItem, ComboBox et TreeView. -->
+	<Style x:Key="SimpleScrollViewer" TargetType="{x:Type ScrollViewer}" BasedOn="{x:Null}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ScrollViewer}">
+					<Grid Background="{TemplateBinding Background}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<ScrollContentPresenter Grid.Column="0" Grid.Row="0" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" CanContentScroll="{TemplateBinding CanContentScroll}"/>
+						
+						<!-- La visibilité des barres de défilement est contrôlée par l’implémentation du contrôle. -->
+						<ScrollBar Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="1" x:Name="PART_HorizontalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Horizontal" Value="{Binding Path=HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Minimum="0" Maximum="{TemplateBinding ScrollableWidth}" />
+						<ScrollBar Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="1" Grid.Row="0" x:Name="PART_VerticalScrollBar" Style="{DynamicResource SimpleScrollBar}" Orientation="Vertical" Value="{Binding Path=VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Minimum="0" Maximum="{TemplateBinding ScrollableHeight}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ListBox - Utilise le SimpleScrollViewer pour autoriser le défilement des éléments et le SimpleListBoxItem pour définir l’aspect de chaque élément. -->
+	<Style x:Key="SimpleListBox" TargetType="{x:Type ListBox}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource SolidBorderBrush}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<Grid>
+						<Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+						<ScrollViewer Margin="1" Style="{DynamicResource SimpleScrollViewer}" Focusable="false" Background="{TemplateBinding Background}">
+							
+							<!-- Le StackPanel est utilisé pour afficher les enfants en définissant l’IsItemsHost à la valeur True. -->
+							<StackPanel Margin="2" IsItemsHost="true"/>
+							
+						</ScrollViewer>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ListBoxItem - Utilisé pour chaque élément dans un ListBox. Le contenu de l’élément est placé dans le ContentPresenter. -->
+	
+	<Style x:Key="SimpleListBoxItem" d:IsControlPart="True" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="OverridesDefaultStyle" Value="true"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Grid SnapsToDevicePixels="true">
+						<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						
+						<!-- Changez IsSelected SelectedBackgroundBrush pour définir la couleur de sélection des éléments. -->
+						<Trigger Property="IsSelected" Value="true">
+							<Setter Property="Background" Value="{DynamicResource SelectedBackgroundBrush}" TargetName="Border"/>
+						</Trigger>
+						
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Expander ToggleButton - Ce bouton est utilisé par le contrôle Expander. Lorsqu’il est activé, il fait passer la visibilité sur Up_Arrow et Down_Arrow. -->
+	<ControlTemplate x:Key="ExpanderToggleButton" TargetType="{x:Type ToggleButton}">
+		<Grid>
+			<Rectangle Margin="0,0,0,0" x:Name="Rectangle" Fill="Transparent" Stroke="{DynamicResource NormalBorderBrush}"/>
+			<Path HorizontalAlignment="Center" x:Name="Up_Arrow" VerticalAlignment="Center" Fill="{DynamicResource GlyphBrush}" Data="M 0 0 L 4 4 L 8 0 Z"/>
+			<Path Visibility="Collapsed" HorizontalAlignment="Center" x:Name="Down_Arrow" VerticalAlignment="Center" Fill="{DynamicResource GlyphBrush}" Data="M 0 4 L 4 0 L 8 4 Z"/>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="true">
+				<Setter Property="Fill" Value="{DynamicResource MouseOverBrush}" TargetName="Rectangle"/>
+			</Trigger>
+			<Trigger Property="IsPressed" Value="true">
+				<Setter Property="Fill" Value="{DynamicResource PressedBrush}" TargetName="Rectangle"/>
+			</Trigger>
+			<Trigger Property="IsChecked" Value="true">
+				<Setter Property="Visibility" Value="Visible" TargetName="Down_Arrow"/>
+				<Setter Property="Visibility" Value="Collapsed" TargetName="Up_Arrow"/>
+			</Trigger>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Fill" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Rectangle"/>
+				<Setter Property="Stroke" Value="{DynamicResource DisabledBorderBrush}" TargetName="Rectangle"/>
+				<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+				<Setter Property="Fill" Value="{DynamicResource DisabledForegroundBrush}" TargetName="Up_Arrow"/>
+			</Trigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+	
+	<!-- Simple Expander 
+	 Utilise le Simple ExpanderToggleButton. Définit la propriété Visibility du ContentPresenter pour se développer.
+	 Limitations : le Simple Expander ne se développe que vers le bas. -->
+	<Style x:Key="SimpleExpander" TargetType="{x:Type Expander}">
+		<Setter Property="Background" Value="{DynamicResource LightBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Expander}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*" x:Name="ContentRow"/>
+						</Grid.RowDefinitions>
+						<Border Grid.Row="0" x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2,2,0,0">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="20"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<ToggleButton Template="{DynamicResource ExpanderToggleButton}" Background="{DynamicResource NormalBrush}" IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" OverridesDefaultStyle="True"/>
+								<ContentPresenter Grid.Column="1" Margin="4" RecognizesAccessKey="True" ContentSource="Header"/>
+							</Grid>
+						</Border>
+						<Border Visibility="Collapsed" Grid.Row="1" x:Name="ExpandSite" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,2,2">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Focusable="false"/>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsExpanded" Value="True">
+							<Setter Property="Visibility" Value="Visible" TargetName="ExpandSite"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ComboBox Toggle Button - Utilisé dans le ComboBox pour développer et réduire le ComboBox Popup.-->
+	<ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="20"/>
+			</Grid.ColumnDefinitions>
+			<Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Stretch" x:Name="Rectangle" VerticalAlignment="Stretch" Width="Auto" Height="Auto" RadiusX="5" RadiusY="5" Fill="{DynamicResource NormalBrush}" Stroke="{DynamicResource NormalBorderBrush}"/>
+			<Rectangle Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" RadiusX="5" RadiusY="5" Fill="{DynamicResource WindowBackgroundBrush}" Stroke="{DynamicResource NormalBorderBrush}"/>
+			<Path Grid.Column="1" HorizontalAlignment="Center" x:Name="Arrow" VerticalAlignment="Center" Fill="{DynamicResource GlyphBrush}" Data="M 0 0 L 4 4 L 8 0 Z"/>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="true">
+				<Setter Property="Fill" Value="{DynamicResource MouseOverBrush}" TargetName="Rectangle"/>
+			</Trigger>
+			<Trigger Property="IsChecked" Value="true">
+				<Setter Property="Fill" Value="{DynamicResource PressedBrush}" TargetName="Rectangle"/>
+			</Trigger>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Fill" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Rectangle"/>
+				<Setter Property="Stroke" Value="{DynamicResource DisabledBorderBrush}" TargetName="Rectangle"/>
+				<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+				<Setter Property="Fill" Value="{DynamicResource DisabledForegroundBrush}" TargetName="Arrow"/>
+			</Trigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+	
+	<!-- Il s’agit de la zone contenant l’élément sélectionné dans le ComboBox. -->
+	
+	<ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+		<!-- Le nom de cet élément doit être PART_ContentHost. -->
+		<Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}"/>
+	</ControlTemplate>
+	
+	<!-- Simple ComboBox 
+	Utilise le ComboBoxToggleButton pour développer et réduire un contrôle Popup.
+	SimpleScrollViewer permet le défilement d’éléments et SimpleComboBoxItem permet de définir l’aspect de chaque élément. 
+	Le Popup affiche une liste d’éléments dans un StackPanel.-->
+	
+	<Style x:Key="SimpleComboBox" TargetType="{x:Type ComboBox}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBox}">
+					<Grid>
+						<!-- Le ToggleButton est lié aux données avec le ComboBox lui-même afin d’activer/désactiver IsDropDownOpen. -->
+						<ToggleButton Grid.Column="2" Template="{DynamicResource ComboBoxToggleButton}" x:Name="ToggleButton" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+						<ContentPresenter HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="ContentSite" VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False"/>
+						
+						<!-- Le nom du TextBox doit être PART_EditableTextBox pour que le ComboBox puisse le reconnaître. -->
+						<TextBox Visibility="Hidden" Template="{DynamicResource ComboBoxTextBox}" HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="PART_EditableTextBox" Style="{x:Null}" VerticalAlignment="Center" Focusable="True" Background="Transparent" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+						
+						<!-- Le Popup affiche la liste des éléments présents dans le ComboBox. IsOpen est lié aux données avec IsDropDownOpen, qui est activé/désactivé via le ComboBoxToggleButton. -->
+						<Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide">
+							<Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+								<Border x:Name="DropDownBorder" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+								<ScrollViewer Margin="4,6,4,6" Style="{DynamicResource SimpleScrollViewer}" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+							
+									<!-- Le StackPanel est utilisé pour afficher les enfants en définissant IsItemsHost sur True. -->
+									<StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+								
+								</ScrollViewer>
+							</Grid>
+						</Popup>
+					</Grid>
+					<ControlTemplate.Triggers>						
+						<!-- Force le DropDown a avoir une taille minimale s’il est vide. -->
+						<Trigger Property="HasItems" Value="false">
+							<Setter Property="MinHeight" Value="95" TargetName="DropDownBorder"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+						<Trigger Property="AllowsTransparency" SourceName="Popup" Value="true">
+							<Setter Property="CornerRadius" Value="4" TargetName="DropDownBorder"/>
+							<Setter Property="Margin" Value="0,2,0,0" TargetName="DropDownBorder"/>
+						</Trigger>
+						<Trigger Property="IsEditable" Value="true">
+							<Setter Property="IsTabStop" Value="false"/>
+							<Setter Property="Visibility" Value="Visible" TargetName="PART_EditableTextBox"/>
+							<Setter Property="Visibility" Value="Hidden" TargetName="ContentSite"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple ComboBoxItem - Utilisé pour chaque élément à l’intérieur du ComboBox. Vous pouvez modifier la couleur sélectionnée pour chaque élément ci-dessous.-->
+	<Style x:Key="SimpleComboBoxItem" d:IsControlPart="True" TargetType="{x:Type ComboBoxItem}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBoxItem}">
+					<Grid SnapsToDevicePixels="true">
+						<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+					
+						<!-- Changez IsHighlighted SelectedBackgroundBrush pour définir la couleur de sélection des éléments. -->
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter Property="Background" Value="{DynamicResource SelectedBackgroundBrush}" TargetName="Border"/>
+						</Trigger>
+						
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple SimpleProgressBar
+	 Ce modèle utilise deux contrôles Border pour afficher les éléments Track et Progress. 
+	 Limitations : ce modèle ne prend en charge qu’une ProgressBar orientée horizontalement. -->
+	<Style x:Key="SimpleProgressBar" TargetType="{x:Type ProgressBar}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ProgressBar}">
+					<Grid>
+					
+						<!-- Cet élément Border est la piste. Son nom doit être PART_Track. -->
+						<Border x:Name="PART_Track" Background="{DynamicResource PressedBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="2"/>
+						
+						<!-- Ce contrôle Border affiche la progression. Son nom doit être PART_Indicator pour le contrôle à utiliser. -->
+						<Border HorizontalAlignment="Left" x:Name="PART_Indicator" Background="{DynamicResource MouseOverBrush}" BorderBrush="{DynamicResource NormalBorderBrush}" BorderThickness="1" CornerRadius="2"/>
+					
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple TextBox -->
+	<Style x:Key="SimpleTextBox" TargetType="{x:Type TextBox}">
+		<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		<Setter Property="AllowDrop" Value="true"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TextBox}">
+					<Grid>
+						<Border x:Name="Border" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" Padding="2" CornerRadius="2">
+							
+							<!-- L’implémentation place le Content dans le ScrollViewer. Son nom doit être PART_ContentHost pour le contrôle à utiliser. -->
+							<ScrollViewer Margin="0" x:Name="PART_ContentHost" Style="{DynamicResource SimpleScrollViewer}" Background="{TemplateBinding Background}"/>
+						
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Label - Ce modèle est simplement un ContentPresenter qui affiche le contenu du Label. -->
+	<Style x:Key="SimpleLabel" TargetType="{x:Type Label}">
+		<Setter Property="HorizontalContentAlignment" Value="Left"/>
+		<Setter Property="VerticalContentAlignment" Value="Top"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Label}">
+					<Grid>
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false"/>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Menu - Ce modèle utilise un StackPanel pour la disposition des éléments MenuItem. --> 
+	<Style x:Key="SimpleMenu" TargetType="{x:Type Menu}">
+		<Setter Property="Background" Value="{DynamicResource LightBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Menu}">
+					<Grid>
+						<Border Margin="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+						<StackPanel Background="{TemplateBinding Background}" IsItemsHost="True" ClipToBounds="True" Orientation="Horizontal"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Ce BitmapEffect est utilisé par le Simple MenuItem. -->
+	<DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="1.5" Softness="0.15"/>
+	
+	<!-- Simple MenuItem - Ce modèle utilise des déclencheurs pour fournir quatre arrangements différents de l’élément de menu, qui sont définis par le biais de la propriété Role. --> 
+	<Style x:Key="SimpleMenuItem" TargetType="{x:Type MenuItem}">
+		<Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type MenuItem}">
+					<Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							
+							<!-- Le Grid est utilisé pour maintenir ensemble les colonnes des éléments Icon, Content, Glyph et Arrow pour afficher le niveau suivant.
+							 Le partage de taille est utilisé dans le Grid de telle sorte que les éléments Icon, Content et Arrow de chaque MenuItem soient alignés. -->
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup"/>
+								<ColumnDefinition Width="14"/>
+							</Grid.ColumnDefinitions>
+							
+							<!-- ContentPresenter devant afficher un élément Icon si nécessaire -->
+							<ContentPresenter Margin="4,0,6,0" x:Name="Icon" VerticalAlignment="Center" ContentSource="Icon"/>
+							
+							<!-- Le Glyph est une coche si le menu peut être activé. -->
+							<Grid Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel" VerticalAlignment="Center">
+								<Path x:Name="GlyphPanelpath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,2 L0,4.8 L2.5,7.4 L7.1,2.8 L7.1,0 L2.5,4.6 z" FlowDirection="LeftToRight"/>
+							</Grid>
+							
+							<!-- Contenu du texte du menu, etc. -->
+							<ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}" x:Name="HeaderHost" RecognizesAccessKey="True" ContentSource="Header"/>
+							
+							<!-- Tracé de dessin de flèche pointant vers le niveau suivant du menu -->
+							<Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">
+								<Path x:Name="ArrowPanelPath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,0 L0,8 L4,4 z"/>
+							</Grid>
+							
+							<!-- Le Popup est le corps du menu qui se développe vers le bas ou sur le côté en fonction du niveau de l’élément. -->
+							<Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" AllowsTransparency="true" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" VerticalOffset="-3">
+								<Grid x:Name="SubMenu">
+									<Border x:Name="SubMenuBorder" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+									
+									<!-- Le StackPanel contient les enfants du menu. Défini par IsItemsHost=True. -->
+									<StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+								</Grid>
+							</Popup>
+							
+						</Grid>
+					</Border>
+					
+					<!-- Ces déclencheurs reconfigurent les quatre arrangements de MenuItem afin d’afficher les différents niveaux du menu via Role. -->
+					<ControlTemplate.Triggers>
+					
+						<!-- Role = TopLevelHeader : élément de menu racine dans un menu ; le Popup se développe vers le bas. -->
+						<Trigger Property="Role" Value="TopLevelHeader">
+							<Setter Property="Margin" Value="0,1,0,1"/>
+							<Setter Property="Padding" Value="6,3,6,3"/>
+							<Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+							<Setter Property="Placement" Value="Bottom" TargetName="SubMenuPopup"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+						</Trigger>
+						
+						<!-- Role = TopLevelItem : élément de menu enfant à partir du niveau supérieur sans aucun élément enfant-->
+						<Trigger Property="Role" Value="TopLevelItem">
+							<Setter Property="Margin" Value="0,1,0,1"/>
+							<Setter Property="Padding" Value="6,3,6,3"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+						</Trigger>
+						
+						<!-- Role = SubMenuHeader : élément de menu enfant qui ne possède pas d’enfant -->
+						<Trigger Property="Role" Value="SubmenuHeader">
+							<Setter Property="DockPanel.Dock" Value="Top"/>
+							<Setter Property="Padding" Value="0,2,0,2"/>
+							<Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+						</Trigger>
+						
+						<!-- Role = SubMenuItem : élément de menu enfant qui possède des enfants-->
+						<Trigger Property="Role" Value="SubmenuItem">
+							<Setter Property="DockPanel.Dock" Value="Top"/>
+							<Setter Property="Padding" Value="0,2,0,2"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel"/>
+						</Trigger>
+						<Trigger Property="IsSuspendingPopupAnimation" Value="true">
+							<Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup"/>
+						</Trigger>
+						
+						<!-- Le contenu de l’icône est réduit si aucune icône n’est présente. -->
+						<Trigger Property="Icon" Value="{x:Null}">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+						</Trigger>
+						
+						<!-- Le GlyphPanel contient le CheckMark. -->
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Visibility" Value="Visible" TargetName="GlyphPanel"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
+						</Trigger>
+						
+						<Trigger Property="AllowsTransparency" SourceName="SubMenuPopup" Value="true">
+							<Setter Property="Margin" Value="0,0,3,3" TargetName="SubMenu"/>
+							<Setter Property="SnapsToDevicePixels" Value="true" TargetName="SubMenu"/>
+							<Setter Property="BitmapEffect" Value="{DynamicResource PopupDropShadow}" TargetName="SubMenuBorder"/>
+						</Trigger>
+						
+						<!-- Utilisation des couleurs système pour Menu Highlight et IsEnabled-->
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!-- Simple Separator - Ce modèle est utilisé en tant que séparateur dans un menu. --> 
+	<Style x:Key="SimpleSeparator" TargetType="{x:Type Separator}">
+		<Setter Property="Height" Value="1"/>
+		<Setter Property="Margin" Value="0,2,0,2"/>
+		<Setter Property="Focusable" Value="false"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Separator}">
+					<Border BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Simple TabControl 
+	Ce modèle utilise Simple TabItem pour chaque Tab. Les éléments TabItem sont placés dans le TabPanel.
+	Limitations : le Simple TabControl autorise l’affichage des éléments Tab uniquement au-dessus du contrôle Tab. Vous pouvez repositionner le TabPanel pour modifier cela.-->
+	
+	<Style x:Key="SimpleTabControl" TargetType="{x:Type TabControl}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabControl}">
+					<Grid KeyboardNavigation.TabNavigation="Local">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						
+						<!-- Le TabPanel est un conteneur de disposition qui autorise l’agencement et le réordonnancement des éléments TabItem lorsqu’ils sont sélectionnés.
+						L’implémentation peut utiliser ce contrôle, car il est marqué comme suit : IsItemsHost = True. -->
+						<TabPanel Grid.Row="0" Margin="0,0,4,-1" x:Name="HeaderPanel" Background="Transparent" IsItemsHost="True" Panel.ZIndex="1" KeyboardNavigation.TabIndex="1"/>
+						
+						<Border Grid.Row="1" x:Name="Border" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="2" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2">
+							
+							<!-- L’implémentation active ou désactive le contenu. Le nom de ce contrôle doit être PART_SelectedContentHost. -->
+							<ContentPresenter Margin="4" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
+							
+						</Border>
+					</Grid>
+					
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple TabItem -->
+	<Style x:Key="SimpleTabItem" d:IsControlPart="True" TargetType="{x:Type TabItem}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TabItem}">
+					<Grid>
+						<Border Margin="0,0,-4,0" x:Name="Border" Background="{DynamicResource LightBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
+							<ContentPresenter HorizontalAlignment="Center" Margin="12,2,12,2" x:Name="ContentSite" VerticalAlignment="Center" RecognizesAccessKey="True" ContentSource="Header"/>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Panel.ZIndex" Value="100"/>
+							<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderThickness" Value="1,1,1,0" TargetName="Border"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple Simple SliderThumb - Le Thumb est la partie d’un Slider que l’on peut faire glisser.-->
+	<Style x:Key="SimpleSliderThumb" d:IsControlPart="True" TargetType="{x:Type Thumb}">
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="Height" Value="14"/>
+		<Setter Property="Width" Value="14"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Thumb}">
+					<Grid>
+						<Ellipse x:Name="Ellipse" Fill="{DynamicResource NormalBrush}" Stroke="{DynamicResource NormalBorderBrush}" StrokeThickness="1"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Fill" Value="{DynamicResource MouseOverBrush}" TargetName="Ellipse"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Fill" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Ellipse"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple Simple Slider
+	Similaire au ScrollBar, ce modèle utilise le Track pour disposer le Thumb qui peut être glissé et qui possède des boutons de répétition Haut et Bas.
+	Il utilise Simple SliderThumb et SimpleScrollRepeatButtonStyle pour les boutons de répétition Page précédente et Page suivante. -->
+	<Style x:Key="SimpleSlider" TargetType="{x:Type Slider}">
+		<Setter Property="Background" Value="{DynamicResource LightBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Slider}">
+					<Grid x:Name="GridRoot">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						
+						<!-- Le TickBar affiche les marques du Slider. -->
+						<TickBar Visibility="Collapsed" x:Name="TopTick" Height="4" SnapsToDevicePixels="True" Placement="Top" Fill="{DynamicResource GlyphBrush}"/>
+						<Border Grid.Row="1" Margin="0" x:Name="Border" Height="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+						
+						<!-- Le Track dispose les boutons de répétition et le curseur. -->
+						<Track Grid.Row="1" x:Name="PART_Track">
+							<Track.Thumb>
+								<Thumb Style="{DynamicResource SimpleSliderThumb}"/>
+							</Track.Thumb>
+							<Track.IncreaseRepeatButton>
+								<RepeatButton Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="Slider.IncreaseLarge"/>
+							</Track.IncreaseRepeatButton>
+							<Track.DecreaseRepeatButton>
+								<RepeatButton Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="Slider.DecreaseLarge"/>
+							</Track.DecreaseRepeatButton>
+						</Track>
+						
+						<TickBar Visibility="Collapsed" Grid.Row="2" x:Name="BottomTick" Height="4" SnapsToDevicePixels="True" Placement="Bottom" Fill="{TemplateBinding Foreground}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="TickPlacement" Value="TopLeft">
+							<Setter Property="Visibility" Value="Visible" TargetName="TopTick"/>
+						</Trigger>
+						<Trigger Property="TickPlacement" Value="BottomRight">
+							<Setter Property="Visibility" Value="Visible" TargetName="BottomTick"/>
+						</Trigger>
+						<Trigger Property="TickPlacement" Value="Both">
+							<Setter Property="Visibility" Value="Visible" TargetName="TopTick"/>
+							<Setter Property="Visibility" Value="Visible" TargetName="BottomTick"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+							<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+						</Trigger>
+						
+						<!-- Utilisez une rotation pour créer un Slider vertical à partir du Slider horizontal par défaut. -->
+						<Trigger Property="Orientation" Value="Vertical">
+							<Setter Property="LayoutTransform" TargetName="GridRoot">
+								<Setter.Value>
+									<RotateTransform Angle="-90"/>
+								</Setter.Value>
+							</Setter>
+							<!-- Le Track tourne de lui-même en fonction de l’orientation et il faut donc le replacer dans sa position initiale. -->
+							<Setter TargetName="PART_Track" Property="Orientation" Value="Horizontal"/>
+						</Trigger>
+						
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple Tree View - Dispose les éléments TreeViewItem à l’intérieur d’un ScrollViewer. -->
+	<Style x:Key="SimpleTreeView" TargetType="{x:Type TreeView}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TreeView}">
+					<Grid>
+						<Border x:Name="Border" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="1">
+							<ScrollViewer Style="{DynamicResource SimpleScrollViewer}" Focusable="False" Background="{TemplateBinding Background}" Padding="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+								<ItemsPresenter/>
+							</ScrollViewer>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple TreeViewItem ToggleButton - Boutons + et - permettant de développer et de réduire un TreeViewItem. -->
+	<Style x:Key="SimpleTreeViewItemToggleButton" d:IsControlPart="True" TargetType="{x:Type ToggleButton}">
+		<Setter Property="Focusable" Value="False"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Grid Width="15" Height="13" Background="Transparent">
+						<Path Visibility="Collapsed" HorizontalAlignment="Left" Margin="1,1,1,1" x:Name="IsExpandedPath" VerticalAlignment="Center" Fill="{DynamicResource GlyphBrush}" Data="M 0 4 L 8 4 L 4 8 Z"/>
+						<Path HorizontalAlignment="Left" Margin="1,1,1,1" x:Name="ExpandPath" VerticalAlignment="Center" Fill="{DynamicResource GlyphBrush}" Data="M 4 0 L 8 4 L 4 8 Z"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsChecked" Value="True">
+							<Setter Property="Visibility" Value="Visible" TargetName="IsExpandedPath"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ExpandPath"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<!--Simple TreeViewItem - Le modèle TreeViewItem possède un en-tête qui affiche l’élément Item ainsi qu’un élément Body qui est un contrôle ItemsHost qui se développe pour afficher les éléments enfants.-->
+	<Style x:Key="SimpleTreeViewItem" d:IsControlPart="True" TargetType="{x:Type TreeViewItem}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="Padding" Value="1,0,0,0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TreeViewItem}">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition MinWidth="19" Width="Auto"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<ToggleButton x:Name="Expander" Style="{DynamicResource SimpleTreeViewItemToggleButton}" IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+						<Border Grid.Column="1" x:Name="Selection_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" x:Name="PART_Header" ContentSource="Header"/>
+						</Border>
+						<ItemsPresenter Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" x:Name="ItemsHost"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsExpanded" Value="false">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ItemsHost"/>
+						</Trigger>
+						<Trigger Property="HasItems" Value="false">
+							<Setter Property="Visibility" Value="Hidden" TargetName="Expander"/>
+						</Trigger>
+						<Trigger Property="IsSelected" Value="true">
+							<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" TargetName="Selection_Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected" Value="true"/>
+								<Condition Property="IsSelectionActive" Value="false"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Selection_Border"/>
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+						</MultiTrigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
