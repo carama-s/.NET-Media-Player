@@ -72,10 +72,13 @@ namespace WindowsMedia.classes
         public string Artist { get; private set; }
         public string Path { get; private set; }
         public TimeSpan Duration { get; private set; }
+        private bool IsImage { get; set; }
         public BitmapImage Image
         {
             get
             {
+                if (IsImage)
+                    return new BitmapImage(new Uri(Path, UriKind.Absolute));
                 TagLib.File tags = null;
                 try
                 {
@@ -106,6 +109,7 @@ namespace WindowsMedia.classes
             Artist = music.Artist;
             Path = music.Path;
             Duration = music.Duration;
+            IsImage = false;
         }
 
         public MediaItem(MovieFile movie)
@@ -114,6 +118,7 @@ namespace WindowsMedia.classes
             Artist = "";
             Path = movie.Path;
             Duration = movie.Duration;
+            IsImage = false;
         }
 
         public MediaItem(ImageFile image)
@@ -122,8 +127,7 @@ namespace WindowsMedia.classes
             Artist = "";
             Path = image.Path;
             Duration = image.Duration;
+            IsImage = true;
         }
-
-
     }
 }
