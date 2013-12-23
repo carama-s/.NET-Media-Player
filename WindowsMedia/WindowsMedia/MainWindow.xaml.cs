@@ -132,6 +132,8 @@ namespace WindowsMedia
             {
                 if (PlaylistBox.Items.Count > 0 && this.state_ != State.PAUSE)
                 {
+                    if (PlaylistBox.SelectedIndex < 0)
+                        PlaylistBox.SelectedIndex = 0;
                     MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
                     this.source_ = item.Path;
                     this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
