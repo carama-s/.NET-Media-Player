@@ -21,6 +21,8 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
+using MyToolkit.Multimedia;
+using System.Net.Http;
 
 namespace WindowsMedia
 {
@@ -411,7 +413,12 @@ namespace WindowsMedia
                         {
                             MovieFile mv = (MovieFile)MainBox.SelectedItem;
                             this.source_ = mv.Path;
-                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);
+                            this.MediaPlayer.Source = new Uri(mv.Path, UriKind.RelativeOrAbsolute);*/
+                            /*HttpClient client = new HttpClient();
+                            Task<string> getStringTask = client.GetStringAsync("http://www.youtube.com/watch?v=FcMRkyoHKeA");
+                            var url = await YouTube.GetVideoUriAsync("/v/FcMRkyoHKeA", YouTubeQuality.Quality720P);
+                            MediaPlayer.Source = url.Uri;*/
+                            
                             this.state_ = State.STOP;
                             ButtonSwitch_Click(sender, e);
                             ButtonPlay_Click(sender, e);
