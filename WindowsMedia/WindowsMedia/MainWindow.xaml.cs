@@ -55,6 +55,8 @@ namespace WindowsMedia
         private double          oldSize_;
         public Library          lib_;
 
+        private int currentIndexLecture_;
+
  
         public MainWindow()
         {
@@ -129,25 +131,26 @@ namespace WindowsMedia
                 }
                 if (MediaPlayer.Source != null)
                 {
-                brush = createBrush("assets/icon-pause-barre.png");
-                this.state_ = State.PLAY;
-                this.MediaPlayer.Play();
-                this.NomVideo.Width = 150;
-                if (oldValue == -1)
-                {
-                    this.CurrentTime.Text = "00:00:00";
-                    this.SliderTime.Value = 0;
-                }
-                String[] media = this.source_.Split('\\');
-                this.NomVideo.Text = media[media.Length - 1] + "     ";
-                this.timer_text.Start();
-                var tags = TagLib.File.Create(this.source_);
-                this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                this.duree_ = tags.Properties.Duration;
-                this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
+                    brush = createBrush("assets/icon-pause-barre.png");
+                    this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
+                    this.state_ = State.PLAY;
+                    this.MediaPlayer.Play();
+                    this.NomVideo.Width = 150;
+                    if (oldValue == -1)
+                    {
+                        this.CurrentTime.Text = "00:00:00";
+                        this.SliderTime.Value = 0;
+                    }
+                    String[] media = this.source_.Split('\\');
+                    this.NomVideo.Text = media[media.Length - 1] + "     ";
+                    this.timer_text.Start();
+                    var tags = TagLib.File.Create(this.source_);
+                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
+                    this.duree_ = tags.Properties.Duration;
+                    this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
-                this.TotalTime.Text = this.duree_.ToString();
-                this.timer_Slide.Start();
+                    this.TotalTime.Text = this.duree_.ToString();
+                    this.timer_Slide.Start();
 
             }
                 else
@@ -231,6 +234,7 @@ namespace WindowsMedia
                 else
                     PlaylistBox.SelectedIndex -= 1;
 
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -247,6 +251,7 @@ namespace WindowsMedia
                 else
                     PlaylistBox.SelectedIndex += 1;
 
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -371,6 +376,7 @@ namespace WindowsMedia
             else
             {
                 PlaylistBox.SelectedIndex = 0;
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
         }
@@ -559,7 +565,7 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                        }
+        }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -672,6 +678,20 @@ namespace WindowsMedia
             this.sourceVideo_ = this.YoutubeDownload.Text;
             this.YoutubeDownload.Text = "Entrez votre URL...";
 
+        }
+
+        private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (PlaylistBox.Items.Count > 0)
+            {
+                int current_index = PlaylistBox.SelectedIndex;
+
+                if (current_index == PlaylistBox.Items.Count - 1)
+                    current_index -= 1;
+                PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
+                if (PlaylistBox.Items.Count > 0)
+                    PlaylistBox.SelectedIndex = current_index;
+            }
         }
         
     }
