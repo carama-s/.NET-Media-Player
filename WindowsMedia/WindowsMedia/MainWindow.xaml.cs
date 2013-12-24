@@ -682,6 +682,12 @@ namespace WindowsMedia
             {
                 int current_index = PlaylistBox.SelectedIndex;
 
+                if (current_index == currentIndexLecture_) // si on delete le media en lecture
+                {
+                    ButtonStop_Click(sender, e);
+
+                }
+
                 if (current_index == PlaylistBox.Items.Count - 1)
                     current_index -= 1;
                 PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
