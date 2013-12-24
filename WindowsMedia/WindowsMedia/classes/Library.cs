@@ -117,60 +117,69 @@ namespace WindowsMedia.classes
 
     public class Library
     {
-        public List<String> Sources { get; set; }
+        public delegate void MtPtr(object pars);
         public List<MediaItem> Medias { get; private set; }
+        public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         public static String[] MusicExtensions = { ".mp3", ".flac" };
+        public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
+        public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
 
-        public Library(List<String> sources)
+        public Library()
         {
             Medias = new List<MediaItem>();
-            Sources = sources;
         }
 
-        public void GenerateMusic(String path)
-        {
-            var title = new MusicTitle(path);
-        }
 
-        public void GenerateFile(object param)
+        public void GenerateMusic(object param)
         {
             var pars = (Tuple<string, ManualResetEvent>)param;
-            var extension = Path.GetExtension(pars.Item1);
-            MediaItem media = null;
-            if (MusicExtensions.Contains(extension))
-                media = new MusicTitle(pars.Item1);
-            else if (VideoExtensions.Contains(extension))
-                media = new MovieFile(pars.Item1);
-            else
-                media = new ImageFile(pars.Item1);
+            var media = new MusicTitle(pars.Item1);
             lock (Medias)
                 Medias.Add(media);
             pars.Item2.Set();
         }
 
-        public Boolean GoodExtension(String path)
+        public void GenerateVideo(object param)
         {
-            var extension = Path.GetExtension(path);
-            return (MusicExtensions.Contains(extension) || VideoExtensions.Contains(extension) || ImageExtensions.Contains(extension));
+            var pars = (Tuple<string, ManualResetEvent>)param;
+            var media = new MovieFile(pars.Item1);
+            lock (Medias)
+                Medias.Add(media);
+            pars.Item2.Set();
         }
+
+        public void GenerateImage(object param)
+        {
+            var pars = (Tuple<string, ManualResetEvent>)param;
+            var media = new ImageFile(pars.Item1);
+            lock (Medias)
+                Medias.Add(media);
+            pars.Item2.Set();
+        }
+
 
         public void GenerateLibrary()
         {
             Medias.Clear();
             var paths = new List<string>();
             var handlers = new List<ManualResetEvent>();
-            foreach (String dir in Sources)
+            var tmps = new List<Tuple<String, String[], MtPtr>> {
+                Tuple.Create(MusicPath, MusicExtensions, new MtPtr(GenerateMusic)),
+                Tuple.Create(VideoPath, VideoExtensions, new MtPtr(GenerateVideo)),
+                Tuple.Create(ImagePath, ImageExtensions, new MtPtr(GenerateImage))
+            };
+            foreach (var tmp in tmps)
             {
-                var files = Directory.GetFileSystemEntries(dir, "*.*", SearchOption.AllDirectories).Where(GoodExtension);
+                var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
                 foreach (String file in files)
                 {
                     if (!paths.Contains(file))
                     {
                         paths.Add(file);
                         var handler = new ManualResetEvent(false);
-                        ThreadPool.QueueUserWorkItem(GenerateFile, Tuple.Create(file, handler));
+                        ThreadPool.QueueUserWorkItem(tmp.Item3.Invoke, Tuple.Create(file, handler));
                         handlers.Add(handler);
                     }
                 }
