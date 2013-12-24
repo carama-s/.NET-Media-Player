@@ -29,6 +29,24 @@ namespace WindowsMedia.classes
         }
     }
 
+    [ValueConversion(typeof(Int32), typeof(String))]
+    public class NbElementsConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            String nb = value.ToString();
+            return String.Format("{0:d2} {1:d2}", nb, "éléments");
+        }
+
+        public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
+        {
+            String str = (String)value;
+            String[] result = str.Split(new string[] { " " }, StringSplitOptions.None);
+            
+            return result[0];
+        }
+    }
+
     abstract public class MediaItem
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);

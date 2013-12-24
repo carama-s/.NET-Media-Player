@@ -5,6 +5,8 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
+    <!-- Converter pour NbElementsListeLecture (nb to nb + éléments) -->
+    <local:NbElementsConverter x:Key="nbConverter" />
     <!-- ItemContainerStyleSelector WrapBox-->
     <local:WrapBoxContainerSelector x:Key="WrapContainerSelector"/>
     <!-- Panel Template pour WrapBox-->

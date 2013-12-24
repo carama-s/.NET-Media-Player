@@ -403,15 +403,15 @@ namespace WindowsMedia
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0)
-                        {
+            {
                 PlaylistBox.Items.Clear();
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = 0;
-                            this.state_ = State.STOP;
+                this.state_ = State.STOP;
 
-                            ButtonPlay_Click(sender, e);
+                ButtonPlay_Click(sender, e);
             }
         }
 
