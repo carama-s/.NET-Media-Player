@@ -98,11 +98,7 @@ namespace WindowsMedia
 
             var watch = Stopwatch.StartNew();
 
-            lib_ = new Library(new List<string> {
-                Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
-                Environment.GetFolderPath(Environment.SpecialFolder.MyVideos),
-                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-            });
+            lib_ = new Library();
             lib_.GenerateLibrary();
             MainBox.ItemsSource = new AlbumIterator(lib_);
         }
