@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
@@ -67,7 +68,6 @@ namespace WindowsMedia.classes
     public class MediaItem
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
-
         public string Title { get; private set; }
         public string Artist { get; private set; }
         public string Path { get; private set; }
