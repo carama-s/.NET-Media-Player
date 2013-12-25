@@ -5,12 +5,8 @@
 	<!-- Resource dictionary entries should be defined here. -->
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
-    <!-- Converter pour MediaItem (Object to String) -->
-    <local:MediaItemTitleConverter x:Key="mediaTitleConverter" />
-    <!-- Converter pour MediaItem (Object to String) -->
-    <local:MediaItemArtistConverter x:Key="mediaArtistConverter" />
-    <!-- Converter pour MediaItem (Object to String) -->
-    <local:MediaItemImageConverter x:Key="mediaImageConverter" />
+    <!-- Converter pour NbElementsListeLecture (nb to nb + éléments) -->
+    <local:NbElementsConverter x:Key="nbConverter" />
     <!-- ItemContainerStyleSelector WrapBox-->
     <local:WrapBoxContainerSelector x:Key="WrapContainerSelector"/>
     <!-- Panel Template pour WrapBox-->

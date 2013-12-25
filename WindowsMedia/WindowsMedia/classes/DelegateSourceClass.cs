@@ -23,7 +23,7 @@ namespace WindowsMedia.classes
                 win.MainBox.Visibility = System.Windows.Visibility.Visible;
             win.clickStyle_ = ClickStyle.MUSIC;
             win.WrapBox.ItemsSource = null;
-            win.MainBox.ItemsSource = new AlbumIterator(win.musicLib_);
+            win.MainBox.ItemsSource = new AlbumIterator(win.lib_);
             win.MainBox.Visibility = System.Windows.Visibility.Visible;
         }
         }
@@ -35,7 +35,7 @@ namespace WindowsMedia.classes
             win.WrapBox.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.ItemsSource = null;
             win.clickStyle_ = ClickStyle.IMAGE;
-            win.WrapBox.ItemsSource = win.imageLib_;
+            win.WrapBox.ItemsSource = new ImageIterator(win.lib_);
             win.MainBox.ItemsSource = null;
         }
         public void VideoSource(MainWindow win)
@@ -46,7 +46,7 @@ namespace WindowsMedia.classes
             win.WrapBox.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.ItemsSource = null;
             win.clickStyle_ = ClickStyle.VIDEO;
-            win.WrapBox.ItemsSource = win.movieLib_;
+            win.WrapBox.ItemsSource = new MovieIterator(win.lib_);
             win.MainBox.ItemsSource = null;
         }
     }

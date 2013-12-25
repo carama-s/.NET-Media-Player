@@ -7,20 +7,21 @@ using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
 {
-    public class ImageFile
+    public class ImageFile : MediaItem
     {
-        public String Path { get; private set; }
-        public String Title { get; private set; }
-        public TimeSpan Duration { get; private set; }
         public String Description { get; private set; }
-        public BitmapImage Image { get; private set; }
+
+        protected override BitmapImage GetImage()
+        {
+            return new BitmapImage(new Uri(Path, UriKind.Absolute));
+        }
 
         public ImageFile(String path)
         {
             Path = path;
-            this.Duration = TimeSpan.FromSeconds(10);
-            this.Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
-            this.Image = new BitmapImage(new Uri(Path, UriKind.Absolute));
+            Artist = "";
+            Duration = TimeSpan.FromSeconds(10);
+            Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
         }
     }
 }

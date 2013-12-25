@@ -53,9 +53,9 @@ namespace WindowsMedia
         private double          oldValue;
         delegate void           DelegateSource(MainWindow win);
         private double          oldSize_;
-        public MusicLibrary     musicLib_;
-        public MovieLibrary     movieLib_;
-        public ImageLibrary     imageLib_;
+        public Library          lib_;
+
+        private int currentIndexLecture_;
 
  
         public MainWindow()
@@ -100,23 +100,9 @@ namespace WindowsMedia
 
             var watch = Stopwatch.StartNew();
 
-            musicLib_ = new MusicLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) });
-            musicLib_.GenerateLibrary();
-            MainBox.ItemsSource = new AlbumIterator(musicLib_);
-
-            Debug.WriteLine("Time music: " + watch.ElapsedMilliseconds);
-            watch.Reset();
-
-            movieLib_ = new MovieLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)});
-            movieLib_.GenerateLibrary();
-
-            Debug.WriteLine("Time movie: " + watch.ElapsedMilliseconds);
-            watch.Reset();
-
-            imageLib_ = new ImageLibrary(new List<string> { Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) });
-            imageLib_.GenerateLibrary();
-
-            Debug.WriteLine("Time pictures: " + watch.ElapsedMilliseconds);
+            lib_ = new Library();
+            lib_.GenerateLibrary();
+            MainBox.ItemsSource = new AlbumIterator(lib_);
         }
 
         private void timer_Text(object sender, EventArgs e)
@@ -141,25 +127,26 @@ namespace WindowsMedia
                 }
                 if (MediaPlayer.Source != null)
                 {
-                brush = createBrush("assets/icon-pause-barre.png");
-                this.state_ = State.PLAY;
-                this.MediaPlayer.Play();
-                this.NomVideo.Width = 150;
-                if (oldValue == -1)
-                {
-                    this.CurrentTime.Text = "00:00:00";
-                    this.SliderTime.Value = 0;
-                }
-                String[] media = this.source_.Split('\\');
-                this.NomVideo.Text = media[media.Length - 1] + "     ";
-                this.timer_text.Start();
-                var tags = TagLib.File.Create(this.source_);
-                this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                this.duree_ = tags.Properties.Duration;
-                this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
+                    brush = createBrush("assets/icon-pause-barre.png");
+                    this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
+                    this.state_ = State.PLAY;
+                    this.MediaPlayer.Play();
+                    this.NomVideo.Width = 150;
+                    if (oldValue == -1)
+                    {
+                        this.CurrentTime.Text = "00:00:00";
+                        this.SliderTime.Value = 0;
+                    }
+                    String[] media = this.source_.Split('\\');
+                    this.NomVideo.Text = media[media.Length - 1] + "     ";
+                    this.timer_text.Start();
+                    var tags = TagLib.File.Create(this.source_);
+                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
+                    this.duree_ = tags.Properties.Duration;
+                    this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
-                this.TotalTime.Text = this.duree_.ToString();
-                this.timer_Slide.Start();
+                    this.TotalTime.Text = this.duree_.ToString();
+                    this.timer_Slide.Start();
 
             }
                 else
@@ -243,6 +230,7 @@ namespace WindowsMedia
                 else
                     PlaylistBox.SelectedIndex -= 1;
 
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -259,6 +247,7 @@ namespace WindowsMedia
                 else
                     PlaylistBox.SelectedIndex += 1;
 
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -383,6 +372,7 @@ namespace WindowsMedia
             else
             {
                 PlaylistBox.SelectedIndex = 0;
+                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
         }
@@ -415,15 +405,15 @@ namespace WindowsMedia
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0)
-                        {
+            {
                 PlaylistBox.Items.Clear();
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = 0;
-                            this.state_ = State.STOP;
+                this.state_ = State.STOP;
 
-                            ButtonPlay_Click(sender, e);
+                ButtonPlay_Click(sender, e);
             }
         }
 
@@ -438,7 +428,7 @@ namespace WindowsMedia
             {
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = SecondBox.SelectedIndex;
                 this.state_ = State.STOP;
 
@@ -571,7 +561,7 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                        }
+        }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -589,7 +579,7 @@ namespace WindowsMedia
 
                             var items = WrapBox.ItemsSource;
                             foreach (var title in items)
-                                PlaylistBox.Items.Add(new MediaItem(title as ImageFile));
+                                PlaylistBox.Items.Add(title);
                             PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
@@ -601,7 +591,7 @@ namespace WindowsMedia
                     case (ClickStyle.VIDEO):
                         {
                             PlaylistBox.Items.Clear();
-                            PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+                            PlaylistBox.Items.Add(WrapBox.SelectedItem);
                             PlaylistBox.SelectedIndex = 0;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
@@ -641,7 +631,7 @@ namespace WindowsMedia
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
             if (SecondBox.SelectedItems.Count > 0)
-                PlaylistBox.Items.Add(new MediaItem(SecondBox.SelectedItem as MusicTitle));
+                PlaylistBox.Items.Add(SecondBox.SelectedItem);
         }
 
         private void MainBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -652,7 +642,7 @@ namespace WindowsMedia
                     PlaylistBox.SelectedIndex = 0;
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach(var title in items)
-                    PlaylistBox.Items.Add(new MediaItem(title as MusicTitle));
+                    PlaylistBox.Items.Add(title);
             }
         }
 
@@ -661,9 +651,9 @@ namespace WindowsMedia
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
             if (clickStyle_ == ClickStyle.IMAGE)
-                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as ImageFile));
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
             else if (clickStyle_ == ClickStyle.VIDEO)
-                PlaylistBox.Items.Add(new MediaItem(WrapBox.SelectedItem as MovieFile));
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -684,6 +674,26 @@ namespace WindowsMedia
             this.sourceVideo_ = this.YoutubeDownload.Text;
             this.YoutubeDownload.Text = "Entrez votre URL...";
 
+        }
+
+        private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (PlaylistBox.Items.Count > 0)
+            {
+                int current_index = PlaylistBox.SelectedIndex;
+
+                if (current_index == currentIndexLecture_) // si on delete le media en lecture
+                {
+                    ButtonStop_Click(sender, e);
+
+                }
+
+                if (current_index == PlaylistBox.Items.Count - 1)
+                    current_index -= 1;
+                PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
+                if (PlaylistBox.Items.Count > 0)
+                    PlaylistBox.SelectedIndex = current_index;
+            }
         }
         
     }
