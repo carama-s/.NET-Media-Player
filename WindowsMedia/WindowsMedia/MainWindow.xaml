@@ -38,7 +38,13 @@
                     <Button x:Name="DownloadButton" Content="Button" Style="{DynamicResource SimpleButton}" Background = "#FF181515" Margin="293.569,4.734,118.464,6.5" Height="24.766" Click="DownLoadYoutubeVideo"/>
                 </Grid>
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
-                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="21" Height="21" SnapsToDevicePixels="False">
+                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
+                        <MenuItem.OpacityMask>
+                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
+                        </MenuItem.OpacityMask>
+                        <MenuItem.Background>
+                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
+                        </MenuItem.Background>
                         <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
                         <MenuItem InputGestureText="Ctrl+I" Style="{DynamicResource MenuItemStyle}" Header="Importer..." Click="OpenFile"/>
                         <MenuItem Style="{DynamicResource MenuItemStyle}" Header="Options"/>
