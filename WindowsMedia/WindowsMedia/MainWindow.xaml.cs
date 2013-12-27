@@ -124,6 +124,9 @@ namespace WindowsMedia
                     MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
                     this.source_ = item.Path;
                     this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
+                    this.PlayingItemImage.Source = item.Image;
+                    this.PlayingItemTitle.Text = item.Title;
+                    this.PlayingItemArtist.Text = item.Artist;
                 }
                 if (MediaPlayer.Source != null)
                 {
@@ -514,6 +517,10 @@ namespace WindowsMedia
             ResetSelectionFilterMusic();
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
             this.musicStyle_ = MusicStyle.ALBUM;
+            this.MainBox.ItemsSource = new AlbumIterator(lib_);
+            this.MainBox.SelectedIndex = -1;
+            this.SecondBox.ItemsSource = null;
+            this.MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
         }
 
         private void ButtonArtists_Click(object sender, RoutedEventArgs e)
@@ -523,6 +530,10 @@ namespace WindowsMedia
             ResetSelectionFilterMusic();
             this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
             this.musicStyle_ = MusicStyle.ARTIST;
+            this.MainBox.ItemsSource = new ArtistIterator(lib_);
+            this.MainBox.SelectedIndex = -1;
+            this.SecondBox.ItemsSource = null;
+            this.MainBox.ItemTemplate = FindResource("MainArtistTemplate") as DataTemplate;
         }
 
         private void ButtonGenres_Click(object sender, RoutedEventArgs e)
@@ -532,6 +543,10 @@ namespace WindowsMedia
             ResetSelectionFilterMusic();
             this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
             this.musicStyle_ = MusicStyle.GENRE;
+            this.MainBox.ItemsSource = new GenreIterator(lib_);
+            this.MainBox.SelectedIndex = -1;
+            this.SecondBox.ItemsSource = null;
+            this.MainBox.ItemTemplate = FindResource("MainGenreTemplate") as DataTemplate;
         }
 
         private void PlayItem(object sender, RoutedEventArgs e)
@@ -561,6 +576,35 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.AddedItems.Count > 0)
+            {
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.SELECTION):
+                        {
+                            break;
+                        }
+                    case (ClickStyle.IMAGE):
+                        {
+                            PlaylistBox.Items.Clear();
+
+                            var items = WrapBox.ItemsSource;
+                            foreach (var title in items)
+                                PlaylistBox.Items.Add(title);
+                            PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            PlaylistBox.Items.Clear();
+                            PlaylistBox.Items.Add(WrapBox.SelectedItem);
+                            PlaylistBox.SelectedIndex = 0;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
         }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
