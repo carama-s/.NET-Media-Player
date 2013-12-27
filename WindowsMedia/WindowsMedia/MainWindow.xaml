@@ -26,7 +26,7 @@
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
+            <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainAlbumTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
             <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
@@ -69,11 +69,11 @@
                 		<ColumnDefinition Width="13*"/>
                 		<ColumnDefinition Width="17*"/>
                 	</Grid.ColumnDefinitions>
-                	<Image Grid.RowSpan="2" Source="{Binding SelectedItem.Image, ElementName=PlaylistBox}"/>
-                	<TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
-                    <TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedItem.Artist, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
+                	<Image Grid.RowSpan="2" Name="PlayingItemImage"/>
+                	<TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
+                    <TextBlock Name="PlayingItemArtist" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
                 </Grid>
-                <TextBox x:Name="CountElements" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Items.Count, ElementName=PlaylistBox, Mode=OneWay, Converter={StaticResource nbConverter}}" IsEnabled="False"/>
+                <TextBox x:Name="CountElements" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
