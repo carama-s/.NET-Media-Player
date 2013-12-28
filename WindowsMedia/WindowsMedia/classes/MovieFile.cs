@@ -23,6 +23,7 @@ namespace WindowsMedia.classes
             Artist = "";
             Duration = tags.Properties.Duration;
             Title = tags.Name.Substring(0,tags.Name.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
+            Type = ClickStyle.VIDEO;
         }
     }
 }
