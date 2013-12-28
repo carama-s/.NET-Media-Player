@@ -139,6 +139,14 @@ namespace WindowsMedia
                     this.PlayingItemImage.Source = item.Image;
                     this.PlayingItemTitle.Text = item.Title;
                     this.PlayingItemArtist.Text = item.Artist;
+
+                    if (item.Type == ClickStyle.MUSIC)
+                    {
+                        this.LectureMusicImage.Source = item.Image;
+                        this.LectureMusicImage.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    else
+                        this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
                 if (MediaPlayer.Source != null)
                 {

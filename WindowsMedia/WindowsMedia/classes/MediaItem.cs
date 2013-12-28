@@ -53,6 +53,7 @@ namespace WindowsMedia.classes
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
 
+        public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }
         public string Path { get; protected set; }

@@ -56,6 +56,7 @@ namespace WindowsMedia.classes
             Title = tags.Tag.Title;
             Composer = tags.Tag.FirstComposer;
             Duration = tags.Properties.Duration;
+            Type = ClickStyle.MUSIC;
         }
     }
 }
