@@ -85,7 +85,7 @@
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement" MediaEnded="EventEndMedia" MouseMove="EventMouseMove"/>
-            <Image Name="LectureMusicImage" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160" Height="160"/>
+            <Image Name="LectureMusicImage" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160" Height="160" MouseDown="EventClicLectureImage"/>
         </Grid>
         <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">
             <Slider x:Name="SliderTime" VerticalAlignment="Top" Margin="70,5,64.6,0" ValueChanged="SliderTime_ValueChanged" MouseUp="SliderTime_MouseUp"/>

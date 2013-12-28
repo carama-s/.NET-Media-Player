@@ -341,7 +341,14 @@ namespace WindowsMedia
         // Gestion du FullScreen
         private void EventClicMediaElement(object sender, MouseButtonEventArgs e)
         {
+            if (this.isFullScreen_ == false && e.ClickCount == 2)
+                this.FullScreenOn();
+            else if (this.isFullScreen_ == true && e.ClickCount == 2)
+                this.FulllScreenOff();
+        }
 
+        private void EventClicLectureImage(object sender, MouseButtonEventArgs e)
+        {
             if (this.isFullScreen_ == false && e.ClickCount == 2)
                 this.FullScreenOn();
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
@@ -743,6 +750,8 @@ namespace WindowsMedia
                 total += temp.Duration;
             }
             DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
-        }        
+        }
+
+  
     }
 }
