@@ -20,7 +20,7 @@ namespace WindowsMedia.classes
         {
             Path = path;
             Artist = "";
-            Duration = TimeSpan.FromSeconds(10);
+            Duration = TimeSpan.FromSeconds(0);
             Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
         }
     }
