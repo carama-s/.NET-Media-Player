@@ -62,6 +62,8 @@ namespace WindowsMedia
         {
             this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
+            AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
+
             InitializeComponent();
         }
 
@@ -103,6 +105,16 @@ namespace WindowsMedia
             lib_ = new Library();
             lib_.GenerateLibrary();
             MainBox.ItemsSource = new AlbumIterator(lib_);
+        }
+
+        private void WindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (isFullScreen_ == true && e.Key == Key.Escape)
+                FulllScreenOff();
+            else if ((e.Key == Key.O) && Keyboard.IsKeyDown(Key.LeftCtrl))
+                PlayItem(sender, e);
+            else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
+                OpenFile(sender, e);
         }
 
         private void timer_Text(object sender, EventArgs e)
