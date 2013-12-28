@@ -47,9 +47,9 @@ namespace WindowsMedia.classes
             Path = file;
             Artist = tags.Tag.FirstPerformer;
             Album = tags.Tag.Album;
-            if (tags.Tag.FirstGenre == null)
+            if (tags.Tag.FirstGenre != "")
                 Genre = tags.Tag.FirstGenre;
-            Genre = "inconnu";
+            Genre = "Inconnu";
             Year = tags.Tag.Year;
             TrackNumber = tags.Tag.Track;
             Title = tags.Tag.Title;
