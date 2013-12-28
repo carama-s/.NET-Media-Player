@@ -49,7 +49,8 @@ namespace WindowsMedia.classes
             Album = tags.Tag.Album;
             if (tags.Tag.FirstGenre != "")
                 Genre = tags.Tag.FirstGenre;
-            Genre = "Inconnu";
+            else
+                Genre = "Inconnu";
             Year = tags.Tag.Year;
             TrackNumber = tags.Tag.Track;
             Title = tags.Tag.Title;
