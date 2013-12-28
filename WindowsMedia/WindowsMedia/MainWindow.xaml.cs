@@ -596,37 +596,6 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count > 0)
-            {
-                switch (this.clickStyle_)
-                {
-                    case (ClickStyle.SELECTION):
-                        {
-                            break;
-                        }
-                    case (ClickStyle.IMAGE):
-                        {
-                            PlaylistBox.Items.Clear();
-
-                            var items = WrapBox.ItemsSource;
-                            foreach (var title in items)
-                                PlaylistBox.Items.Add(title);
-                            PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
-                            PlaylistBox_SourceUpdated();
-                            break;
-                        }
-                    case (ClickStyle.VIDEO):
-                        {
-                            PlaylistBox.Items.Clear();
-                            PlaylistBox.Items.Add(WrapBox.SelectedItem);
-                            PlaylistBox.SelectedIndex = 0;
-                            PlaylistBox_SourceUpdated();
-                            break;
-                        }
-                    default:
-                        break;
-                }
-            }
         }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -716,7 +685,10 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
-            PlaylistBox.Items.Add(WrapBox.SelectedItem);
+            if (clickStyle_ == ClickStyle.IMAGE)
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
+            else if (clickStyle_ == ClickStyle.VIDEO)
+                PlaylistBox.Items.Add(WrapBox.SelectedItem);
             PlaylistBox_SourceUpdated();
         }
 
