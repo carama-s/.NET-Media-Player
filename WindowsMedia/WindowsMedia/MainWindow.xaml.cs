@@ -398,7 +398,7 @@ namespace WindowsMedia
                 this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
-        }
+            }
 
         }
 
@@ -435,14 +435,14 @@ namespace WindowsMedia
                     PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = 0;
                 this.state_ = State.STOP;
-
+                PlaylistBox_SourceUpdated();
                 ButtonPlay_Click(sender, e);
             }
         }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            }
+        }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -454,7 +454,7 @@ namespace WindowsMedia
                     PlaylistBox.Items.Add(title);
                 PlaylistBox.SelectedIndex = SecondBox.SelectedIndex;
                 this.state_ = State.STOP;
-
+                PlaylistBox_SourceUpdated();
                 ButtonPlay_Click(sender, e);
             }
         }
@@ -612,6 +612,7 @@ namespace WindowsMedia
                             foreach (var title in items)
                                 PlaylistBox.Items.Add(title);
                             PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
+                            PlaylistBox_SourceUpdated();
                             break;
                         }
                     case (ClickStyle.VIDEO):
@@ -619,6 +620,7 @@ namespace WindowsMedia
                             PlaylistBox.Items.Clear();
                             PlaylistBox.Items.Add(WrapBox.SelectedItem);
                             PlaylistBox.SelectedIndex = 0;
+                            PlaylistBox_SourceUpdated();
                             break;
                         }
                     default:
@@ -633,10 +635,6 @@ namespace WindowsMedia
             {
                 switch (this.clickStyle_)
                 {
-                    case (ClickStyle.SELECTION):
-                        {
-                            break;
-                        }
                     case (ClickStyle.IMAGE):
                         {
                             PlaylistBox.Items.Clear();
@@ -649,7 +647,7 @@ namespace WindowsMedia
                             MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
                             ButtonPlay_Click(sender, e);
-
+                            PlaylistBox_SourceUpdated();
                             break;
                         }
                     case (ClickStyle.VIDEO):
@@ -661,6 +659,7 @@ namespace WindowsMedia
                             MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
                             ButtonPlay_Click(sender, e);
+                            PlaylistBox_SourceUpdated();
                             break;
                         }
                     default:
@@ -696,6 +695,8 @@ namespace WindowsMedia
                 PlaylistBox.SelectedIndex = 0;
             if (SecondBox.SelectedItems.Count > 0)
                 PlaylistBox.Items.Add(SecondBox.SelectedItem);
+            PlaylistBox_SourceUpdated();
+
         }
 
         private void MainBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -707,6 +708,7 @@ namespace WindowsMedia
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach(var title in items)
                     PlaylistBox.Items.Add(title);
+                PlaylistBox_SourceUpdated();
             }
         }
 
@@ -714,10 +716,8 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count <= 0)
                 PlaylistBox.SelectedIndex = 0;
-            if (clickStyle_ == ClickStyle.IMAGE)
-                PlaylistBox.Items.Add(WrapBox.SelectedItem);
-            else if (clickStyle_ == ClickStyle.VIDEO)
-                PlaylistBox.Items.Add(WrapBox.SelectedItem);
+            PlaylistBox.Items.Add(WrapBox.SelectedItem);
+            PlaylistBox_SourceUpdated();
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -757,8 +757,20 @@ namespace WindowsMedia
                 PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
                 if (PlaylistBox.Items.Count > 0)
                     PlaylistBox.SelectedIndex = current_index;
+                PlaylistBox_SourceUpdated();
             }
         }
-        
+
+        private void PlaylistBox_SourceUpdated()
+        {
+            var list = PlaylistBox.Items;
+            TimeSpan total = new TimeSpan();
+            foreach (var item in list)
+            {
+                var temp = (MediaItem)item;
+                total += temp.Duration;
+            }
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+        }        
     }
 }
