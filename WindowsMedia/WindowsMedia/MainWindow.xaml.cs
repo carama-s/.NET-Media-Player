@@ -110,7 +110,7 @@ namespace WindowsMedia
         private void WindowKeyDown(object sender, KeyEventArgs e)
         {
             if (isFullScreen_ == true && e.Key == Key.Escape)
-                FulllScreenOff();
+                FullScreenOff();
             else if ((e.Key == Key.O) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 PlayItem(sender, e);
             else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
@@ -237,7 +237,7 @@ namespace WindowsMedia
             else
             {
                 if (this.isFullScreen_ == true)
-                    this.FulllScreenOff();
+                    this.FullScreenOff();
                 GridBibliotheque.Visibility = System.Windows.Visibility.Visible;
                 GridLecture.Visibility = System.Windows.Visibility.Hidden;
             }
@@ -328,7 +328,7 @@ namespace WindowsMedia
             this.isFullScreen_ = true;
         }
 
-        private void FulllScreenOff()
+        private void FullScreenOff()
         {
             this.ShowTitleBar = true;
             this.IgnoreTaskbarOnMaximize = false;
@@ -344,7 +344,7 @@ namespace WindowsMedia
             if (this.isFullScreen_ == false && e.ClickCount == 2)
                 this.FullScreenOn();
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
-                this.FulllScreenOff();
+                this.FullScreenOff();
         }
 
         private void EventClicLectureImage(object sender, MouseButtonEventArgs e)
@@ -352,7 +352,7 @@ namespace WindowsMedia
             if (this.isFullScreen_ == false && e.ClickCount == 2)
                 this.FullScreenOn();
             else if (this.isFullScreen_ == true && e.ClickCount == 2)
-                this.FulllScreenOff();
+                this.FullScreenOff();
         }
 
         // Gestion de la modification de la MainWindow
@@ -434,7 +434,7 @@ namespace WindowsMedia
 
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (MainBox.SelectedItems.Count > 0)
+            if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
             {
                 PlaylistBox.Items.Clear();
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
@@ -453,9 +453,10 @@ namespace WindowsMedia
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            PlaylistBox.Items.Clear();
-            if (SecondBox.SelectedItems.Count > 0)
+            if (SecondBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
             {
+                PlaylistBox.Items.Clear();
+
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
@@ -607,7 +608,7 @@ namespace WindowsMedia
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            if (e.ChangedButton == MouseButton.Left && WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
             {
                 switch (this.clickStyle_)
                 {
