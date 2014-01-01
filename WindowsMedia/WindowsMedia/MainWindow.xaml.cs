@@ -702,7 +702,7 @@ namespace WindowsMedia
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (PlaylistBox.SelectedItems.Count > 0)
+            if (e.ChangedButton == MouseButton.Left && PlaylistBox.SelectedItems.Count > 0)
             {
                 MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
                 this.source_ = item.Path;
