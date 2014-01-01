@@ -19,7 +19,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="208*" MaxWidth="350"/>
                 <ColumnDefinition Width="176*"/>
-                <ColumnDefinition Width="135*" MaxWidth="150"/>
+                <ColumnDefinition Width="170*" MaxWidth="170"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="36*" MaxHeight="36"/>
@@ -61,26 +61,26 @@
             </Grid>
             <Grid x:Name="GirdPlaylist" Grid.Column="2" Margin="0" Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100*" MinHeight="100"/>
+                    <RowDefinition Height="76*" MinHeight="76" MaxHeight="76"/>
                     <RowDefinition Height="343*"/>
                     <RowDefinition Height="23*"/>
                 </Grid.RowDefinitions>
                 <ListBox x:Name="PlaylistBox" Background="#FF2088FF" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource PlaylistTemplate}" Grid.Row="1" MouseDoubleClick="PlaylistBox_MouseDoubleClick" MouseRightButtonUp="PlaylistBox_MouseRightButtonUp"/>
                 <Grid x:Name="GridTopPlaylist" Margin="0" Background="#FF686868">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="16*"/>
                         <RowDefinition Height="16*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="13*"/>
                         <ColumnDefinition Width="17*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.RowSpan="2" Name="PlayingItemImage"/>
-                    <TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
-                    <TextBlock Name="PlayingItemArtist" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
+                    <Image Grid.RowSpan="2" Name="PlayingItemImage" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2"/>
+                    <TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="85" Foreground="White" Margin="4,0,0,0"/>
+                    <TextBlock Name="PlayingItemArtist" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Foreground="White" Margin="4,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Grid>
                 <TextBox x:Name="CountElements" Margin="0,0.4,59.4,-4" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
-                <TextBox x:Name="DurationBox" HorizontalAlignment="Left" TextWrapping="Wrap" Width="62" Margin="88,0.4,0,-4" Grid.Row="2" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right"/>
+                <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="88,0.4,0,-4" Grid.Row="2" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
