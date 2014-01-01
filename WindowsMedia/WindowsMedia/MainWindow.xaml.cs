@@ -100,7 +100,7 @@ namespace WindowsMedia
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
-            var watch = Stopwatch.StartNew();
+            this.currentIndexLecture_ = -1;
 
             lib_ = new Library();
             lib_.GenerateLibrary();
@@ -133,7 +133,7 @@ namespace WindowsMedia
             {
                 if (PlaylistBox.Items.Count > 0 && this.state_ != State.PAUSE)
                 {
-                    MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
+                    MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.source_ = item.Path;
                     this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
                     this.PlayingItemImage.Source = item.Image;
@@ -148,10 +148,9 @@ namespace WindowsMedia
                     else
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
-                if (MediaPlayer.Source != null)
+                if (/*MediaPlayer.Source != null*/this.source_ != null)
                 {
                     brush = createBrush("assets/icon-pause-barre.png");
-                    this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                     this.state_ = State.PLAY;
                     this.MediaPlayer.Play();
                     this.NomVideo.Width = 150;
@@ -248,12 +247,11 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
-                if (PlaylistBox.SelectedIndex == 0)
-                    PlaylistBox.SelectedIndex = PlaylistBox.Items.Count - 1;
+                if (currentIndexLecture_ == 0)
+                    currentIndexLecture_ = PlaylistBox.Items.Count - 1;
                 else
-                    PlaylistBox.SelectedIndex -= 1;
+                    currentIndexLecture_ -= 1;
 
-                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -265,12 +263,11 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
-                if (PlaylistBox.SelectedIndex == (PlaylistBox.Items.Count - 1))
-                    PlaylistBox.SelectedIndex = 0;
+                if (currentIndexLecture_ == (PlaylistBox.Items.Count - 1))
+                    currentIndexLecture_ = 0;
                 else
-                    PlaylistBox.SelectedIndex += 1;
+                    currentIndexLecture_ += 1;
 
-                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
                 this.source_ = null;
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
@@ -395,14 +392,13 @@ namespace WindowsMedia
         {
             this.ButtonStop_Click(sender, e);
 
-            if (PlaylistBox.SelectedIndex < (PlaylistBox.Items.Count - 1))
+            if (currentIndexLecture_ < (PlaylistBox.Items.Count - 1))
                 ForwardButtonMediaElement(sender, e);
             else if (isRepeat_)
                 ForwardButtonMediaElement(sender, e);
             else
             {
-                PlaylistBox.SelectedIndex = 0;
-                this.currentIndexLecture_ = PlaylistBox.SelectedIndex;
+                currentIndexLecture_ = 0;
                 this.source_ = null;
                 this.state_ = State.STOP;
             }
@@ -437,10 +433,10 @@ namespace WindowsMedia
             if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
             {
                 PlaylistBox.Items.Clear();
+                currentIndexLecture_ = 0;
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
-                PlaylistBox.SelectedIndex = 0;
                 this.state_ = State.STOP;
                 PlaylistBox_SourceUpdated();
                 ButtonPlay_Click(sender, e);
@@ -460,7 +456,7 @@ namespace WindowsMedia
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
-                PlaylistBox.SelectedIndex = SecondBox.SelectedIndex;
+                currentIndexLecture_ = SecondBox.SelectedIndex;
                 this.state_ = State.STOP;
                 PlaylistBox_SourceUpdated();
                 ButtonPlay_Click(sender, e);
@@ -619,7 +615,7 @@ namespace WindowsMedia
                             var items = WrapBox.ItemsSource;
                             foreach (var title in items)
                                 PlaylistBox.Items.Add(title);
-                            PlaylistBox.SelectedIndex = WrapBox.SelectedIndex;
+                            currentIndexLecture_ = WrapBox.SelectedIndex;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
@@ -631,7 +627,7 @@ namespace WindowsMedia
                         {
                             PlaylistBox.Items.Clear();
                             PlaylistBox.Items.Add(WrapBox.SelectedItem);
-                            PlaylistBox.SelectedIndex = 0;
+                            currentIndexLecture_ = 0;
                             this.state_ = State.STOP;
                             MediaPlayer.Stop();
                             ButtonSwitch_Click(sender, e);
@@ -669,11 +665,10 @@ namespace WindowsMedia
         private void SecondBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (PlaylistBox.Items.Count <= 0)
-                PlaylistBox.SelectedIndex = 0;
+                currentIndexLecture_ = 0;
             if (SecondBox.SelectedItems.Count > 0)
                 PlaylistBox.Items.Add(SecondBox.SelectedItem);
             PlaylistBox_SourceUpdated();
-
         }
 
         private void MainBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -681,7 +676,10 @@ namespace WindowsMedia
             if (MainBox.SelectedItems.Count > 0)
             {
                 if (PlaylistBox.Items.Count <= 0)
-                    PlaylistBox.SelectedIndex = 0;
+                {
+                    //PlaylistBox.SelectedIndex = 0;
+                    currentIndexLecture_ = 0;
+                }
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach(var title in items)
                     PlaylistBox.Items.Add(title);
@@ -692,7 +690,7 @@ namespace WindowsMedia
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (PlaylistBox.Items.Count <= 0)
-                PlaylistBox.SelectedIndex = 0;
+                currentIndexLecture_ = 0;
             if (clickStyle_ == ClickStyle.IMAGE)
                 PlaylistBox.Items.Add(WrapBox.SelectedItem);
             else if (clickStyle_ == ClickStyle.VIDEO)
@@ -704,7 +702,8 @@ namespace WindowsMedia
         {
             if (e.ChangedButton == MouseButton.Left && PlaylistBox.SelectedItems.Count > 0)
             {
-                MediaItem item = (MediaItem)PlaylistBox.SelectedItem;
+                currentIndexLecture_ = PlaylistBox.SelectedIndex;
+                MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                 this.source_ = item.Path;
                 this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
                 this.state_ = State.STOP;   
@@ -722,21 +721,21 @@ namespace WindowsMedia
 
         private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (PlaylistBox.Items.Count > 0)
+            if (PlaylistBox.SelectedIndex > -1 && PlaylistBox.Items.Count > 0)
             {
-                int current_index = PlaylistBox.SelectedIndex;
-
-                if (current_index == currentIndexLecture_) // si on delete le media en lecture
+                if (PlaylistBox.SelectedIndex == currentIndexLecture_) // si on delete le media en lecture
                 {
+                    if (PlaylistBox.SelectedIndex == PlaylistBox.Items.Count - 1) // et si c'est le dernier
+                        currentIndexLecture_ -= 1;
                     ButtonStop_Click(sender, e);
-
+                    this.source_ = null;
                 }
+                else if (PlaylistBox.SelectedIndex < currentIndexLecture_ && PlaylistBox.SelectedIndex < PlaylistBox.Items.Count)
+                    currentIndexLecture_ -= 1;
 
-                if (current_index == PlaylistBox.Items.Count - 1)
-                    current_index -= 1;
-                PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
-                if (PlaylistBox.Items.Count > 0)
-                    PlaylistBox.SelectedIndex = current_index;
+                if (PlaylistBox.SelectedIndex < PlaylistBox.Items.Count)
+                    PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
+
                 PlaylistBox_SourceUpdated();
             }
         }
