@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
@@ -47,12 +48,17 @@ namespace WindowsMedia.classes
             Path = file;
             Artist = tags.Tag.FirstPerformer;
             Album = tags.Tag.Album;
-            Genre = tags.Tag.FirstGenre;
+            if (tags.Tag.FirstGenre != null)
+                Genre = tags.Tag.FirstGenre;
+            else
+                Genre = "Inconnu";
             Year = tags.Tag.Year;
             TrackNumber = tags.Tag.Track;
             Title = tags.Tag.Title;
             Composer = tags.Tag.FirstComposer;
             Duration = tags.Properties.Duration;
+            Type = ClickStyle.MUSIC;
+            BrushText = Brushes.White;
         }
     }
 }

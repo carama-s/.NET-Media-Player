@@ -13,8 +13,8 @@
     <ItemsPanelTemplate x:Key="WrapBoxPanelTemplate">
         <WrapPanel Orientation="Horizontal"/>
     </ItemsPanelTemplate>
-    <!-- Template pour ListBoxMain (Music)-->
-	<DataTemplate x:Key="MainMusicTemplate">
+    <!-- Template pour ListBoxMain (Music Album)-->
+	<DataTemplate x:Key="MainAlbumTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
 			<Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
 			<StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
@@ -23,6 +23,26 @@
 			</StackPanel>
 		</StackPanel>
 	</DataTemplate>
+    <!-- Template pour ListBoxMain (Music Artist)-->
+    <DataTemplate x:Key="MainArtistTemplate">
+        <StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+            <Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
+            <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Artist}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Album}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <!-- Template pour ListBoxMain (Music Genre)-->
+    <DataTemplate x:Key="MainGenreTemplate">
+        <StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+            <Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
+            <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Album}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Genre}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
     <!-- Template pour ListBoxWrap (Video Unselected)-->
     <DataTemplate x:Key="WrapVideoTemplateItem">
         <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
@@ -77,7 +97,7 @@
     <!-- Template pour PlaylistBox -->
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
-        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding BrushText}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
@@ -34,15 +37,15 @@ namespace WindowsMedia.classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            String nb = value.ToString();
-            return String.Format("{0:d2} {1:d2}", nb, "éléments");
+            var nb = (Int32)value;
+            return String.Format("{0:d2} {1:d2}", nb.ToString(), "éléments");
         }
 
         public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
         {
             String str = (String)value;
             String[] result = str.Split(new string[] { " " }, StringSplitOptions.None);
-            
+
             return result[0];
         }
     }
@@ -51,6 +54,8 @@ namespace WindowsMedia.classes
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
 
+        public Brush BrushText { get; set; }
+        public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }
         public string Path { get; protected set; }

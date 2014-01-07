@@ -19,14 +19,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="208*" MaxWidth="350"/>
                 <ColumnDefinition Width="176*"/>
-                <ColumnDefinition Width="135*" MaxWidth="150"/>
+                <ColumnDefinition Width="170*" MaxWidth="170"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="36*" MaxHeight="36"/>
                 <RowDefinition Height="225*"/>
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainMusicTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
+            <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainAlbumTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
             <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
@@ -36,19 +36,19 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                     <Button x:Name="DownloadButton" Content="Button" Style="{DynamicResource SimpleButton}" Background = "#FF181515" Margin="293.569,4.734,118.464,6.5" Height="24.766" Click="DownLoadYoutubeVideo"/>
-                </Grid>             
-                <Menu IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
-                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20">
+                </Grid>
+                <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
+                    <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
                         <MenuItem.OpacityMask>
-                            <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
+                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
                         </MenuItem.OpacityMask>
                         <MenuItem.Background>
-                            <ImageBrush ImageSource="assets/menu-icon-blanc.png"/>
+                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
                         </MenuItem.Background>
-                        <MenuItem Header="Ouvrir..." Click="PlayItem"/>
-                        <MenuItem Header="Importer..." Click="OpenFile"/>
-                        <MenuItem Header="Options"/>
-                        <MenuItem Header="Quitter"/>
+                        <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
+                        <MenuItem InputGestureText="Ctrl+I" Style="{DynamicResource MenuItemStyle}" Header="Importer..." Click="OpenFile"/>
+                        <MenuItem Style="{DynamicResource MenuItemStyle}" Header="Options"/>
+                        <MenuItem InputGestureText="Alt+F4" Style="{DynamicResource MenuItemStyle}" Header="Quitter"/>
                     </MenuItem>
                 </Menu>
                 <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="114" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" BorderThickness="0" VerticalAlignment="Center" Style="{DynamicResource ComboBoxMediaStyle}">
@@ -58,32 +58,34 @@
                     <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="114"/>
 
                 </ComboBox>
-                </Grid>
+            </Grid>
             <Grid x:Name="GirdPlaylist" Grid.Column="2" Margin="0" Grid.Row="1">
-            	<Grid.RowDefinitions>
-            		<RowDefinition Height="100*" MinHeight="100"/>
-            		<RowDefinition Height="343*"/>
-            		<RowDefinition Height="50*"/>
-            	</Grid.RowDefinitions>
-            	<ListBox x:Name="PlaylistBox" Background="#FF2088FF" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource PlaylistTemplate}" Grid.Row="1" MouseDoubleClick="PlaylistBox_MouseDoubleClick"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="76*" MinHeight="76" MaxHeight="76"/>
+                    <RowDefinition Height="343*"/>
+                    <RowDefinition Height="23*"/>
+                </Grid.RowDefinitions>
+                <ListBox x:Name="PlaylistBox" Background="#FF2088FF" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource PlaylistTemplate}" Grid.Row="1" MouseDoubleClick="PlaylistBox_MouseDoubleClick" MouseRightButtonUp="PlaylistBox_MouseRightButtonUp"/>
                 <Grid x:Name="GridTopPlaylist" Margin="0" Background="#FF686868">
-                	<Grid.RowDefinitions>
-                		<RowDefinition Height="9*"/>
-                		<RowDefinition Height="16*"/>
-                	</Grid.RowDefinitions>
-                	<Grid.ColumnDefinitions>
-                		<ColumnDefinition Width="13*"/>
-                		<ColumnDefinition Width="17*"/>
-                	</Grid.ColumnDefinitions>
-                	<Image Grid.RowSpan="2" Source="{Binding SelectedItem.Image, ElementName=PlaylistBox}"/>
-                	<TextBlock Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="36" Width="85" Foreground="White"/>
-                    <TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedItem.Artist, ElementName=PlaylistBox}" VerticalAlignment="Top" Height="64" Width="85" Grid.Column="1" Foreground="White"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="17*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.RowSpan="2" Name="PlayingItemImage" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2"/>
+                    <TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="85" Foreground="White" Margin="4,0,0,0"/>
+                    <TextBlock Name="PlayingItemArtist" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Foreground="White" Margin="4,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Grid>
-                <TextBox x:Name="CountElements" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Items.Count, ElementName=PlaylistBox, Mode=OneWay, Converter={StaticResource nbConverter}}"/>
+                <TextBox x:Name="CountElements" Margin="0,0.4,59.4,-4" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="88,0.4,0,-4" Grid.Row="2" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
             <MediaElement x:Name="MediaPlayer" MouseDown="EventClicMediaElement" MediaEnded="EventEndMedia" MouseMove="EventMouseMove"/>
+            <Image Name="LectureMusicImage" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160" Height="160" MouseDown="EventClicLectureImage"/>
         </Grid>
         <Grid x:Name="GridControls" VerticalAlignment="Bottom" Margin="0" Height="70">
             <Slider x:Name="SliderTime" VerticalAlignment="Top" Margin="70,5,64.6,0" ValueChanged="SliderTime_ValueChanged" MouseUp="SliderTime_MouseUp"/>
