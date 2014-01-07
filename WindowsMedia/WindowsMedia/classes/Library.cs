@@ -121,11 +121,8 @@ namespace WindowsMedia.classes
         public List<MediaItem> Medias { get; private set; }
         public List<Playlist> Playlists { get; private set; }
         public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-        public static String[] MusicExtensions = { ".mp3", ".flac" };
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-        public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
         public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
         public static String[] PlaylistExtensions = { ".m3u" };
 
@@ -136,30 +133,13 @@ namespace WindowsMedia.classes
         }
 
 
-        public void GenerateMusic(object param)
+        public void GenerateMedia(object param)
         {
             var pars = (Tuple<string, ManualResetEvent>)param;
-            var media = new MusicTitle(pars.Item1);
-            lock (Medias)
-                Medias.Add(media);
-            pars.Item2.Set();
-        }
-
-        public void GenerateVideo(object param)
-        {
-            var pars = (Tuple<string, ManualResetEvent>)param;
-            var media = new MovieFile(pars.Item1);
-            lock (Medias)
-                Medias.Add(media);
-            pars.Item2.Set();
-        }
-
-        public void GenerateImage(object param)
-        {
-            var pars = (Tuple<string, ManualResetEvent>)param;
-            var media = new ImageFile(pars.Item1);
-            lock (Medias)
-                Medias.Add(media);
+            var media = MediaItem.Create(pars.Item1);
+            if (media != null)
+                lock (Medias)
+                    Medias.Add(media);
             pars.Item2.Set();
         }
 
@@ -179,10 +159,11 @@ namespace WindowsMedia.classes
             Playlists.Clear();
             var paths = new List<string>();
             var handlers = new List<ManualResetEvent>();
+            var ptr = new MtPtr(GenerateMedia);
             var tmps = new List<Tuple<String, String[], MtPtr>> {
-                Tuple.Create(MusicPath, MusicExtensions, new MtPtr(GenerateMusic)),
-                Tuple.Create(VideoPath, VideoExtensions, new MtPtr(GenerateVideo)),
-                Tuple.Create(ImagePath, ImageExtensions, new MtPtr(GenerateImage)),
+                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr),
+                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr),
+                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr),
                 Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist))
             };
             foreach (var tmp in tmps)

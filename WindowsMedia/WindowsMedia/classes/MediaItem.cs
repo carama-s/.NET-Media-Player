@@ -53,6 +53,9 @@ namespace WindowsMedia.classes
     abstract public class MediaItem
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
+        public static String[] MusicExtensions = { ".mp3", ".flac" };
+        public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
+        public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
 
         public Brush BrushText { get; set; }
         public ClickStyle Type { get; protected set; }
@@ -71,5 +74,25 @@ namespace WindowsMedia.classes
         }
 
         abstract protected BitmapImage GetImage();
+
+        static public MediaItem Create(String path)
+        {
+            if (MusicExtensions.Contains(System.IO.Path.GetExtension(path)))
+            {
+                return new MusicTitle(path);
+            }
+            else if (VideoExtensions.Contains(System.IO.Path.GetExtension(path)))
+            {
+                return new MovieFile(path);
+            }
+            else if (ImageExtensions.Contains(System.IO.Path.GetExtension(path)))
+            {
+                return new ImageFile(path);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

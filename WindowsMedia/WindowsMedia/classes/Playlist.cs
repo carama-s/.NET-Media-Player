@@ -53,18 +53,10 @@ namespace WindowsMedia.classes
             {
                 if (line.Length > 0 && line[0] != '#')
                 {
-                    if (Library.MusicExtensions.Contains(Path.GetExtension(line)))
-                    {
-                        Medias.Add(new MusicTitle(line));
-                    }
-                    else if (Library.VideoExtensions.Contains(Path.GetExtension(line)))
-                    {
-                        Medias.Add(new MovieFile(line));
-                    }
-                    else if (Library.ImageExtensions.Contains(Path.GetExtension(line)))
-                    {
-                        Medias.Add(new ImageFile(line));
-                    }
+                    var media = MediaItem.Create(line);
+
+                    if (media != null)
+                        Medias.Add(media);
                 }
             }
             file.Close();
