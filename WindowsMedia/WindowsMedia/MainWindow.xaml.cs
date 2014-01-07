@@ -248,7 +248,15 @@ namespace WindowsMedia
             if (PlaylistBox.Items.Count > 0)
             {
                 if (currentIndexLecture_ == 0)
+                {
+                    var obj = (MediaItem)PlaylistBox.Items[0];
+
+                    obj.BrushText = Brushes.White;
                     currentIndexLecture_ = PlaylistBox.Items.Count - 1;
+
+                    obj = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
+                    obj.BrushText = Brushes.Red;
+                }
                 else
                     currentIndexLecture_ -= 1;
 

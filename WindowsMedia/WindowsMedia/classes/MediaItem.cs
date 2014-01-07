@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
@@ -53,6 +54,7 @@ namespace WindowsMedia.classes
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
 
+        public Brush BrushText { get; set; }
         public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }

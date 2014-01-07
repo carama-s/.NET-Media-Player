@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
@@ -57,6 +58,7 @@ namespace WindowsMedia.classes
             Composer = tags.Tag.FirstComposer;
             Duration = tags.Properties.Duration;
             Type = ClickStyle.MUSIC;
+            BrushText = Brushes.White;
         }
     }
 }
