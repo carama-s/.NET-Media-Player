@@ -182,7 +182,10 @@ namespace WindowsMedia.classes
                         }
                     }
                 }
-                catch (DirectoryNotFoundException) {}
+                catch (DirectoryNotFoundException)
+                {
+                    Directory.CreateDirectory(tmp.Item1);
+                }
             }
             foreach (var handler in handlers)
                 handler.WaitOne();
