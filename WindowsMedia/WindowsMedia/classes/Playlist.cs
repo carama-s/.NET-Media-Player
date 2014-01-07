@@ -8,24 +8,27 @@ using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
-    [Serializable]
     public class Playlist
     {
         public List<MediaItem> Medias { get; private set; }
+        public String Name { get; set; }
 
         public Playlist()
         {
+            Name = "";
             Medias = new List<MediaItem>();
         }
 
         public Playlist(String path)
         {
+            Name = Path.GetFileNameWithoutExtension(path);
             Medias = new List<MediaItem>();
             Deserialize(path);
         }
 
         public Playlist(List<MediaItem> medias)
         {
+            Name = "";
             Medias = new List<MediaItem>(medias);
         }
 
