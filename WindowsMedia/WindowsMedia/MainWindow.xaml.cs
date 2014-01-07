@@ -56,7 +56,7 @@ namespace WindowsMedia
         public Library          lib_;
 
         private int currentIndexLecture_;
- 
+
  
         public MainWindow()
         {
@@ -144,31 +144,31 @@ namespace WindowsMedia
                     {
                         this.LectureMusicImage.Source = item.Image;
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Visible;
-                }
+                    }
                     else
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
                 if (/*MediaPlayer.Source != null*/this.source_ != null)
                 {
-                brush = createBrush("assets/icon-pause-barre.png");
-                this.state_ = State.PLAY;
-                this.MediaPlayer.Play();
-                this.NomVideo.Width = 150;
-                if (oldValue == -1)
-                {
-                    this.CurrentTime.Text = "00:00:00";
-                    this.SliderTime.Value = 0;
-                }
-                String[] media = this.source_.Split('\\');
-                this.NomVideo.Text = media[media.Length - 1] + "     ";
-                this.timer_text.Start();
-                var tags = TagLib.File.Create(this.source_);
-                this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                this.duree_ = tags.Properties.Duration;
-                this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
+                    brush = createBrush("assets/icon-pause-barre.png");
+                    this.state_ = State.PLAY;
+                    this.MediaPlayer.Play();
+                    this.NomVideo.Width = 150;
+                    if (oldValue == -1)
+                    {
+                        this.CurrentTime.Text = "00:00:00";
+                        this.SliderTime.Value = 0;
+                    }
+                    String[] media = this.source_.Split('\\');
+                    this.NomVideo.Text = media[media.Length - 1] + "     ";
+                    this.timer_text.Start();
+                    var tags = TagLib.File.Create(this.source_);
+                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
+                    this.duree_ = tags.Properties.Duration;
+                    this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
-                this.TotalTime.Text = this.duree_.ToString();
-                this.timer_Slide.Start();
+                    this.TotalTime.Text = this.duree_.ToString();
+                    this.timer_Slide.Start();
 
             }
                 else
@@ -403,7 +403,7 @@ namespace WindowsMedia
                 currentIndexLecture_ = 0;
                 this.source_ = null;
                 this.state_ = State.STOP;
-        }
+            }
 
         }
 
@@ -433,21 +433,21 @@ namespace WindowsMedia
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
-                        {
+            {
                 PlaylistBox.Items.Clear();
                 currentIndexLecture_ = 0;
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
-                            this.state_ = State.STOP;
+                this.state_ = State.STOP;
                 PlaylistBox_SourceUpdated();
-                            ButtonPlay_Click(sender, e);
+                ButtonPlay_Click(sender, e);
             }
         }
 
         private void SecondBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            }
+        }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -602,7 +602,7 @@ namespace WindowsMedia
 
         private void WrapBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                        }
+        }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -720,7 +720,43 @@ namespace WindowsMedia
             this.YoutubeDownload.Text = "Entrez votre URL...";
 
         }
-        
+
+        private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (PlaylistBox.SelectedIndex > -1 && PlaylistBox.Items.Count > 0)
+            {
+                if (PlaylistBox.SelectedIndex == currentIndexLecture_) // si on delete le media en lecture
+                {
+                    if (PlaylistBox.SelectedIndex == PlaylistBox.Items.Count - 1) // et si c'est le dernier
+                        currentIndexLecture_ -= 1;
+                    ButtonStop_Click(sender, e);
+                    this.source_ = null;
+                }
+                else if (PlaylistBox.SelectedIndex < currentIndexLecture_ && PlaylistBox.SelectedIndex < PlaylistBox.Items.Count)
+                    currentIndexLecture_ -= 1;
+
+                if (PlaylistBox.SelectedIndex < PlaylistBox.Items.Count)
+                    PlaylistBox.Items.RemoveAt(PlaylistBox.SelectedIndex);
+
+                PlaylistBox_SourceUpdated();
+            }
+        }
+
+        private void PlaylistBox_SourceUpdated()
+        {
+            var list = PlaylistBox.Items;
+            TimeSpan total = new TimeSpan();
+            foreach (var item in list)
+            {
+                var temp = (MediaItem)item;
+                total += temp.Duration;
+            }
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+        }
+
+        private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-}
 }
