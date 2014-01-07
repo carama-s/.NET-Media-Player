@@ -97,7 +97,7 @@
     <!-- Template pour PlaylistBox -->
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
-        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding BrushText}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

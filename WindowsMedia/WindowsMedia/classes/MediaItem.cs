@@ -57,7 +57,6 @@ namespace WindowsMedia.classes
         public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
         public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
 
-        public Brush BrushText { get; set; }
         public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }

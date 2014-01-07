@@ -249,13 +249,7 @@ namespace WindowsMedia
             {
                 if (currentIndexLecture_ == 0)
                 {
-                    var obj = (MediaItem)PlaylistBox.Items[0];
-
-                    obj.BrushText = Brushes.White;
                     currentIndexLecture_ = PlaylistBox.Items.Count - 1;
-
-                    obj = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
-                    obj.BrushText = Brushes.Red;
                 }
                 else
                     currentIndexLecture_ -= 1;
@@ -760,6 +754,9 @@ namespace WindowsMedia
             DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
         }
 
-  
+        private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
