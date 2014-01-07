@@ -31,11 +31,9 @@
             <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
-                    <TextBox x:Name="YoutubeDownload" Foreground="White" Height="24.5" HorizontalAlignment="Center" Margin="134.2,5,173.4,6.5" VerticalAlignment="Center" Width="146" TextWrapping="Wrap" Text="Entrez un URL" Background="#FF181515"/>
                     <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
-                    <Button x:Name="DownloadButton" Content="Button" Style="{DynamicResource SimpleButton}" Background = "#FF181515" Margin="293.569,4.734,118.464,6.5" Height="24.766" Click="DownLoadYoutubeVideo"/>
                 </Grid>
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">

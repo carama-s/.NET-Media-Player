@@ -713,14 +713,6 @@ namespace WindowsMedia
             }
         }
 
-
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-
-        }
-
         private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (PlaylistBox.SelectedIndex > -1 && PlaylistBox.Items.Count > 0)
