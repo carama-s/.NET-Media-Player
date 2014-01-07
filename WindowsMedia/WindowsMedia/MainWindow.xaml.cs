@@ -430,6 +430,18 @@ namespace WindowsMedia
             }
         }
 
+        void PlaylistBox_SourceUpdated()
+        {
+            var list = PlaylistBox.Items;
+            TimeSpan total = new TimeSpan();
+            foreach (var item in list)
+            {
+                var temp = (MediaItem)item;
+                total += temp.Duration;
+            }
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+        }
+
         private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
@@ -711,16 +723,7 @@ namespace WindowsMedia
                 this.state_ = State.STOP;   
                 ButtonPlay_Click(sender, e);
             }
-        }
-
-
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-
-        }
-        
+        }      
     }
-}
+
 }
