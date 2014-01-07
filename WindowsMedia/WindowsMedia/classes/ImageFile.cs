@@ -24,7 +24,6 @@ namespace WindowsMedia.classes
             Duration = TimeSpan.FromSeconds(0);
             Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
             Type = ClickStyle.IMAGE;
-            BrushText = Brushes.White;
         }
     }
 }
