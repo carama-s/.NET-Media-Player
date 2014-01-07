@@ -119,16 +119,20 @@ namespace WindowsMedia.classes
     {
         public delegate void MtPtr(object pars);
         public List<MediaItem> Medias { get; private set; }
+        public List<Playlist> Playlists { get; private set; }
         public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         public static String[] MusicExtensions = { ".mp3", ".flac" };
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
+        public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
+        public static String[] PlaylistExtensions = { ".m3u" };
 
         public Library()
         {
             Medias = new List<MediaItem>();
+            Playlists = new List<Playlist>();
         }
 
 
@@ -159,30 +163,45 @@ namespace WindowsMedia.classes
             pars.Item2.Set();
         }
 
+        public void GeneratePlaylist(object param)
+        {
+            var pars = (Tuple<string, ManualResetEvent>)param;
+            var playlist = new Playlist(pars.Item1);
+            lock (Playlists)
+                Playlists.Add(playlist);
+            pars.Item2.Set();
+        }
+
 
         public void GenerateLibrary()
         {
             Medias.Clear();
+            Playlists.Clear();
             var paths = new List<string>();
             var handlers = new List<ManualResetEvent>();
             var tmps = new List<Tuple<String, String[], MtPtr>> {
                 Tuple.Create(MusicPath, MusicExtensions, new MtPtr(GenerateMusic)),
                 Tuple.Create(VideoPath, VideoExtensions, new MtPtr(GenerateVideo)),
-                Tuple.Create(ImagePath, ImageExtensions, new MtPtr(GenerateImage))
+                Tuple.Create(ImagePath, ImageExtensions, new MtPtr(GenerateImage)),
+                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist))
             };
             foreach (var tmp in tmps)
             {
-                var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
-                foreach (String file in files)
+                try
                 {
-                    if (!paths.Contains(file))
+                    var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
+                    foreach (String file in files)
                     {
-                        paths.Add(file);
-                        var handler = new ManualResetEvent(false);
-                        ThreadPool.QueueUserWorkItem(tmp.Item3.Invoke, Tuple.Create(file, handler));
-                        handlers.Add(handler);
+                        if (!paths.Contains(file))
+                        {
+                            paths.Add(file);
+                            var handler = new ManualResetEvent(false);
+                            ThreadPool.QueueUserWorkItem(tmp.Item3.Invoke, Tuple.Create(file, handler));
+                            handlers.Add(handler);
+                        }
                     }
                 }
+                catch (DirectoryNotFoundException) {}
             }
             foreach (var handler in handlers)
                 handler.WaitOne();
