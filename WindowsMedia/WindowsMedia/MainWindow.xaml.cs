@@ -677,14 +677,5 @@ namespace WindowsMedia
                 ButtonPlay_Click(sender, e);
             }
         }
-
-
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-
-        }
-        
     }
 }
