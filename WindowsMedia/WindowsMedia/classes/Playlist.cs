@@ -47,9 +47,16 @@ namespace WindowsMedia.classes
             Medias.Remove(media);
         }
 
+        public void SaveToFile()
+        {
+            var file = new StreamWriter(Path.Combine(Library.PlaylistPath, Name + ".m3u"));
+            file.Write(Serialize());
+            file.Close();
+        }
+
         public void Deserialize(String path)
         {
-            StreamReader file = new StreamReader(path);
+            var file = new StreamReader(path);
             String line;
 
             while ((line = file.ReadLine()) != null)
