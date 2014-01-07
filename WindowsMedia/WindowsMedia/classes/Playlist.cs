@@ -8,54 +8,72 @@ using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
-    [Serializable]
     public class Playlist
     {
-        [XmlElement("PlayListName")]
+        public List<MediaItem> Medias { get; private set; }
         public String Name { get; set; }
-        [XmlArray("Elements")]
-        public List<PlaylistElement> List { get; private set;}
 
         public Playlist()
         {
-            this.List = new List<PlaylistElement>();
+            Name = "";
+            Medias = new List<MediaItem>();
         }
 
-        public void AddItem(string name, string path)
+        public Playlist(String path)
         {
-            this.List.Add(new PlaylistElement(name, path));
+            Name = Path.GetFileNameWithoutExtension(path);
+            Medias = new List<MediaItem>();
+            Deserialize(path);
+        }
+
+        public Playlist(List<MediaItem> medias)
+        {
+            Name = "";
+            Medias = new List<MediaItem>(medias);
+        }
+
+        public void AddItem(MediaItem media)
+        {
+            Medias.Add(media);
         }
 
         public void RemoveItem(int index)
         {
-            this.List.RemoveAt(index);
+            Medias.RemoveAt(index);
         }
 
-        public static Playlist DeserializePlaylist(string path)
+        public void RemoveItem(MediaItem media)
         {
-            try
+            Medias.Remove(media);
+        }
+
+        public void Deserialize(String path)
+        {
+            StreamReader file = new StreamReader(path);
+            String line;
+
+            while ((line = file.ReadLine()) != null)
             {
-                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                if (line.Length > 0 && line[0] != '#')
                 {
-                    XmlSerializer xml = new XmlSerializer(typeof(Playlist));
-                    return (xml.Deserialize(fs) as Playlist);
+                    var media = MediaItem.Create(line);
+
+                    if (media != null)
+                        Medias.Add(media);
                 }
             }
-            catch (IOException)
-            {
-                return null;
-            }
+            file.Close();
         }
 
-        public static void SerializePlaylist(Playlist list)
+        public String Serialize()
         {
-            string direct = Environment.SpecialFolder.Personal +  "\\Playlist";
-            Directory.CreateDirectory(direct);
-            using(var fs = new FileStream(direct + "\\" + list.Name + ".xml",FileMode.OpenOrCreate, FileAccess.Write))
+            var output = "";
+
+            foreach (var media in Medias)
             {
-                XmlSerializer xml = new XmlSerializer(typeof(Playlist));
-                xml.Serialize(fs, list);
+                output += media.Path + '\n';
             }
+            return output;
         }
     }
 }

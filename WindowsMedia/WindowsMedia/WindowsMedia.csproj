@@ -117,14 +117,11 @@
     </Compile>
     <Compile Include="classes\DelegateSourceClass.cs" />
     <Compile Include="classes\ImageFile.cs" />
-    <Compile Include="classes\ImageLibrary.cs" />
     <Compile Include="classes\MediaItem.cs" />
     <Compile Include="classes\MovieFile.cs" />
-    <Compile Include="classes\MovieLibrary.cs" />
-    <Compile Include="classes\MusicLibrary.cs" />
+    <Compile Include="classes\Library.cs" />
     <Compile Include="classes\MusicTitle.cs" />
     <Compile Include="classes\Playlist.cs" />
-    <Compile Include="classes\PlaylistElement.cs" />
     <Compile Include="classes\WrapBoxContainerSelector.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -197,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\menu-icon-blanc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\menu-icon-bleu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
