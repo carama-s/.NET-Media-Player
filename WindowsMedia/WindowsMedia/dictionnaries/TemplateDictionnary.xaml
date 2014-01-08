@@ -93,6 +93,20 @@
 			<Label Content="{Binding TrackNumber}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
 		</Grid>
 	</DataTemplate>
+    <!-- Temlate pour ListBoxSecond (Selection)-->
+    <DataTemplate x:Key="SecondSelectionTemplate">
+        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*" MaxWidth="71" MinWidth="71"/>
+                <ColumnDefinition Width="236*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+            <Label Content="{Binding Index}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
     <!-- Template pour ComboBoxSelectMedia-->
 	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
 		<Grid Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -108,7 +122,6 @@
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding MessageColor, Converter={StaticResource colorToBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
-
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

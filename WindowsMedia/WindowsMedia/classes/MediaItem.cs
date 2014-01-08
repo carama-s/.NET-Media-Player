@@ -53,8 +53,6 @@ namespace WindowsMedia.classes
 
     public class ColorToBrushConverter : IValueConverter
     {
-        #region IValueConverter Members
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null) return Brushes.Black;
@@ -67,8 +65,6 @@ namespace WindowsMedia.classes
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 
     abstract public class MediaItem : INotifyPropertyChanged, ICloneable
@@ -90,6 +86,7 @@ namespace WindowsMedia.classes
                     PropertyChanged(this, new PropertyChangedEventArgs("MessageColor"));
             }
         }
+        public int Index { get; protected set; }
         public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }
@@ -126,6 +123,12 @@ namespace WindowsMedia.classes
                 return null;
             }
         }
+
+        public void SetIndex(int index)
+        {
+            this.Index = index;
+        }
+
         abstract public Object Clone();
     }
 }
