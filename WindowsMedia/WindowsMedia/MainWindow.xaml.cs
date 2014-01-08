@@ -136,9 +136,6 @@ namespace WindowsMedia
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.source_ = item.Path;
                     this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
-                    //this.PlayingItemImage.Source = item.Image;
-                    //this.PlayingItemTitle.Text = item.Title;
-                    //this.PlayingItemArtist.Text = item.Artist;
 
                     if (item.Type == ClickStyle.MUSIC)
                     {
@@ -148,7 +145,7 @@ namespace WindowsMedia
                     else
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
-                if (/*MediaPlayer.Source != null*/this.source_ != null)
+                if (this.source_ != null)
                 {
                     brush = createBrush("assets/icon-pause-barre.png");
                     this.state_ = State.PLAY;
@@ -498,7 +495,7 @@ namespace WindowsMedia
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title.Clone());
                 if (WasEmpty)
-        {
+                {
                     ResetIndexLecture();
                     SelectIndexLecture(0);
                 }
@@ -664,7 +661,6 @@ namespace WindowsMedia
 
         private void OpenFile(object sender, RoutedEventArgs e)
         {
-  
             System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();            
             dlg.ShowDialog();
             string filename = dlg.SelectedPath;
@@ -697,13 +693,13 @@ namespace WindowsMedia
                     default:
                         break;
                 }
-                            this.state_ = State.STOP;
-                            MediaPlayer.Stop();
-                            ButtonSwitch_Click(sender, e);
-                            ButtonPlay_Click(sender, e);
-                            PlaylistBox_SourceUpdated();
-                        }
-                }
+                this.state_ = State.STOP;
+                MediaPlayer.Stop();
+                ButtonSwitch_Click(sender, e);
+                ButtonPlay_Click(sender, e);
+                PlaylistBox_SourceUpdated();
+            }
+        }
 
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -742,12 +738,6 @@ namespace WindowsMedia
                this.timer_3.Stop();
         }
 
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-        }
-
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left && PlaylistBox.SelectedItems.Count > 0)
@@ -761,14 +751,6 @@ namespace WindowsMedia
                 this.state_ = State.STOP;   
                 ButtonPlay_Click(sender, e);
             }
-        }
-
-
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-
         }
 
         private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
