@@ -58,6 +58,28 @@ namespace WindowsMedia.classes
             Composer = tags.Tag.FirstComposer;
             Duration = tags.Properties.Duration;
             Type = ClickStyle.MUSIC;
+            MessageColor = Colors.White;
+        }
+
+        public MusicTitle()
+        {
+        }
+
+        public override Object Clone()
+        {
+            return new MusicTitle { Path = Path,
+                                    Artist = Artist,
+                                    Album = Album,
+                                    Genre = Genre,
+                                    Year = Year,
+                                    TrackNumber = TrackNumber,
+                                    Title = Title,
+                                    Composer = Composer,
+                                    Duration = Duration,
+                                    Type = Type,
+                                    MessageColor = Colors.White
+            };
+
         }
     }
 }

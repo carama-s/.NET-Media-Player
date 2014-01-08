@@ -3,6 +3,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:WindowsMedia.classes" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" mc:Ignorable="d">
 	<!-- Resource dictionary entries should be defined here. -->
+
+    <local:ColorToBrushConverter x:Key="colorToBrushConverter"/>
+
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
     <!-- Converter pour NbElementsListeLecture (nb to nb + éléments) -->
@@ -97,7 +100,8 @@
     <!-- Template pour PlaylistBox -->
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
-            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding MessageColor, Converter={StaticResource colorToBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
