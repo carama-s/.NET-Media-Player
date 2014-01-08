@@ -60,7 +60,6 @@ namespace WindowsMedia.classes
             if (value == null) return Brushes.Black;
 
             Color color = (Color)value;
-            Console.Out.WriteLine("CONVERT");
             return new SolidColorBrush(color);
         }
 

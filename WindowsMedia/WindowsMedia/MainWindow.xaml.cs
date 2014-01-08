@@ -136,9 +136,6 @@ namespace WindowsMedia
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.source_ = item.Path;
                     this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
-                    //this.PlayingItemImage.Source = item.Image;
-                    //this.PlayingItemTitle.Text = item.Title;
-                    //this.PlayingItemArtist.Text = item.Artist;
 
                     if (item.Type == ClickStyle.MUSIC)
                     {
@@ -148,7 +145,7 @@ namespace WindowsMedia
                     else
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
-                if (/*MediaPlayer.Source != null*/this.source_ != null)
+                if (this.source_ != null)
                 {
                     brush = createBrush("assets/icon-pause-barre.png");
                     this.state_ = State.PLAY;
@@ -528,7 +525,7 @@ namespace WindowsMedia
         {
             if (SecondBox.SelectedItems.Count > 0)
                 PlaylistBox.Items.Add(((MediaItem)SecondBox.SelectedItem).Clone());
-            if (PlaylistBox.Items.Count <= 0)
+            if (PlaylistBox.Items.Count > 0)
             {
                 ResetIndexLecture();
                 SelectIndexLecture(0);
@@ -664,7 +661,6 @@ namespace WindowsMedia
 
         private void OpenFile(object sender, RoutedEventArgs e)
         {
-  
             System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();            
             dlg.ShowDialog();
             string filename = dlg.SelectedPath;
@@ -707,6 +703,8 @@ namespace WindowsMedia
 
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (WrapBox.SelectedItems.Count > 0)
+            {
             bool WasEmpty = true;
 
             if (PlaylistBox.Items.Count > 0)
@@ -720,6 +718,7 @@ namespace WindowsMedia
             }
 
             PlaylistBox_SourceUpdated();
+        }
         }
 
         private void timer_tick_Slide(object sender, EventArgs e)
