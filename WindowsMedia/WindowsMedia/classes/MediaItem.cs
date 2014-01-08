@@ -20,7 +20,7 @@ namespace WindowsMedia.classes
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             TimeSpan duration = (TimeSpan)value;
-            return String.Format("{0:d2}:{1:d2}:{2:d2}", duration.Hours, duration.Minutes, duration.Seconds);
+            return String.Format("{0:d2}:{1:d2}:{2:d2}", (int)duration.TotalHours, duration.Minutes, duration.Seconds);
         }
 
         public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)

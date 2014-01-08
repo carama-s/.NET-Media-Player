@@ -792,7 +792,7 @@ namespace WindowsMedia
                 var temp = (MediaItem)item;
                 total += temp.Duration;
             }
-            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", (int)total.TotalHours, total.Minutes, total.Seconds);
         }
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
