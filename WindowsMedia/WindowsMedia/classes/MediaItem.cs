@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -50,11 +51,43 @@ namespace WindowsMedia.classes
         }
     }
 
-    abstract public class MediaItem
+    public class ColorToBrushConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null) return Brushes.Black;
+
+            Color color = (Color)value;
+            Console.Out.WriteLine("CONVERT");
+            return new SolidColorBrush(color);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    abstract public class MediaItem : INotifyPropertyChanged, ICloneable
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
+        
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public Brush BrushText { get; set; }
+        private Color _messageColor;
+        public Color MessageColor {
+            get { return _messageColor; }
+            set
+            {
+                _messageColor = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("MessageColor"));
+            }
+        }
         public ClickStyle Type { get; protected set; }
         public string Artist { get; protected set; }
         public string Title { get; protected set; }
@@ -71,5 +104,6 @@ namespace WindowsMedia.classes
         }
 
         abstract protected BitmapImage GetImage();
+        abstract public Object Clone();
     }
 }

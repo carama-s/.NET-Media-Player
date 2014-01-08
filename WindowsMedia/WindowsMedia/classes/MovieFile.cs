@@ -25,7 +25,21 @@ namespace WindowsMedia.classes
             Duration = tags.Properties.Duration;
             Title = tags.Name.Substring(0,tags.Name.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
             Type = ClickStyle.VIDEO;
-            BrushText = Brushes.White;
+            MessageColor = Colors.White;
+        }
+
+        public MovieFile()
+        {
+        }
+
+        public override Object Clone()
+        {
+            return new MovieFile { Path = Path,
+                                   Artist = Artist,
+                                   Duration = Duration,
+                                   Title = Title,
+                                   Type = Type,
+                                   MessageColor = Colors.White };
         }
     }
 }
