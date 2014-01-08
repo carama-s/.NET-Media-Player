@@ -498,7 +498,7 @@ namespace WindowsMedia
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title.Clone());
                 if (WasEmpty)
-                {
+        {
                     ResetIndexLecture();
                     SelectIndexLecture(0);
                 }
@@ -697,13 +697,13 @@ namespace WindowsMedia
                     default:
                         break;
                 }
-                this.state_ = State.STOP;
-                MediaPlayer.Stop();
-                ButtonSwitch_Click(sender, e);
-                ButtonPlay_Click(sender, e);
-                PlaylistBox_SourceUpdated();
-            }
-        }
+                            this.state_ = State.STOP;
+                            MediaPlayer.Stop();
+                            ButtonSwitch_Click(sender, e);
+                            ButtonPlay_Click(sender, e);
+                            PlaylistBox_SourceUpdated();
+                        }
+                }
 
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -758,9 +758,17 @@ namespace WindowsMedia
                 MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                 this.source_ = item.Path;
                 this.MediaPlayer.Source = new Uri(item.Path, UriKind.RelativeOrAbsolute);
-                this.state_ = State.STOP;
+                this.state_ = State.STOP;   
                 ButtonPlay_Click(sender, e);
             }
+        }
+
+
+        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
+        {
+            this.sourceVideo_ = this.YoutubeDownload.Text;
+            this.YoutubeDownload.Text = "Entrez votre URL...";
+
         }
 
         private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -800,6 +808,19 @@ namespace WindowsMedia
             DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
         }
 
-  
+        private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = PlaylistNameBox.Text;
+            if (name != "" && PlaylistBox.Items.Count > 0 && lib_.Playlists.Find(x => x.Name == name) == null)
+            {
+                Playlist actual = new Playlist();
+                foreach (var item in PlaylistBox.Items)
+                {
+                    actual.AddItem((MediaItem)item);
+                }
+                actual.Name = name;
+                actual.SaveToFile();
+            }
+        }
     }
 }
