@@ -742,12 +742,6 @@ namespace WindowsMedia
                this.timer_3.Stop();
         }
 
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-        }
-
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left && PlaylistBox.SelectedItems.Count > 0)
@@ -761,14 +755,6 @@ namespace WindowsMedia
                 this.state_ = State.STOP;   
                 ButtonPlay_Click(sender, e);
             }
-        }
-
-
-        private void DownLoadYoutubeVideo(object sender, RoutedEventArgs e)
-        {
-            this.sourceVideo_ = this.YoutubeDownload.Text;
-            this.YoutubeDownload.Text = "Entrez votre URL...";
-
         }
 
         private void PlaylistBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
