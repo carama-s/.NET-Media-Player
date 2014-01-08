@@ -469,6 +469,8 @@ namespace WindowsMedia
                 {
                     case (ClickStyle.SELECTION):
                         {
+                            var al = (Playlist)e.AddedItems[0];
+                            SecondBox.ItemsSource = al.Medias;
                             break;
                         }
                     case (ClickStyle.MUSIC):
@@ -485,13 +487,13 @@ namespace WindowsMedia
 
         private void FillPlaylistMainBox()
         {
-            ResetIndexLecture();
-            PlaylistBox.Items.Clear();
-            var items = (List<MusicTitle>)MainBox.SelectedItems[0];
-            foreach (var title in items)
-                PlaylistBox.Items.Add(title);
-            this.state_ = State.STOP;
-            SelectIndexLecture(0);
+                ResetIndexLecture();
+                PlaylistBox.Items.Clear();
+                var items = (List<MusicTitle>)MainBox.SelectedItems[0];
+                foreach (var title in items)
+                    PlaylistBox.Items.Add(title);
+                this.state_ = State.STOP;
+                SelectIndexLecture(0);
             PlaylistBox_SourceUpdated();
         }
 
@@ -525,15 +527,15 @@ namespace WindowsMedia
         }
 
         private void FillPlaylistSecondBox()
-        {
-            ResetIndexLecture();
-            PlaylistBox.Items.Clear();
-            var items = (List<MusicTitle>)MainBox.SelectedItems[0];
-            foreach (var title in items)
-                PlaylistBox.Items.Add(title);
-            SelectIndexLecture(SecondBox.SelectedIndex);
-            this.state_ = State.STOP;
-            PlaylistBox_SourceUpdated();
+            {
+                ResetIndexLecture();
+                PlaylistBox.Items.Clear();
+                var items = (List<MusicTitle>)MainBox.SelectedItems[0];
+                foreach (var title in items)
+                    PlaylistBox.Items.Add(title);
+                SelectIndexLecture(SecondBox.SelectedIndex);
+                this.state_ = State.STOP;
+                PlaylistBox_SourceUpdated();
         }
 
         private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -698,31 +700,31 @@ namespace WindowsMedia
         }
 
         private void FillPlaylistWrapBox()
-        {
-            ResetIndexLecture();
-            PlaylistBox.Items.Clear();
-
-            switch (this.clickStyle_)
             {
-                case (ClickStyle.IMAGE):
-                    {
-                        var items = WrapBox.ItemsSource;
-                        foreach (var title in items)
-                            PlaylistBox.Items.Add(title);
-                        SelectIndexLecture(WrapBox.SelectedIndex);
+                ResetIndexLecture();
+                PlaylistBox.Items.Clear();
+
+                switch (this.clickStyle_)
+                {
+                    case (ClickStyle.IMAGE):
+                        {
+                            var items = WrapBox.ItemsSource;
+                            foreach (var title in items)
+                                PlaylistBox.Items.Add(title);
+                            SelectIndexLecture(WrapBox.SelectedIndex);
+                            break;
+                        }
+                    case (ClickStyle.VIDEO):
+                        {
+                            PlaylistBox.Items.Add(WrapBox.SelectedItem);
+                            SelectIndexLecture(0);
+                            break;
+                        }
+                    default:
                         break;
-                    }
-                case (ClickStyle.VIDEO):
-                    {
-                        PlaylistBox.Items.Add(WrapBox.SelectedItem);
-                        SelectIndexLecture(0);
-                        break;
-                    }
-                default:
-                    break;
-            }
-            this.state_ = State.STOP;
-            MediaPlayer.Stop();
+                }
+                this.state_ = State.STOP;
+                MediaPlayer.Stop();
         }
 
         private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -825,7 +827,7 @@ namespace WindowsMedia
                 var temp = (MediaItem)item;
                 total += temp.Duration;
             }
-            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", (int)total.TotalHours, total.Minutes, total.Seconds);
         }
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
