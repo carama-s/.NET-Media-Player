@@ -525,7 +525,7 @@ namespace WindowsMedia
         {
             if (SecondBox.SelectedItems.Count > 0)
                 PlaylistBox.Items.Add(((MediaItem)SecondBox.SelectedItem).Clone());
-            if (PlaylistBox.Items.Count <= 0)
+            if (PlaylistBox.Items.Count > 0)
             {
                 ResetIndexLecture();
                 SelectIndexLecture(0);
@@ -703,19 +703,22 @@ namespace WindowsMedia
 
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            bool WasEmpty = true;
-
-            if (PlaylistBox.Items.Count > 0)
-                WasEmpty = false;
-            if (clickStyle_ == ClickStyle.IMAGE || clickStyle_ == ClickStyle.VIDEO)
-                PlaylistBox.Items.Add(((MediaItem)WrapBox.SelectedItem).Clone());
-            if (WasEmpty)
+            if (WrapBox.SelectedItems.Count > 0)
             {
-                ResetIndexLecture();
-                SelectIndexLecture(0);
-            }
+                bool WasEmpty = true;
 
-            PlaylistBox_SourceUpdated();
+                if (PlaylistBox.Items.Count > 0)
+                    WasEmpty = false;
+                if (clickStyle_ == ClickStyle.IMAGE || clickStyle_ == ClickStyle.VIDEO)
+                    PlaylistBox.Items.Add(((MediaItem)WrapBox.SelectedItem).Clone());
+                if (WasEmpty)
+                {
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                }
+
+                PlaylistBox_SourceUpdated();
+            }
         }
 
         private void timer_tick_Slide(object sender, EventArgs e)
