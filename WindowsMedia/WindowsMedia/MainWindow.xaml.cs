@@ -450,6 +450,8 @@ namespace WindowsMedia
                 {
                     case (ClickStyle.SELECTION):
                         {
+                            var al = (Playlist)e.AddedItems[0];
+                            SecondBox.ItemsSource = al.Medias;
                             break;
                         }
                     case (ClickStyle.MUSIC):
