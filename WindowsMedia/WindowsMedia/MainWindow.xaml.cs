@@ -748,7 +748,17 @@ namespace WindowsMedia
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string name = PlaylistNameBox.Text;
+            if (name != "" && PlaylistBox.Items.Count > 0 && lib_.Playlists.Find(x => x.Name == name) == null)
+            {
+                Playlist actual = new Playlist();
+                foreach (var item in PlaylistBox.Items)
+                {
+                    actual.AddItem((MediaItem)item);
+                }
+                actual.Name = name;
+                actual.SaveToFile();
+            }
         }
     }
 }
