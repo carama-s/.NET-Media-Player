@@ -36,7 +36,6 @@ namespace WindowsMedia
 
     public partial class MainWindow : MetroWindow
     {
-        private String          sourceVideo_;
         private TimeSpan        duree_;
         private String          source_;
         private State           state_;
@@ -115,6 +114,8 @@ namespace WindowsMedia
                 PlayItem(sender, e);
             else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 OpenFile(sender, e);
+            else if ((e.Key == Key.F5))
+                RefreshLib(sender, e);
         }
 
         private void timer_Text(object sender, EventArgs e)
@@ -131,6 +132,23 @@ namespace WindowsMedia
 
             if ((this.state_ == State.STOP || this.state_ == State.PAUSE))
             {
+                if (PlaylistBox.Items.Count == 0 && this.state_ != State.PAUSE)
+                {
+                    if (clickStyle_ == ClickStyle.MUSIC)
+                    {
+                        if (MainBox.SelectedItems.Count > 0 && SecondBox.SelectedItems.Count <= 0)
+                            FillPlaylistMainBox();
+                        else if (MainBox.SelectedItems.Count > 0 && SecondBox.SelectedItems.Count > 0)
+                            FillPlaylistSecondBox();
+                    }
+                    else if (clickStyle_ == ClickStyle.IMAGE || clickStyle_ == ClickStyle.VIDEO)
+                        if (WrapBox.SelectedItems.Count > 0)
+                        {
+                            FillPlaylistWrapBox();
+                            ButtonSwitch_Click(sender, e);
+                        }
+                }
+
                 if (PlaylistBox.Items.Count > 0 && this.state_ != State.PAUSE)
                 {
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
@@ -145,6 +163,7 @@ namespace WindowsMedia
                     else
                         this.LectureMusicImage.Visibility = System.Windows.Visibility.Hidden;
                 }
+
                 if (this.source_ != null)
                 {
                     brush = createBrush("assets/icon-pause-barre.png");
@@ -466,21 +485,23 @@ namespace WindowsMedia
             }
         }
 
-        private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void FillPlaylistMainBox()
         {
-            if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
-            {
                 ResetIndexLecture();
-
                 PlaylistBox.Items.Clear();
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
                 this.state_ = State.STOP;
-
                 SelectIndexLecture(0);
+            PlaylistBox_SourceUpdated();
+        }
 
-                PlaylistBox_SourceUpdated();
+        private void MainBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
+            {
+                FillPlaylistMainBox();
                 ButtonPlay_Click(sender, e);
             }
         }
@@ -497,7 +518,7 @@ namespace WindowsMedia
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title.Clone());
                 if (WasEmpty)
-        {
+                {
                     ResetIndexLecture();
                     SelectIndexLecture(0);
                 }
@@ -505,20 +526,23 @@ namespace WindowsMedia
             }
         }
 
-        private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (SecondBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
+        private void FillPlaylistSecondBox()
             {
                 ResetIndexLecture();
-
                 PlaylistBox.Items.Clear();
-
                 var items = (List<MusicTitle>)MainBox.SelectedItems[0];
                 foreach (var title in items)
                     PlaylistBox.Items.Add(title);
                 SelectIndexLecture(SecondBox.SelectedIndex);
                 this.state_ = State.STOP;
                 PlaylistBox_SourceUpdated();
+        }
+
+        private void SecondBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SecondBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
+            {
+                FillPlaylistSecondBox();
                 ButtonPlay_Click(sender, e);
             }
         }
@@ -669,9 +693,13 @@ namespace WindowsMedia
             Console.Out.WriteLine(filename);
         }
 
-        private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void RefreshLib(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left && WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            lib_.GenerateLibrary();
+            BoxSelectMedia_SelectionChanged(sender, null);
+        }
+
+        private void FillPlaylistWrapBox()
             {
                 ResetIndexLecture();
                 PlaylistBox.Items.Clear();
@@ -695,32 +723,39 @@ namespace WindowsMedia
                     default:
                         break;
                 }
-                            this.state_ = State.STOP;
-                            MediaPlayer.Stop();
-                            ButtonSwitch_Click(sender, e);
-                            ButtonPlay_Click(sender, e);
-                            PlaylistBox_SourceUpdated();
-                        }
-                }
+                this.state_ = State.STOP;
+                MediaPlayer.Stop();
+        }
+
+        private void WrapBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && WrapBox.SelectedItems.Count > 0 && clickStyle_ != ClickStyle.MUSIC)
+            {
+                FillPlaylistWrapBox();
+                ButtonPlay_Click(sender, e);
+                ButtonSwitch_Click(sender, e);
+                PlaylistBox_SourceUpdated();
+            }
+        }
 
         private void WrapBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (WrapBox.SelectedItems.Count > 0)
             {
-            bool WasEmpty = true;
+                bool WasEmpty = true;
 
-            if (PlaylistBox.Items.Count > 0)
-                WasEmpty = false;
-            if (clickStyle_ == ClickStyle.IMAGE || clickStyle_ == ClickStyle.VIDEO)
-                PlaylistBox.Items.Add(((MediaItem)WrapBox.SelectedItem).Clone());
-            if (WasEmpty)
-            {
-                ResetIndexLecture();
-                SelectIndexLecture(0);
+                if (PlaylistBox.Items.Count > 0)
+                    WasEmpty = false;
+                if (clickStyle_ == ClickStyle.IMAGE || clickStyle_ == ClickStyle.VIDEO)
+                    PlaylistBox.Items.Add(((MediaItem)WrapBox.SelectedItem).Clone());
+                if (WasEmpty)
+                {
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                }
+
+                PlaylistBox_SourceUpdated();
             }
-
-            PlaylistBox_SourceUpdated();
-        }
         }
 
         private void timer_tick_Slide(object sender, EventArgs e)
@@ -792,7 +827,7 @@ namespace WindowsMedia
                 var temp = (MediaItem)item;
                 total += temp.Duration;
             }
-            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", total.Hours, total.Minutes, total.Seconds);
+            DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", (int)total.TotalHours, total.Minutes, total.Seconds);
         }
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
