@@ -68,8 +68,8 @@
         	</Grid.ColumnDefinitions>
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Grid.ColumnSpan="1"/>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="153.6" VerticalAlignment="Top" Width="225.237">
-            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
-            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333"/>
+            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold" Margin="20,30,0,0"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333" Margin="20,10,0,0"/>
             </StackPanel>
         </Grid>
     </DataTemplate>
@@ -83,7 +83,7 @@
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="71*" MaxWidth="102"/>
+				<ColumnDefinition Width="71*" MinWidth="71" MaxWidth="71"/>
 				<ColumnDefinition Width="236*"/>
 			</Grid.ColumnDefinitions>
 			<StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">

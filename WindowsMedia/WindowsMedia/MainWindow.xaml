@@ -35,6 +35,11 @@
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
+                <Grid x:Name="GridSelectionsFilters" Margin="170,0" Visibility="Hidden">
+                    <Button x:Name="ButtonRenommer" Content="Renommer" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23"/>
+                    <Button x:Name="ButtonSupprimer" Content="Supprimer" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonSupprimer_Click"/>
+                    <Button x:Name="ButtonCreer" Content="Ajouter" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23"/>
+                </Grid>
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
                         <MenuItem.OpacityMask>
@@ -180,3 +185,5 @@
         </Grid>
     </Grid>
 </Controls:MetroWindow>
+    
+

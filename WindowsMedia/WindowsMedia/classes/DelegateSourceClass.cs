@@ -14,6 +14,7 @@ namespace WindowsMedia.classes
         public void PlaylistSource(MainWindow win)
         {
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
+            win.GridSelectionsFilters.Visibility = System.Windows.Visibility.Visible;
             win.SecondBox.Visibility = System.Windows.Visibility.Visible;
             win.WrapBox.Visibility = System.Windows.Visibility.Hidden;
             win.MainBox.Visibility = System.Windows.Visibility.Visible;
@@ -28,6 +29,7 @@ namespace WindowsMedia.classes
         {
             if (win.IsLoaded)
             {
+                win.GridSelectionsFilters.Visibility = System.Windows.Visibility.Hidden;
                 win.GridMusicFilters.Visibility = System.Windows.Visibility.Visible;
                 win.SecondBox.Visibility = System.Windows.Visibility.Visible;
                 win.WrapBox.Visibility = System.Windows.Visibility.Hidden;
@@ -45,6 +47,7 @@ namespace WindowsMedia.classes
         }
         public void ImageSource(MainWindow win)
         {
+            win.GridSelectionsFilters.Visibility = System.Windows.Visibility.Hidden;
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
             win.MainBox.Visibility = System.Windows.Visibility.Hidden;
             win.SecondBox.Visibility = System.Windows.Visibility.Hidden;
@@ -56,6 +59,7 @@ namespace WindowsMedia.classes
         }
         public void VideoSource(MainWindow win)
         {
+            win.GridSelectionsFilters.Visibility = System.Windows.Visibility.Hidden;
             win.GridMusicFilters.Visibility = System.Windows.Visibility.Hidden;
             win.MainBox.Visibility = System.Windows.Visibility.Hidden;
             win.SecondBox.Visibility = System.Windows.Visibility.Hidden;
