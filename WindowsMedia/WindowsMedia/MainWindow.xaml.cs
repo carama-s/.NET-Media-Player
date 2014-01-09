@@ -543,7 +543,7 @@ namespace WindowsMedia
                 {
                     var itemsMusic = (List<MusicTitle>)MainBox.SelectedItems[0];
                     foreach (var title in itemsMusic)
-                        PlaylistBox.Items.Add(title);
+                        PlaylistBox.Items.Add(title.Clone());
                 }
                 else
                 {
