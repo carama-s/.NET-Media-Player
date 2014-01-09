@@ -21,10 +21,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
-using MyToolkit.Multimedia;
 using System.Net.Http;
-using InfoBox;
-using Essy.Tools.InputBox;
 
 namespace WindowsMedia
 {
@@ -883,16 +880,31 @@ namespace WindowsMedia
             }
         }
 
-        private void Selection_FormDelete(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        {
-
-        }
-
         private void ButtonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
             {
+                var newwindow = new DeleteWindow(this);
+                newwindow.Owner = this;
+                newwindow.ShowDialog();
+            }
+        }
+
+        private void ButtonRenommer_Click(object sender, RoutedEventArgs e)
+        {
+            if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
+            {
                 var newwindow = new RenameWindow(this);
+                newwindow.Owner = this;
+                newwindow.ShowDialog();
+            }
+        }
+
+        private void ButtonCreer_Click(object sender, RoutedEventArgs e)
+        {
+            if (clickStyle_ == ClickStyle.SELECTION)
+            {
+                var newwindow = new AddWindow(this);
                 newwindow.Owner = this;
                 newwindow.ShowDialog();
             }
