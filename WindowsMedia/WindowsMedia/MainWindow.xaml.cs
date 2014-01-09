@@ -218,7 +218,8 @@ namespace WindowsMedia
                 this.NomVideo.Text = "";
                 this.MediaPlayer.Stop();
                 Mouse.OverrideCursor = null;
-                this.MediaPlayer.Visibility = Visibility.Visible;
+                this.MediaPlayer.Visibility = Visibility.Hidden;
+                this.LectureMusicImage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -810,10 +811,17 @@ namespace WindowsMedia
             Point point = Mouse.GetPosition(MediaPlayer);
             Mouse.OverrideCursor = null;
             GridControls.Visibility = Visibility.Visible;
-            if ((this.state_ == State.PLAY) && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight))
+            Console.Out.WriteLine(point.Y);
+            if ((this.state_ == State.PLAY) && (point.Y > 10 && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight)))
                 this.timer_3.Start();
             else
                 this.timer_3.Stop();
+        }
+
+        private void LeaveMainWindow(object sender, MouseEventArgs e)
+        {
+            this.timer_3.Stop();
+            GridControls.Visibility = Visibility.Visible;
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -897,8 +905,6 @@ namespace WindowsMedia
                 newwindow.ShowDialog();
             }
         }
-
-
     }
 }
 
