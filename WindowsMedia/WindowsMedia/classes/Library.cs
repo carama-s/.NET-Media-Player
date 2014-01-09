@@ -63,15 +63,11 @@ namespace WindowsMedia.classes
         public System.Collections.IEnumerator GetEnumerator()
         {
             var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
-            var albums = from title in titles
+            var genres = from title in titles
                          orderby title.Genre, title.Album, title.Artist, title.TrackNumber, title.Title
-                         group title by new { title.Genre, title.Album };
-            var genres = from album in albums
-                         group album by album.Key.Genre;
+                         group title by title.Genre;
             foreach (var genre in genres)
-            {
-                yield return genre.ToList();
-            }
+                yield return new MusicArtist(genre.Key, genre.ToList());
         }
     }
 
