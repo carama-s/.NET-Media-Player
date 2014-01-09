@@ -12,6 +12,7 @@ namespace WindowsMedia.classes
     {
         public List<MediaItem> Medias { get; private set; }
         public String Name { get; set; }
+        public Uri Image { get; set; }
 
         public Playlist()
         {
@@ -59,7 +60,8 @@ namespace WindowsMedia.classes
             var file = new StreamReader(path);
             String line;
             int index = 0;
-
+            Uri[] tab = new Uri[] { new Uri("../assets/blueplaylisticon.jpg", UriKind.Relative), new Uri("../assets/greenplaylisticon.jpg", UriKind.Relative), new Uri("../assets/pinkplaylisticon.jpg", UriKind.Relative), new Uri("../assets/purpleplaylisticon.jpg", UriKind.Relative), new Uri("../assets/redplaylisticon.jpg", UriKind.Relative) };
+            Random rd = new Random();
             while ((line = file.ReadLine()) != null)
             {
                 if (line.Length > 0 && line[0] != '#')
@@ -75,6 +77,7 @@ namespace WindowsMedia.classes
                 }
             }
             file.Close();
+            this.Image = tab[rd.Next(5)];
         }
 
         public String Serialize()
