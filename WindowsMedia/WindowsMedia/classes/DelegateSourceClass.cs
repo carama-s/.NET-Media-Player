@@ -23,6 +23,7 @@ namespace WindowsMedia.classes
             win.SecondBox.ItemsSource = null;
             win.MainBox.ItemsSource = win.lib_.Playlists;
             win.MainBox.ItemTemplate = win.FindResource("MainSelectionTemplate") as DataTemplate;
+            win.SecondBox.ItemTemplate = win.FindResource("SecondSelectionTemplate") as DataTemplate;
             win.MainBox.Visibility = System.Windows.Visibility.Visible;
         }
         public void MusicSource(MainWindow win)
@@ -38,6 +39,7 @@ namespace WindowsMedia.classes
                 win.clickStyle_ = ClickStyle.MUSIC;
                 win.WrapBox.ItemsSource = null;
                 win.MainBox.Visibility = System.Windows.Visibility.Visible;
+                win.SecondBox.ItemTemplate = win.FindResource("SecondMusicTemplate") as DataTemplate;
                 DelegateTemplate[] tab = new DelegateTemplate[3];
                 tab[0] = new DelegateTemplate(this.AlbumTemplate);
                 tab[1] = new DelegateTemplate(this.ArtistTemplate);
