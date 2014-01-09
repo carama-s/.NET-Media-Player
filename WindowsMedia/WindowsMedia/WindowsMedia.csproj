@@ -48,6 +48,9 @@
     <Reference Include="Google.GData.YouTube">
       <HintPath>..\packages\Google.GData.YouTube.2.2.0.0\lib\Google.GData.YouTube.dll</HintPath>
     </Reference>
+    <Reference Include="IllusoryStudios.Wpf.LostControls">
+      <HintPath>..\packages\IllusoryStudios.Wpf.LostControls.1.3.0\lib\net40\IllusoryStudios.Wpf.LostControls.dll</HintPath>
+    </Reference>
     <Reference Include="InfoBox, Version=0.9.0.0, Culture=neutral, PublicKeyToken=6f5edd306b0cc770, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\InformationBoxLegacy.0.9.0\lib\net35\InfoBox.dll</HintPath>

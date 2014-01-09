@@ -883,20 +883,18 @@ namespace WindowsMedia
             }
         }
 
-        private void Selection_FormDelete(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        {
 
-        }
 
         private void ButtonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
             {
+                
 
                 string Message = "Êtes-vous sûr de vouloir effacer la sélection ?";
                 string Title = "Effacer une sélection";
                 MessageBoxResult result = Xceed.Wpf.Toolkit.MessageBox.Show(Message, Title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                InputBox.ShowInputBox("lol", "lol", true);
+
             }
         }
 
