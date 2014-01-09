@@ -487,8 +487,18 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.MUSIC):
                         {
-                            var al = (List<MusicTitle>)e.AddedItems[0];
-                            SecondBox.ItemsSource = al;
+                            if (musicStyle_ == MusicStyle.ARTIST)
+                            {
+                                var al = (MusicArtist)e.AddedItems[0];
+                                MainBox.ItemsSource = al;
+                                musicStyle_ = MusicStyle.ALBUM;
+                                MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
+                            }
+                            else
+                            {
+                                var al = (List<MusicTitle>)e.AddedItems[0];
+                                SecondBox.ItemsSource = al;
+                            }
                             break;
                         }
                     default:
@@ -916,7 +926,7 @@ namespace WindowsMedia
 
         private void ShuffleList()
         {
-            if  (PlaylistBox.Items.Count > 1)
+            if (PlaylistBox.Items.Count > 1)
             {
                 Random rd = new Random();
                 int ran = rd.Next(PlaylistBox.Items.Count);
