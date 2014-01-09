@@ -18,37 +18,28 @@ using WindowsMedia.classes;
 namespace WindowsMedia
 {
     /// <summary>
-    /// Interaction logic for RenameWindow.xaml
+    /// Interaction logic for DeleteWindow.xaml
     /// </summary>
-    public partial class RenameWindow : MetroWindow
+    public partial class DeleteWindow : MetroWindow
     {
         private MainWindow ParentWindow { get; set; }
         private string InitName { get; set; }
 
-        public RenameWindow(MainWindow parent)
+        public DeleteWindow(MainWindow parent)
         {
             ParentWindow = parent;
             InitializeComponent();
-            this.Title = "Renommer une sélection";
+            this.Title = "Supprimer une sélection";
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
-            TextBoxRename.Text = ((Playlist)ParentWindow.MainBox.SelectedItem).Name;
-            InitName = TextBoxRename.Text;
+            InitName = ((Playlist)ParentWindow.MainBox.SelectedItem).Name;
+            LabelName.Text += " \"" + InitName + "\" ?";            
         }
 
         private void BoutonValider_Click(object sender, RoutedEventArgs e)
         {
-            this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Hidden;
-            this.LabelWarningUsed.Visibility = System.Windows.Visibility.Hidden;
-            if (TextBoxRename.Text == "")
-                this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Visible;
-            else if (ParentWindow.lib_.Playlists.Find(x => x.Name == TextBoxRename.Text) != null)
-                this.LabelWarningUsed.Visibility = System.Windows.Visibility.Visible;
-            else
-            {
-                System.IO.File.Move(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"), System.IO.Path.Combine(Library.PlaylistPath, TextBoxRename.Text + ".m3u"));
-                this.Close();
-            }
+            System.IO.File.Delete(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"));
+            this.Close();
         }
 
         private void ButtonAnnuler_Click(object sender, RoutedEventArgs e)
