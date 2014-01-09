@@ -1,8 +1,15 @@
-﻿using System;
+﻿using AsfMojo.Media;
+//using DexterLib;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
+//using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -13,8 +20,30 @@ namespace WindowsMedia.classes
         public String Description { get; private set; }
 
         protected override BitmapImage GetImage()
-        {
-            return new BitmapImage(new Uri("../assets/defaultvideoart.png", UriKind.Relative));
+        {         
+            MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
+            player.Open(new Uri(Path, UriKind.Relative));
+            player.Position = TimeSpan.FromSeconds(22);
+            System.Threading.Thread.Sleep(1000);
+
+            RenderTargetBitmap rtb = new RenderTargetBitmap(320, 240, 96, 96, PixelFormats.Pbgra32);
+            DrawingVisual dv = new DrawingVisual();
+            DrawingContext dc = dv.RenderOpen();
+            dc.DrawVideo(player, new Rect(0, 0, 320, 240));
+            dc.Close();
+            rtb.Render(dv);
+
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            MemoryStream memoryStream = new MemoryStream();
+            BitmapImage bImg = new BitmapImage();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            encoder.Save(memoryStream);
+            bImg.BeginInit();
+            bImg.StreamSource = new MemoryStream(memoryStream.ToArray());
+            bImg.EndInit();
+            memoryStream.Close();
+
+            return bImg;
         }
 
         public MovieFile(String path)

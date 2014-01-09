@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -10,19 +12,37 @@ namespace WindowsMedia.classes
 {
     public class ImageFile : MediaItem
     {
+        static public Uri DefaultImagePath = new Uri("../assets/defaultimage.jpg", UriKind.Relative);
         public String Description { get; private set; }
+        private BitmapImage GeneratedImage { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected override BitmapImage GetImage()
         {
-            return new BitmapImage(new Uri(Path, UriKind.Absolute));
+            if (GeneratedImage == null)
+            {
+                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
+                return new BitmapImage(DefaultImagePath);
+            }
+            else
+                return GeneratedImage;
+        }
+
+        private void BackgroundGenerateImage(object param)
+        {
+            lock (GeneratedImage)
+                GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("Image"));
         }
 
         public ImageFile(String path)
         {
+            GeneratedImage = null;
             Path = path;
             Artist = "";
             Duration = TimeSpan.FromSeconds(0);
-            Title = Path.Substring(0, Path.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
+            Title = System.IO.Path.GetFileNameWithoutExtension(path);
             Type = ClickStyle.IMAGE;
             MessageColor = Colors.White;
         }

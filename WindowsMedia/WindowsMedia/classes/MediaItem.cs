@@ -69,7 +69,6 @@ namespace WindowsMedia.classes
 
     abstract public class MediaItem : INotifyPropertyChanged, ICloneable
     {
-        static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
         public static String[] MusicExtensions = { ".mp3", ".flac", ".m4a" };
         public static String[] VideoExtensions = { ".mp4", ".mkv", ".avi", ".wmv" };
         public static String[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };

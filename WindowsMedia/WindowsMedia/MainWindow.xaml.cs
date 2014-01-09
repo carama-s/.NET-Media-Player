@@ -215,7 +215,8 @@ namespace WindowsMedia
                 this.NomVideo.Text = "";
                 this.MediaPlayer.Stop();
                 Mouse.OverrideCursor = null;
-                this.MediaPlayer.Visibility = Visibility.Visible;
+                this.MediaPlayer.Visibility = Visibility.Hidden;
+                this.LectureMusicImage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -262,6 +263,11 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
+                if (isShuffle_)
+                {
+                    ShuffleList();
+                    return;
+                }
                 ResetIndexLecture();
 
                 if (currentIndexLecture_ == 0)
@@ -282,8 +288,12 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
+                if (isShuffle_)
+                {
+                    ShuffleList();
+                    return;
+                }
                 ResetIndexLecture();
-
                 if (currentIndexLecture_ == (PlaylistBox.Items.Count - 1))
                     currentIndexLecture_ = 0;
                 else
@@ -444,7 +454,9 @@ namespace WindowsMedia
         {
             this.ButtonStop_Click(sender, e);
 
-            if (currentIndexLecture_ < (PlaylistBox.Items.Count - 1))
+            if (isShuffle_)
+                ShuffleList();
+            else if (currentIndexLecture_ < (PlaylistBox.Items.Count - 1))
                 ForwardButtonMediaElement(sender, e);
             else if (isRepeat_)
                 ForwardButtonMediaElement(sender, e);
@@ -807,10 +819,17 @@ namespace WindowsMedia
             Point point = Mouse.GetPosition(MediaPlayer);
             Mouse.OverrideCursor = null;
             GridControls.Visibility = Visibility.Visible;
-            if ((this.state_ == State.PLAY) && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight))
+            Console.Out.WriteLine(point.Y);
+            if ((this.state_ == State.PLAY) && (point.Y > 10 && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight)))
                 this.timer_3.Start();
             else
                 this.timer_3.Stop();
+        }
+
+        private void LeaveMainWindow(object sender, MouseEventArgs e)
+        {
+            this.timer_3.Stop();
+            GridControls.Visibility = Visibility.Visible;
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -887,7 +906,7 @@ namespace WindowsMedia
                 var newwindow = new DeleteWindow(this);
                 newwindow.Owner = this;
                 newwindow.ShowDialog();
-            }
+        }
         }
 
         private void ButtonRenommer_Click(object sender, RoutedEventArgs e)
@@ -911,6 +930,20 @@ namespace WindowsMedia
         }
 
 
+        private void ShuffleList()
+        {
+            if  (PlaylistBox.Items.Count > 1)
+            {
+                Random rd = new Random();
+                int ran = rd.Next(PlaylistBox.Items.Count);
+                while (ran == currentIndexLecture_)
+                    ran = rd.Next(PlaylistBox.Items.Count);
+                ResetIndexLecture();
+                SelectIndexLecture(ran);
+                this.state_ = State.STOP;
+                ButtonPlay_Click(null, null);
+            }
+        }
     }
 }
 
