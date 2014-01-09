@@ -21,25 +21,11 @@ namespace WindowsMedia.classes
 
         protected override BitmapImage GetImage()
         {         
-            /*MediaDet md = new MediaDet();
-            md.Filename = Path;
-            md.CurrentStream = 0;
-            //string fBitmapName = "C:\\Users\\Robert\\image.jpg";
-            //md.WriteBitmapBits(125.2, 320, 240, fBitmapName);
-            
-            //md.GetBitmapBits(125.2, bufferSize, (byte)IntPtr.Zero, 320, 200);
-            buffer = (byte*)Marshal.AllocHGlobal(125000);
-            md.GetBitmapBits(125.2, 125000, *buffer, 320, 200);
-            var img = new BitmapImage();
-            img.BeginInit();
-            img.StreamSource = new MemoryStream(*buffer);
-            img.EndInit();
-            return img;*/
             MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
             player.Open(new Uri(Path, UriKind.Relative));
             player.Position = TimeSpan.FromSeconds(22);
             System.Threading.Thread.Sleep(10000);
-            Console.Out.WriteLine(player.HasVideo);
+
             RenderTargetBitmap rtb = new RenderTargetBitmap(320, 240, 96, 96, PixelFormats.Pbgra32);
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
