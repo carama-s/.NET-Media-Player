@@ -193,6 +193,12 @@ namespace WindowsMedia.classes
             foreach (var handler in handlers)
                 handler.WaitOne();
             GenerateMutex.ReleaseMutex();
+            int i = 0;
+            foreach (var list in Playlists)
+            {
+                list.SetImage(i);
+                i++;
+            }
         }
     }
 }
