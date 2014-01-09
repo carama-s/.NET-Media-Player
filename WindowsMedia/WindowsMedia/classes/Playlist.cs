@@ -58,6 +58,7 @@ namespace WindowsMedia.classes
         {
             var file = new StreamReader(path);
             String line;
+            int index = 0;
 
             while ((line = file.ReadLine()) != null)
             {
@@ -66,7 +67,11 @@ namespace WindowsMedia.classes
                     var media = MediaItem.Create(line);
 
                     if (media != null)
+                    {
+                        media.SetIndex(index);
+                        index++;
                         Medias.Add(media);
+                    }
                 }
             }
             file.Close();

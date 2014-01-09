@@ -27,13 +27,18 @@
                 <RowDefinition Height="72*" MaxHeight="72"/>
             </Grid.RowDefinitions>
             <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainAlbumTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
-            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="SecondBox_SelectionChanged" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
-            <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" SelectionChanged="WrapBox_SelectionChanged" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
+            <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
+            <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
                     <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
+                </Grid>
+                <Grid x:Name="GridSelectionsFilters" Margin="170,0" Visibility="Hidden">
+                    <Button x:Name="ButtonRenommer" Content="Renommer" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23"/>
+                    <Button x:Name="ButtonSupprimer" Content="Supprimer" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonSupprimer_Click"/>
+                    <Button x:Name="ButtonCreer" Content="Ajouter" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23"/>
                 </Grid>
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
@@ -45,7 +50,7 @@
                         </MenuItem.Background>
                         <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
                         <MenuItem InputGestureText="Ctrl+I" Style="{DynamicResource MenuItemStyle}" Header="Importer..." Click="OpenFile"/>
-                        <MenuItem Style="{DynamicResource MenuItemStyle}" Header="Options"/>
+                        <MenuItem InputGestureText="F5" Style="{DynamicResource MenuItemStyle}" Header="Rafraîchir" Click="RefreshLib"/>
                         <MenuItem InputGestureText="Alt+F4" Style="{DynamicResource MenuItemStyle}" Header="Quitter"/>
                     </MenuItem>
                 </Menu>
@@ -81,7 +86,7 @@
                 <TextBox x:Name="CountElements" Margin="0,0,58.6,-4" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="0,0,-0.4,-4" Grid.Row="3" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
                 <Button x:Name="CreatePlaylistButton" Content="Button" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="29" Grid.RowSpan="2" Click="CreatePlaylistButton_Click"/>
-                <TextBox HorizontalAlignment="Left" Height="29" Margin="75,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Grid.RowSpan="2" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="True"/>
+                <TextBox x:Name="PlaylistNameBox" HorizontalAlignment="Left" Height="29" Margin="75,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Grid.RowSpan="2" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="True"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridLecture" Background="#FF181515" OpacityMask="#FF181515" Visibility="Hidden" d:IsHidden="True">
@@ -180,3 +185,5 @@
         </Grid>
     </Grid>
 </Controls:MetroWindow>
+    
+

@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:WindowsMedia.classes" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" mc:Ignorable="d">
 	<!-- Resource dictionary entries should be defined here. -->
+    <local:ColorToBrushConverter x:Key="colorToBrushConverter"/>
     <!-- Converter pour Duration (TimeSpan to String) -->
 	<local:DurationConverter x:Key="durationConverter" />
     <!-- Converter pour NbElementsListeLecture (nb to nb + éléments) -->
@@ -13,6 +14,15 @@
     <ItemsPanelTemplate x:Key="WrapBoxPanelTemplate">
         <WrapPanel Orientation="Horizontal"/>
     </ItemsPanelTemplate>
+    <!-- Template pour ListBoxMain (Selection)-->
+    <DataTemplate x:Key="MainSelectionTemplate">
+        <StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
+            <Image Height="120" Width="120" VerticalAlignment="Center" Source="../assets/defaultplaylisticon.jpg"/>
+            <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
     <!-- Template pour ListBoxMain (Music Album)-->
 	<DataTemplate x:Key="MainAlbumTemplate">
 		<StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
@@ -58,8 +68,8 @@
         	</Grid.ColumnDefinitions>
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}" Grid.ColumnSpan="1"/>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="153.6" VerticalAlignment="Top" Width="225.237">
-            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
-            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333"/>
+            	<TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold" Margin="20,30,0,0"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" TextTrimming="WordEllipsis" FontStyle="Italic" FontSize="13.333" Margin="20,10,0,0"/>
             </StackPanel>
         </Grid>
     </DataTemplate>
@@ -73,7 +83,7 @@
 	<DataTemplate x:Key="SecondMusicTemplate">
 		<Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="71*" MaxWidth="102"/>
+				<ColumnDefinition Width="71*" MinWidth="71" MaxWidth="71"/>
 				<ColumnDefinition Width="236*"/>
 			</Grid.ColumnDefinitions>
 			<StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
@@ -83,6 +93,20 @@
 			<Label Content="{Binding TrackNumber}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
 		</Grid>
 	</DataTemplate>
+    <!-- Temlate pour ListBoxSecond (Selection)-->
+    <DataTemplate x:Key="SecondSelectionTemplate">
+        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*" MaxWidth="71" MinWidth="71"/>
+                <ColumnDefinition Width="236*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+            <Label Content="{Binding Index}" Height="35.4" Margin="20.623,5,10,19.4" VerticalAlignment="Center" Background="#FF5F5C5C" Foreground="White" Width="38.423" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14.667" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
     <!-- Template pour ComboBoxSelectMedia-->
 	<DataTemplate x:Key="ComboBoxSelectMediaTemplate">
 		<Grid Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -97,7 +121,7 @@
     <!-- Template pour PlaylistBox -->
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
-            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="White" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+            <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding MessageColor, Converter={StaticResource colorToBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
