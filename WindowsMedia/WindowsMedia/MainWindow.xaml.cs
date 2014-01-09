@@ -297,7 +297,6 @@ namespace WindowsMedia
                     return;
                 }
                 ResetIndexLecture();
-                if (isShuffle_)
                 if (currentIndexLecture_ == (PlaylistBox.Items.Count - 1))
                     currentIndexLecture_ = 0;
                 else
