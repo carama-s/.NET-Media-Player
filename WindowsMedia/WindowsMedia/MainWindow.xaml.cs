@@ -23,8 +23,6 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using MyToolkit.Multimedia;
 using System.Net.Http;
-using InfoBox;
-using Essy.Tools.InputBox;
 
 namespace WindowsMedia
 {

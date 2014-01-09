@@ -1,6 +1,4 @@
-﻿using AsfMojo.Media;
-//using DexterLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,7 +7,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
-//using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
