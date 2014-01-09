@@ -26,46 +26,9 @@ namespace WindowsMedia.classes
         protected override BitmapImage GetImage()
         {
             if (GeneratedImage == null)
-            {
-                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
                 return new BitmapImage(DefaultImagePath);
-            }
             else
                 return GeneratedImage;
-        }
-
-        private void BackgroundGenerateImage(object param)
-        {
-            GenerationMutex.WaitOne();
-            if (GeneratedImage == null)
-            {
-                var changed = false;
-                try
-                {
-                    TagLib.File tags = null;
-                    tags = TagLib.File.Create(Path);
-                    if (tags.Tag.Pictures.Length > 0)
-                    {
-                        GeneratedImage = new BitmapImage();
-                        GeneratedImage.BeginInit();
-                        GeneratedImage.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
-                        GeneratedImage.EndInit();
-                        changed = true;
-                    }
-                    else
-                    {
-                        GeneratedImage = new BitmapImage(DefaultImagePath);
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-                    GeneratedImage = new BitmapImage(DefaultImagePath);
-                }
-                GeneratedImage.Freeze();
-                if (changed)
-                    OnPropertyChanged("Image");
-            }
-            GenerationMutex.ReleaseMutex();
         }
 
         public MusicTitle(String file)
