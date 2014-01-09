@@ -39,7 +39,6 @@ namespace WindowsMedia
     public partial class MainWindow : MetroWindow
     {
         private TimeSpan duree_;
-        private double oldValueMain_;
         private String source_;
         private State state_;
         private String typeCurrentMedia_;
@@ -72,8 +71,6 @@ namespace WindowsMedia
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             BrushConverter bc = new BrushConverter();
-
-            this.oldValueMain_ = this.Width;
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
@@ -394,10 +391,6 @@ namespace WindowsMedia
         // Gestion de la modification de la MainWindow
         private void MainWindowUpdated(object sender, EventArgs e)
         {
-            double newSize = this.Width - this.oldValueMain_;
-            if (this.NomVideo.Width + newSize >= 0)
-                this.NomVideo.Width = this.NomVideo.Width + newSize;
-            this.oldValueMain_ = this.Width;
             this.oldSize_ = (double)this.SliderTime.Maximum;
             this.SliderTime.Maximum = this.Width - 160;
         }
