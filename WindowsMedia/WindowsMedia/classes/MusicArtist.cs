@@ -46,7 +46,7 @@ namespace WindowsMedia.classes
             var albums = from title in Titles
                          group title by title.Album;
             foreach (var album in albums)
-                yield return albums.ToList();
+                yield return album.ToList();
         }
     }
 }
