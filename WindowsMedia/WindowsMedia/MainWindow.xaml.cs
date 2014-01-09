@@ -266,6 +266,11 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
+                if (isShuffle_)
+                {
+                    ShuffleList();
+                    return;
+                }
                 ResetIndexLecture();
 
                 if (currentIndexLecture_ == 0)
@@ -286,8 +291,13 @@ namespace WindowsMedia
         {
             if (PlaylistBox.Items.Count > 0)
             {
+                if (isShuffle_)
+                {
+                    ShuffleList();
+                    return;
+                }
                 ResetIndexLecture();
-
+                if (isShuffle_)
                 if (currentIndexLecture_ == (PlaylistBox.Items.Count - 1))
                     currentIndexLecture_ = 0;
                 else
@@ -448,7 +458,9 @@ namespace WindowsMedia
         {
             this.ButtonStop_Click(sender, e);
 
-            if (currentIndexLecture_ < (PlaylistBox.Items.Count - 1))
+            if (isShuffle_)
+                ShuffleList();
+            else if (currentIndexLecture_ < (PlaylistBox.Items.Count - 1))
                 ForwardButtonMediaElement(sender, e);
             else if (isRepeat_)
                 ForwardButtonMediaElement(sender, e);
@@ -903,6 +915,21 @@ namespace WindowsMedia
                 var newwindow = new RenameWindow(this);
                 newwindow.Owner = this;
                 newwindow.ShowDialog();
+            }
+        }
+
+        private void ShuffleList()
+        {
+            if  (PlaylistBox.Items.Count > 1)
+            {
+                Random rd = new Random();
+                int ran = rd.Next(PlaylistBox.Items.Count);
+                while (ran == currentIndexLecture_)
+                    ran = rd.Next(PlaylistBox.Items.Count);
+                ResetIndexLecture();
+                SelectIndexLecture(ran);
+                this.state_ = State.STOP;
+                ButtonPlay_Click(null, null);
             }
         }
     }
