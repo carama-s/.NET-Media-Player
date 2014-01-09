@@ -85,7 +85,6 @@
                 </Grid>
                 <TextBox x:Name="CountElements" Margin="0,0,58.6,-4" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="0,0,-0.4,-4" Grid.Row="3" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
-                <Button x:Name="CreatePlaylistButton" Content="Button" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="29" Grid.RowSpan="2" Click="CreatePlaylistButton_Click"/>
                 <TextBox x:Name="PlaylistNameBox" HorizontalAlignment="Left" Height="29" Margin="75,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Grid.RowSpan="2" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="True"/>
             </Grid>
         </Grid>

@@ -885,31 +885,30 @@ namespace WindowsMedia
             DurationBox.Text = String.Format("{0:d2}:{1:d2}:{2:d2}", (int)total.TotalHours, total.Minutes, total.Seconds);
         }
 
-        private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
-        {
-            string name = PlaylistNameBox.Text;
-            if (name != "" && PlaylistBox.Items.Count > 0 && lib_.Playlists.Find(x => x.Name == name) == null)
-            {
-                Playlist actual = new Playlist();
-                foreach (var item in PlaylistBox.Items)
-                {
-                    actual.AddItem((MediaItem)item);
-                }
-                actual.Name = name;
-                actual.SaveToFile();
-            }
-        }
-
-        private void Selection_FormDelete(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        {
-
-        }
-
         private void ButtonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
             {
+                var newwindow = new DeleteWindow(this);
+                newwindow.Owner = this;
+                newwindow.ShowDialog();
+            }
+        }
+        private void ButtonRenommer_Click(object sender, RoutedEventArgs e)
+        {
+            if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
+            {
                 var newwindow = new RenameWindow(this);
+                newwindow.Owner = this;
+                newwindow.ShowDialog();
+            }
+        }
+
+        private void ButtonCreer_Click(object sender, RoutedEventArgs e)
+        {
+            if (clickStyle_ == ClickStyle.SELECTION)
+            {
+                var newwindow = new AddWindow(this);
                 newwindow.Owner = this;
                 newwindow.ShowDialog();
             }
