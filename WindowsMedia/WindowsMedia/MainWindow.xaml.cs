@@ -487,14 +487,7 @@ namespace WindowsMedia
                         }
                     case (ClickStyle.MUSIC):
                         {
-                            if (musicStyle_ == MusicStyle.ARTIST)
-                            {
-                                var al = (MusicArtist)e.AddedItems[0];
-                                MainBox.ItemsSource = al;
-                                musicStyle_ = MusicStyle.ALBUM;
-                                MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
-                            }
-                            else
+                            if (musicStyle_ == MusicStyle.ALBUM)
                             {
                                 var al = (List<MusicTitle>)e.AddedItems[0];
                                 SecondBox.ItemsSource = al;
@@ -535,8 +528,18 @@ namespace WindowsMedia
         {
             if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
             {
-                FillPlaylistMainBox();
-                ButtonPlay_Click(sender, e);
+                if (musicStyle_ == MusicStyle.ARTIST)
+                {
+                    var al = (MusicArtist)MainBox.SelectedItem;
+                    MainBox.ItemsSource = al;
+                    musicStyle_ = MusicStyle.ALBUM;
+                    MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
+                }
+                else
+                {
+                    FillPlaylistMainBox();
+                    ButtonPlay_Click(sender, e);
+                }
             }
         }
 
@@ -544,11 +547,12 @@ namespace WindowsMedia
         {
             if (MainBox.SelectedItems.Count > 0)
             {
+                if (clickStyle_ == ClickStyle.MUSIC && musicStyle_ != MusicStyle.ALBUM)
+                    return;
                 bool WasEmpty = true;
 
                 if (PlaylistBox.Items.Count > 0)
                     WasEmpty = false;
-
                 if (clickStyle_ == ClickStyle.MUSIC)
                 {
                     var itemsMusic = (List<MusicTitle>)MainBox.SelectedItems[0];
