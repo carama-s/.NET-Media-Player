@@ -892,11 +892,9 @@ namespace WindowsMedia
         {
             if (clickStyle_ == ClickStyle.SELECTION && MainBox.SelectedItems.Count > 0)
             {
-
-                string Message = "Êtes-vous sûr de vouloir effacer la sélection ?";
-                string Title = "Effacer une sélection";
-                MessageBoxResult result = Xceed.Wpf.Toolkit.MessageBox.Show(Message, Title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                InputBox.ShowInputBox("lol", "lol", true);
+                var newwindow = new RenameWindow(this);
+                newwindow.Owner = this;
+                newwindow.ShowDialog();
             }
         }
 
