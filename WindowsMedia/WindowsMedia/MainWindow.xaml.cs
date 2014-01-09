@@ -436,7 +436,7 @@ namespace WindowsMedia
             if (currentIndexLecture_ >= 0)
             {
                 MediaItem obj = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
-                obj.MessageColor = Colors.Blue;
+                obj.MessageColor = Color.FromRgb(65, 177, 225);
 
                 this.PlayingItemImage.Source = obj.Image;
                 this.PlayingItemTitle.Text = obj.Title;
