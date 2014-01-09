@@ -13,6 +13,7 @@ namespace WindowsMedia.classes
 {
     public class MusicTitle : MediaItem
     {
+        static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
         public String Album { get; private set; }
         public String Genre { get; private set; }
         public uint Year { get; private set; }
