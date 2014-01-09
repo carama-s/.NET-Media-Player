@@ -119,6 +119,7 @@ namespace WindowsMedia.classes
     {
         public delegate void MtPtr(object pars);
         public List<MediaItem> Medias { get; private set; }
+        private Mutex GenerateMutex { get; set; }
         public List<Playlist> Playlists { get; private set; }
         public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
@@ -128,6 +129,7 @@ namespace WindowsMedia.classes
 
         public Library()
         {
+            GenerateMutex = new Mutex(false);
             Medias = new List<MediaItem>();
             Playlists = new List<Playlist>();
         }
@@ -155,6 +157,7 @@ namespace WindowsMedia.classes
 
         public void GenerateLibrary()
         {
+            GenerateMutex.WaitOne();
             Medias.Clear();
             Playlists.Clear();
             var paths = new List<string>();
@@ -189,6 +192,7 @@ namespace WindowsMedia.classes
             }
             foreach (var handler in handlers)
                 handler.WaitOne();
+            GenerateMutex.ReleaseMutex();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AsfMojo.Media;
-using DexterLib;
+//using DexterLib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
