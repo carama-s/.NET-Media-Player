@@ -17,7 +17,7 @@
     <!-- Template pour ListBoxMain (Selection)-->
     <DataTemplate x:Key="MainSelectionTemplate">
         <StackPanel HorizontalAlignment="Stretch" Height="120" VerticalAlignment="Stretch" Width="300" Margin="0,0,0,20.4" Orientation="Horizontal" d:DesignWidth="147.2" d:DesignHeight="117.6">
-            <Image Height="120" Width="120" VerticalAlignment="Center" Source="../assets/defaultplaylisticon.jpg"/>
+            <Image Height="120" Width="120" VerticalAlignment="Center" Source="{Binding Image}"/>
             <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Name}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
             </StackPanel>

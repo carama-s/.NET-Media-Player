@@ -236,7 +236,6 @@
     <Resource Include="assets\icon-volumemax-barre.png" />
     <Resource Include="assets\icon-volumemute-barre.png" />
     <Resource Include="assets\icone.png" />
-    <Resource Include="assets\defaultplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\defaultalbumart.png" />
@@ -267,6 +266,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="informationbox.license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\defaultimage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\blueplaylisticon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\greenplaylisticon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\pinkplaylisticon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\purpleplaylisticon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\redplaylisticon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
