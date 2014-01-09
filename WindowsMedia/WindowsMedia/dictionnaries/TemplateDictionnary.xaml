@@ -39,7 +39,6 @@
             <Image Height="120" Width="120" Source="{Binding Image}" VerticalAlignment="Center"/>
             <StackPanel Width="Auto" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Artist}" Width="Auto" Height="42.36" FontSize="16" Foreground="White" FontWeight="Bold" TextTrimming="WordEllipsis"/>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Album}" Width="Auto" FontSize="14.667" Foreground="White" FontStyle="Italic" Height="39.507" TextTrimming="WordEllipsis"/>
             </StackPanel>
         </StackPanel>
     </DataTemplate>
