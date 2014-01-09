@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -13,38 +14,63 @@ namespace WindowsMedia.classes
 {
     public class MusicTitle : MediaItem
     {
+        static private Mutex GenerationMutex = new Mutex(false);
         static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
         public String Album { get; private set; }
         public String Genre { get; private set; }
         public uint Year { get; private set; }
         public uint TrackNumber { get; private set; }
         public String Composer { get; private set; }
+        private BitmapImage GeneratedImage { get; set; }
 
         protected override BitmapImage GetImage()
         {
-            TagLib.File tags = null;
-            try
+            if (GeneratedImage == null)
             {
-                tags = TagLib.File.Create(Path);
-            }
-            catch (FileNotFoundException)
-            {
+                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
                 return new BitmapImage(DefaultImagePath);
-            }
-            if (tags.Tag.Pictures.Length > 0)
-            {
-                var img = new BitmapImage();
-                img.BeginInit();
-                img.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
-                img.EndInit();
-                return img;
             }
             else
-                return new BitmapImage(DefaultImagePath);
+                return GeneratedImage;
+        }
+
+        private void BackgroundGenerateImage(object param)
+        {
+            GenerationMutex.WaitOne();
+            if (GeneratedImage == null)
+            {
+                var changed = false;
+                try
+                {
+                    TagLib.File tags = null;
+                    tags = TagLib.File.Create(Path);
+                    if (tags.Tag.Pictures.Length > 0)
+                    {
+                        GeneratedImage = new BitmapImage();
+                        GeneratedImage.BeginInit();
+                        GeneratedImage.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
+                        GeneratedImage.EndInit();
+                        changed = true;
+                    }
+                    else
+                    {
+                        GeneratedImage = new BitmapImage(DefaultImagePath);
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    GeneratedImage = new BitmapImage(DefaultImagePath);
+                }
+                GeneratedImage.Freeze();
+                if (changed)
+                    OnPropertyChanged("Image");
+            }
+            GenerationMutex.ReleaseMutex();
         }
 
         public MusicTitle(String file)
         {
+            GeneratedImage = null;
             var tags = TagLib.File.Create(file);
             Path = file;
             Artist = tags.Tag.FirstPerformer;
@@ -78,7 +104,8 @@ namespace WindowsMedia.classes
                                     Composer = Composer,
                                     Duration = Duration,
                                     Type = Type,
-                                    MessageColor = Colors.White
+                                    MessageColor = Colors.White,
+                                    GeneratedImage = GeneratedImage.Clone()
             };
 
         }

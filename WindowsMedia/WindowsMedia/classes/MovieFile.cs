@@ -2,12 +2,14 @@
 //using DexterLib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows;
 //using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,12 +17,27 @@ using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
 {
-    public class MovieFile : MediaItem
+    public class MovieFile : MediaItem, System.ComponentModel.INotifyPropertyChanged
     {
+        static private Mutex GenerationMutex = new Mutex(false);
+        static public Uri DefaultImagePath = new Uri("../assets/defaultvideoart.png", UriKind.Relative);
         public String Description { get; private set; }
+        private BitmapImage GeneratedImage { get; set; }
 
         protected override BitmapImage GetImage()
-        {         
+        {
+            if (GeneratedImage == null)
+            {
+                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
+                return new BitmapImage(DefaultImagePath);
+            }
+            else
+                return GeneratedImage;
+        }
+
+        public void BackgroundGenerateImage(object param)
+        {
+            GenerationMutex.WaitOne();
             MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
             player.Open(new Uri(Path, UriKind.Relative));
             player.Position = TimeSpan.FromSeconds(22);
@@ -35,19 +52,22 @@ namespace WindowsMedia.classes
 
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             MemoryStream memoryStream = new MemoryStream();
-            BitmapImage bImg = new BitmapImage();
+            GeneratedImage = new BitmapImage();
             encoder.Frames.Add(BitmapFrame.Create(rtb));
             encoder.Save(memoryStream);
-            bImg.BeginInit();
-            bImg.StreamSource = new MemoryStream(memoryStream.ToArray());
-            bImg.EndInit();
+            GeneratedImage.BeginInit();
+            GeneratedImage.StreamSource = new MemoryStream(memoryStream.ToArray());
+            GeneratedImage.EndInit();
+            GeneratedImage.Freeze();
             memoryStream.Close();
-
-            return bImg;
+            player.Close();
+            OnPropertyChanged("Image");
+            GenerationMutex.ReleaseMutex();
         }
 
         public MovieFile(String path)
         {
+            GeneratedImage = null;
             var tags = TagLib.File.Create(path);
             Path = path;
             Artist = "";
@@ -68,7 +88,8 @@ namespace WindowsMedia.classes
                                    Duration = Duration,
                                    Title = Title,
                                    Type = Type,
-                                   MessageColor = Colors.White };
+                                   MessageColor = Colors.White,
+                                   GeneratedImage = GeneratedImage };
         }
     }
 }

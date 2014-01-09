@@ -81,8 +81,7 @@ namespace WindowsMedia.classes
             set
             {
                 _messageColor = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("MessageColor"));
+                OnPropertyChanged("MessageColor");
             }
         }
         public int Index { get; protected set; }
@@ -102,6 +101,12 @@ namespace WindowsMedia.classes
         }
 
         abstract protected BitmapImage GetImage();
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         static public MediaItem Create(String path)
         {

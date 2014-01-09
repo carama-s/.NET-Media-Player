@@ -10,12 +10,11 @@ using System.Windows.Media.Imaging;
 
 namespace WindowsMedia.classes
 {
-    public class ImageFile : MediaItem
+    public class ImageFile : MediaItem, INotifyPropertyChanged
     {
         static public Uri DefaultImagePath = new Uri("../assets/defaultimage.jpg", UriKind.Relative);
         public String Description { get; private set; }
         private BitmapImage GeneratedImage { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected override BitmapImage GetImage()
         {
@@ -30,10 +29,9 @@ namespace WindowsMedia.classes
 
         private void BackgroundGenerateImage(object param)
         {
-            lock (GeneratedImage)
-                GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs("Image"));
+            GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
+            GeneratedImage.Freeze();
+            OnPropertyChanged("Image");
         }
 
         public ImageFile(String path)
@@ -58,7 +56,8 @@ namespace WindowsMedia.classes
                                    Duration = Duration, 
                                    Title = Title, 
                                    Type = Type, 
-                                   MessageColor = Colors.White};
+                                   MessageColor = Colors.White,
+                                   GeneratedImage = GeneratedImage };
         }
     }
 }
