@@ -35,27 +35,28 @@ namespace WindowsMedia.classes
             img.StreamSource = new MemoryStream(*buffer);
             img.EndInit();
             return img;*/
-            MediaPlayer player = new MediaPlayer();
-            player.Open(new Uri(Path, UriKind.RelativeOrAbsolute));
+            MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
+            player.Open(new Uri(Path, UriKind.Relative));
             player.Position = TimeSpan.FromSeconds(22);
-
+            System.Threading.Thread.Sleep(10000);
+            Console.Out.WriteLine(player.HasVideo);
             RenderTargetBitmap rtb = new RenderTargetBitmap(320, 240, 96, 96, PixelFormats.Pbgra32);
             DrawingVisual dv = new DrawingVisual();
             DrawingContext dc = dv.RenderOpen();
-            dc.DrawVideo((MediaPlayer)player, new Rect(0, 0, 320, 240));
+            dc.DrawVideo(player, new Rect(0, 0, 320, 240));
             dc.Close();
             rtb.Render(dv);
 
-            BitmapFrame bmp = BitmapFrame.Create(rtb);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             MemoryStream memoryStream = new MemoryStream();
             BitmapImage bImg = new BitmapImage();
-            encoder.Frames.Add(BitmapFrame.Create(bmp));
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
             encoder.Save(memoryStream);
             bImg.BeginInit();
             bImg.StreamSource = new MemoryStream(memoryStream.ToArray());
             bImg.EndInit();
             memoryStream.Close();
+
             return bImg;
         }
 
