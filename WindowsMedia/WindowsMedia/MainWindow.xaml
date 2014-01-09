@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="WindowsMedia" Width="800" Height="600" MinWidth="480" MinHeight="340" Icon="assets/icone.png" MouseLeave="LeaveMainWindow">
+        Title="WindowsMedia" Width="800" Height="600" MinWidth="480" MinHeight="340" Icon="assets/icone.png">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,9 +36,9 @@
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>
                 <Grid x:Name="GridSelectionsFilters" Margin="170,0" Visibility="Hidden">
-                    <Button x:Name="ButtonRenommer" Content="Renommer" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23"/>
+                    <Button x:Name="ButtonRenommer" Content="Renommer" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonRenommer_Click"/>
                     <Button x:Name="ButtonSupprimer" Content="Supprimer" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonSupprimer_Click"/>
-                    <Button x:Name="ButtonCreer" Content="Ajouter" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23"/>
+                    <Button x:Name="ButtonCreer" Content="Ajouter" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonCreer_Click"/>
                 </Grid>
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
@@ -85,7 +85,6 @@
                 </Grid>
                 <TextBox x:Name="CountElements" Margin="0,0,58.6,-4" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="0,0,-0.4,-4" Grid.Row="3" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
-                <Button x:Name="CreatePlaylistButton" Content="Button" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="29" Grid.RowSpan="2" Click="CreatePlaylistButton_Click"/>
                 <TextBox x:Name="PlaylistNameBox" HorizontalAlignment="Left" Height="29" Margin="75,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Grid.RowSpan="2" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="True"/>
             </Grid>
         </Grid>
@@ -181,7 +180,7 @@
                     <ImageBrush ImageSource="assets/icon-switch-barre.png"/>
                 </Button.OpacityMask>
             </Button>
-            <TextBlock x:Name="NomVideo" Margin="10,39,636.8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="146.8" Foreground="#FFFEFEFE" IsHitTestVisible="True" AllowDrop="True"/>
+            <TextBlock x:Name="NomVideo" Margin="10,39,636.8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="146.8" Foreground="#FFFEFEFE" IsHitTestVisible="True" AllowDrop="True" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
