@@ -80,8 +80,8 @@
                         <ColumnDefinition Width="17*"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.RowSpan="2" Name="PlayingItemImage" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,2,2,2"/>
-                    <TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="85" Foreground="White" Margin="4,0,0,0"/>
-                    <TextBlock Name="PlayingItemArtist" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Foreground="White" Margin="4,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBlock Grid.Column="1" Name="PlayingItemTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="36" Width="85" Foreground="White" Margin="8,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="PlayingItemArtist" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Foreground="White" Margin="8,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                 </Grid>
                 <TextBox x:Name="CountElements" Margin="0,0,58.6,-4" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Items.Count, Converter={StaticResource nbConverter}, ElementName=PlaylistBox, Mode=OneWay}" IsEnabled="False" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="DurationBox" TextWrapping="Wrap" Width="62" Margin="0,0,-0.4,-4" Grid.Row="3" IsEnabled="False" Text="00:00:00" BorderBrush="{x:Null}" TextAlignment="Right" HorizontalAlignment="Right"/>
