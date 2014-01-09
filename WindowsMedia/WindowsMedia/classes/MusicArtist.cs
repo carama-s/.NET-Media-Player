@@ -11,6 +11,17 @@ namespace WindowsMedia.classes
     {
         public String Artist { get; private set; }
         public List<MusicTitle> Titles { get; private set; }
+        public String Genre
+        {
+            get
+            {
+                return Artist;
+            }
+            private set
+            {
+                Artist = value;
+            }
+        }
 
         public BitmapImage Image
         {
