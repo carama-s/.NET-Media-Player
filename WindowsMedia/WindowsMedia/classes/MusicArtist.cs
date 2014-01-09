@@ -32,7 +32,7 @@ namespace WindowsMedia.classes
                 else
                     return new BitmapImage(MusicTitle.DefaultImagePath);
             }
-            private set;
+            private set {}
         }
 
         public MusicArtist(String name, List<MusicTitle> titles)
