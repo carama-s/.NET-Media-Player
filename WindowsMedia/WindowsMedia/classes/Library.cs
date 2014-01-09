@@ -26,7 +26,7 @@ namespace WindowsMedia.classes
                          group title by new { title.Artist, title.Album };
             foreach (var album in albums)
             {
-                yield return new List<MusicTitle>(album);
+                yield return album.ToList();
             }
         }
     }
@@ -46,9 +46,11 @@ namespace WindowsMedia.classes
             var albums = from title in titles
                          orderby title.Artist, title.Album, title.TrackNumber, title.Title
                          group title by new { title.Artist, title.Album };
-            foreach (var album in albums)
+            var artists = from album in albums
+                          group album by album.Key.Artist;
+            foreach (var artist in artists)
             {
-                yield return new List<MusicTitle>(album);
+                yield return artist.ToList();
             }
         }
     }
@@ -67,10 +69,12 @@ namespace WindowsMedia.classes
             var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
             var albums = from title in titles
                          orderby title.Genre, title.Album, title.Artist, title.TrackNumber, title.Title
-                         group title by new { title.Artist, title.Album };
-            foreach (var album in albums)
+                         group title by new { title.Genre, title.Album };
+            var genres = from album in albums
+                         group album by album.Key.Genre;
+            foreach (var genre in genres)
             {
-                yield return new List<MusicTitle>(album);
+                yield return genre.ToList();
             }
         }
     }
