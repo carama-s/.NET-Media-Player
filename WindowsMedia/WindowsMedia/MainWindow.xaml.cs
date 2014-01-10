@@ -103,7 +103,7 @@ namespace WindowsMedia
 
             lib_ = new Library();
             lib_.GenerateLibrary();
-            MainBox.ItemsSource = new AlbumIterator(lib_);
+            BoxSelectMedia_SelectionChanged(sender, null);
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
@@ -169,7 +169,6 @@ namespace WindowsMedia
                     brush = createBrush("assets/icon-pause-barre.png");
                     this.state_ = State.PLAY;
                     this.MediaPlayer.Play();
-                    this.NomVideo.Width = 150;
                     if (oldValue == -1)
                     {
                         this.CurrentTime.Text = "00:00:00";

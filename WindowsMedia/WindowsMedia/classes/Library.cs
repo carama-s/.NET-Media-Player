@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
@@ -122,6 +123,7 @@ namespace WindowsMedia.classes
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
         public static String[] PlaylistExtensions = { ".m3u" };
+        public List<String> BiblioPath { get; set; }
 
         public Library()
         {
