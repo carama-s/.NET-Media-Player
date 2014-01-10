@@ -39,6 +39,7 @@ namespace WindowsMedia
         private void BoutonValider_Click(object sender, RoutedEventArgs e)
         {
             System.IO.File.Delete(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"));
+            ParentWindow.RefreshLib(null, null);
             this.Close();
         }
 

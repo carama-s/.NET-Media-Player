@@ -39,7 +39,6 @@ namespace WindowsMedia
         private TimeSpan duree_;
         private String source_;
         private State state_;
-        private String typeCurrentMedia_;
         public MusicStyle musicStyle_;
         public ClickStyle clickStyle_;
         private bool isMuted_;
@@ -70,9 +69,7 @@ namespace WindowsMedia
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            BrushConverter bc = new BrushConverter();
 
-            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
@@ -82,18 +79,14 @@ namespace WindowsMedia
             this.timer_EventMouse.Interval = TimeSpan.FromSeconds(2);
             this.timer_EventMouse.Tick += new EventHandler(timer_tick_Slide);
 
-            this.isMuted_ = ConfigFile.Instance.Data.Muted;
             this.isFullScreen_ = false;
-            this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
-            this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
+            LoadConfigProperty();
             this.oldValue = -1;
             this.state_ = State.STOP;
             this.clickStyle_ = ClickStyle.MUSIC;
-            this.musicStyle_ = ConfigFile.Instance.Data.Style;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            this.SliderVolume.Value = ConfigFile.Instance.Data.Volume;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
@@ -104,13 +97,63 @@ namespace WindowsMedia
             BoxSelectMedia_SelectionChanged(sender, null);
         }
 
+        private void LoadConfigProperty()
+        {
+            ImageBrush brush;
+
+            // Volume (bouton + slider)
+
+            this.SliderVolume.Value = ConfigFile.Instance.Data.Volume;
+            this.isMuted_ = ConfigFile.Instance.Data.Muted;
+
+            brush = createBrushVolume(this.SliderVolume.Value);
+            if (this.isMuted_)
+            {
+                brush = createBrushVolume(0);
+                this.MediaPlayer.Volume = 0;
+            }
+            this.ButtonVolume.Background = brush;
+            this.ButtonVolume.OpacityMask = brush;
+
+            // Bouton Repeat
+
+            this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
+            if (this.isRepeat_)
+            {
+                brush = createBrush("assets/icon-enable-repeat-barre.png");
+                this.ButtonRepeat.Background = brush;
+                this.ButtonRepeat.OpacityMask = brush;
+            }
+
+            // Bouton Shuffle
+
+            this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
+            if (this.isShuffle_)
+            {
+                brush = createBrush("assets/icon-enable-shuffle-barre.png");
+                this.ButtonShuffle.Background = brush;
+                this.ButtonShuffle.OpacityMask = brush;
+            }
+
+            // ClickMusicStyle
+
+            BrushConverter bc = new BrushConverter();
+            this.musicStyle_ = ConfigFile.Instance.Data.Style;
+            if (musicStyle_ == MusicStyle.ALBUM)
+                this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            else if (musicStyle_ == MusicStyle.ARTIST)
+                this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            else
+                this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+        }
+
         private void WindowKeyDown(object sender, KeyEventArgs e)
         {
             if (isFullScreen_ == true && e.Key == Key.Escape)
                 FullScreenOff();
             else if ((e.Key == Key.O) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 PlayItem(sender, e);
-            else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            else if ((e.Key == Key.B) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 OpenBiblioWindow(sender, e);
             else if ((e.Key == Key.F5))
                 RefreshLib(sender, e);
@@ -166,9 +209,9 @@ namespace WindowsMedia
                         this.SliderTime.Value = 0;
                     }
                     String[] media = this.source_.Split('\\');
-                    var tags = TagLib.File.Create(this.source_);
-                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                    this.duree_ = tags.Properties.Duration;
+                    MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
+                    this.duree_ = item.Duration;
+                    Console.Out.WriteLine("YAAAAAAAAAAAAAH            ");
                     this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
                     this.TotalTime.Text = this.duree_.ToString();
@@ -296,7 +339,7 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            if (typeCurrentMedia_ != "Photo")
+            if (currentIndexLecture_ >= 0 && ((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE)
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)this.SliderTime.Maximum;
@@ -395,7 +438,7 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            if (value == 0) // A voir si on met isMuted_ à TRUE?
+            if (value == 0)
                 brush = createBrush("assets/icon-volumemute-barre.png");
             else if (value >= 0.1 && value < 34)
                 brush = createBrush("assets/icon-volume1-barre.png");
@@ -719,12 +762,14 @@ namespace WindowsMedia
         private void PlayItem(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Filter = "MP3/MP4/MKV/AVI/JPEG/PNG/JPG Files (*.mp3, *.mp4, *.avi, *.jpeg, *.png, *.jpg) | *.mp3; *.mp4; *.avi; *.jpeg; *.png; *.jpg";
+            dlg.Filter = "Media files | *.mp3; .flac; .m4a; *.mp4; *.avi; *.wmv; *.jpeg; *.png; *.jpg; *.bmp";
             Nullable<bool> result = dlg.ShowDialog();
 
             if (result == true)
             {
                 this.source_ = dlg.FileName;
+                MediaItem.Create(dlg.FileName);
+
                 MediaPlayer.Stop();
                 MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
                 this.state_ = State.STOP;
@@ -740,7 +785,7 @@ namespace WindowsMedia
             newwindow.ShowDialog();
         }
 
-        private void RefreshLib(object sender, RoutedEventArgs e)
+        public void RefreshLib(object sender, RoutedEventArgs e)
         {
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);

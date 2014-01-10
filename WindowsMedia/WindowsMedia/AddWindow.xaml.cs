@@ -54,6 +54,7 @@ namespace WindowsMedia
                 }
                 actual.Name = TextBoxAdd.Text;
                 actual.SaveToFile();
+                ParentWindow.RefreshLib(null, null);
                 this.Close();
             }
         }

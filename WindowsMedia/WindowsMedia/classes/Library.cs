@@ -167,6 +167,11 @@ namespace WindowsMedia.classes
                 Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr),
                 Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist))
             };
+            var allExtensions = new List<String>(MediaItem.MusicExtensions);
+            allExtensions.AddRange(MediaItem.VideoExtensions);
+            allExtensions.AddRange(MediaItem.ImageExtensions);
+            foreach (var dir in ConfigFile.Instance.Data.BiblioFiles)
+                tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr));
             foreach (var tmp in tmps)
             {
                 try
@@ -185,7 +190,15 @@ namespace WindowsMedia.classes
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    Directory.CreateDirectory(tmp.Item1);
+                    try
+                    {
+                        Directory.CreateDirectory(tmp.Item1);
+                    }
+                    catch (DirectoryNotFoundException) { }
+                }
+                catch (ArgumentException)
+                {
+                    ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
                 }
             }
             foreach (var handler in handlers)
