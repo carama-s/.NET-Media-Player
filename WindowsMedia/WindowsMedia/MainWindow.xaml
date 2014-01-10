@@ -49,7 +49,7 @@
                             <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
                         </MenuItem.Background>
                         <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
-                        <MenuItem InputGestureText="Ctrl+I" Style="{DynamicResource MenuItemStyle}" Header="Importer..." Click="OpenFile"/>
+                        <MenuItem InputGestureText="Ctrl+I" Style="{DynamicResource MenuItemStyle}" Header="Bibliothèque..." Click="OpenBiblioWindow"/>
                         <MenuItem InputGestureText="F5" Style="{DynamicResource MenuItemStyle}" Header="Rafraîchir" Click="RefreshLib"/>
                         <MenuItem InputGestureText="Alt+F4" Style="{DynamicResource MenuItemStyle}" Header="Quitter"/>
                     </MenuItem>
