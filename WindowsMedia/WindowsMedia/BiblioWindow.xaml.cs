@@ -41,7 +41,8 @@ namespace WindowsMedia
         {
             System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
             dlg.ShowDialog();
-            ListBoxBiblio.Items.Add(dlg.SelectedPath);
+            if (dlg.SelectedPath != "")
+                ListBoxBiblio.Items.Add(dlg.SelectedPath);
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
