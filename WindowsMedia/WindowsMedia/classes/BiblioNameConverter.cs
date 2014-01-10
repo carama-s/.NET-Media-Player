@@ -14,8 +14,7 @@ namespace WindowsMedia.classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            String path = Path.GetFileNameWithoutExtension((String)value); ;
-            return path;
+            return Path.GetFileNameWithoutExtension((String)value);
         }
 
         public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)

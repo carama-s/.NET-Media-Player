@@ -34,7 +34,7 @@ namespace WindowsMedia
         public bool Shuffle = false;
         public bool Repeat = false;
         public MusicStyle Style = MusicStyle.ALBUM;
-        public List<String> SiblioFiles = new List<String>();
+        public List<String> BiblioFiles = new List<String>();
     }
 
     class ConfigFile
