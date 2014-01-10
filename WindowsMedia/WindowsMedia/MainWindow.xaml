@@ -176,7 +176,6 @@
                     <ImageBrush ImageSource="assets/icon-switch-barre.png"/>
                 </Button.OpacityMask>
             </Button>
-            <TextBlock x:Name="NomVideo" Margin="10,39,636.8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="146.8" Foreground="#FFFEFEFE" IsHitTestVisible="True" AllowDrop="True" HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </Controls:MetroWindow>
