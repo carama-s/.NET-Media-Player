@@ -192,6 +192,10 @@ namespace WindowsMedia.classes
                 {
                     Directory.CreateDirectory(tmp.Item1);
                 }
+                catch (ArgumentException)
+                {
+                    ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
+                }
             }
             foreach (var handler in handlers)
                 handler.WaitOne();
