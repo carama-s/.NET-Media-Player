@@ -190,7 +190,11 @@ namespace WindowsMedia.classes
                 }
                 catch (DirectoryNotFoundException)
                 {
-                    Directory.CreateDirectory(tmp.Item1);
+                    try
+                    {
+                        Directory.CreateDirectory(tmp.Item1);
+                    }
+                    catch (DirectoryNotFoundException) { }
                 }
                 catch (ArgumentException)
                 {
