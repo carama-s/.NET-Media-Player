@@ -966,6 +966,7 @@ namespace WindowsMedia
             ConfigFile.Instance.Data.Muted = this.isMuted_;
             ConfigFile.Instance.Data.Repeat = this.isRepeat_;
             ConfigFile.Instance.Data.Shuffle = this.isShuffle_;
+            ConfigFile.Instance.Data.Volume = (int)this.SliderVolume.Value;
             ConfigFile.Instance.Data.Style = this.musicStyle_;
             ConfigFile.Instance.Write();
         }
