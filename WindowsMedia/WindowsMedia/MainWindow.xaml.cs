@@ -754,16 +754,7 @@ namespace WindowsMedia
         {
             var newwindow = new BiblioWindow(this);
             newwindow.Owner = this;
-            newwindow.ShowDialog();        
-        }
-
-        
-        private void OpenFile(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
-            dlg.ShowDialog();
-            string filename = dlg.SelectedPath;
-            Console.Out.WriteLine(filename);
+            newwindow.ShowDialog();
         }
 
         private void RefreshLib(object sender, RoutedEventArgs e)
