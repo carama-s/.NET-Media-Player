@@ -345,6 +345,11 @@ namespace WindowsMedia
                 this.SliderTime.Value = oldValue;
                 this.CurrentTime.Text = this.MediaPlayer.Position.ToString();
             }
+            else
+            {
+                this.CurrentTime.Text = "00:00:00";
+                this.SliderTime.Value = 0;
+            }
         }
 
         // Gestion du Slide du volume

@@ -26,9 +26,13 @@ namespace WindowsMedia.classes
 
         private void BackgroundGenerateImage(object param)
         {
-            GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
-            GeneratedImage.Freeze();
-            OnPropertyChanged("Image");
+            try
+            {
+                GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
+                GeneratedImage.Freeze();
+                OnPropertyChanged("Image");
+            }
+            catch (NotSupportedException) { }
         }
 
         public ImageFile(String path)
