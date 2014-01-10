@@ -18,12 +18,12 @@ namespace WindowsMedia
         public int Height
         {
             get { return height; }
-            set { height = (value <= 600) ? 600 : value; }
+            set { height = (value <= 340) ? 340 : value; }
         }
         public int Width
         {
             get { return width; }
-            set { width = (value <= 800) ? 800 : value; }
+            set { width = (value <= 480) ? 480 : value; }
         }
         public int Volume
         {
