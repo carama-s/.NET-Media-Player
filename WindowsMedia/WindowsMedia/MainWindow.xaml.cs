@@ -482,6 +482,7 @@ namespace WindowsMedia
         private void EventEndMedia(object sender, RoutedEventArgs e)
         {
             this.ButtonStop_Click(sender, e);
+            this.GridControls.Visibility = Visibility.Visible;
 
             if (isShuffle_)
                 ShuffleList();
