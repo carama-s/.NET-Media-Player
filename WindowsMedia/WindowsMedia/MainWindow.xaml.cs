@@ -113,7 +113,7 @@ namespace WindowsMedia
             else if ((e.Key == Key.O) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 PlayItem(sender, e);
             else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
-                OpenFile(sender, e);
+                OpenBiblioWindow(sender, e);
             else if ((e.Key == Key.F5))
                 RefreshLib(sender, e);
         }
@@ -747,6 +747,15 @@ namespace WindowsMedia
             }
         }
 
+
+        private void OpenBiblioWindow(object sender, RoutedEventArgs e)
+        {
+            var newwindow = new BiblioWindow(this);
+            newwindow.Owner = this;
+            newwindow.ShowDialog();        
+        }
+
+        
         private void OpenFile(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();

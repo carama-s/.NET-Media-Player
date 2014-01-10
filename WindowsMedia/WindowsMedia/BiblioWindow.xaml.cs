@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,17 @@ namespace WindowsMedia
     /// <summary>
     /// Interaction logic for BiblioWindow.xaml
     /// </summary>
-    public partial class BiblioWindow : Window
+    public partial class BiblioWindow : MetroWindow
     {
-        public BiblioWindow()
+        private MainWindow ParentWindow { get; set; }
+
+        public BiblioWindow(MainWindow parent)
         {
+            ParentWindow = parent;
             InitializeComponent();
+            this.Title = "Gérer la bibliothèque";
+            this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
+            this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
         }
     }
 }
