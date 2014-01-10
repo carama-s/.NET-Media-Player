@@ -36,6 +36,7 @@ namespace WindowsMedia
 
     public partial class MainWindow : MetroWindow
     {
+        private double sizeWindow_;
         private TimeSpan duree_;
         private String source_;
         private State state_;
@@ -46,9 +47,8 @@ namespace WindowsMedia
         private bool isFullScreen_;
         private bool isRepeat_;
         private bool isShuffle_;
-        private DispatcherTimer timer_text;
         private DispatcherTimer timer_Slide;
-        private DispatcherTimer timer_3;
+        private DispatcherTimer timer_EventMouse;
         private double oldValue;
         delegate void DelegateSource(MainWindow win);
         private double oldSize_;
@@ -72,17 +72,15 @@ namespace WindowsMedia
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
+            this.sizeWindow_ = this.Width;
+
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
             this.timer_Slide.Tick += new EventHandler(timer_Tick);
 
-            this.timer_3 = new DispatcherTimer();
-            this.timer_3.Interval = TimeSpan.FromSeconds(2);
-            this.timer_3.Tick += new EventHandler(timer_tick_Slide);
-
-            this.timer_text = new DispatcherTimer();
-            this.timer_text.Interval = TimeSpan.FromMilliseconds(100);
-            this.timer_text.Tick += new EventHandler(timer_Text);
+            this.timer_EventMouse = new DispatcherTimer();
+            this.timer_EventMouse.Interval = TimeSpan.FromSeconds(2);
+            this.timer_EventMouse.Tick += new EventHandler(timer_tick_Slide);
 
             this.isMuted_ = false;
             this.isFullScreen_ = false;
@@ -116,13 +114,6 @@ namespace WindowsMedia
                 OpenBiblioWindow(sender, e);
             else if ((e.Key == Key.F5))
                 RefreshLib(sender, e);
-        }
-
-        private void timer_Text(object sender, EventArgs e)
-        {
-            String letter = this.NomVideo.Text.Substring(0, 1);
-            this.NomVideo.Text = this.NomVideo.Text.Remove(0, 1);
-            this.NomVideo.Text += letter;
         }
 
         // Gestion bouton Play/Pause
@@ -175,8 +166,6 @@ namespace WindowsMedia
                         this.SliderTime.Value = 0;
                     }
                     String[] media = this.source_.Split('\\');
-                    this.NomVideo.Text = media[media.Length - 1] + "     ";
-                    this.timer_text.Start();
                     var tags = TagLib.File.Create(this.source_);
                     this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
                     this.duree_ = tags.Properties.Duration;
@@ -207,12 +196,9 @@ namespace WindowsMedia
                 ImageBrush brush = createBrush("assets/icon-play-barre.png");
                 this.ButtonPlay.Background = brush;
                 this.ButtonPlay.OpacityMask = brush;
-                this.NomVideo.Text = "";
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
                 this.oldValue = -1;
-                this.timer_text.Stop();
-                this.NomVideo.Text = "";
                 this.MediaPlayer.Stop();
                 Mouse.OverrideCursor = null;
                 this.MediaPlayer.Visibility = Visibility.Hidden;
@@ -390,6 +376,7 @@ namespace WindowsMedia
         {
             this.oldSize_ = (double)this.SliderTime.Maximum;
             this.SliderTime.Maximum = this.Width - 160;
+            this.sizeWindow_ = this.Width;
         }
 
         // Gestion Brush
@@ -835,7 +822,7 @@ namespace WindowsMedia
                 Mouse.OverrideCursor = Cursors.None;
                 GridControls.Visibility = Visibility.Hidden;
             }
-            this.timer_3.Stop();
+            this.timer_EventMouse.Stop();
         }
         private void EventMouseMove(object sender, MouseEventArgs e)
         {
@@ -844,14 +831,14 @@ namespace WindowsMedia
             GridControls.Visibility = Visibility.Visible;
             Console.Out.WriteLine(point.Y);
             if ((this.state_ == State.PLAY) && (point.Y > 10 && point.Y < (MediaPlayer.ActualHeight - GridControls.ActualHeight)))
-                this.timer_3.Start();
+                this.timer_EventMouse.Start();
             else
-                this.timer_3.Stop();
+                this.timer_EventMouse.Stop();
         }
 
         private void LeaveMainWindow(object sender, MouseEventArgs e)
         {
-            this.timer_3.Stop();
+            this.timer_EventMouse.Stop();
             GridControls.Visibility = Visibility.Visible;
         }
 
