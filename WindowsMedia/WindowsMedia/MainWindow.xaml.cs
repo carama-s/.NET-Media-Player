@@ -70,7 +70,6 @@ namespace WindowsMedia
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
-
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
             this.timer_Slide.Tick += new EventHandler(timer_Tick);
