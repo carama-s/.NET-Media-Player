@@ -64,6 +64,9 @@ namespace WindowsMedia
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
 
             InitializeComponent();
+
+            this.Width = ConfigFile.Instance.Data.Width;
+            this.Height = ConfigFile.Instance.Data.Height;
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -82,18 +85,18 @@ namespace WindowsMedia
             this.timer_EventMouse.Interval = TimeSpan.FromSeconds(2);
             this.timer_EventMouse.Tick += new EventHandler(timer_tick_Slide);
 
-            this.isMuted_ = false;
+            this.isMuted_ = ConfigFile.Instance.Data.Muted;
             this.isFullScreen_ = false;
-            this.isRepeat_ = false;
-            this.isShuffle_ = false;
+            this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
+            this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
             this.oldValue = -1;
             this.state_ = State.STOP;
             this.clickStyle_ = ClickStyle.MUSIC;
-            this.musicStyle_ = MusicStyle.ALBUM;
+            this.musicStyle_ = ConfigFile.Instance.Data.Style;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            this.SliderVolume.Value = 50;
+            this.SliderVolume.Value = ConfigFile.Instance.Data.Volume;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
@@ -756,6 +759,11 @@ namespace WindowsMedia
             BoxSelectMedia_SelectionChanged(sender, null);
         }
 
+        private void Quit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void FillPlaylistWrapBox()
         {
             ResetIndexLecture();
@@ -936,6 +944,17 @@ namespace WindowsMedia
                 this.state_ = State.STOP;
                 ButtonPlay_Click(null, null);
             }
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            ConfigFile.Instance.Data.Height = (int)this.Height;
+            ConfigFile.Instance.Data.Width = (int)this.Width;
+            ConfigFile.Instance.Data.Muted = this.isMuted_;
+            ConfigFile.Instance.Data.Repeat = this.isRepeat_;
+            ConfigFile.Instance.Data.Shuffle = this.isShuffle_;
+            ConfigFile.Instance.Data.Style = this.musicStyle_;
+            ConfigFile.Instance.Write();
         }
     }
 }
