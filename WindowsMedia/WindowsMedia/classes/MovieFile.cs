@@ -37,9 +37,10 @@ namespace WindowsMedia.classes
             GenerationMutex.WaitOne();
             MediaPlayer player = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
             player.Open(new Uri(Path, UriKind.Relative));
-            System.Threading.Thread.Sleep(1000);
+            while (player.NaturalDuration.HasTimeSpan == false);
             player.Position = TimeSpan.FromSeconds(player.NaturalDuration.TimeSpan.TotalSeconds / 2);
             System.Threading.Thread.Sleep(1000);
+
 
             RenderTargetBitmap rtb = new RenderTargetBitmap(320, 180, 96, 96, PixelFormats.Pbgra32);
             DrawingVisual dv = new DrawingVisual();

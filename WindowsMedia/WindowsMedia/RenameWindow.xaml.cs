@@ -30,10 +30,17 @@ namespace WindowsMedia
             ParentWindow = parent;
             InitializeComponent();
             this.Title = "Renommer une sélection";
+            AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
             TextBoxRename.Text = ((Playlist)ParentWindow.MainBox.SelectedItem).Name;
             InitName = TextBoxRename.Text;
+        }
+
+        private void WindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                ButtonAnnuler_Click(sender, null);
         }
 
         private void BoutonValider_Click(object sender, RoutedEventArgs e)

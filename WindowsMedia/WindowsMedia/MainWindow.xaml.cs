@@ -767,13 +767,21 @@ namespace WindowsMedia
             if (result == true)
             {
                 this.source_ = dlg.FileName;
-                MediaItem.Create(dlg.FileName);
 
+                MediaItem item = MediaItem.Create(dlg.FileName);
+                if (item != null)
+                {
+                    PlaylistBox.Items.Clear();
+                    PlaylistBox.Items.Add(item);
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                    this.state_ = State.STOP;
+                    PlaylistBox_SourceUpdated();
                 MediaPlayer.Stop();
-                MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
                 this.state_ = State.STOP;
                 this.ButtonPlay_Click(sender, e);
             }
+        }
         }
 
 

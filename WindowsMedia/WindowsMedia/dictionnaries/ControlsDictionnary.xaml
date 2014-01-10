@@ -471,15 +471,15 @@
     
     <!-- Button SubWindow-->
     <Style x:Key="ButtonStyleSubWindow" TargetType="{x:Type Button}">
-        <Setter Property="MinHeight" Value="25"/>
+        <Setter Property="MinHeight" Value="23"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontSize" Value="{DynamicResource UpperCaseContentFontSize}"/>
         <Setter Property="FontFamily" Value="{DynamicResource DefaultFont}"/>
         <Setter Property="Background" Value="{DynamicResource GrayBrush10}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-        <Setter Property="Padding" Value="5,6"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -521,12 +521,12 @@
                                 <VisualState x:Name="Unfocused"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="Background" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="3"/>
-                        <Rectangle x:Name="DisabledVisualElement" Fill="{DynamicResource ControlsDisabledBrush}" IsHitTestVisible="False" Opacity="0" RadiusY="3" RadiusX="3"/>
-                        <Border x:Name="MouseOverBorder" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource GrayBrush8}" CornerRadius="3.5" Opacity="0"/>
-                        <Border x:Name="PressedBorder" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource GrayBrush7}" CornerRadius="3.5" Opacity="0"/>
-                        <Rectangle x:Name="FocusRectangle" Margin="-1" Opacity="0" RadiusY="4" RadiusX="4" Stroke="{DynamicResource ButtonMouseOverInnerBorderBrush}"/>
-                        <Rectangle x:Name="FocusInnerRectangle" Opacity="0" RadiusY="3" RadiusX="3" Stroke="{DynamicResource ButtonMouseOverBorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
+                        <Border x:Name="Background" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0"/>
+                        <Rectangle x:Name="DisabledVisualElement" Fill="{DynamicResource ControlsDisabledBrush}" IsHitTestVisible="False" Opacity="0" RadiusY="0" RadiusX="0"/>
+                        <Border x:Name="MouseOverBorder" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource GrayBrush8}" CornerRadius="0" Opacity="0"/>
+                        <Border x:Name="PressedBorder" BorderThickness="{TemplateBinding BorderThickness}" Background="{DynamicResource GrayBrush7}" CornerRadius="0" Opacity="0"/>
+                        <Rectangle x:Name="FocusRectangle" Margin="-1" Opacity="0" RadiusY="0" RadiusX="0" Stroke="{DynamicResource ButtonMouseOverInnerBorderBrush}"/>
+                        <Rectangle x:Name="FocusInnerRectangle" Opacity="0" RadiusY="0" RadiusX="0" Stroke="{DynamicResource ButtonMouseOverBorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
                         <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
                 </ControlTemplate>
