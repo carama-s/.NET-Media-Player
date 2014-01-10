@@ -36,7 +36,6 @@ namespace WindowsMedia
 
     public partial class MainWindow : MetroWindow
     {
-        private double sizeWindow_;
         private TimeSpan duree_;
         private String source_;
         private State state_;
@@ -74,8 +73,6 @@ namespace WindowsMedia
             BrushConverter bc = new BrushConverter();
 
             this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
-
-            this.sizeWindow_ = this.Width;
 
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
@@ -379,7 +376,6 @@ namespace WindowsMedia
         {
             this.oldSize_ = (double)this.SliderTime.Maximum;
             this.SliderTime.Maximum = this.Width - 160;
-            this.sizeWindow_ = this.Width;
         }
 
         // Gestion Brush
