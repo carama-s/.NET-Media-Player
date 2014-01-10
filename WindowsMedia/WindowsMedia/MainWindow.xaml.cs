@@ -339,7 +339,7 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            if (((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE)
+            if (currentIndexLecture_ >= 0 && ((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE)
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)this.SliderTime.Maximum;
