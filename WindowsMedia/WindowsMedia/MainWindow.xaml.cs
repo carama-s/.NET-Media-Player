@@ -71,9 +71,7 @@ namespace WindowsMedia
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            BrushConverter bc = new BrushConverter();
 
-            this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
 
             this.sizeWindow_ = this.Width;
 
@@ -85,18 +83,14 @@ namespace WindowsMedia
             this.timer_EventMouse.Interval = TimeSpan.FromSeconds(2);
             this.timer_EventMouse.Tick += new EventHandler(timer_tick_Slide);
 
-            this.isMuted_ = ConfigFile.Instance.Data.Muted;
             this.isFullScreen_ = false;
-            this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
-            this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
+            LoadConfigProperty();
             this.oldValue = -1;
             this.state_ = State.STOP;
             this.clickStyle_ = ClickStyle.MUSIC;
-            this.musicStyle_ = ConfigFile.Instance.Data.Style;
             this.MediaPlayer.LoadedBehavior = MediaState.Manual;
             this.MediaPlayer.UnloadedBehavior = MediaState.Manual;
 
-            this.SliderVolume.Value = ConfigFile.Instance.Data.Volume;
             this.SliderTime.Maximum = this.Width - 160;
             this.SliderTime.IsMoveToPointEnabled = true;
 
@@ -105,6 +99,56 @@ namespace WindowsMedia
             lib_ = new Library();
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);
+        }
+
+        private void LoadConfigProperty()
+        {
+            ImageBrush brush;
+
+            // Volume (bouton + slider)
+
+            this.SliderVolume.Value = ConfigFile.Instance.Data.Volume;
+            this.isMuted_ = ConfigFile.Instance.Data.Muted;
+
+            brush = createBrushVolume(this.SliderVolume.Value);
+            if (this.isMuted_)
+            {
+                brush = createBrushVolume(0);
+                this.MediaPlayer.Volume = 0;
+            }
+            this.ButtonVolume.Background = brush;
+            this.ButtonVolume.OpacityMask = brush;
+
+            // Bouton Repeat
+
+            this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
+            if (this.isRepeat_)
+            {
+                brush = createBrush("assets/icon-enable-repeat-barre.png");
+                this.ButtonRepeat.Background = brush;
+                this.ButtonRepeat.OpacityMask = brush;
+            }
+
+            // Bouton Shuffle
+
+            this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
+            if (this.isShuffle_)
+            {
+                brush = createBrush("assets/icon-enable-shuffle-barre.png");
+                this.ButtonShuffle.Background = brush;
+                this.ButtonShuffle.OpacityMask = brush;
+            }
+
+            // ClickMusicStyle
+
+            BrushConverter bc = new BrushConverter();
+            this.musicStyle_ = ConfigFile.Instance.Data.Style;
+            if (musicStyle_ == MusicStyle.ALBUM)
+                this.ButtonAlbums.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            else if (musicStyle_ == MusicStyle.ARTIST)
+                this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+            else
+                this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
@@ -399,7 +443,7 @@ namespace WindowsMedia
         {
             ImageBrush brush;
 
-            if (value == 0) // A voir si on met isMuted_ à TRUE?
+            if (value == 0)
                 brush = createBrush("assets/icon-volumemute-barre.png");
             else if (value >= 0.1 && value < 34)
                 brush = createBrush("assets/icon-volume1-barre.png");
