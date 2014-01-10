@@ -69,8 +69,6 @@ namespace WindowsMedia
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
-
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
             this.timer_Slide.Tick += new EventHandler(timer_Tick);
@@ -768,12 +766,20 @@ namespace WindowsMedia
             if (result == true)
             {
                 this.source_ = dlg.FileName;
-                MediaItem.Create(dlg.FileName);
 
-                MediaPlayer.Stop();
-                MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
-                this.state_ = State.STOP;
-                this.ButtonPlay_Click(sender, e);
+                MediaItem item = MediaItem.Create(dlg.FileName);
+                if (item != null)
+                {
+                    PlaylistBox.Items.Clear();
+                    PlaylistBox.Items.Add(item);
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                    this.state_ = State.STOP;
+                    PlaylistBox_SourceUpdated();
+                    MediaPlayer.Stop();
+                    this.state_ = State.STOP;
+                    this.ButtonPlay_Click(sender, e);
+                }
             }
         }
 

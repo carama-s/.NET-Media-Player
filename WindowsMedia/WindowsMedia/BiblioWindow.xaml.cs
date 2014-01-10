@@ -27,6 +27,7 @@ namespace WindowsMedia
             List<String> Display;
             ParentWindow = parent;
             InitializeComponent();
+            AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Title = "Gérer la bibliothèque";
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
@@ -35,6 +36,12 @@ namespace WindowsMedia
             {
                 ListBoxBiblio.Items.Add(path);
             }
+        }
+
+        private void WindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                ButtonCancel_Click(sender, null);
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)

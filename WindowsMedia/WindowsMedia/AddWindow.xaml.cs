@@ -29,10 +29,17 @@ namespace WindowsMedia
             ParentWindow = parent;
             InitializeComponent();
             this.Title = "Ajouter une sélection";
+            AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
             if (this.ParentWindow.PlaylistBox.Items.Count <= 0)
                 this.LabelWarningPlaylist.Visibility = System.Windows.Visibility.Visible;
+        }
+        
+        private void WindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                ButtonAnnuler_Click(sender, null);
         }
 
         private void BoutonValider_Click(object sender, RoutedEventArgs e)
