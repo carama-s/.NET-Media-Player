@@ -8,6 +8,8 @@
 	<local:DurationConverter x:Key="durationConverter" />
     <!-- Converter pour NbElementsListeLecture (nb to nb + éléments) -->
     <local:NbElementsConverter x:Key="nbConverter" />
+    <!-- Converter pour ListBoxBiblio (path to filename)-->
+    <local:BiblioNameConverter x:Key="pathConverter"/>
     <!-- ItemContainerStyleSelector WrapBox-->
     <local:WrapBoxContainerSelector x:Key="WrapContainerSelector"/>
     <!-- Panel Template pour WrapBox-->
@@ -121,6 +123,19 @@
     <DataTemplate x:Key="PlaylistTemplate">
         <Grid>
             <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Title}" Foreground="{Binding MessageColor, Converter={StaticResource colorToBrushConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextTrimming="WordEllipsis" FontSize="13.333" FontWeight="Bold"/>
+        </Grid>
+    </DataTemplate>
+    <!-- Temlate pour ListBoxBiblio-->
+    <DataTemplate x:Key="ListBibliTemplate">
+        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*" MinWidth="71" MaxWidth="71"/>
+                <ColumnDefinition Width="236*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding , Converter={StaticResource pathConverter}}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
