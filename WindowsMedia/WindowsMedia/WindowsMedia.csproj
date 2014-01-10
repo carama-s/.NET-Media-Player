@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="classes\BiblioNameConverter.cs" />
     <Compile Include="classes\MusicArtist.cs" />
+    <Compile Include="ConfigFile.cs" />
     <Compile Include="DeleteWindow.xaml.cs">
       <DependentUpon>DeleteWindow.xaml</DependentUpon>
     </Compile>
