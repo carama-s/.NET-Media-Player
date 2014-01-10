@@ -101,7 +101,7 @@ namespace WindowsMedia
 
             lib_ = new Library();
             lib_.GenerateLibrary();
-            MainBox.ItemsSource = new AlbumIterator(lib_);
+            BoxSelectMedia_SelectionChanged(sender, null);
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
