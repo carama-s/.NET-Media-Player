@@ -28,7 +28,7 @@ namespace WindowsMedia
         public int Volume
         {
             get { return volume; }
-            set { width = (value <= 0) ? 0 : ((value >= 100) ? 100 : value); }
+            set { volume = (value <= 0) ? 0 : ((value >= 100) ? 100 : value); }
         }
         public bool Muted = false;
         public bool Shuffle = false;
