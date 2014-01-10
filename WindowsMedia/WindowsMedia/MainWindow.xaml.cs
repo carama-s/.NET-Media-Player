@@ -154,7 +154,7 @@ namespace WindowsMedia
                 FullScreenOff();
             else if ((e.Key == Key.O) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 PlayItem(sender, e);
-            else if ((e.Key == Key.I) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            else if ((e.Key == Key.B) && Keyboard.IsKeyDown(Key.LeftCtrl))
                 OpenBiblioWindow(sender, e);
             else if ((e.Key == Key.F5))
                 RefreshLib(sender, e);
