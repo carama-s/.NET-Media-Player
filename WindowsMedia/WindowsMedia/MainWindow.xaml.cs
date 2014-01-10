@@ -763,12 +763,14 @@ namespace WindowsMedia
         private void PlayItem(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Filter = "MP3/MP4/MKV/AVI/JPEG/PNG/JPG Files (*.mp3, *.mp4, *.avi, *.jpeg, *.png, *.jpg) | *.mp3; *.mp4; *.avi; *.jpeg; *.png; *.jpg";
+            dlg.Filter = "Media files | *.mp3; .flac; .m4a; *.mp4; *.avi; *.wmv; *.jpeg; *.png; *.jpg; *.bmp";
             Nullable<bool> result = dlg.ShowDialog();
 
             if (result == true)
             {
                 this.source_ = dlg.FileName;
+                MediaItem.Create(dlg.FileName);
+
                 MediaPlayer.Stop();
                 MediaPlayer.Source = new Uri(this.source_, UriKind.RelativeOrAbsolute);
                 this.state_ = State.STOP;
@@ -784,7 +786,7 @@ namespace WindowsMedia
             newwindow.ShowDialog();
         }
 
-        private void RefreshLib(object sender, RoutedEventArgs e)
+        public void RefreshLib(object sender, RoutedEventArgs e)
         {
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);

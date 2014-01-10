@@ -21,7 +21,12 @@ namespace WindowsMedia.classes
             win.clickStyle_ = ClickStyle.SELECTION;
             win.WrapBox.ItemsSource = null;
             win.SecondBox.ItemsSource = null;
-            win.MainBox.ItemsSource = win.lib_.Playlists;
+
+            //List<MediaItem> list = new List<MediaItem>(win.lib_.Playlists);
+            List<Playlist> list = new List<Playlist>();
+            foreach (var item in win.lib_.Playlists)
+                list.Add((Playlist)item);
+            win.MainBox.ItemsSource = list;
             win.MainBox.ItemTemplate = win.FindResource("MainSelectionTemplate") as DataTemplate;
             win.SecondBox.ItemTemplate = win.FindResource("SecondSelectionTemplate") as DataTemplate;
             win.MainBox.Visibility = System.Windows.Visibility.Visible;

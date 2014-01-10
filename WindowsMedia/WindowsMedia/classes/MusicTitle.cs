@@ -40,7 +40,7 @@ namespace WindowsMedia.classes
                     return new BitmapImage(DefaultImagePath);
                 }
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
                 return new BitmapImage(DefaultImagePath);
             }
