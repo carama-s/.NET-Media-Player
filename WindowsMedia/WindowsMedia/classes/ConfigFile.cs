@@ -74,7 +74,7 @@ namespace WindowsMedia
         public void Write()
         {
             var data = JsonConvert.SerializeObject(Data);
-            var f = File.Open(ConfigPath, FileMode.CreateNew, FileAccess.Write);
+            var f = File.Open(ConfigPath, FileMode.Create, FileAccess.Write);
             try
             {
                 Byte[] info = new UTF8Encoding(true).GetBytes(data);
