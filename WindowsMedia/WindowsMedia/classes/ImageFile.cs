@@ -19,10 +19,7 @@ namespace WindowsMedia.classes
         protected override BitmapImage GetImage()
         {
             if (GeneratedImage == null)
-            {
-                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
                 return new BitmapImage(DefaultImagePath);
-            }
             else
                 return GeneratedImage;
         }
@@ -38,6 +35,7 @@ namespace WindowsMedia.classes
         {
             GeneratedImage = null;
             Path = path;
+            ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
             Artist = "";
             Duration = TimeSpan.FromSeconds(0);
             Title = System.IO.Path.GetFileNameWithoutExtension(path);

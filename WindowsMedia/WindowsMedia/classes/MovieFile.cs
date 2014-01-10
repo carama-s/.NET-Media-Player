@@ -24,10 +24,7 @@ namespace WindowsMedia.classes
         protected override BitmapImage GetImage()
         {
             if (GeneratedImage == null)
-            {
-                ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
                 return new BitmapImage(DefaultImagePath);
-            }
             else
                 return GeneratedImage;
         }
@@ -74,6 +71,7 @@ namespace WindowsMedia.classes
             Title = tags.Name.Substring(0,tags.Name.LastIndexOf('.')).Split("\\".ToCharArray()).Last();
             Type = ClickStyle.VIDEO;
             MessageColor = Colors.White;
+            ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
         }
 
         public MovieFile()
