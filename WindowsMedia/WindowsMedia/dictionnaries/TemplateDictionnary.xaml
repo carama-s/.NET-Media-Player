@@ -133,7 +133,7 @@
                 <ColumnDefinition Width="236*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
-                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding , Converter={StaticResource pathConverter}}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Converter={StaticResource pathConverter}}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
                 <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
             </StackPanel>
         </Grid>

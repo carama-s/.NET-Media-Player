@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
@@ -122,9 +123,27 @@ namespace WindowsMedia.classes
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
         public static String[] PlaylistExtensions = { ".m3u" };
+        public List<String> BiblioPath { get; set; }
 
         public Library()
         {
+            try
+            {
+                using (var fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\MediaPlayerconfig.xml", FileMode.Open, FileAccess.Read))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(List<String>));
+                    BiblioPath = xml.Deserialize(fs) as List<String>;
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                BiblioPath = new List<string> { MusicPath, VideoPath, ImagePath };
+                using (var fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\MediaPlayerconfig.xml", FileMode.Create, FileAccess.Read))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(List<String>));
+                    xml.Serialize(fs, BiblioPath);
+                }
+            }
             GenerateMutex = new Mutex(false);
             Medias = new List<MediaItem>();
             Playlists = new List<Playlist>();
