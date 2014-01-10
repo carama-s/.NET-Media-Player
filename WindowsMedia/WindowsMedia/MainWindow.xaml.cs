@@ -39,7 +39,6 @@ namespace WindowsMedia
         private TimeSpan duree_;
         private String source_;
         private State state_;
-        private String typeCurrentMedia_;
         public MusicStyle musicStyle_;
         public ClickStyle clickStyle_;
         private bool isMuted_;
@@ -210,9 +209,9 @@ namespace WindowsMedia
                         this.SliderTime.Value = 0;
                     }
                     String[] media = this.source_.Split('\\');
-                    var tags = TagLib.File.Create(this.source_);
-                    this.typeCurrentMedia_ = tags.Properties.MediaTypes.ToString();
-                    this.duree_ = tags.Properties.Duration;
+                    MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
+                    this.duree_ = item.Duration;
+                    Console.Out.WriteLine("YAAAAAAAAAAAAAH            ");
                     this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
                     this.TotalTime.Text = this.duree_.ToString();
@@ -340,7 +339,7 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            if (typeCurrentMedia_ != "Photo")
+            if (((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE)
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)this.SliderTime.Maximum;
