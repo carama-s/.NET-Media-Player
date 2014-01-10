@@ -24,11 +24,48 @@ namespace WindowsMedia
 
         public BiblioWindow(MainWindow parent)
         {
+            List<String> Display;
             ParentWindow = parent;
             InitializeComponent();
             this.Title = "Gérer la bibliothèque";
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
+            Display = new List<string>(ConfigFile.Instance.Data.BiblioFiles);
+            foreach (string path in Display)
+            {
+                ListBoxBiblio.Items.Add(path);
+            }
+        }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
+            dlg.ShowDialog();
+            if (dlg.SelectedPath != "")
+                ListBoxBiblio.Items.Add(dlg.SelectedPath);
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListBoxBiblio.SelectedItem != null)
+            {
+                ListBoxBiblio.Items.RemoveAt(ListBoxBiblio.SelectedIndex);
+            }
+        }
+
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigFile.Instance.Data.BiblioFiles = new List<string>();
+            foreach (var item in ListBoxBiblio.Items)
+            {
+                ConfigFile.Instance.Data.BiblioFiles.Add((String)item);
+            }
+            this.Close();
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
