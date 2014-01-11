@@ -48,7 +48,7 @@ namespace WindowsMedia
         {
             System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
             dlg.ShowDialog();
-            if (dlg.SelectedPath != "")
+            if (dlg.SelectedPath != "" && !ListBoxBiblio.Items.Contains(dlg.SelectedPath))
                 ListBoxBiblio.Items.Add(dlg.SelectedPath);
         }
 
