@@ -141,4 +141,19 @@
             </StackPanel>
         </Grid>
     </DataTemplate>
+    <!-- Temlate pour ListBoxSearch (Music)-->
+    <DataTemplate x:Key="BoxSearchTemplate">
+        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
+            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Center" Width="Auto" Margin="10,0,0,0">
+                <TextBlock TextWrapping="WrapWithOverflow" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis">
+                    <Run Text="{Binding Artist}"/>
+                    <Run Text=" - "/>
+                    <Run Text="{Binding Title}"/>
+                    <Run Text=" - "/>
+                    <Run Text="{Binding Album}"/>
+                </TextBlock>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Duration, Converter={StaticResource durationConverter}}" Foreground="White" FontSize="12" FontStyle="Italic" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

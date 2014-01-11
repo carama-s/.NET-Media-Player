@@ -28,7 +28,8 @@
             </Grid.RowDefinitions>
             <ListBox x:Name="MainBox" Grid.Row="1" BorderBrush="{x:Null}" Margin="0" ItemTemplate="{DynamicResource MainAlbumTemplate}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="MainBox_SelectionChanged" MouseDoubleClick="MainBox_MouseDoubleClick" MouseRightButtonUp="MainBox_MouseRightButtonUp" Background="#FF181515"/>
             <ListBox x:Name="SecondBox" Grid.Column="1" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0.2,0.4,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemTemplate="{DynamicResource SecondMusicTemplate}" MouseDoubleClick="SecondBox_MouseDoubleClick" Padding="0,20,0,0" MouseRightButtonUp="SecondBox_MouseRightButtonUp"/>
-            <ListBox x:Name="WrapBox" Margin="0,0.4,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
+            <ListBox x:Name="WrapBox" Margin="0,0,0,0" Grid.Column="0" ItemContainerStyleSelector="{StaticResource WrapContainerSelector}" Grid.Row="1" Background="{x:Null}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsPanel="{DynamicResource WrapBoxPanelTemplate}" Visibility="Hidden" MouseDoubleClick="WrapBox_MouseDoubleClick" MouseRightButtonUp="WrapBox_MouseRightButtonUp"/>
+            <ListBox x:Name="BoxSearchMusic" Margin="0,0,0,0" Grid.Column="0" ItemTemplate="{DynamicResource BoxSearchTemplate}" Grid.Row="1" Background="#FF181515" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden" MouseDoubleClick="BoxSearchMusic_MouseDoubleClick" MouseRightButtonUp="BoxSearchMusic_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
                     <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
@@ -62,7 +63,7 @@
 
                 </ComboBox>
                 <TextBox x:Name="TextBoxSearch" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="134" Margin="45,6,0,6" MinHeight="0" VerticalContentAlignment="Center" Background="#FF2E2E2E" Foreground="White" TextChanged="TextBoxSearch_TextChanged"/>
-                <Image x:Name="LoupeImage" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="18" Margin="182,10,0,0" Source="assets/loupe.png" RenderTransformOrigin="-1.156,0.511">
+                <Image x:Name="LoupeImage" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="18" Margin="182,10,0,0" Source="assets/loupe.png" RenderTransformOrigin="-1.156,0.511" MouseRightButtonDown="LoupeImage_MouseRightButtonDown">
                     <Image.OpacityMask>
                         <ImageBrush ImageSource="assets/loupe.png"/>
                     </Image.OpacityMask>

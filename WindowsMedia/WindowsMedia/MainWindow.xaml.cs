@@ -238,7 +238,6 @@ namespace WindowsMedia
                     String[] media = this.source_.Split('\\');
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.duree_ = item.Duration;
-                    Console.Out.WriteLine("YAAAAAAAAAAAAAH            ");
                     this.MediaPlayer.Visibility = System.Windows.Visibility.Visible;
 
                     this.TotalTime.Text = this.duree_.ToString();
@@ -1047,15 +1046,23 @@ namespace WindowsMedia
         {
             if (clickStyle_ == ClickStyle.MUSIC)
             {
+                this.SecondBox.ItemsSource = null;
                 if (TextBoxSearch.Text != "")
                 {
-                    this.MainBox.ItemsSource = new MusicSearchIterator(lib_, TextBoxSearch.Text);
-                    this.MainBox.SelectedIndex = -1;
-                    this.SecondBox.ItemsSource = null;
-                    this.MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
+                    if (this.MainBox.Visibility == System.Windows.Visibility.Visible)
+                    {
+                        this.SecondBox.Visibility = System.Windows.Visibility.Hidden;
+                        this.MainBox.Visibility = System.Windows.Visibility.Hidden;
+                        this.BoxSearchMusic.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    this.BoxSearchMusic.ItemsSource = new MusicSearchIterator(lib_, TextBoxSearch.Text);
+                    this.BoxSearchMusic.SelectedIndex = -1;                   
                 }
                 else
                 {
+                    this.SecondBox.Visibility = System.Windows.Visibility.Visible;
+                    this.MainBox.Visibility = System.Windows.Visibility.Visible;
+                    this.BoxSearchMusic.Visibility = System.Windows.Visibility.Hidden;
                     if (musicStyle_ == MusicStyle.ALBUM)
                         this.MainBox.ItemsSource = new AlbumIterator(lib_);
                     else if (musicStyle_ == MusicStyle.ARTIST)
@@ -1085,6 +1092,49 @@ namespace WindowsMedia
                 }
                 else
                     this.WrapBox.ItemsSource = new MovieIterator(lib_);
+            }
+        }
+
+        private void LoupeImage_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBoxSearch.Text = "";
+        }
+
+        private void BoxSearchMusic_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && BoxSearchMusic.SelectedItems.Count > 0)
+            {
+                ResetIndexLecture();
+
+                PlaylistBox.Items.Clear();
+                PlaylistBox.Items.Add(((MediaItem)BoxSearchMusic.SelectedItem).Clone());
+                if (PlaylistBox.Items.Count > 0)
+                    SelectIndexLecture(0);
+                PlaylistBox_SourceUpdated();
+                this.state_ = State.STOP;
+                ButtonPlay_Click(sender, e);
+            }
+        }
+
+        private void BoxSearchMusic_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("click");
+
+            if (BoxSearchMusic.SelectedItems.Count > 0)
+            {
+                Console.WriteLine("lol");
+                bool WasEmpty = true;
+
+                if (PlaylistBox.Items.Count > 0)
+                    WasEmpty = false;
+                PlaylistBox.Items.Add(((MediaItem)BoxSearchMusic.SelectedItem).Clone());
+                if (WasEmpty)
+                {
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                }
+
+                PlaylistBox_SourceUpdated();
             }
         }
     }
