@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsMedia.classes;
 using Newtonsoft.Json;
+using System.Windows;
 
 namespace WindowsMedia
 {
@@ -35,6 +36,7 @@ namespace WindowsMedia
         public bool Repeat = false;
         public MusicStyle Style = MusicStyle.ALBUM;
         public List<String> BiblioFiles = new List<String>();
+        public WindowState WinState = WindowState.Normal;
     }
 
     class ConfigFile

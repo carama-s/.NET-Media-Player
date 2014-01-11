@@ -144,6 +144,10 @@ namespace WindowsMedia
                 this.ButtonArtists.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
             else
                 this.ButtonGenres.Foreground = (Brush)bc.ConvertFrom("#FF41B1E1");
+
+            // WindowsState
+
+            this.WindowState = ConfigFile.Instance.Data.WinState;
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
@@ -338,7 +342,7 @@ namespace WindowsMedia
         // Gestion du Slide de la video
         void timer_Tick(object sender, EventArgs e)
         {
-            if (currentIndexLecture_ >= 0 && ((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE)
+            if (currentIndexLecture_ >= 0 && ((MediaItem)this.PlaylistBox.Items[currentIndexLecture_]).Type != ClickStyle.IMAGE && this.duree_.TotalSeconds > 0)
             {
                 double value = (double)((this.MediaPlayer.Position.Hours * 3600) + (this.MediaPlayer.Position.Minutes * 60) + this.MediaPlayer.Position.Seconds) / (double)this.duree_.TotalSeconds;
                 oldValue = value * (double)this.SliderTime.Maximum;
@@ -1002,6 +1006,13 @@ namespace WindowsMedia
             ConfigFile.Instance.Data.Shuffle = this.isShuffle_;
             ConfigFile.Instance.Data.Volume = (int)this.SliderVolume.Value;
             ConfigFile.Instance.Data.Style = this.musicStyle_;
+            ConfigFile.Instance.Data.WinState = this.WindowState;
+
+            if (this.WindowState == System.Windows.WindowState.Maximized)
+            {
+                ConfigFile.Instance.Data.Height = 600;
+                ConfigFile.Instance.Data.Width = 800;
+            }
             ConfigFile.Instance.Write();
         }
     }
