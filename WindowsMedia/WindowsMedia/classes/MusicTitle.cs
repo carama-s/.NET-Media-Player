@@ -14,37 +14,11 @@ namespace WindowsMedia.classes
 {
     public class MusicTitle : MediaItem
     {
-        static public Uri DefaultImagePath = new Uri("../assets/defaultalbumart.png", UriKind.Relative);
         public String Album { get; private set; }
         public String Genre { get; private set; }
         public uint Year { get; private set; }
         public uint TrackNumber { get; private set; }
         public String Composer { get; private set; }
-
-        protected override BitmapImage GetImage()
-        {
-            try
-            {
-                TagLib.File tags = null;
-                tags = TagLib.File.Create(Path);
-                if (tags.Tag.Pictures.Length > 0)
-                {
-                    var img = new BitmapImage();
-                    img.BeginInit();
-                    img.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
-                    img.EndInit();
-                    return img;
-                }
-                else
-                {
-                    return new BitmapImage(DefaultImagePath);
-                }
-            }
-            catch (Exception)
-            {
-                return new BitmapImage(DefaultImagePath);
-            }
-        }
 
         public MusicTitle(String file)
         {
@@ -63,6 +37,25 @@ namespace WindowsMedia.classes
             Duration = tags.Properties.Duration;
             Type = ClickStyle.MUSIC;
             MessageColor = Colors.White;
+            try
+            {
+                if (tags.Tag.Pictures.Length > 0)
+                {
+                    Image = new BitmapImage();
+                    Image.BeginInit();
+                    Image.StreamSource = new MemoryStream(tags.Tag.Pictures[0].Data.Data);
+                    Image.EndInit();
+                }
+                else
+                {
+                    Image = DefaultImageGetter.Instance.Music;
+                }
+            }
+            catch (Exception)
+            {
+                Image = DefaultImageGetter.Instance.Music;
+            }
+            Image.Freeze();
         }
 
         public MusicTitle()
@@ -81,7 +74,8 @@ namespace WindowsMedia.classes
                                     Composer = Composer,
                                     Duration = Duration,
                                     Type = Type,
-                                    MessageColor = Colors.White
+                                    MessageColor = Colors.White,
+                                    Image = Image
             };
 
         }

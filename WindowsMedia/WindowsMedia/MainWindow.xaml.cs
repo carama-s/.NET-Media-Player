@@ -91,9 +91,30 @@ namespace WindowsMedia
 
             this.currentIndexLecture_ = -1;
 
-            lib_ = new Library();
+            lib_ = new Library(this);
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);
+        }
+
+        public void UpdateCurrentPanel()
+        {
+            Action action = delegate
+            {
+                if (clickStyle_ == ClickStyle.MUSIC)
+                {
+                    if (musicStyle_ == MusicStyle.ALBUM)
+                        MainBox.ItemsSource = new AlbumIterator(lib_);
+                    else if (musicStyle_ == MusicStyle.ARTIST)
+                        MainBox.ItemsSource = new ArtistIterator(lib_);
+                    else if (musicStyle_ == MusicStyle.GENRE)
+                        MainBox.ItemsSource = new GenreIterator(lib_);
+                }
+                else if (clickStyle_ == ClickStyle.IMAGE)
+                    WrapBox.ItemsSource = new ImageIterator(lib_);
+                else if (clickStyle_ == ClickStyle.VIDEO)
+                    WrapBox.ItemsSource = new MovieIterator(lib_);
+            };
+            Dispatcher.Invoke(action);
         }
 
         private void LoadConfigProperty()

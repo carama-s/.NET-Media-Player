@@ -30,7 +30,7 @@ namespace WindowsMedia.classes
                 if (Titles.Count > 0)
                     return Titles[0].Image;
                 else
-                    return new BitmapImage(MusicTitle.DefaultImagePath);
+                    return DefaultImageGetter.Instance.Music;
             }
             private set {}
         }

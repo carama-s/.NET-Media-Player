@@ -110,6 +110,7 @@
       <DependentUpon>BiblioWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\BiblioNameConverter.cs" />
+    <Compile Include="classes\DefaultImageGetter.cs" />
     <Compile Include="classes\MusicArtist.cs" />
     <Compile Include="classes\ConfigFile.cs" />
     <Compile Include="DeleteWindow.xaml.cs">
@@ -271,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultMusicImage.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -12,39 +12,25 @@ namespace WindowsMedia.classes
 {
     public class ImageFile : MediaItem, INotifyPropertyChanged
     {
-        static public Uri DefaultImagePath = new Uri("../assets/defaultimage.jpg", UriKind.Relative);
         public String Description { get; private set; }
-        private BitmapImage GeneratedImage { get; set; }
-
-        protected override BitmapImage GetImage()
-        {
-            if (GeneratedImage == null)
-                return new BitmapImage(DefaultImagePath);
-            else
-                return GeneratedImage;
-        }
-
-        private void BackgroundGenerateImage(object param)
-        {
-            try
-            {
-                GeneratedImage = new BitmapImage(new Uri(Path, UriKind.Absolute));
-                GeneratedImage.Freeze();
-                OnPropertyChanged("Image");
-            }
-            catch (NotSupportedException) { }
-        }
 
         public ImageFile(String path)
         {
-            GeneratedImage = null;
             Path = path;
-            ThreadPool.QueueUserWorkItem(BackgroundGenerateImage, null);
             Artist = "";
             Duration = TimeSpan.FromSeconds(0);
             Title = System.IO.Path.GetFileNameWithoutExtension(path);
             Type = ClickStyle.IMAGE;
             MessageColor = Colors.White;
+            try
+            {
+                Image = new BitmapImage(new Uri(Path, UriKind.Absolute));
+            }
+            catch (NotSupportedException)
+            {
+                Image = DefaultImageGetter.Instance.Image;
+            }
+            Image.Freeze();
         }
 
         public ImageFile()
@@ -59,7 +45,7 @@ namespace WindowsMedia.classes
                                    Title = Title, 
                                    Type = Type, 
                                    MessageColor = Colors.White,
-                                   GeneratedImage = GeneratedImage };
+                                   Image = Image };
         }
     }
 }
