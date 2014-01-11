@@ -227,7 +227,9 @@ namespace WindowsMedia.classes
 
         public void GenerateLibraryThread(object param)
         {
-            GenerateMutex.WaitOne();
+            if (!GenerateMutex.WaitOne(0))
+                return;
+            GenerateMutex.Reset();
             Medias.Clear();
             Playlists.Clear();
             int counter = 0;
