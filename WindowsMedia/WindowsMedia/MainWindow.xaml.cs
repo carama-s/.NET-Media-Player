@@ -382,9 +382,11 @@ namespace WindowsMedia
         //fullscren fonction
         private void FullScreenOn()
         {
-            this.ShowTitleBar = false;
             this.IgnoreTaskbarOnMaximize = true;
+            this.ShowTitleBar = false;
             this.WindowStyle = WindowStyle.None;
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = System.Windows.WindowState.Normal;
             this.WindowState = WindowState.Maximized;
             this.MediaPlayer.Stretch = Stretch.Uniform;
             this.SliderTime.Maximum = this.Width - 160;
