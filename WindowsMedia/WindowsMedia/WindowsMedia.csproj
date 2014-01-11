@@ -116,6 +116,11 @@
     <Compile Include="DeleteWindow.xaml.cs">
       <DependentUpon>DeleteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RenameWindow.xaml.cs">
       <DependentUpon>RenameWindow.xaml</DependentUpon>
     </Compile>
@@ -173,18 +178,13 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -209,7 +209,7 @@
     <Resource Include="assets\icone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\defaultalbumart.png" />
+    <Resource Include="Resources\defaultalbumart.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\icon-repeat-barre.png" />
@@ -227,7 +227,7 @@
     <Resource Include="assets\icon-switch-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\defaultvideoart.png" />
+    <Resource Include="Resources\defaultvideoart.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\menu-icon-blanc.png" />
@@ -236,7 +236,7 @@
     <Resource Include="assets\menu-icon-bleu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\defaultimage.jpg" />
+    <Resource Include="Resources\defaultimage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\blueplaylisticon.jpg" />
@@ -273,9 +273,7 @@
   <ItemGroup>
     <Resource Include="assets\loupe.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\DefaultMusicImage.bmp" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
