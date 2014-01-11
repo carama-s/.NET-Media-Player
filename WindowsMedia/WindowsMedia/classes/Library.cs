@@ -35,6 +35,55 @@ namespace WindowsMedia.classes
         }
     }
 
+    public class ImageSearchIterator : System.Collections.IEnumerable
+    {
+        public Library Library { get; private set; }
+        public String Match { get; private set; }
+
+        public ImageSearchIterator(Library lib, String match)
+        {
+            Library = lib;
+            Match = match.ToLower();
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var titles = from media in Library.Medias where media is ImageFile select (ImageFile)media;
+            var pics = from title in titles
+                         where title.Title.ToLower().Contains(Match)
+                         orderby title.Title
+                         select title;
+            foreach (var pic in pics)
+            {
+                yield return music;
+            }
+        }
+    }
+    public class MovieSearchIterator : System.Collections.IEnumerable
+    {
+        public Library Library { get; private set; }
+        public String Match { get; private set; }
+
+        public MovieSearchIterator(Library lib, String match)
+        {
+            Library = lib;
+            Match = match.ToLower();
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var titles = from media in Library.Medias where media is MovieFile select (MovieFile)media;
+            var musics = from title in titles
+                         where title.Title.ToLower().Contains(Match)
+                         orderby title.Title
+                         select title;
+            foreach (var music in musics)
+            {
+                yield return music;
+            }
+        }
+    }
+
     public class AlbumIterator : System.Collections.IEnumerable
     {
         public Library Library { get; private set; }
