@@ -51,6 +51,7 @@ namespace WindowsMedia
         delegate void DelegateSource(MainWindow win);
         private double oldSize_;
         public Library lib_;
+        private bool isInit;
 
         private int currentIndexLecture_;
 
@@ -69,6 +70,7 @@ namespace WindowsMedia
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            this.isInit = false;
 
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
@@ -90,10 +92,10 @@ namespace WindowsMedia
             this.SliderTime.IsMoveToPointEnabled = true;
 
             this.currentIndexLecture_ = -1;
-
             lib_ = new Library();
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);
+            this.isInit = true;
         }
 
         private void LoadConfigProperty()
@@ -662,6 +664,9 @@ namespace WindowsMedia
 
         private void BoxSelectMedia_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (this.isInit == true)
+                this.TextBoxSearch.Text = "";
+
             DelegateSourceClass del = new DelegateSourceClass();
             DelegateSource[] bind = new DelegateSource[4];
             bind[0] = new DelegateSource(del.PlaylistSource);
