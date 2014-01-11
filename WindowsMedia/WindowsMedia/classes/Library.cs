@@ -190,7 +190,8 @@ namespace WindowsMedia.classes
     {
         public delegate void MtPtr(object pars);
         public List<MediaItem> Medias { get; private set; }
-        private Mutex GenerateMutex { get; set; }
+        private ManualResetEvent GenerateMutex { get; set; }
+        private MainWindow MW { get; set; }
         public List<Playlist> Playlists { get; private set; }
         public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
@@ -199,41 +200,38 @@ namespace WindowsMedia.classes
         public static String[] PlaylistExtensions = { ".m3u" };
         public List<String> BiblioPath { get; set; }
 
-        public Library()
+        public Library(MainWindow mw)
         {
-            GenerateMutex = new Mutex(false);
+            MW = mw;
+            GenerateMutex = new ManualResetEvent(true);
             Medias = new List<MediaItem>();
             Playlists = new List<Playlist>();
         }
 
 
-        public void GenerateMedia(object param)
+        public void GenerateMedia(object path)
         {
-            var pars = (Tuple<string, ManualResetEvent>)param;
-            var media = MediaItem.Create(pars.Item1);
+            var media = MediaItem.Create((string)path);
             if (media != null)
                 lock (Medias)
                     Medias.Add(media);
-            pars.Item2.Set();
         }
 
-        public void GeneratePlaylist(object param)
+        public void GeneratePlaylist(object path)
         {
-            var pars = (Tuple<string, ManualResetEvent>)param;
-            var playlist = new Playlist(pars.Item1);
+            var playlist = new Playlist((string) path);
             lock (Playlists)
                 Playlists.Add(playlist);
-            pars.Item2.Set();
         }
 
 
-        public void GenerateLibrary()
+        public void GenerateLibraryThread(object param)
         {
             GenerateMutex.WaitOne();
             Medias.Clear();
             Playlists.Clear();
+            int counter = 0;
             var paths = new List<string>();
-            var handlers = new List<ManualResetEvent>();
             var ptr = new MtPtr(GenerateMedia);
             var tmps = new List<Tuple<String, String[], MtPtr>> {
                 Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr),
@@ -250,15 +248,24 @@ namespace WindowsMedia.classes
             {
                 try
                 {
+                    if (counter > 0)
+                    {
+                        MW.UpdateCurrentPanel();
+                        counter = 0;
+                    }
                     var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
                     foreach (String file in files)
                     {
+                        if (counter >= 64)
+                        {
+                            MW.UpdateCurrentPanel();
+                            counter = 0;
+                        }
                         if (!paths.Contains(file))
                         {
                             paths.Add(file);
-                            var handler = new ManualResetEvent(false);
-                            ThreadPool.QueueUserWorkItem(tmp.Item3.Invoke, Tuple.Create(file, handler));
-                            handlers.Add(handler);
+                            tmp.Item3.Invoke(file);
+                            counter += 1;
                         }
                     }
                 }
@@ -275,15 +282,23 @@ namespace WindowsMedia.classes
                     ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
                 }
             }
-            foreach (var handler in handlers)
-                handler.WaitOne();
-            GenerateMutex.ReleaseMutex();
             int i = 0;
             foreach (var list in Playlists)
             {
                 list.SetImage(i);
                 i++;
             }
+            if (counter > 0)
+            {
+                MW.UpdateCurrentPanel();
+                counter = 0;
+            }
+            GenerateMutex.Set();
+        }
+
+        public void GenerateLibrary()
+        {
+            ThreadPool.QueueUserWorkItem(GenerateLibraryThread);
         }
     }
 }
