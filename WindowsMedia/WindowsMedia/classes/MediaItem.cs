@@ -90,17 +90,7 @@ namespace WindowsMedia.classes
         public string Title { get; protected set; }
         public string Path { get; protected set; }
         public TimeSpan Duration { get; protected set; }
-        public BitmapImage Image
-        {
-            get
-            {
-                return GetImage();
-            }
-
-            private set { }
-        }
-
-        abstract protected BitmapImage GetImage();
+        public BitmapImage Image { get; protected set; }
 
         public void OnPropertyChanged(string propertyName)
         {
