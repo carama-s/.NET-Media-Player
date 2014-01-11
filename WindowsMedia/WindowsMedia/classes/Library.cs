@@ -55,7 +55,7 @@ namespace WindowsMedia.classes
                          select title;
             foreach (var pic in pics)
             {
-                yield return music;
+                yield return pic;
             }
         }
     }

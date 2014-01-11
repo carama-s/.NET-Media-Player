@@ -1018,9 +1018,46 @@ namespace WindowsMedia
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (TextBoxSearch.Text != "" && clickStyle_ == ClickStyle.MUSIC)
+            if (clickStyle_ == ClickStyle.MUSIC)
             {
-
+                if (TextBoxSearch.Text != "")
+                {
+                    this.MainBox.ItemsSource = new MusicSearchIterator(lib_, TextBoxSearch.Text);
+                    this.MainBox.SelectedIndex = -1;
+                    this.SecondBox.ItemsSource = null;
+                    this.MainBox.ItemTemplate = FindResource("MainAlbumTemplate") as DataTemplate;
+                }
+                else
+                {
+                    if (musicStyle_ == MusicStyle.ALBUM)
+                        this.MainBox.ItemsSource = new AlbumIterator(lib_);
+                    else if (musicStyle_ == MusicStyle.ARTIST)
+                        this.MainBox.ItemsSource = new ArtistIterator(lib_);
+                    else
+                        this.MainBox.ItemsSource = new GenreIterator(lib_);
+                }
+            }
+            else if (clickStyle_ == ClickStyle.IMAGE)
+            {
+                if (TextBoxSearch.Text != "")
+                {
+                    this.SecondBox.ItemsSource = null;
+                    this.MainBox.ItemsSource = null;
+                    this.WrapBox.ItemsSource = new ImageSearchIterator(lib_, TextBoxSearch.Text);
+                }
+                else
+                    this.WrapBox.ItemsSource = new ImageIterator(lib_);
+            }
+            else if (clickStyle_ == ClickStyle.VIDEO)
+            {
+                if (TextBoxSearch.Text != "")
+                {
+                    this.SecondBox.ItemsSource = null;
+                    this.MainBox.ItemsSource = null;
+                    this.WrapBox.ItemsSource = new MovieSearchIterator(lib_, TextBoxSearch.Text);
+                }
+                else
+                    this.WrapBox.ItemsSource = new MovieIterator(lib_);
             }
         }
     }
