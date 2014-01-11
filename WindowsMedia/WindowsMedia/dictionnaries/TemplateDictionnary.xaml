@@ -58,6 +58,9 @@
     <DataTemplate x:Key="WrapVideoTemplateItem">
         <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+            <Grid.ToolTip>
+                <Label Content="{Binding Title}" FontSize="12"/>
+            </Grid.ToolTip>
         </Grid>
     </DataTemplate>
     <!-- Template pour ListBoxWrap (Video Selected)-->
@@ -78,6 +81,9 @@
     <DataTemplate x:Key="WrapImageTemplateItem">
         <Grid Width="156.2" Height="153.6" VerticalAlignment="Center">
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Source="{Binding Image}"/>
+            <Grid.ToolTip>
+                <Label Content="{Binding Title}" FontSize="12"/>
+            </Grid.ToolTip>
         </Grid>
     </DataTemplate>
     <!-- Temlate pour ListBoxSecond (Music)-->
