@@ -1015,6 +1015,14 @@ namespace WindowsMedia
             }
             ConfigFile.Instance.Write();
         }
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TextBoxSearch.Text != "" && clickStyle_ == ClickStyle.MUSIC)
+            {
+
+            }
+        }
     }
 }
 

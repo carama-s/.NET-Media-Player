@@ -61,7 +61,7 @@
                     <ComboBoxItem Content="VIDEOS" HorizontalAlignment="Left" Width="114"/>
 
                 </ComboBox>
-                <TextBox x:Name="TextBoxSearch" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="134" Margin="45,6,0,6" MinHeight="0" VerticalContentAlignment="Center" Background="#FF2E2E2E" Foreground="White"/>
+                <TextBox x:Name="TextBoxSearch" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="134" Margin="45,6,0,6" MinHeight="0" VerticalContentAlignment="Center" Background="#FF2E2E2E" Foreground="White" TextChanged="TextBoxSearch_TextChanged"/>
                 <Image x:Name="LoupeImage" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="18" Margin="182,10,0,0" Source="assets/loupe.png" RenderTransformOrigin="-1.156,0.511">
                     <Image.OpacityMask>
                         <ImageBrush ImageSource="assets/loupe.png"/>
