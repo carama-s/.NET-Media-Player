@@ -10,6 +10,31 @@ using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
+    public class MusicSearchIterator : System.Collections.IEnumerable
+    {
+        public Library Library { get; private set; }
+        public String Match { get; private set; }
+
+        public MusicSearchIterator(Library lib, String match)
+        {
+            Library = lib;
+            Match = match.ToLower();
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
+            var musics = from title in titles
+                         where title.Album.ToLower().Contains(Match) || title.Artist.ToLower().Contains(Match) || title.Title.ToLower().Contains(Match)
+                         orderby title.Title
+                         select title;
+            foreach (var music in musics)
+            {
+                yield return music;
+            }
+        }
+    }
+
     public class AlbumIterator : System.Collections.IEnumerable
     {
         public Library Library { get; private set; }
