@@ -161,18 +161,18 @@
                 </Button>
                 <Button x:Name="ButtonRepeat" Style="{DynamicResource ButtonPlayStyle}" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,18,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1" Click="ButtonRepeat_Click">
                     <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-repeat-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-repeat-barre.png"/>
                     </Button.OpacityMask>
                     <Button.Background>
-                        <ImageBrush ImageSource="assets/icon-repeat-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-repeat-barre.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="ButtonShuffle" Style="{DynamicResource ButtonPlayStyle}" Content="" HorizontalAlignment="Center" Margin="18,0,0,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1" Click="ButtonShuffle_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="assets/icon-shuffle-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-shuffle-barre.png"/>
                     </Button.Background>
                     <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-shuffle-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-shuffle-barre.png"/>
                     </Button.OpacityMask>
                 </Button>
             </Grid>

@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using WindowsMedia.Properties;
 using System.Drawing.Imaging;
+using System.Windows.Media;
 
 namespace WindowsMedia
 {
@@ -23,6 +24,11 @@ namespace WindowsMedia
         public BitmapImage Music { get; private set; }
 
         public List<BitmapImage> Playlists { get; private set; }
+
+        public ImageBrush EnableRepeat { get; private set; }
+        public ImageBrush EnableShuffle { get; private set; }
+        public ImageBrush DisabledRepeat { get; private set; }
+        public ImageBrush DisabledShuffle { get; private set; }
 
         public static DefaultImageGetter Instance
         {
@@ -56,6 +62,16 @@ namespace WindowsMedia
             return result;
         }
 
+        static public ImageBrush ConvertToImageBrush(System.Drawing.Bitmap img)
+        {
+            var bitmap = new System.Drawing.Bitmap(img);
+            var bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            bitmap.Dispose();
+            ImageBrush result = new ImageBrush(bitmapSource);
+            result.Freeze();
+            return result;
+        }
+
         private DefaultImageGetter()
         {
             Image = ConvertToBitmapImage(Resources.DefaultPicImage);
@@ -68,6 +84,11 @@ namespace WindowsMedia
             Playlists.Add(ConvertToBitmapImage(Resources.PinkPlaylistIcon));
             Playlists.Add(ConvertToBitmapImage(Resources.PurplePlaylistIcon));
             Playlists.Add(ConvertToBitmapImage(Resources.RedPlaylistIcon));
+
+            EnableRepeat = ConvertToImageBrush(Resources.EnableRepeat);
+            EnableShuffle = ConvertToImageBrush(Resources.EnableShuffle);
+            DisabledRepeat = ConvertToImageBrush(Resources.DisableRepeat);
+            DisabledShuffle = ConvertToImageBrush(Resources.DisableShuffle);
         }
     }
 }

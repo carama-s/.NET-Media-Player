@@ -155,9 +155,8 @@ namespace WindowsMedia
             this.isRepeat_ = ConfigFile.Instance.Data.Repeat;
             if (this.isRepeat_)
             {
-                brush = createBrush("assets/icon-enable-repeat-barre.png");
-                this.ButtonRepeat.Background = brush;
-                this.ButtonRepeat.OpacityMask = brush;
+                this.ButtonRepeat.Background = DefaultImageGetter.Instance.EnableRepeat;
+                this.ButtonRepeat.OpacityMask = DefaultImageGetter.Instance.EnableRepeat;
             }
 
             // Bouton Shuffle
@@ -165,9 +164,8 @@ namespace WindowsMedia
             this.isShuffle_ = ConfigFile.Instance.Data.Shuffle;
             if (this.isShuffle_)
             {
-                brush = createBrush("assets/icon-enable-shuffle-barre.png");
-                this.ButtonShuffle.Background = brush;
-                this.ButtonShuffle.OpacityMask = brush;
+                this.ButtonShuffle.Background = DefaultImageGetter.Instance.EnableShuffle;
+                this.ButtonShuffle.OpacityMask = DefaultImageGetter.Instance.EnableShuffle;
             }
 
             // ClickMusicStyle
@@ -719,20 +717,18 @@ namespace WindowsMedia
 
         private void ButtonRepeat_Click(object sender, RoutedEventArgs e)
         {
-            ImageBrush brush;
-
             if (this.isRepeat_)
             {
                 this.isRepeat_ = false;
-                brush = createBrush("assets/icon-repeat-barre.png");
+                this.ButtonRepeat.Background = DefaultImageGetter.Instance.DisabledRepeat;
+                this.ButtonRepeat.OpacityMask = DefaultImageGetter.Instance.DisabledRepeat;
             }
             else
             {
                 this.isRepeat_ = true;
-                brush = createBrush("assets/icon-enable-repeat-barre.png");
+                this.ButtonRepeat.Background = DefaultImageGetter.Instance.EnableRepeat;
+                this.ButtonRepeat.OpacityMask = DefaultImageGetter.Instance.EnableRepeat;
             }
-            this.ButtonRepeat.Background = brush;
-            this.ButtonRepeat.OpacityMask = brush;
         }
 
         private void ButtonShuffle_Click(object sender, RoutedEventArgs e)
@@ -742,15 +738,15 @@ namespace WindowsMedia
             if (this.isShuffle_)
             {
                 this.isShuffle_ = false;
-                brush = createBrush("assets/icon-shuffle-barre.png");
+                this.ButtonShuffle.Background = DefaultImageGetter.Instance.DisabledShuffle;
+                this.ButtonShuffle.OpacityMask = DefaultImageGetter.Instance.DisabledShuffle;
             }
             else
             {
                 this.isShuffle_ = true;
-                brush = createBrush("assets/icon-enable-shuffle-barre.png");
+                this.ButtonShuffle.Background = DefaultImageGetter.Instance.EnableShuffle;
+                this.ButtonShuffle.OpacityMask = DefaultImageGetter.Instance.EnableShuffle; ;
             }
-            this.ButtonShuffle.Background = brush;
-            this.ButtonShuffle.OpacityMask = brush;
         }
 
         private void SliderTime_MouseUp(object sender, MouseButtonEventArgs e)
