@@ -245,7 +245,7 @@ namespace WindowsMedia.classes
 
         public void GenerateLibraryThreadBis(object param)
         {
-            var tmp = (Tuple<String, String[], MtPtr, ManualResetEvent>)param;
+            var tmp = (Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle>)param;
             try
             {
                 var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
@@ -263,7 +263,7 @@ namespace WindowsMedia.classes
                         tmp.Item3.Invoke(file);
                         lock (MW)
                         {
-                            MW.UpdateCurrentPanel();
+                            MW.UpdateCurrentPanel(tmp.Item5);
                         }
                     }
                 }
@@ -298,17 +298,17 @@ namespace WindowsMedia.classes
             Playlists.Clear();
             Paths.Clear();
             var ptr = new MtPtr(GenerateMedia);
-            var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent>> {
-                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false)),
-                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr, new ManualResetEvent(false)),
-                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr, new ManualResetEvent(false)),
-                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist), new ManualResetEvent(false))
+            var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle>> {
+                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false), ClickStyle.MUSIC),
+                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr, new ManualResetEvent(false), ClickStyle.VIDEO),
+                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr, new ManualResetEvent(false), ClickStyle.IMAGE),
+                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist), new ManualResetEvent(false), ClickStyle.SELECTION)
             };
             var allExtensions = new List<String>(MediaItem.MusicExtensions);
             allExtensions.AddRange(MediaItem.VideoExtensions);
             allExtensions.AddRange(MediaItem.ImageExtensions);
             foreach (var dir in ConfigFile.Instance.Data.BiblioFiles)
-                tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr, new ManualResetEvent(false)));
+                tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr, new ManualResetEvent(false), ClickStyle.ALL));
             foreach (var tmp in tmps)
                 ThreadPool.QueueUserWorkItem(GenerateLibraryThreadBis, tmp);
             foreach (var tmp in tmps)
