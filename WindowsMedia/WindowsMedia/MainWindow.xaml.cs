@@ -237,7 +237,7 @@ namespace WindowsMedia
 
                 if (this.source_ != null)
                 {
-                    brush = createBrush("assets/icon-pause-barre.png");
+                    brush = DefaultImageGetter.Instance.Pause;
                     this.state_ = State.PLAY;
                     this.MediaPlayer.Play();
                     if (oldValue == -1)
@@ -255,11 +255,11 @@ namespace WindowsMedia
 
                 }
                 else
-                    brush = createBrush("assets/icon-play-barre.png");
+                    brush = DefaultImageGetter.Instance.Play;
             }
             else // this.state_ == State.PLAY
             {
-                brush = createBrush("assets/icon-play-barre.png");
+                brush = DefaultImageGetter.Instance.Play;
                 this.state_ = State.PAUSE;
                 this.MediaPlayer.Pause();
             }
@@ -272,9 +272,8 @@ namespace WindowsMedia
         {
             if (this.state_ == State.PAUSE || this.state_ == State.PLAY)
             {
-                ImageBrush brush = createBrush("assets/icon-play-barre.png");
-                this.ButtonPlay.Background = brush;
-                this.ButtonPlay.OpacityMask = brush;
+                this.ButtonPlay.Background = DefaultImageGetter.Instance.Play;
+                this.ButtonPlay.OpacityMask = DefaultImageGetter.Instance.Play;
                 this.state_ = State.STOP;
                 this.SliderTime.Value = 0;
                 this.oldValue = -1;

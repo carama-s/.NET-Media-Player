@@ -173,9 +173,29 @@ namespace WindowsMedia.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Pause {
+            get {
+                object obj = ResourceManager.GetObject("Pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap PinkPlaylistIcon {
             get {
                 object obj = ResourceManager.GetObject("PinkPlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Play {
+            get {
+                object obj = ResourceManager.GetObject("Play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +216,16 @@ namespace WindowsMedia.Properties {
         public static System.Drawing.Bitmap RedPlaylistIcon {
             get {
                 object obj = ResourceManager.GetObject("RedPlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Stop {
+            get {
+                object obj = ResourceManager.GetObject("Stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
