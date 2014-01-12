@@ -248,24 +248,28 @@ namespace WindowsMedia.classes
             var tmp = (Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle>)param;
             try
             {
-                var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
-                foreach (String file in files)
+                foreach (var ext in tmp.Item2)
                 {
-                    var cont = false;
-                    lock (Paths)
+                    var files = Directory.GetFiles(tmp.Item1, "*" + ext, SearchOption.AllDirectories);
+                    foreach (String file in files)
                     {
-                        cont = Paths.Contains(file);
-                        if (!cont)
-                            Paths.Add(file);
-                    }
-                    if (!cont)
-                    {
-                        tmp.Item3.Invoke(file);
-                        lock (MW)
+                        var cont = false;
+                        lock (Paths)
                         {
-                            MW.UpdateCurrentPanel(tmp.Item5);
+                            cont = Paths.Contains(file);
+                            if (!cont)
+                                Paths.Add(file);
+                        }
+                        if (!cont)
+                        {
+                            tmp.Item3.Invoke(file);
+                            lock (MW)
+                            {
+                                MW.UpdateCurrentPanel(tmp.Item5);
+                            }
                         }
                     }
+
                 }
             }
             catch (DirectoryNotFoundException)
