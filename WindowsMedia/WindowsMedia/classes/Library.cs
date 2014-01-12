@@ -310,12 +310,13 @@ namespace WindowsMedia.classes
                 {
                     Directory.CreateDirectory(tmp.Item1);
                 }
-                catch (DirectoryNotFoundException) { }
+                catch (Exception) { }
             }
             catch (ArgumentException)
             {
                 ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
             }
+            catch (Exception) { }
             tmp.Item4.Set();
         }
 
