@@ -1105,6 +1105,21 @@ namespace WindowsMedia
                 else
                     this.WrapBox.ItemsSource = new MovieIterator(lib_);
             }
+            else if (clickStyle_ == ClickStyle.SELECTION)
+            {
+                if (TextBoxSearch.Text != "")
+                {
+                    this.SecondBox.ItemsSource = null;
+                    this.MainBox.ItemsSource = new PlaylistSearchIterator(lib_, TextBoxSearch.Text);
+                }
+                else
+                {
+                    List<Playlist> list = new List<Playlist>();
+                    foreach (var item in this.lib_.Playlists)
+                        list.Add((Playlist)item);
+                    this.MainBox.ItemsSource = list;
+                }
+            }
         }
 
         private void LoupeImage_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
