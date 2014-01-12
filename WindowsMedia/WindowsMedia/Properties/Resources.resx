@@ -130,6 +130,18 @@
   <data name="DefaultVideoImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defaultvideoart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DisableRepeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-repeat-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DisableShuffle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-shuffle-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnableRepeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-enable-repeat-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnableShuffle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-enable-shuffle-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="GreenPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greenplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

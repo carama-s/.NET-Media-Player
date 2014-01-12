@@ -212,16 +212,16 @@
     <Resource Include="Resources\defaultalbumart.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-repeat-barre.png" />
+    <Resource Include="Resources\icon-repeat-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-shuffle-barre.png" />
+    <Resource Include="Resources\icon-shuffle-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-enable-repeat-barre.png" />
+    <Resource Include="Resources\icon-enable-repeat-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-enable-shuffle-barre.png" />
+    <Resource Include="Resources\icon-enable-shuffle-barre.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\icon-switch-barre.png" />
@@ -273,7 +273,6 @@
   <ItemGroup>
     <Resource Include="Resources\loupe.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
