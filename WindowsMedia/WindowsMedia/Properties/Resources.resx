@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BluePlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blueplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DefaultMusicImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defaultalbumart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -126,5 +129,17 @@
   </data>
   <data name="DefaultVideoImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defaultvideoart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GreenPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\greenplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PinkPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pinkplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PurplePlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\purpleplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

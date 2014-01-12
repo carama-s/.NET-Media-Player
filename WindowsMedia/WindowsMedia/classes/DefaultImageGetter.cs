@@ -17,12 +17,12 @@ namespace WindowsMedia
     {
         private static DefaultImageGetter instance = null;
         private static readonly object Lock = new object();
-        static private Uri ImageDefaultPath = new Uri(@"assets/defaultimage.jpg", UriKind.Relative);
-        static private Uri MovieDefaultPath = new Uri(@"assets/defaultvideoart.png", UriKind.Relative);
 
         public BitmapImage Image { get; private set; }
         public BitmapImage Movie { get; private set; }
         public BitmapImage Music { get; private set; }
+
+        public List<BitmapImage> Playlists { get; private set; }
 
         public static DefaultImageGetter Instance
         {
@@ -61,6 +61,13 @@ namespace WindowsMedia
             Image = ConvertToBitmapImage(Resources.DefaultPicImage);
             Movie = ConvertToBitmapImage(Resources.DefaultVideoImage);
             Music = ConvertToBitmapImage(Resources.DefaultMusicImage);
+
+            Playlists = new List<BitmapImage>();
+            Playlists.Add(ConvertToBitmapImage(Resources.BluePlaylistIcon));
+            Playlists.Add(ConvertToBitmapImage(Resources.GreenPlaylistIcon));
+            Playlists.Add(ConvertToBitmapImage(Resources.PinkPlaylistIcon));
+            Playlists.Add(ConvertToBitmapImage(Resources.PurplePlaylistIcon));
+            Playlists.Add(ConvertToBitmapImage(Resources.RedPlaylistIcon));
         }
     }
 }

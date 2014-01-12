@@ -239,19 +239,19 @@
     <Resource Include="Resources\defaultimage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\blueplaylisticon.jpg" />
+    <Resource Include="Resources\blueplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\greenplaylisticon.jpg" />
+    <Resource Include="Resources\greenplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\pinkplaylisticon.jpg" />
+    <Resource Include="Resources\pinkplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\purpleplaylisticon.jpg" />
+    <Resource Include="Resources\purpleplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\redplaylisticon.jpg" />
+    <Resource Include="Resources\redplaylisticon.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

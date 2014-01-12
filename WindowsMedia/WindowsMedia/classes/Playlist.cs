@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
@@ -12,17 +13,20 @@ namespace WindowsMedia.classes
     {
         public List<MediaItem> Medias { get; private set; }
         public String Name { get; set; }
-        public Uri Image { get; set; }
-        private static Uri[] Icons = { new Uri("../assets/blueplaylisticon.jpg", UriKind.Relative), new Uri("../assets/greenplaylisticon.jpg", UriKind.Relative), new Uri("../assets/pinkplaylisticon.jpg", UriKind.Relative), new Uri("../assets/purpleplaylisticon.jpg", UriKind.Relative), new Uri("../assets/redplaylisticon.jpg", UriKind.Relative) };
+        public BitmapImage Image { get; set; }
+        private static object Lock = new object();
+        private static int ColorChooser = 0;
 
         public Playlist()
         {
+            SetImage();
             Name = "";
             Medias = new List<MediaItem>();
         }
 
         public Playlist(String path)
         {
+            SetImage();
             Name = Path.GetFileNameWithoutExtension(path);
             Medias = new List<MediaItem>();
             Deserialize(path);
@@ -30,6 +34,7 @@ namespace WindowsMedia.classes
 
         public Playlist(List<MediaItem> medias)
         {
+            SetImage();
             Name = "";
             Medias = new List<MediaItem>(medias);
         }
@@ -90,9 +95,14 @@ namespace WindowsMedia.classes
             return output;
         }
 
-        public void SetImage(int i)
+        public void SetImage()
         {
-            this.Image = Icons[i % 5];
+            lock (Lock)
+            {
+                Image = DefaultImageGetter.Instance.Playlists[ColorChooser++];
+                if (ColorChooser >= DefaultImageGetter.Instance.Playlists.Count)
+                    ColorChooser = 0;
+            }
         }
     }
 }

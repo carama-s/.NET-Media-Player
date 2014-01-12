@@ -284,12 +284,6 @@ namespace WindowsMedia.classes
                     ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
                 }
             }
-            int i = 0;
-            foreach (var list in Playlists)
-            {
-                list.SetImage(i);
-                i++;
-            }
             if (counter > 0)
             {
                 MW.UpdateCurrentPanel();
