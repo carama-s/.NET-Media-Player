@@ -63,6 +63,16 @@ namespace WindowsMedia.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BluePlaylistIcon {
+            get {
+                object obj = ResourceManager.GetObject("BluePlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap DefaultMusicImage {
             get {
                 object obj = ResourceManager.GetObject("DefaultMusicImage", resourceCulture);
@@ -86,6 +96,46 @@ namespace WindowsMedia.Properties {
         public static System.Drawing.Bitmap DefaultVideoImage {
             get {
                 object obj = ResourceManager.GetObject("DefaultVideoImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GreenPlaylistIcon {
+            get {
+                object obj = ResourceManager.GetObject("GreenPlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PinkPlaylistIcon {
+            get {
+                object obj = ResourceManager.GetObject("PinkPlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PurplePlaylistIcon {
+            get {
+                object obj = ResourceManager.GetObject("PurplePlaylistIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap RedPlaylistIcon {
+            get {
+                object obj = ResourceManager.GetObject("RedPlaylistIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

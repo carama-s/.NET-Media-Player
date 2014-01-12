@@ -103,6 +103,7 @@ namespace WindowsMedia
         {
             Action action = delegate
             {
+                SecondBox.ItemsSource = null;
                 if (clickStyle_ == ClickStyle.MUSIC)
                 {
                     if (musicStyle_ == MusicStyle.ALBUM)
@@ -116,6 +117,14 @@ namespace WindowsMedia
                     WrapBox.ItemsSource = new ImageIterator(lib_);
                 else if (clickStyle_ == ClickStyle.VIDEO)
                     WrapBox.ItemsSource = new MovieIterator(lib_);
+                else if (clickStyle_ == ClickStyle.SELECTION)
+                {
+                    List<Playlist> list = new List<Playlist>();
+                    foreach (var item in this.lib_.Playlists)
+                        list.Add((Playlist)item);
+                    this.MainBox.ItemsSource = list;
+                }
+
             };
             Dispatcher.Invoke(action);
         }
@@ -674,13 +683,20 @@ namespace WindowsMedia
         private void SecondBox_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (SecondBox.SelectedItems.Count > 0)
-                PlaylistBox.Items.Add(((MediaItem)SecondBox.SelectedItem).Clone());
-            if (PlaylistBox.Items.Count > 0)
             {
-                ResetIndexLecture();
-                SelectIndexLecture(0);
+                bool WasEmpty = true;
+
+                if (PlaylistBox.Items.Count > 0)
+                    WasEmpty = false;
+                if (clickStyle_ == ClickStyle.MUSIC || clickStyle_ == ClickStyle.SELECTION)
+                    PlaylistBox.Items.Add(((MediaItem)SecondBox.SelectedItem).Clone());
+                if (WasEmpty)
+                {
+                    ResetIndexLecture();
+                    SelectIndexLecture(0);
+                }
+                PlaylistBox_SourceUpdated();
             }
-            PlaylistBox_SourceUpdated();
         }
 
         private void BoxSelectMedia_SelectionChanged(object sender, SelectionChangedEventArgs e)
