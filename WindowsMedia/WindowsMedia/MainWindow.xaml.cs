@@ -32,7 +32,7 @@ namespace WindowsMedia
 
     public enum State { PLAY, STOP, PAUSE };
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
-    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
+    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO, ALL};
 
     public partial class MainWindow : MetroWindow
     {
@@ -99,30 +99,33 @@ namespace WindowsMedia
             this.isInit = true;
         }
 
-        public void UpdateCurrentPanel()
+        public void UpdateCurrentPanel(ClickStyle currentStyle)
         {
             Action action = delegate
             {
-                SecondBox.ItemsSource = null;
-                if (clickStyle_ == ClickStyle.MUSIC)
+                if (currentStyle == clickStyle_ || currentStyle == ClickStyle.ALL)
                 {
-                    if (musicStyle_ == MusicStyle.ALBUM)
-                        MainBox.ItemsSource = new AlbumIterator(lib_);
-                    else if (musicStyle_ == MusicStyle.ARTIST)
-                        MainBox.ItemsSource = new ArtistIterator(lib_);
-                    else if (musicStyle_ == MusicStyle.GENRE)
-                        MainBox.ItemsSource = new GenreIterator(lib_);
-                }
-                else if (clickStyle_ == ClickStyle.IMAGE)
-                    WrapBox.ItemsSource = new ImageIterator(lib_);
-                else if (clickStyle_ == ClickStyle.VIDEO)
-                    WrapBox.ItemsSource = new MovieIterator(lib_);
-                else if (clickStyle_ == ClickStyle.SELECTION)
-                {
-                    List<Playlist> list = new List<Playlist>();
-                    foreach (var item in this.lib_.Playlists)
-                        list.Add((Playlist)item);
-                    this.MainBox.ItemsSource = list;
+                    SecondBox.ItemsSource = null;
+                    if (clickStyle_ == ClickStyle.MUSIC)
+                    {
+                        if (musicStyle_ == MusicStyle.ALBUM)
+                            MainBox.ItemsSource = new AlbumIterator(lib_);
+                        else if (musicStyle_ == MusicStyle.ARTIST)
+                            MainBox.ItemsSource = new ArtistIterator(lib_);
+                        else if (musicStyle_ == MusicStyle.GENRE)
+                            MainBox.ItemsSource = new GenreIterator(lib_);
+                    }
+                    else if (clickStyle_ == ClickStyle.IMAGE)
+                        WrapBox.ItemsSource = new ImageIterator(lib_);
+                    else if (clickStyle_ == ClickStyle.VIDEO)
+                        WrapBox.ItemsSource = new MovieIterator(lib_);
+                    else if (clickStyle_ == ClickStyle.SELECTION)
+                    {
+                        List<Playlist> list = new List<Playlist>();
+                        foreach (var item in this.lib_.Playlists)
+                            list.Add((Playlist)item);
+                        this.MainBox.ItemsSource = list;
+                    }
                 }
 
             };
