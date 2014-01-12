@@ -100,19 +100,17 @@ namespace WindowsMedia.classes
 
         static public MediaItem Create(String path)
         {
-            if (MusicExtensions.Contains(System.IO.Path.GetExtension(path)))
+            try
             {
-                return new MusicTitle(path);
+                if (MusicExtensions.Contains(System.IO.Path.GetExtension(path)))
+                    return new MusicTitle(path);
+                else if (VideoExtensions.Contains(System.IO.Path.GetExtension(path)))
+                    return new MovieFile(path);
+                else if (ImageExtensions.Contains(System.IO.Path.GetExtension(path)))
+                    return new ImageFile(path);
+                return null;
             }
-            else if (VideoExtensions.Contains(System.IO.Path.GetExtension(path)))
-            {
-                return new MovieFile(path);
-            }
-            else if (ImageExtensions.Contains(System.IO.Path.GetExtension(path)))
-            {
-                return new ImageFile(path);
-            }
-            else
+            catch (Exception)
             {
                 return null;
             }

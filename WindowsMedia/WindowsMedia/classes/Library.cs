@@ -23,14 +23,15 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
-            var musics = from title in titles
-                         where title.Album.ToLower().Contains(Match) || title.Artist.ToLower().Contains(Match) || title.Title.ToLower().Contains(Match)
-                         orderby title.Title
-                         select title;
-            foreach (var music in musics)
+            lock (Library.Medias)
             {
-                yield return music;
+                var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
+                var musics = from title in titles
+                             where title.Album.ToLower().Contains(Match) || title.Artist.ToLower().Contains(Match) || title.Title.ToLower().Contains(Match)
+                             orderby title.Title
+                             select title;
+                foreach (var music in musics)
+                    yield return music;
             }
         }
     }
@@ -48,14 +49,15 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is ImageFile select (ImageFile)media;
-            var pics = from title in titles
-                         where title.Title.ToLower().Contains(Match)
-                         orderby title.Title
-                         select title;
-            foreach (var pic in pics)
+            lock (Library.Medias)
             {
-                yield return pic;
+                var titles = from media in Library.Medias where media is ImageFile select (ImageFile)media;
+                var pics = from title in titles
+                           where title.Title.ToLower().Contains(Match)
+                           orderby title.Title
+                           select title;
+                foreach (var pic in pics)
+                    yield return pic;
             }
         }
     }
@@ -72,14 +74,16 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is MovieFile select (MovieFile)media;
-            var musics = from title in titles
-                         where title.Title.ToLower().Contains(Match)
-                         orderby title.Title
-                         select title;
-            foreach (var music in musics)
+            lock (Library.Medias)
             {
-                yield return music;
+
+                var titles = from media in Library.Medias where media is MovieFile select (MovieFile)media;
+                var musics = from title in titles
+                             where title.Title.ToLower().Contains(Match)
+                             orderby title.Title
+                             select title;
+                foreach (var music in musics)
+                    yield return music;
             }
         }
     }
@@ -95,13 +99,14 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
-            var albums = from title in titles
-                         orderby title.Album, title.TrackNumber, title.Title //orderby title.Album, title.Artist, title.TrackNumber, title.Title
-                         group title by new { title.Album }; //group title by new { title.Artist, title.Album };
-            foreach (var album in albums)
+            lock (Library.Medias)
             {
-                yield return album.ToList();
+                var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
+                var albums = from title in titles
+                             orderby title.Album, title.TrackNumber, title.Title //orderby title.Album, title.Artist, title.TrackNumber, title.Title
+                             group title by title.Album; //group title by new { title.Artist, title.Album };
+                foreach (var album in albums)
+                    yield return album.ToList();
             }
         }
     }
@@ -117,12 +122,15 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
-            var artists = from title in titles
-                          orderby title.Artist, title.Album, title.TrackNumber, title.Title
-                          group title by title.Artist;
-            foreach (var artist in artists)
-                yield return new MusicArtist(artist.Key, artist.ToList());
+            lock (Library.Medias)
+            {
+                var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
+                var artists = from title in titles
+                              orderby title.Artist, title.Album, title.TrackNumber, title.Title
+                              group title by title.Artist;
+                foreach (var artist in artists)
+                    yield return new MusicArtist(artist.Key, artist.ToList());
+            }
         }
     }
 
@@ -137,12 +145,16 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
-            var genres = from title in titles
-                         orderby title.Genre, title.Album, title.TrackNumber, title.Title
-                         group title by title.Genre;
-            foreach (var genre in genres)
-                yield return new MusicArtist(genre.Key, genre.ToList());
+            lock (Library.Medias)
+            {
+
+                var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
+                var genres = from title in titles
+                             orderby title.Genre, title.Album, title.TrackNumber, title.Title
+                             group title by title.Genre;
+                foreach (var genre in genres)
+                    yield return new MusicArtist(genre.Key, genre.ToList());
+            }
         }
     }
 
@@ -157,11 +169,14 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var images = from media in Library.Medias where media is ImageFile select (ImageFile)media;
-            var sorted = from image in images orderby Path.GetFileName(image.Path) select image;
-            foreach (var image in sorted)
+            lock (Library.Medias)
             {
-                yield return image;
+                var images = from media in Library.Medias where media is ImageFile select (ImageFile)media;
+                var sorted = from image in images orderby Path.GetFileName(image.Path) select image;
+                foreach (var image in sorted)
+                {
+                    yield return image;
+                }
             }
         }
     }
@@ -177,11 +192,12 @@ namespace WindowsMedia.classes
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            var movies = from media in Library.Medias where media is MovieFile select (MovieFile)media;
-            var sorted = from movie in movies orderby Path.GetFileName(movie.Path) select movie;
-            foreach (var movie in sorted)
+            lock (Library.Medias)
             {
-                yield return movie;
+                var movies = from media in Library.Medias where media is MovieFile select (MovieFile)media;
+                var sorted = from movie in movies orderby Path.GetFileName(movie.Path) select movie;
+                foreach (var movie in sorted)
+                    yield return movie;
             }
         }
     }
@@ -192,7 +208,8 @@ namespace WindowsMedia.classes
         public List<MediaItem> Medias { get; private set; }
         public List<Playlist> Playlists { get; private set; }
         public List<String> BiblioPath { get; set; }
-        private ManualResetEvent GenerateMutex { get; set; }
+        private Boolean GenerateMutex = false;
+        private object GenerateMutexLock = new object();
         private MainWindow MW { get; set; }
         private List<String> Paths { get; set; }
 
@@ -206,7 +223,6 @@ namespace WindowsMedia.classes
         {
             MW = mw;
             Paths = new List<string>();
-            GenerateMutex = new ManualResetEvent(true);
             Medias = new List<MediaItem>();
             Playlists = new List<Playlist>();
         }
@@ -235,15 +251,21 @@ namespace WindowsMedia.classes
                 var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
                 foreach (String file in files)
                 {
-                var cont = false;
-                lock (Paths)
+                    var cont = false;
+                    lock (Paths)
                     {
-                    cont = Paths.Contains(file);
-                    if (!cont)
-                        Paths.Add(file);
+                        cont = Paths.Contains(file);
+                        if (!cont)
+                            Paths.Add(file);
                     }
-                if (!cont)
+                    if (!cont)
+                    {
                         tmp.Item3.Invoke(file);
+                        lock (MW)
+                        {
+                            MW.UpdateCurrentPanel();
+                        }
+                    }
                 }
             }
             catch (DirectoryNotFoundException)
@@ -258,22 +280,23 @@ namespace WindowsMedia.classes
             {
                 ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
             }
-            lock (MW)
-            {
-                MW.UpdateCurrentPanel();
-            }
             tmp.Item4.Set();
         }
 
         public void GenerateLibraryThread(object param)
         {
-            if (!GenerateMutex.WaitOne(0))
-                return;
-            GenerateMutex.Reset();
-            Medias.Clear();
+            lock (GenerateMutexLock)
+            {
+                if (GenerateMutex)
+                    return;
+                GenerateMutex = true;
+            }
+            lock (Medias)
+            {
+                Medias.Clear();
+            }
             Playlists.Clear();
             Paths.Clear();
-            var handlers = new List<ManualResetEvent>();
             var ptr = new MtPtr(GenerateMedia);
             var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent>> {
                 Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false)),
@@ -288,9 +311,12 @@ namespace WindowsMedia.classes
                 tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr, new ManualResetEvent(false)));
             foreach (var tmp in tmps)
                 ThreadPool.QueueUserWorkItem(GenerateLibraryThreadBis, tmp);
-            foreach (var l in handlers)
-                l.WaitOne();
-            GenerateMutex.Set();
+            foreach (var tmp in tmps)
+                tmp.Item4.WaitOne();
+            lock (GenerateMutexLock)
+            {
+                GenerateMutex = false;
+            }
         }
 
         public void GenerateLibrary()
