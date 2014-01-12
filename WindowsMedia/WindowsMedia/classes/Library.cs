@@ -97,8 +97,8 @@ namespace WindowsMedia.classes
         {
             var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
             var albums = from title in titles
-                         orderby title.Album, title.Artist, title.TrackNumber, title.Title
-                         group title by new { title.Artist, title.Album };
+                         orderby title.Album, title.TrackNumber, title.Title //orderby title.Album, title.Artist, title.TrackNumber, title.Title
+                         group title by new { title.Album }; //group title by new { title.Artist, title.Album };
             foreach (var album in albums)
             {
                 yield return album.ToList();
@@ -139,7 +139,7 @@ namespace WindowsMedia.classes
         {
             var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
             var genres = from title in titles
-                         orderby title.Genre, title.Album, title.Artist, title.TrackNumber, title.Title
+                         orderby title.Genre, title.Album, title.TrackNumber, title.Title
                          group title by title.Genre;
             foreach (var genre in genres)
                 yield return new MusicArtist(genre.Key, genre.ToList());
