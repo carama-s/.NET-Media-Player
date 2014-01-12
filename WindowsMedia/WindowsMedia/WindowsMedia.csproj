@@ -202,11 +202,11 @@
     <Resource Include="Resources\icon-pause-barre.png" />
     <Resource Include="Resources\icon-play-barre.png" />
     <Resource Include="Resources\icon-stop-barre.png" />
-    <Resource Include="assets\icon-volume1-barre.png" />
-    <Resource Include="assets\icon-volume2-barre.png" />
-    <Resource Include="assets\icon-volumemax-barre.png" />
-    <Resource Include="assets\icon-volumemute-barre.png" />
-    <Resource Include="assets\icone.png" />
+    <Resource Include="Resources\icon-volume1-barre.png" />
+    <Resource Include="Resources\icon-volume2-barre.png" />
+    <Resource Include="Resources\icon-volumemax-barre.png" />
+    <Resource Include="Resources\icon-volumemute-barre.png" />
+    <Resource Include="Resources\icone.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\defaultalbumart.png" />
@@ -224,16 +224,16 @@
     <Resource Include="Resources\icon-enable-shuffle-barre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-switch-barre.png" />
+    <Resource Include="Resources\icon-switch-barre.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\defaultvideoart.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\menu-icon-blanc.png" />
+    <Resource Include="Resources\menu-icon-blanc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\menu-icon-bleu.png" />
+    <Resource Include="Resources\menu-icon-bleu.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\defaultimage.jpg" />
@@ -273,6 +273,7 @@
   <ItemGroup>
     <Resource Include="Resources\loupe.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

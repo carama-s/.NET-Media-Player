@@ -350,12 +350,12 @@
 
         <Setter Property="Background">
             <Setter.Value>
-                <ImageBrush ImageSource="../assets/menu-icon-blanc.png"/>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-blanc.png"/>
             </Setter.Value>
         </Setter>
         <Setter Property="OpacityMask">
             <Setter.Value>
-                <ImageBrush ImageSource="../assets/menu-icon-blanc.png"/>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-blanc.png"/>
             </Setter.Value>
         </Setter>
         
