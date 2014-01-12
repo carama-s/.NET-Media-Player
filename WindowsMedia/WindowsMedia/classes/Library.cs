@@ -10,6 +10,28 @@ using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
+    public class PlaylistSearchIterator : System.Collections.IEnumerable
+    {
+        public Library Library { get; private set; }
+        public String Match { get; private set; }
+
+        public PlaylistSearchIterator(Library lib, String match)
+        {
+            Library = lib;
+            Match = match.ToLower();
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            lock (Library.Playlists)
+            {
+                var playlists = from playlist in Library.Playlists where playlist.Name.ToLower().Contains(Match) select playlist;
+                foreach (var playlist in playlists)
+                    yield return playlist;
+            }
+        }
+    }
+
     public class MusicSearchIterator : System.Collections.IEnumerable
     {
         public Library Library { get; private set; }
@@ -309,7 +331,10 @@ namespace WindowsMedia.classes
             {
                 Medias.Clear();
             }
-            Playlists.Clear();
+            lock (Playlists)
+            {
+                Playlists.Clear();
+            }
             Paths.Clear();
             var ptr = new MtPtr(GenerateMedia);
             var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle, int>> {
