@@ -125,8 +125,8 @@ namespace WindowsMedia.classes
             {
                 var titles = from media in Library.Medias where media is MusicTitle select (MusicTitle)media;
                 var albums = from title in titles
-                             orderby title.Album, title.TrackNumber, title.Title //orderby title.Album, title.Artist, title.TrackNumber, title.Title
-                             group title by title.Album; //group title by new { title.Artist, title.Album };
+                             orderby title.Album, title.TrackNumber, title.Title
+                             group title by title.Album;
                 foreach (var album in albums)
                     yield return album.ToList();
             }
@@ -239,7 +239,7 @@ namespace WindowsMedia.classes
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
-        public static String[] PlaylistExtensions = { ".m3u" };
+        public static String PlaylistExtension = ".m3u";
 
         public Library(MainWindow mw)
         {
@@ -257,17 +257,36 @@ namespace WindowsMedia.classes
                     Medias.Add(media);
         }
 
-        public void GeneratePlaylist(object path)
+        public void GenerateLibraryThreadPlaylist(object param)
         {
-            var playlist = new Playlist((string) path);
-            lock (Playlists)
-                Playlists.Add(playlist);
+            var handler = (ManualResetEvent)param;
+            try
+            {
+                var files = Directory.GetFiles(PlaylistPath, "*" + PlaylistExtension, SearchOption.AllDirectories);
+                foreach (String file in files)
+                {
+                    var playlist = new Playlist(file);
+                    lock (Playlists)
+                        Playlists.Add(playlist);
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                try
+                {
+                    Directory.CreateDirectory(PlaylistPath);
+                }
+                catch (DirectoryNotFoundException) { }
+            }
+            lock (MW)
+                MW.UpdateCurrentPanel(ClickStyle.SELECTION);
+            handler.Set();
         }
 
-        public void GenerateLibraryThreadBis(object param)
+        public void GenerateLibraryThreadMedia(object param)
         {
-            var tmp = (Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle, int>)param;
-            int counter = 0;
+            var tmp = (Tuple<String, String[], ManualResetEvent, ClickStyle, int>)param;
+            var done = new List<MediaItem>();
             try
             {
                 foreach (var ext in tmp.Item2)
@@ -284,24 +303,29 @@ namespace WindowsMedia.classes
                         }
                         if (!cont)
                         {
-                            tmp.Item3.Invoke(file);
-                            if (++counter >= tmp.Item6)
+                            var media = MediaItem.Create(file);
+                            if (media != null)
                             {
-                                lock (MW)
+                                done.Add(media);
+                                if (done.Count >= tmp.Item5)
                                 {
-                                    MW.UpdateCurrentPanel(tmp.Item5);
+                                    lock (Medias)
+                                        Medias.AddRange(done);
+                                    done.Clear();
+                                    lock (MW)
+                                        MW.UpdateCurrentPanel(tmp.Item4);
                                 }
-                                counter = 0;
                             }
                         }
                     }
                 }
-                if (counter > 0)
+                if (done.Count > 0)
                 {
+                    lock (Medias)
+                        Medias.AddRange(done);
+                    done.Clear();
                     lock (MW)
-                    {
-                        MW.UpdateCurrentPanel(tmp.Item5);
-                    }
+                        MW.UpdateCurrentPanel(tmp.Item4);
                 }
             }
             catch (DirectoryNotFoundException)
@@ -316,7 +340,7 @@ namespace WindowsMedia.classes
             {
                 ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
             }
-            tmp.Item4.Set();
+            tmp.Item3.Set();
         }
 
         public void GenerateLibraryThread(object param)
@@ -328,35 +352,33 @@ namespace WindowsMedia.classes
                 GenerateMutex = true;
             }
             lock (Medias)
-            {
                 Medias.Clear();
-            }
             lock (Playlists)
-            {
                 Playlists.Clear();
-            }
-            Paths.Clear();
-            var ptr = new MtPtr(GenerateMedia);
-            var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent, ClickStyle, int>> {
-                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false), ClickStyle.MUSIC, 100),
-                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr, new ManualResetEvent(false), ClickStyle.VIDEO, 1),
-                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr, new ManualResetEvent(false), ClickStyle.IMAGE, 1),
-                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist), new ManualResetEvent(false), ClickStyle.SELECTION, 1)
+            lock (Paths)
+                Paths.Clear();
+            var playlistHandler = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem(GenerateLibraryThreadPlaylist, playlistHandler);
+            var tmps = new List<Tuple<String, String[], ManualResetEvent, ClickStyle, int>> {
+                Tuple.Create(MusicPath, MediaItem.MusicExtensions, new ManualResetEvent(false), ClickStyle.MUSIC, 100),
+                Tuple.Create(VideoPath, MediaItem.VideoExtensions, new ManualResetEvent(false), ClickStyle.VIDEO, 1),
+                Tuple.Create(ImagePath, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 100),
             };
             foreach (var dir in ConfigFile.Instance.Data.BiblioFiles)
             {
-                tmps.Add(Tuple.Create(dir, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false), ClickStyle.MUSIC, 100));
-                tmps.Add(Tuple.Create(dir, MediaItem.VideoExtensions, ptr, new ManualResetEvent(false), ClickStyle.VIDEO, 1));
-                tmps.Add(Tuple.Create(dir, MediaItem.ImageExtensions, ptr, new ManualResetEvent(false), ClickStyle.IMAGE, 1));
+                tmps.Add(Tuple.Create(dir, MediaItem.MusicExtensions, new ManualResetEvent(false), ClickStyle.MUSIC, 100));
+                tmps.Add(Tuple.Create(dir, MediaItem.VideoExtensions, new ManualResetEvent(false), ClickStyle.VIDEO, 1));
+                tmps.Add(Tuple.Create(dir, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 100));
             }
             foreach (var tmp in tmps)
-                ThreadPool.QueueUserWorkItem(GenerateLibraryThreadBis, tmp);
+                ThreadPool.QueueUserWorkItem(GenerateLibraryThreadMedia, tmp);
+            playlistHandler.WaitOne();
             foreach (var tmp in tmps)
-                tmp.Item4.WaitOne();
+                tmp.Item3.WaitOne();
+            lock (Paths)
+                Paths.Clear();
             lock (GenerateMutexLock)
-            {
                 GenerateMutex = false;
-            }
         }
 
         public void GenerateLibrary()
