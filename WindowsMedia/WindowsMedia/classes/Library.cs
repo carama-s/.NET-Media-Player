@@ -249,14 +249,6 @@ namespace WindowsMedia.classes
             Playlists = new List<Playlist>();
         }
 
-        public void GenerateMedia(object path)
-        {
-            var media = MediaItem.Create((string)path);
-            if (media != null)
-                lock (Medias)
-                    Medias.Add(media);
-        }
-
         public void GenerateLibraryThreadPlaylist(object param)
         {
             var handler = (ManualResetEvent)param;
@@ -266,9 +258,9 @@ namespace WindowsMedia.classes
                 foreach (String file in files)
                 {
                     var playlist = new Playlist(file);
-            lock (Playlists)
-                Playlists.Add(playlist);
-        }
+                    lock (Playlists)
+                        Playlists.Add(playlist);
+                }
             }
             catch (DirectoryNotFoundException)
             {
@@ -327,14 +319,6 @@ namespace WindowsMedia.classes
                     lock (MW)
                         MW.UpdateCurrentPanel(tmp.Item4);
                 }
-            }
-            catch (DirectoryNotFoundException)
-            {
-                try
-                {
-                    Directory.CreateDirectory(tmp.Item1);
-                }
-                catch (Exception) { }
             }
             catch (ArgumentException)
             {
