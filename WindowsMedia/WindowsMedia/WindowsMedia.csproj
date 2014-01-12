@@ -198,7 +198,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\icon-next-barre.png" />
+    <Resource Include="Resources\icon-next-barre.png" />
     <Resource Include="assets\icon-pause-barre.png" />
     <Resource Include="assets\icon-play-barre.png" />
     <Resource Include="assets\icon-stop-barre.png" />

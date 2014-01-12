@@ -120,10 +120,10 @@
                 </Button>
                 <Button x:Name="ButtonNext" Content="" Grid.Column="5" HorizontalAlignment="Center" Height="25" Margin="0" VerticalAlignment="Center" Width="43" BorderThickness="0" Click="ForwardButtonMediaElement" Style="{DynamicResource ButtonPlayStyle}">
                     <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-next-barre.png"/>
                     </Button.OpacityMask>
                     <Button.Background>
-                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-next-barre.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="ButtonPrev" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="43" Margin="0" Height="25" Grid.Column="3" BorderThickness="0" RenderTransformOrigin="0.5,0.5" Click="BackButtonMediaElement" Style="{DynamicResource ButtonPlayStyle}">
@@ -136,10 +136,10 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                     <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-next-barre.png"/>
                     </Button.OpacityMask>
                     <Button.Background>
-                        <ImageBrush ImageSource="assets/icon-next-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-next-barre.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="ButtonStop" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Margin="0" Height="25" BorderThickness="0" Click="ButtonStop_Click" Grid.Column="2" Style="{DynamicResource ButtonPlayStyle}">
