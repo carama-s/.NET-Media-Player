@@ -190,19 +190,22 @@ namespace WindowsMedia.classes
     {
         public delegate void MtPtr(object pars);
         public List<MediaItem> Medias { get; private set; }
+        public List<Playlist> Playlists { get; private set; }
+        public List<String> BiblioPath { get; set; }
         private ManualResetEvent GenerateMutex { get; set; }
         private MainWindow MW { get; set; }
-        public List<Playlist> Playlists { get; private set; }
+        private List<String> Paths { get; set; }
+
         public static String MusicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
         public static String VideoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         public static String ImagePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public static String PlaylistPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Playlists");
         public static String[] PlaylistExtensions = { ".m3u" };
-        public List<String> BiblioPath { get; set; }
 
         public Library(MainWindow mw)
         {
             MW = mw;
+            Paths = new List<string>();
             GenerateMutex = new ManualResetEvent(true);
             Medias = new List<MediaItem>();
             Playlists = new List<Playlist>();
@@ -224,6 +227,43 @@ namespace WindowsMedia.classes
                 Playlists.Add(playlist);
         }
 
+        public void GenerateLibraryThreadBis(object param)
+        {
+            var tmp = (Tuple<String, String[], MtPtr, ManualResetEvent>)param;
+            try
+            {
+                var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
+                foreach (String file in files)
+                {
+                    var cont = false;
+                    lock (Paths)
+                    {
+                        cont = Paths.Contains(file);
+                        if (!cont)
+                            Paths.Add(file);
+                    }
+                    if (!cont)
+                        tmp.Item3.Invoke(file);
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                try
+                {
+                    Directory.CreateDirectory(tmp.Item1);
+                }
+                catch (DirectoryNotFoundException) { }
+            }
+            catch (ArgumentException)
+            {
+                ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
+            }
+            lock (MW)
+            {
+                MW.UpdateCurrentPanel();
+            }
+            tmp.Item4.Set();
+        }
 
         public void GenerateLibraryThread(object param)
         {
@@ -232,69 +272,24 @@ namespace WindowsMedia.classes
             GenerateMutex.Reset();
             Medias.Clear();
             Playlists.Clear();
-            int counter = 0;
-            var paths = new List<string>();
+            Paths.Clear();
+            var handlers = new List<ManualResetEvent>();
             var ptr = new MtPtr(GenerateMedia);
-            var tmps = new List<Tuple<String, String[], MtPtr>> {
-                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr),
-                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr),
-                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr),
-                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist))
+            var tmps = new List<Tuple<String, String[], MtPtr, ManualResetEvent>> {
+                Tuple.Create(MusicPath, MediaItem.MusicExtensions, ptr, new ManualResetEvent(false)),
+                Tuple.Create(VideoPath, MediaItem.VideoExtensions, ptr, new ManualResetEvent(false)),
+                Tuple.Create(ImagePath, MediaItem.ImageExtensions, ptr, new ManualResetEvent(false)),
+                Tuple.Create(PlaylistPath, PlaylistExtensions, new MtPtr(GeneratePlaylist), new ManualResetEvent(false))
             };
             var allExtensions = new List<String>(MediaItem.MusicExtensions);
             allExtensions.AddRange(MediaItem.VideoExtensions);
             allExtensions.AddRange(MediaItem.ImageExtensions);
             foreach (var dir in ConfigFile.Instance.Data.BiblioFiles)
-                tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr));
+                tmps.Add(Tuple.Create(dir, allExtensions.ToArray(), ptr, new ManualResetEvent(false)));
             foreach (var tmp in tmps)
-            {
-                try
-                {
-                    if (counter > 0)
-                    {
-                        MW.UpdateCurrentPanel();
-                        counter = 0;
-                    }
-                    var files = Directory.GetFileSystemEntries(tmp.Item1, "*.*", SearchOption.AllDirectories).Where(p => tmp.Item2.Contains(Path.GetExtension(p)));
-                    foreach (String file in files)
-                    {
-                        if (counter >= 64)
-                        {
-                            MW.UpdateCurrentPanel();
-                            counter = 0;
-                        }
-                        if (!paths.Contains(file))
-                        {
-                            paths.Add(file);
-                            tmp.Item3.Invoke(file);
-                            counter += 1;
-                        }
-                    }
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(tmp.Item1);
-                    }
-                    catch (DirectoryNotFoundException) { }
-                }
-                catch (ArgumentException)
-                {
-                    ConfigFile.Instance.Data.BiblioFiles.Remove(tmp.Item1);
-                }
-            }
-            int i = 0;
-            foreach (var list in Playlists)
-            {
-                list.SetImage(i);
-                i++;
-            }
-            if (counter > 0)
-            {
-                MW.UpdateCurrentPanel();
-                counter = 0;
-            }
+                ThreadPool.QueueUserWorkItem(GenerateLibraryThreadBis, tmp);
+            foreach (var l in handlers)
+                l.WaitOne();
             GenerateMutex.Set();
         }
 
