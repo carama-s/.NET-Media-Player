@@ -730,8 +730,6 @@ namespace WindowsMedia
 
         private void ButtonShuffle_Click(object sender, RoutedEventArgs e)
         {
-            ImageBrush brush;
-
             if (this.isShuffle_)
             {
                 this.isShuffle_ = false;
