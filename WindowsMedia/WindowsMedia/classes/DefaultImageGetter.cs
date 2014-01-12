@@ -29,6 +29,8 @@ namespace WindowsMedia
         public ImageBrush EnableShuffle { get; private set; }
         public ImageBrush DisabledRepeat { get; private set; }
         public ImageBrush DisabledShuffle { get; private set; }
+        public ImageBrush Play { get; private set; }
+        public ImageBrush Pause { get; private set; }
 
         public static DefaultImageGetter Instance
         {
@@ -89,6 +91,9 @@ namespace WindowsMedia
             EnableShuffle = ConvertToImageBrush(Resources.EnableShuffle);
             DisabledRepeat = ConvertToImageBrush(Resources.DisableRepeat);
             DisabledShuffle = ConvertToImageBrush(Resources.DisableShuffle);
+            Play = ConvertToImageBrush(Resources.Play);
+            Pause = ConvertToImageBrush(Resources.Pause);
+
         }
     }
 }

@@ -199,9 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon-next-barre.png" />
-    <Resource Include="assets\icon-pause-barre.png" />
-    <Resource Include="assets\icon-play-barre.png" />
-    <Resource Include="assets\icon-stop-barre.png" />
+    <Resource Include="Resources\icon-pause-barre.png" />
+    <Resource Include="Resources\icon-play-barre.png" />
+    <Resource Include="Resources\icon-stop-barre.png" />
     <Resource Include="assets\icon-volume1-barre.png" />
     <Resource Include="assets\icon-volume2-barre.png" />
     <Resource Include="assets\icon-volumemax-barre.png" />
