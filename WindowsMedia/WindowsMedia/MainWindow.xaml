@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="WindowsMedia" MinWidth="480" MinHeight="340" Icon="assets/icone.png" Closed="MetroWindow_Closed">
+        Title="WindowsMedia" MinWidth="480" MinHeight="340" Icon="pack://application:,,,/Resources/icone.png" Closed="MetroWindow_Closed">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,10 +44,10 @@
                 <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
                         <MenuItem.OpacityMask>
-                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.OpacityMask>
                         <MenuItem.Background>
-                            <ImageBrush ImageSource="assets/menu-icon-bleu.png"/>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.Background>
                         <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
                         <MenuItem InputGestureText="Ctrl+B" Style="{DynamicResource MenuItemStyle}" Header="Bibliothèque..." Click="OpenBiblioWindow"/>
@@ -153,10 +153,10 @@
                 <Slider x:Name="SliderVolume" Grid.Column="6" HorizontalAlignment="Right" Margin="0,15,20,15" VerticalAlignment="Center" Width="68" ValueChanged="SliderVolume_ValueChanged" Maximum="100" Height="17"/>
                 <Button x:Name="ButtonVolume" Content="" Grid.Column="6" HorizontalAlignment="Left" Margin="34,10,0,11" VerticalAlignment="Center" Width="30" Height="26" BorderThickness="0" Click="ButtonVolume_Click" Style="{DynamicResource ButtonPlayStyle}">
                     <Button.OpacityMask>
-                        <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-volumemax-barre.png"/>
                     </Button.OpacityMask>
                     <Button.Background>
-                        <ImageBrush ImageSource="assets/icon-volumemax-barre.png"/>
+                        <ImageBrush ImageSource="pack://application:,,,/Resources/icon-volumemax-barre.png"/>
                     </Button.Background>
                 </Button>
                 <Button x:Name="ButtonRepeat" Style="{DynamicResource ButtonPlayStyle}" Content="" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,18,0" VerticalAlignment="Center" Width="27" Height="27" BorderThickness="1" Click="ButtonRepeat_Click">
@@ -178,10 +178,10 @@
             </Grid>
             <Button x:Name="ButtonSwitch" Style="{DynamicResource ButtonPlayStyle}" Content="" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="21" Margin="0,0,18,14" Height="21" Click="ButtonSwitch_Click" BorderThickness="0">
                 <Button.Background>
-                    <ImageBrush ImageSource="assets/icon-switch-barre.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/icon-switch-barre.png"/>
                 </Button.Background>
                 <Button.OpacityMask>
-                    <ImageBrush ImageSource="assets/icon-switch-barre.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/icon-switch-barre.png"/>
                 </Button.OpacityMask>
             </Button>
         </Grid>

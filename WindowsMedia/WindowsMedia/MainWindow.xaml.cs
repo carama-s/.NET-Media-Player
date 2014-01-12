@@ -481,13 +481,13 @@ namespace WindowsMedia
             ImageBrush brush;
 
             if (value == 0)
-                brush = createBrush("assets/icon-volumemute-barre.png");
+                brush = DefaultImageGetter.Instance.Mute;
             else if (value >= 0.1 && value < 34)
-                brush = createBrush("assets/icon-volume1-barre.png");
+                brush = DefaultImageGetter.Instance.Volume1;
             else if (value >= 34 && value <= 67)
-                brush = createBrush("assets/icon-volume2-barre.png");
+                brush = DefaultImageGetter.Instance.Volume2;
             else
-                brush = createBrush("assets/icon-volumemax-barre.png");
+                brush = DefaultImageGetter.Instance.Volume3;
             return (brush);
         }
 
@@ -1130,11 +1130,8 @@ namespace WindowsMedia
 
         private void BoxSearchMusic_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("click");
-
             if (BoxSearchMusic.SelectedItems.Count > 0)
             {
-                Console.WriteLine("lol");
                 bool WasEmpty = true;
 
                 if (PlaylistBox.Items.Count > 0)
@@ -1145,7 +1142,6 @@ namespace WindowsMedia
                     ResetIndexLecture();
                     SelectIndexLecture(0);
                 }
-
                 PlaylistBox_SourceUpdated();
             }
         }

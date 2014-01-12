@@ -31,6 +31,10 @@ namespace WindowsMedia
         public ImageBrush DisabledShuffle { get; private set; }
         public ImageBrush Play { get; private set; }
         public ImageBrush Pause { get; private set; }
+        public ImageBrush Mute { get; private set; }
+        public ImageBrush Volume1 { get; private set; }
+        public ImageBrush Volume2 { get; private set; }
+        public ImageBrush Volume3 { get; private set; }
 
         public static DefaultImageGetter Instance
         {
@@ -93,7 +97,10 @@ namespace WindowsMedia
             DisabledShuffle = ConvertToImageBrush(Resources.DisableShuffle);
             Play = ConvertToImageBrush(Resources.Play);
             Pause = ConvertToImageBrush(Resources.Pause);
-
+            Mute = ConvertToImageBrush(Resources.Mute);
+            Volume1 = ConvertToImageBrush(Resources.Volume1);
+            Volume2 = ConvertToImageBrush(Resources.Volume2);
+            Volume3 = ConvertToImageBrush(Resources.Volume3);
         }
     }
 }
