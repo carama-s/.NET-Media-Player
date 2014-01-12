@@ -32,7 +32,7 @@ namespace WindowsMedia
 
     public enum State { PLAY, STOP, PAUSE };
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
-    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO, ALL};
+    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO};
 
     public partial class MainWindow : MetroWindow
     {
@@ -103,7 +103,7 @@ namespace WindowsMedia
         {
             Action action = delegate
             {
-                if (currentStyle == clickStyle_ || currentStyle == ClickStyle.ALL)
+                if (currentStyle == clickStyle_)
                 {
                     SecondBox.ItemsSource = null;
                     if (clickStyle_ == ClickStyle.MUSIC)
