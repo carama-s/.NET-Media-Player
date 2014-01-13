@@ -1,8 +1,9 @@
 ﻿<Controls:MetroWindow x:Class="WindowsMedia.BiblioWindow"
+        xmlns:properties="clr-namespace:WindowsMedia.Properties"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="BiblioWindow" Height="480" Width="480" ResizeMode="NoResize">
+        Title="{x:Static properties:Resources.BiblioWindowTitle}" Height="480" Width="480" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,11 +23,11 @@
             <RowDefinition Height="118*"/>
             <RowDefinition Height="21*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="LabelTitre" Content="Emplacement des bibliothèques" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" Padding="10,5,5,5"/>
+        <Label x:Name="LabelTitre" Content="{x:Static properties:Resources.LabelBiblio}" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" Padding="10,5,5,5"/>
         <ListBox x:Name="ListBoxBiblio" Margin="10,0,0,0" Grid.Row="1" Background="#FF2E2E2E" ItemTemplate="{StaticResource ListBibliTemplate}"/>
-        <Button x:Name="ButtonAdd" Content="Ajouter..." HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0" Grid.Row="1" FontWeight="Bold" Foreground="#FF575555" Style="{DynamicResource ButtonStyleSubWindow}" VerticalContentAlignment="Center" Width="75" Padding="0" Height="25" Click="ButtonAdd_Click"/>
-        <Button x:Name="ButtonDelete" Content="Supprimer" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0,36,0,0" Grid.Row="1" FontWeight="Bold" Foreground="#FF575555" BorderThickness="0" Style="{DynamicResource ButtonStyleSubWindow}" Width="75" VerticalContentAlignment="Center" Padding="0" Height="25" Click="ButtonDelete_Click"/>
-        <Button x:Name="ButtonOK" Content="Valider" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" Style="{DynamicResource ButtonStyleSubWindow}" VerticalContentAlignment="Center" Width="75" Padding="0" Height="25" Click="ButtonOK_Click"/>
-        <Button x:Name="ButtonCancel" Content="Annuler" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,0,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" BorderThickness="0" Style="{DynamicResource ButtonStyleSubWindow}" Width="75" VerticalContentAlignment="Center" Padding="0" Height="25" RenderTransformOrigin="0.5,0.508" Click="ButtonCancel_Click"/>
+        <Button x:Name="ButtonAdd" Content="{x:Static properties:Resources.ButtonAdd}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0" Grid.Row="1" FontWeight="Bold" Foreground="#FF575555" Style="{DynamicResource ButtonStyleSubWindow}" VerticalContentAlignment="Center" Width="75" Padding="0" Height="25" Click="ButtonAdd_Click"/>
+        <Button x:Name="ButtonDelete" Content="{x:Static properties:Resources.ButtonDel}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="0,36,0,0" Grid.Row="1" FontWeight="Bold" Foreground="#FF575555" BorderThickness="0" Style="{DynamicResource ButtonStyleSubWindow}" Width="75" VerticalContentAlignment="Center" Padding="0" Height="25" Click="ButtonDelete_Click"/>
+        <Button x:Name="ButtonOK" Content="{x:Static properties:Resources.ButtonOk}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" Style="{DynamicResource ButtonStyleSubWindow}" VerticalContentAlignment="Center" Width="75" Padding="0" Height="25" Click="ButtonOK_Click"/>
+        <Button x:Name="ButtonCancel" Content="{x:Static properties:Resources.ButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,0,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" BorderThickness="0" Style="{DynamicResource ButtonStyleSubWindow}" Width="75" VerticalContentAlignment="Center" Padding="0" Height="25" RenderTransformOrigin="0.5,0.508" Click="ButtonCancel_Click"/>
     </Grid>
 </Controls:MetroWindow>
