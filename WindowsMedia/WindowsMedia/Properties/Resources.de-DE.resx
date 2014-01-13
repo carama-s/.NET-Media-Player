@@ -118,120 +118,120 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddWindowTitle" xml:space="preserve">
-    <value>Ajouter une sélection</value>
+    <value>Zur Wiedergabeliste hinzufügen</value>
   </data>
   <data name="BiblioWindowTitle" xml:space="preserve">
-    <value>Gérer la bibliothèque</value>
+    <value>Bibliothek verwalten</value>
   </data>
   <data name="BoxElements" xml:space="preserve">
-    <value>éléments</value>
+    <value>Elemente</value>
   </data>
   <data name="ButtonAdd" xml:space="preserve">
-    <value>Ajouter...</value>
+    <value>Hinzufügen...</value>
   </data>
   <data name="ButtonAlbum" xml:space="preserve">
-    <value>Albums</value>
+    <value>Alben</value>
   </data>
   <data name="ButtonArtist" xml:space="preserve">
-    <value>Artistes</value>
+    <value>Künstler</value>
   </data>
   <data name="ButtonCancel" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Stornieren</value>
   </data>
   <data name="ButtonDel" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Entfernen</value>
   </data>
   <data name="ButtonGenre" xml:space="preserve">
     <value>Genres</value>
   </data>
   <data name="ButtonOk" xml:space="preserve">
-    <value>Valider</value>
+    <value>Bestätigen</value>
   </data>
   <data name="ButtonPlaylistAdd" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>Hinzufügen</value>
   </data>
   <data name="ButtonPlaylistDel" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Entfernen</value>
   </data>
   <data name="ButtonPlaylistRename" xml:space="preserve">
-    <value>Renommer</value>
+    <value>Wieder ernennen</value>
   </data>
   <data name="DeleteWindowTitle" xml:space="preserve">
-    <value>Supprimer une sélection</value>
+    <value>Löschen einer Auswahl</value>
   </data>
   <data name="LabelAdd" xml:space="preserve">
-    <value>Nom de la sélection :</value>
+    <value>Nennen Auswah l:</value>
   </data>
   <data name="LabelBiblio" xml:space="preserve">
-    <value>Emplacement des bibliothèques</value>
+    <value>Bibliothek Standorte</value>
   </data>
   <data name="LabelDel" xml:space="preserve">
-    <value>Etes-vous sûr de vouloir effacer la sélection</value>
+    <value>Sind Sie sicher, dass Sie die Auswahl löschen möchten</value>
   </data>
   <data name="LabelEmpty" xml:space="preserve">
-    <value>Le nom de la sélection ne peut pas être vide !</value>
+    <value>Der Name der Auswahl kann nicht leer sein !</value>
   </data>
   <data name="LabelLang" xml:space="preserve">
-    <value>La langue actuelle est :</value>
+    <value>Die aktuelle Sprache ist :</value>
   </data>
   <data name="LabelPlaylist" xml:space="preserve">
-    <value>La liste de lecture est vide !</value>
+    <value>Die Playlist ist leer !</value>
   </data>
   <data name="LabelRename" xml:space="preserve">
-    <value>Nom de la sélection :</value>
+    <value>Nennen Auswahl :</value>
   </data>
   <data name="LabelRestart" xml:space="preserve">
-    <value>Les changements seront pris en compte au prochain démarrage</value>
+    <value>Die Änderungen werden beim nächsten Start berücksichtigt werden</value>
   </data>
   <data name="LabelUsed" xml:space="preserve">
-    <value>Le nom saisi est déjà utilisé par une autre sélection !</value>
+    <value>Der eingegebene Name wird bereits von einem anderen Auswahl verwendet !</value>
   </data>
   <data name="LangWindowTitle" xml:space="preserve">
-    <value>Selectionner une langue</value>
+    <value>Wählen Sie eine Sprache</value>
   </data>
   <data name="MenuExit" xml:space="preserve">
-    <value>Quitter</value>
+    <value>Verlassen</value>
   </data>
   <data name="MenuImage" xml:space="preserve">
-    <value>IMAGES</value>
+    <value>BILDER</value>
   </data>
   <data name="MenuLanguage" xml:space="preserve">
-    <value>Langues</value>
+    <value>Sprachen</value>
   </data>
   <data name="MenuLibrary" xml:space="preserve">
-    <value>Bibliothèques...</value>
+    <value>Bibliotheken...</value>
   </data>
   <data name="MenuMusic" xml:space="preserve">
-    <value>MUSIQUES</value>
+    <value>MUSIK</value>
   </data>
   <data name="MenuOpen" xml:space="preserve">
-    <value>Ouvrir...</value>
+    <value>Öffnen...</value>
   </data>
   <data name="MenuRefresh" xml:space="preserve">
-    <value>Rafraîchir</value>
+    <value>Aktualisieren</value>
   </data>
   <data name="MenuSelection" xml:space="preserve">
-    <value>SELECTIONS</value>
+    <value>AUSWAHL</value>
   </data>
   <data name="MenuVideo" xml:space="preserve">
     <value>VIDEOS</value>
   </data>
   <data name="RenameWindowTitle" xml:space="preserve">
-    <value>Renommer une sélection</value>
+    <value>Benennen Sie eine Auswahl</value>
   </data>
   <data name="StringDeutch" xml:space="preserve">
-    <value>Allemand</value>
+    <value>Deutsch</value>
   </data>
   <data name="StringEnglish" xml:space="preserve">
-    <value>Anglais</value>
+    <value>Englisch</value>
   </data>
   <data name="StringFrench" xml:space="preserve">
-    <value>Français</value>
+    <value>Französisch</value>
   </data>
   <data name="StringItalian" xml:space="preserve">
-    <value>Italien</value>
+    <value>Italienisch</value>
   </data>
   <data name="StringSpanish" xml:space="preserve">
-    <value>Espagnol</value>
+    <value>Spanisch</value>
   </data>
 </root>
