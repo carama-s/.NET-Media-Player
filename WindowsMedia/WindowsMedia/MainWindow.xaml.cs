@@ -36,7 +36,7 @@ namespace WindowsMedia
     public enum State { PLAY, STOP, PAUSE };
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
     public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
-    public enum Language { FRENCH, ENGLISH, GERMAN, SPANISH, ITALIAN}
+    public enum Language { FRENCH, ENGLISH, GERMAN, SPANISH, ITALIAN }
 
     public partial class MainWindow : MetroWindow
     {
@@ -222,6 +222,8 @@ namespace WindowsMedia
                 OpenBiblioWindow(sender, e);
             else if ((e.Key == Key.F5))
                 RefreshLib(sender, e);
+            else if ((e.Key == Key.L) && Keyboard.IsKeyDown(Key.LeftCtrl))
+                LanguageChange(sender, e);
         }
 
         // Gestion bouton Play/Pause

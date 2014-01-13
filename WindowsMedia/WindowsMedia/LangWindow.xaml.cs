@@ -46,7 +46,7 @@ namespace WindowsMedia
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
             this.ListBoxLang.ItemsSource = Display;
-            LabelLang.Content = lang[(int)parent.Lang];
+            this.LabelTitre.DataContext = Display.ElementAt((int)parent.Lang);
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
