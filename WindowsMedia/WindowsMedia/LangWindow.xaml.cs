@@ -22,9 +22,9 @@ namespace WindowsMedia
     public class LangItem
     {
         public string Text { get; set; }
-        public Uri Image { get; set; }
+        public BitmapImage Image { get; set; }
 
-        public LangItem(string lang, Uri image)
+        public LangItem(string lang, BitmapImage image)
         {
             Text = lang;
             Image = image;
@@ -37,7 +37,7 @@ namespace WindowsMedia
 
         public LangWindow(MainWindow parent)
         {
-            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, null), new LangItem(Properties.Resources.StringEnglish, null), new LangItem(Properties.Resources.StringDeutch, null), new LangItem(Properties.Resources.StringSpanish, null), new LangItem(Properties.Resources.StringItalian, null) };
+            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, Properties.Resources.German), new LangItem(Properties.Resources.StringEnglish, null), new LangItem(Properties.Resources.StringDeutch, null), new LangItem(Properties.Resources.StringSpanish, null), new LangItem(Properties.Resources.StringItalian, null) };
             ParentWindow = parent;
             InitializeComponent();
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
