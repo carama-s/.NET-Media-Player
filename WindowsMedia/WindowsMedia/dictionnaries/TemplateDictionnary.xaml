@@ -143,12 +143,13 @@
     </DataTemplate>
     <!-- Temlate pour ListBoxLang-->
     <DataTemplate x:Key="ListLangTemplate">
-        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
-                <Image Source="{Binding Image}"/>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Text}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
-            </StackPanel>
+        <Grid Height="60" d:DesignWidth="307.2" d:DesignHeight="132" Width="Auto">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="61*"/>
+        		<ColumnDefinition Width="246*"/>
+        	</Grid.ColumnDefinitions>
+        	<Image Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Stretch" Width="44.324" Source="{Binding Image}" Margin="10,10,0,10"/>
+        	<Label Content="{Binding Text}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="158.2" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="0,10,0,0"/>
         </Grid>
     </DataTemplate>
     <!-- Temlate pour ListBoxSearch (Music)-->

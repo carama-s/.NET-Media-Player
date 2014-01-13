@@ -73,7 +73,7 @@ namespace WindowsMedia
             if (ListBoxLang.SelectedIndex != (int)ParentWindow.Lang)
                 WarningBox.Visibility = System.Windows.Visibility.Visible;  
             else
-                WarningBox.Visibility = System.Windows.Visibility.Visible;
+                WarningBox.Visibility = System.Windows.Visibility.Hidden;
         }
     }
 }
