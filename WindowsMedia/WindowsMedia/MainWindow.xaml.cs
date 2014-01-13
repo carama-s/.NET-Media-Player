@@ -31,7 +31,7 @@ namespace WindowsMedia
 
     public enum State { PLAY, STOP, PAUSE };
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
-    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO};
+    public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
 
     public partial class MainWindow : MetroWindow
     {
@@ -62,7 +62,6 @@ namespace WindowsMedia
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
 
             InitializeComponent();
-
             this.Width = ConfigFile.Instance.Data.Width;
             this.Height = ConfigFile.Instance.Data.Height;
         }
@@ -96,6 +95,28 @@ namespace WindowsMedia
             lib_.GenerateLibrary();
             BoxSelectMedia_SelectionChanged(sender, null);
             this.isInit = true;
+            string[] cmdLine = Environment.GetCommandLineArgs();
+            if (cmdLine.Length > 1 && (MediaItem.MusicExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1])) || MediaItem.ImageExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1])) || MediaItem.VideoExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1]))))
+                PlayFromString(cmdLine[1]);
+        }
+
+        public void PlayFromString(string path)
+        {
+            this.source_ = path;
+
+            MediaItem item = MediaItem.Create(path);
+            if (item != null)
+            {
+                PlaylistBox.Items.Clear();
+                PlaylistBox.Items.Add(item);
+                ResetIndexLecture();
+                SelectIndexLecture(0);
+                this.state_ = State.STOP;
+                PlaylistBox_SourceUpdated();
+                MediaPlayer.Stop();
+                this.state_ = State.STOP;
+                this.ButtonPlay_Click(null, null);
+            }
         }
 
         public void UpdateCurrentPanel(ClickStyle currentStyle)
@@ -812,25 +833,8 @@ namespace WindowsMedia
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.Filter = "Media files | *.mp3; .flac; .m4a; *.mp4; *.avi; *.wmv; *.jpeg; *.png; *.jpg; *.bmp";
             Nullable<bool> result = dlg.ShowDialog();
-
             if (result == true)
-            {
-                this.source_ = dlg.FileName;
-
-                MediaItem item = MediaItem.Create(dlg.FileName);
-                if (item != null)
-                {
-                    PlaylistBox.Items.Clear();
-                    PlaylistBox.Items.Add(item);
-                    ResetIndexLecture();
-                    SelectIndexLecture(0);
-                    this.state_ = State.STOP;
-                    PlaylistBox_SourceUpdated();
-                MediaPlayer.Stop();
-                this.state_ = State.STOP;
-                this.ButtonPlay_Click(sender, e);
-            }
-        }
+                PlayFromString(dlg.FileName);
         }
 
 
@@ -1067,7 +1071,7 @@ namespace WindowsMedia
                         this.BoxSearchMusic.Visibility = System.Windows.Visibility.Visible;
                     }
                     this.BoxSearchMusic.ItemsSource = new MusicSearchIterator(lib_, TextBoxSearch.Text);
-                    this.BoxSearchMusic.SelectedIndex = -1;                   
+                    this.BoxSearchMusic.SelectedIndex = -1;
                 }
                 else
                 {
