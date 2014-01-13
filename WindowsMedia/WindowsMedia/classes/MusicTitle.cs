@@ -24,16 +24,13 @@ namespace WindowsMedia.classes
         {
             var tags = TagLib.File.Create(file);
             Path = file;
-            Artist = tags.Tag.FirstPerformer;
-            Album = tags.Tag.Album;
-            if (tags.Tag.FirstGenre != null)
-                Genre = tags.Tag.FirstGenre;
-            else
-                Genre = "Inconnu";
-            Year = tags.Tag.Year;
-            TrackNumber = tags.Tag.Track;
-            Title = tags.Tag.Title;
-            Composer = tags.Tag.FirstComposer;
+            Artist = (tags.Tag.FirstPerformer != null) ? tags.Tag.FirstPerformer : "Inconnu";
+            Album = (tags.Tag.Album != null) ? tags.Tag.Album : "Inconnu";
+            Genre = (tags.Tag.FirstGenre != null) ? tags.Tag.FirstGenre : "Inconnu";
+            Year = (tags.Tag.Year != null) ? tags.Tag.Year : 0;
+            TrackNumber = (tags.Tag.Track != null) ? tags.Tag.Track : 0;
+            Title = (tags.Tag.Title != null) ? tags.Tag.Title : System.IO.Path.GetFileNameWithoutExtension(Path);
+            Composer = (tags.Tag.FirstComposer != null) ? tags.Tag.FirstComposer : "Inconnu";
             Duration = tags.Properties.Duration;
             Type = ClickStyle.MUSIC;
             MessageColor = Colors.White;
