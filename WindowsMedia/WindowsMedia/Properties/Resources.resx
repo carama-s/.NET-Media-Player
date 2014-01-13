@@ -184,8 +184,20 @@
   <data name="EnableShuffle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-enable-shuffle-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="English" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drapeau-royaume-uni-icone-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="French" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drapeau-france-icone-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="German" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drapeau-allemagne-icone-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="GreenPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greenplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Italian" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drapeau-italien-icone-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LabelAdd" xml:space="preserve">
     <value>Nom de la sélection :</value>
@@ -261,6 +273,9 @@
   </data>
   <data name="RenameWindowTitle" xml:space="preserve">
     <value>Renommer une sélection</value>
+  </data>
+  <data name="Spanish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drapeau-espagne-icone-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-stop-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
