@@ -46,10 +46,14 @@ namespace WindowsMedia
         {
             this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Hidden;
             this.LabelWarningUsed.Visibility = System.Windows.Visibility.Hidden;
+            this.LabelWarningIncorrect.Visibility = System.Windows.Visibility.Hidden;
+
             if (TextBoxRename.Text == "")
                 this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Visible;
             else if (ParentWindow.lib_.Playlists.Find(x => x.Name == TextBoxRename.Text) != null)
                 this.LabelWarningUsed.Visibility = System.Windows.Visibility.Visible;
+            else if (TextBoxRename.Text.Where(c => System.IO.Path.GetInvalidFileNameChars().Contains(c)).Count() > 0)
+                this.LabelWarningIncorrect.Visibility = System.Windows.Visibility.Visible;
             else
             {
                 System.IO.File.Move(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"), System.IO.Path.Combine(Library.PlaylistPath, TextBoxRename.Text + ".m3u"));
@@ -57,9 +61,9 @@ namespace WindowsMedia
                 {
                     Playlist temp = new Playlist(((Playlist)ParentWindow.MainBox.SelectedItem).Medias);
                     temp.Name = TextBoxRename.Text;
-                    ParentWindow.lib_.Playlists.RemoveAt(ParentWindow.MainBox.SelectedIndex);
+                    ParentWindow.lib_.Playlists.RemoveAll(x => x.Name == InitName);
                     ParentWindow.lib_.Playlists.Insert(ParentWindow.MainBox.SelectedIndex, temp);
-                    ParentWindow.MainBox.ItemsSource = ParentWindow.lib_.Playlists;
+                    ParentWindow.MainBox.ItemsSource = new PlaylistIterator(ParentWindow.lib_);
                 }
                 this.Close();
             }

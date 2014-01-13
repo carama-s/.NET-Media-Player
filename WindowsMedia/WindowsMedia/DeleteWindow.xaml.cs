@@ -44,11 +44,16 @@ namespace WindowsMedia
 
         private void BoutonValider_Click(object sender, RoutedEventArgs e)
         {
-            System.IO.File.Delete(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"));
+            Console.WriteLine("########## " + InitName + " ###########");
             lock (ParentWindow.lib_.Playlists)
             {
-                ParentWindow.lib_.Playlists.RemoveAt(ParentWindow.lib_.Playlists.FindIndex(x => x.Name == InitName));
-                ParentWindow.MainBox.ItemsSource = ParentWindow.lib_.Playlists;
+                ParentWindow.lib_.Playlists.RemoveAll(x => x.Name == InitName);
+                try
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"));
+                }
+                catch (Exception) { }
+                ParentWindow.MainBox.ItemsSource = new PlaylistIterator(ParentWindow.lib_);
             }
             this.Close();
         }

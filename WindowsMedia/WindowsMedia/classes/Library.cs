@@ -10,6 +10,26 @@ using System.Xml.Serialization;
 
 namespace WindowsMedia.classes
 {
+    public class PlaylistIterator : System.Collections.IEnumerable
+    {
+        public Library Library { get; private set; }
+
+        public PlaylistIterator(Library lib)
+        {
+            Library = lib;
+        }
+
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            lock (Library.Playlists)
+            {
+                var playlists = from playlist in Library.Playlists orderby playlist.Name select playlist;
+                foreach (var playlist in playlists)
+                    yield return playlist;
+            }
+        }
+    }
+
     public class PlaylistSearchIterator : System.Collections.IEnumerable
     {
         public Library Library { get; private set; }
@@ -25,7 +45,7 @@ namespace WindowsMedia.classes
         {
             lock (Library.Playlists)
             {
-                var playlists = from playlist in Library.Playlists where playlist.Name.ToLower().Contains(Match) select playlist;
+                var playlists = from playlist in Library.Playlists where playlist.Name.ToLower().Contains(Match) orderby playlist.Name select playlist;
                 foreach (var playlist in playlists)
                     yield return playlist;
             }

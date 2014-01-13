@@ -56,6 +56,8 @@ namespace WindowsMedia.classes
 
         public void SaveToFile()
         {
+            foreach (var c in System.IO.Path.GetInvalidFileNameChars())
+                Name = Name.Replace(c.ToString(), "_");
             var file = new StreamWriter(Path.Combine(Library.PlaylistPath, Name + ".m3u"));
             file.Write(Serialize());
             file.Close();

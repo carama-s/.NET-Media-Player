@@ -353,6 +353,15 @@ namespace WindowsMedia.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Le nom saisi contient des caractères invalides !.
+        /// </summary>
+        public static string LabelIncorrect {
+            get {
+                return ResourceManager.GetString("LabelIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à La langue actuelle est :.
         /// </summary>
         public static string LabelLang {

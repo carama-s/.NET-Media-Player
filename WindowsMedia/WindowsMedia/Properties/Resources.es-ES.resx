@@ -171,6 +171,9 @@
   <data name="LabelEmpty" xml:space="preserve">
     <value>El nombre de la selección no puede estar vacío!</value>
   </data>
+  <data name="LabelIncorrect" xml:space="preserve">
+    <value>El nombre que escribió contiene caracteres no válidos !</value>
+  </data>
   <data name="LabelLang" xml:space="preserve">
     <value>El idioma actual es :</value>
   </data>
@@ -218,9 +221,6 @@
   </data>
   <data name="RenameWindowTitle" xml:space="preserve">
     <value>Cambiar el nombre de una selección</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="StringDeutch" xml:space="preserve">
     <value>Alemán</value>

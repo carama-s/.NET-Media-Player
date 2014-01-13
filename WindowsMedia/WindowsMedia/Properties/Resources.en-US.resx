@@ -171,6 +171,9 @@
   <data name="LabelEmpty" xml:space="preserve">
     <value>The name cannot be empty !</value>
   </data>
+  <data name="LabelIncorrect" xml:space="preserve">
+    <value>The name contains incorrect characters !</value>
+  </data>
   <data name="LabelLang" xml:space="preserve">
     <value>Actual language :</value>
   </data>

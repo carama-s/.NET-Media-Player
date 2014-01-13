@@ -21,5 +21,6 @@
         <Label x:Name="LabelWarningUsed" Content="{x:Static properties:Resources.LabelUsed}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
         <Label x:Name="LabelWarningEmpty" Content="{x:Static properties:Resources.LabelEmpty}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
         <Label x:Name="LabelWarningPlaylist" Content="{x:Static properties:Resources.LabelPlaylist}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
+        <Label x:Name="LabelWarningIncorrect" Content="{x:Static properties:Resources.LabelIncorrect}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
     </Grid>
 </Controls:MetroWindow>

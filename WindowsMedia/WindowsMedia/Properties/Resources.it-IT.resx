@@ -171,6 +171,9 @@
   <data name="LabelEmpty" xml:space="preserve">
     <value>Il nome della selezione non può essere vuoto !</value>
   </data>
+  <data name="LabelIncorrect" xml:space="preserve">
+    <value>Il nome che avete inserito contiene caratteri non validi !</value>
+  </data>
   <data name="LabelLang" xml:space="preserve">
     <value>La lingua corrente è :</value>
   </data>

@@ -43,6 +43,8 @@ namespace WindowsMedia
 
         private void BoutonValider_Click(object sender, RoutedEventArgs e)
         {
+            this.LabelWarningPlaylist.Visibility = System.Windows.Visibility.Hidden;
+            this.LabelWarningIncorrect.Visibility = System.Windows.Visibility.Hidden;
             this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Hidden;
             this.LabelWarningUsed.Visibility = System.Windows.Visibility.Hidden;
             if (this.ParentWindow.PlaylistBox.Items.Count <= 0)
@@ -51,6 +53,8 @@ namespace WindowsMedia
                 this.LabelWarningEmpty.Visibility = System.Windows.Visibility.Visible;
             else if (ParentWindow.lib_.Playlists.Find(x => x.Name == TextBoxAdd.Text) != null)
                 this.LabelWarningUsed.Visibility = System.Windows.Visibility.Visible;
+            else if (TextBoxAdd.Text.Where(c => System.IO.Path.GetInvalidFileNameChars().Contains(c)).Count() > 0)
+                this.LabelWarningIncorrect.Visibility = System.Windows.Visibility.Visible;
             else
             {
                 Playlist actual = new Playlist();
@@ -61,7 +65,7 @@ namespace WindowsMedia
                 lock (ParentWindow.lib_.Playlists)
                 {
                     ParentWindow.lib_.Playlists.Add(actual);
-                    ParentWindow.MainBox.ItemsSource = ParentWindow.lib_.Playlists;
+                    ParentWindow.MainBox.ItemsSource = new PlaylistIterator(ParentWindow.lib_);
                 }
                 this.Close();
             }
