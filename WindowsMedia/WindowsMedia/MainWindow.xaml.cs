@@ -65,7 +65,7 @@ namespace WindowsMedia
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Lang = ConfigFile.Instance.Data.Lang;
-            String[] tab = { "CultureFR", "CultureEN", "CultureGE", "CultureSP", "CultureIT" };
+            String[] tab = { "CultureFR", "CultureUS", "CultureGE", "CultureSP", "CultureIT" };
             Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings[tab[(int)this.Lang]]);
 
             InitializeComponent();
@@ -273,6 +273,7 @@ namespace WindowsMedia
                         this.CurrentTime.Text = "00:00:00";
                         this.SliderTime.Value = 0;
                     }
+
                     String[] media = this.source_.Split('\\');
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.duree_ = item.Duration;
@@ -1171,6 +1172,13 @@ namespace WindowsMedia
                 }
                 PlaylistBox_SourceUpdated();
             }
+        }
+
+        private void LanguageChange(object sender, RoutedEventArgs e)
+        {
+            LangWindow win = new LangWindow(this);
+            win.Owner = this;
+            win.ShowDialog();
         }
     }
 }
