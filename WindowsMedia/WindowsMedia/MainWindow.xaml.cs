@@ -21,7 +21,6 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
-using MyToolkit.Multimedia;
 using System.Net.Http;
 
 namespace WindowsMedia
