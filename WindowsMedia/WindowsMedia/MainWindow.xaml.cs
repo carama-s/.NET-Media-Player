@@ -849,7 +849,7 @@ namespace WindowsMedia
 
         private void OpenBiblioWindow(object sender, RoutedEventArgs e)
         {
-            var newwindow = new LangWindow(this);
+            var newwindow = new BiblioWindow(this);
             newwindow.Owner = this;
             newwindow.ShowDialog();
         }
