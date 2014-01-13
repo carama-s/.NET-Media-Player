@@ -37,7 +37,7 @@ namespace WindowsMedia
 
         public LangWindow(MainWindow parent)
         {
-            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, Properties.Resources.German), new LangItem(Properties.Resources.StringEnglish, null), new LangItem(Properties.Resources.StringDeutch, null), new LangItem(Properties.Resources.StringSpanish, null), new LangItem(Properties.Resources.StringItalian, null) };
+            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, DefaultImageGetter.Instance.French), new LangItem(Properties.Resources.StringEnglish, DefaultImageGetter.Instance.English), new LangItem(Properties.Resources.StringDeutch, DefaultImageGetter.Instance.German), new LangItem(Properties.Resources.StringSpanish, DefaultImageGetter.Instance.Spanish), new LangItem(Properties.Resources.StringItalian, DefaultImageGetter.Instance.Italian) };
             ParentWindow = parent;
             InitializeComponent();
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);

@@ -211,14 +211,23 @@
   <data name="LabelEmpty" xml:space="preserve">
     <value>Le nom de la sélection ne peut pas être vide !</value>
   </data>
+  <data name="LabelLang" xml:space="preserve">
+    <value>La langue actuelle est :</value>
+  </data>
   <data name="LabelPlaylist" xml:space="preserve">
     <value>La liste de lecture est vide !</value>
   </data>
   <data name="LabelRename" xml:space="preserve">
     <value>Nom de la sélection :</value>
   </data>
+  <data name="LabelRestart" xml:space="preserve">
+    <value>Les changement seronts pris en comptes au prochains démarrage</value>
+  </data>
   <data name="LabelUsed" xml:space="preserve">
     <value>Le nom saisi est déjà utilisé par une autre sélection !</value>
+  </data>
+  <data name="LangWindowTitle" xml:space="preserve">
+    <value>Selectionner une langue</value>
   </data>
   <data name="Loupe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loupe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

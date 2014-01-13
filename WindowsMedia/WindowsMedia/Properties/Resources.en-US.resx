@@ -171,14 +171,23 @@
   <data name="LabelEmpty" xml:space="preserve">
     <value>The name cannot be empty !</value>
   </data>
+  <data name="LabelLang" xml:space="preserve">
+    <value>Actual language</value>
+  </data>
   <data name="LabelPlaylist" xml:space="preserve">
     <value>The playlist is empty !</value>
   </data>
   <data name="LabelRename" xml:space="preserve">
     <value>Playlist name :</value>
   </data>
+  <data name="LabelRestart" xml:space="preserve">
+    <value>The changes will become effectives in the next start</value>
+  </data>
   <data name="LabelUsed" xml:space="preserve">
     <value>This name is already used by another playlist !</value>
+  </data>
+  <data name="LangWindowTitle" xml:space="preserve">
+    <value>Select a language</value>
   </data>
   <data name="MenuExit" xml:space="preserve">
     <value>Exit</value>

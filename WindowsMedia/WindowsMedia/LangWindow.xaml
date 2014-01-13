@@ -27,5 +27,6 @@
         <ListBox x:Name="ListBoxLang"  Background="#FF2E2E2E" ItemTemplate="{StaticResource ListLangTemplate}" RenderTransformOrigin="0.5,0.5" Margin="29,0.4,32.8,63" Grid.Row="1" Grid.RowSpan="2"/>
         <Button x:Name="ButtonOK" Content="{x:Static properties:Resources.ButtonOk}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,101.6,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" Style="{DynamicResource ButtonStyleSubWindow}" VerticalContentAlignment="Center" Width="75" Padding="0" Height="25" Click="ButtonOK_Click"/>
         <Button x:Name="ButtonCancel" Content="{x:Static properties:Resources.ButtonCancel}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="300,0,9.8,20" Grid.Row="2" FontWeight="Bold" Foreground="#FF575555" BorderThickness="0" Style="{DynamicResource ButtonStyleSubWindow}" Width="75" VerticalContentAlignment="Center" Padding="0" Height="25" RenderTransformOrigin="0.5,0.508" Click="ButtonCancel_Click"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="10,18.2,0,0" Grid.Row="2" VerticalAlignment="Top" Height="25" Width="174"/>
     </Grid>
 </Controls:MetroWindow>
