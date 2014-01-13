@@ -520,6 +520,51 @@ namespace WindowsMedia.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allemand.
+        /// </summary>
+        public static string StringDeutch {
+            get {
+                return ResourceManager.GetString("StringDeutch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anglais.
+        /// </summary>
+        public static string StringEnglish {
+            get {
+                return ResourceManager.GetString("StringEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Français.
+        /// </summary>
+        public static string StringFrench {
+            get {
+                return ResourceManager.GetString("StringFrench", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Italien.
+        /// </summary>
+        public static string StringItalian {
+            get {
+                return ResourceManager.GetString("StringItalian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Espagnol.
+        /// </summary>
+        public static string StringSpanish {
+            get {
+                return ResourceManager.GetString("StringSpanish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Volume1 {

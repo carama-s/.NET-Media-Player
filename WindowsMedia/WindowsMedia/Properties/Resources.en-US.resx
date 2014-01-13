@@ -210,4 +210,19 @@
   <data name="RenameWindowTitle" xml:space="preserve">
     <value>Rename a playlist</value>
   </data>
+  <data name="StringDeutch" xml:space="preserve">
+    <value>Deutch</value>
+  </data>
+  <data name="StringEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="StringFrench" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="StringItalian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="StringSpanish" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
 </root>

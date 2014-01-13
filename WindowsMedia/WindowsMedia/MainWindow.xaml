@@ -50,15 +50,15 @@
                         <MenuItem.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.Background>
-                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="{x:Static properties:Resources.MenuOpen}" Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="{Binding Source={x:Static properties:Resources.MenuOpen}}" Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" InputGestureText="Ctrl+B"  Header="{x:Static properties:Resources.MenuLibrary}" Click="OpenBiblioWindow" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" InputGestureText="F5" Header="{x:Static properties:Resources.MenuRefresh}" Click="RefreshLib" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" Header="{x:Static properties:Resources.MenuLanguage}" Foreground="White" BorderThickness="0" Padding="0,6" FontSize="12" Style="{DynamicResource MenuItemStyle}" >
-                            <MenuItem Background="#FF181515" Header="Français" FontSize="12" Padding="0,6" BorderThickness="0" Style="{DynamicResource MenuItemStyle}" Click="MenuItemFrench_Click"/>
-                            <MenuItem Background="#FF181515" Header="Anglais" FontSize="12" Padding="0,6" Click="MenuItemEnglish_Click"/>
-                            <MenuItem Background="#FF181515" Header="Allemand" FontSize="12" Padding="0,6" Click="MenuItemGerman_Click"/>
-                            <MenuItem Background="#FF181515" Header="Espagnol" FontSize="12" Padding="0,6" Click="MenuItemSpanish_Click"/>
-                            <MenuItem Background="#FF181515" Header="Italien" FontSize="12" Padding="0,6" Click="MenuItemItalian_Click"/>
+                            <MenuItem Background="#FF181515" Style="{DynamicResource SubMenuItemStyle}" Header="Français" FontSize="12" Padding="0,6" BorderThickness="0" Click="MenuItemFrench_Click"/>
+                            <MenuItem Background="#FF181515" Style="{DynamicResource SubMenuItemStyle}" Header="Anglais" FontSize="12" Padding="0,6" Click="MenuItemEnglish_Click"/>
+                            <MenuItem Background="#FF181515" Style="{DynamicResource SubMenuItemStyle}" Header="Allemand" FontSize="12" Padding="0,6" Click="MenuItemGerman_Click"/>
+                            <MenuItem Background="#FF181515" Style="{DynamicResource SubMenuItemStyle}" Header="Espagnol" FontSize="12" Padding="0,6" Click="MenuItemSpanish_Click"/>
+                            <MenuItem Background="#FF181515" Style="{DynamicResource SubMenuItemStyle}" Header="Italien" FontSize="12" Padding="0,6" Click="MenuItemItalian_Click"/>
                         </MenuItem>
                         <MenuItem Background="#FF181515" InputGestureText="Alt+F4" Header="{x:Static properties:Resources.MenuExit}" Click="Quit" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                     </MenuItem>
