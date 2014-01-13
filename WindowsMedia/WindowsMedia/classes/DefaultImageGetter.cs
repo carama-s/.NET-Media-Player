@@ -23,6 +23,12 @@ namespace WindowsMedia
         public BitmapImage Movie { get; private set; }
         public BitmapImage Music { get; private set; }
 
+        public BitmapImage French { get; private set; }
+        public BitmapImage English { get; private set; }
+        public BitmapImage German { get; private set; }
+        public BitmapImage Spanish { get; private set; }
+        public BitmapImage Italian { get; private set; }
+
         public List<BitmapImage> Playlists { get; private set; }
 
         public ImageBrush EnableRepeat { get; private set; }
@@ -83,6 +89,12 @@ namespace WindowsMedia
             Image = ConvertToBitmapImage(Resources.DefaultPicImage);
             Movie = ConvertToBitmapImage(Resources.DefaultVideoImage);
             Music = ConvertToBitmapImage(Resources.DefaultMusicImage);
+
+            French = ConvertToBitmapImage(Resources.French);
+            English = ConvertToBitmapImage(Resources.English);
+            German = ConvertToBitmapImage(Resources.German);
+            Spanish = ConvertToBitmapImage(Resources.Spanish);
+            Italian = ConvertToBitmapImage(Resources.Italian);
 
             Playlists = new List<BitmapImage>();
             Playlists.Add(ConvertToBitmapImage(Resources.BluePlaylistIcon));
