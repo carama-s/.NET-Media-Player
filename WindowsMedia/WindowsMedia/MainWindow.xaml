@@ -50,17 +50,17 @@
                         <MenuItem.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.Background>
-                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="Ouvrir..." Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+B"  Header="Bibliothèque..." Click="OpenBiblioWindow" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Background="#FF181515" InputGestureText="F5" Header="Rafraîchir" Click="RefreshLib" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Background="#FF181515" Header="Langues" Foreground="White" BorderThickness="0" Padding="0,6" FontSize="12" Style="{DynamicResource MenuItemStyle}" >
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="{x:Static properties:Resources.MenuOpen}" Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+B"  Header="{x:Static properties:Resources.MenuLibrary}" Click="OpenBiblioWindow" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="F5" Header="{x:Static properties:Resources.MenuRefresh}" Click="RefreshLib" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" Header="{x:Static properties:Resources.MenuLanguage}" Foreground="White" BorderThickness="0" Padding="0,6" FontSize="12" Style="{DynamicResource MenuItemStyle}" >
                             <MenuItem Background="#FF181515" Header="Français" FontSize="12" Padding="0,6" BorderThickness="0" Style="{DynamicResource MenuItemStyle}" Click="MenuItemFrench_Click"/>
                             <MenuItem Background="#FF181515" Header="Anglais" FontSize="12" Padding="0,6" Click="MenuItemEnglish_Click"/>
                             <MenuItem Background="#FF181515" Header="Allemand" FontSize="12" Padding="0,6" Click="MenuItemGerman_Click"/>
                             <MenuItem Background="#FF181515" Header="Espagnol" FontSize="12" Padding="0,6" Click="MenuItemSpanish_Click"/>
                             <MenuItem Background="#FF181515" Header="Italien" FontSize="12" Padding="0,6" Click="MenuItemItalian_Click"/>
                         </MenuItem>
-                        <MenuItem Background="#FF181515" InputGestureText="Alt+F4" Header="Quitter" Click="Quit" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Alt+F4" Header="{x:Static properties:Resources.MenuExit}" Click="Quit" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                     </MenuItem>
                 </Menu>
                 <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="114" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" BorderThickness="0" VerticalAlignment="Center" Style="{DynamicResource ComboBoxMediaStyle}">
