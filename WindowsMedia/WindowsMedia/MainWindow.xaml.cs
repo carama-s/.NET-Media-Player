@@ -65,7 +65,7 @@ namespace WindowsMedia
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Lang = ConfigFile.Instance.Data.Lang;
-            String[] tab = { "CultureFR", "CultureEN", "CultureGE", "CultureSP", "CultureIT" };
+            String[] tab = { "CultureFR", "CultureUS", "CultureGE", "CultureSP", "CultureIT" };
             Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings[tab[(int)this.Lang]]);
 
             InitializeComponent();
@@ -1172,6 +1172,13 @@ namespace WindowsMedia
                 }
                 PlaylistBox_SourceUpdated();
             }
+        }
+
+        private void LanguageChange(object sender, RoutedEventArgs e)
+        {
+            LangWindow win = new LangWindow(this);
+            win.Owner = this;
+            win.ShowDialog();
         }
     }
 }
