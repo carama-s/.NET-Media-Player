@@ -53,7 +53,14 @@ namespace WindowsMedia
             else
             {
                 System.IO.File.Move(System.IO.Path.Combine(Library.PlaylistPath, InitName + ".m3u"), System.IO.Path.Combine(Library.PlaylistPath, TextBoxRename.Text + ".m3u"));
-                ParentWindow.RefreshLib(null, null);
+                lock (ParentWindow.lib_.Playlists)
+                {
+                    Playlist temp = new Playlist(((Playlist)ParentWindow.MainBox.SelectedItem).Medias);
+                    temp.Name = TextBoxRename.Text;
+                    ParentWindow.lib_.Playlists.RemoveAt(ParentWindow.MainBox.SelectedIndex);
+                    ParentWindow.lib_.Playlists.Insert(ParentWindow.MainBox.SelectedIndex, temp);
+                    ParentWindow.MainBox.ItemsSource = ParentWindow.lib_.Playlists;
+                }
                 this.Close();
             }
         }

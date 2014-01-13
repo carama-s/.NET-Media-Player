@@ -630,7 +630,7 @@ namespace WindowsMedia
         {
             if (MainBox.SelectedItems.Count > 0 && e.ChangedButton == MouseButton.Left)
             {
-                if (musicStyle_ != MusicStyle.ALBUM)
+                if (clickStyle_ == ClickStyle.MUSIC &&  musicStyle_ != MusicStyle.ALBUM)
                 {
                     var al = (MusicArtist)MainBox.SelectedItem;
                     MainBox.ItemsSource = al;

@@ -55,12 +55,14 @@ namespace WindowsMedia
             {
                 Playlist actual = new Playlist();
                 foreach (var item in this.ParentWindow.PlaylistBox.Items)
-                {
-                    actual.AddItem((MediaItem)item);
-                }
+                    actual.AddItem((MediaItem)((MediaItem)item).Clone());
                 actual.Name = TextBoxAdd.Text;
                 actual.SaveToFile();
-                ParentWindow.RefreshLib(null, null);
+                lock (ParentWindow.lib_.Playlists)
+                {
+                    ParentWindow.lib_.Playlists.Add(actual);
+                    ParentWindow.MainBox.ItemsSource = ParentWindow.lib_.Playlists;
+                }
                 this.Close();
             }
         }
