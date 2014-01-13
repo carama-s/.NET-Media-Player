@@ -61,11 +61,6 @@ namespace WindowsMedia
 
         public MainWindow()
         {
-            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
-
-            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureUS"]);
-            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
-
             this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
@@ -1171,6 +1166,31 @@ namespace WindowsMedia
                 }
                 PlaylistBox_SourceUpdated();
             }
+        }
+
+        private void MenuItemFrench_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
+        }
+
+        private void MenuItemEnglish_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureUS"]);
+        }
+
+        private void MenuItemGerman_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemSpanish_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemItalian_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -42,7 +42,7 @@
                     <Button x:Name="ButtonSupprimer" Content="Supprimer" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonSupprimer_Click"/>
                     <Button x:Name="ButtonCreer" Content="Ajouter" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonCreer_Click"/>
                 </Grid>
-                <Menu Style="{DynamicResource MenuStyle}" IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
+                <Menu IsMainMenu ="True" Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FF181515" Width="20" Height="20">
                     <MenuItem x:Name="Menu" Header="" BorderThickness="0" Padding="0" Width="20" Height="20" SnapsToDevicePixels="False">
                         <MenuItem.OpacityMask>
                             <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
@@ -50,15 +50,17 @@
                         <MenuItem.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.Background>
-                        <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
-                        <MenuItem InputGestureText="Ctrl+B" Style="{DynamicResource MenuItemStyle}" Header="Bibliothèque..." Click="OpenBiblioWindow"/>
-                        <MenuItem InputGestureText="F5" Style="{DynamicResource MenuItemStyle}" Header="Rafraîchir" Click="RefreshLib"/>
-                        <MenuItem Header="Langues" Style="{DynamicResource MenuItemStyle}" HorizontalAlignment="Left">
-                            <MenuItem Header="Français" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Anglais" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Italien" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="Ouvrir..." Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+B"  Header="Bibliothèque..." Click="OpenBiblioWindow" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="F5" Header="Rafraîchir" Click="RefreshLib" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" Header="Langues" Foreground="White" BorderThickness="0" Padding="0,6" FontSize="12" Style="{DynamicResource MenuItemStyle}" >
+                            <MenuItem Background="#FF181515" Header="Français" FontSize="12" Padding="0,6" BorderThickness="0" Style="{DynamicResource MenuItemStyle}" Click="MenuItemFrench_Click"/>
+                            <MenuItem Background="#FF181515" Header="Anglais" FontSize="12" Padding="0,6" Click="MenuItemEnglish_Click"/>
+                            <MenuItem Background="#FF181515" Header="Allemand" FontSize="12" Padding="0,6" Click="MenuItemGerman_Click"/>
+                            <MenuItem Background="#FF181515" Header="Espagnol" FontSize="12" Padding="0,6" Click="MenuItemSpanish_Click"/>
+                            <MenuItem Background="#FF181515" Header="Italien" FontSize="12" Padding="0,6" Click="MenuItemItalian_Click"/>
                         </MenuItem>
-                        <MenuItem InputGestureText="Alt+F4" Style="{DynamicResource MenuItemStyle}" Header="Quitter" Click="Quit"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Alt+F4" Header="Quitter" Click="Quit" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                     </MenuItem>
                 </Menu>
                 <ComboBox x:Name="BoxSelectMedia" HorizontalAlignment="Right" Margin="0" SelectedIndex="1" Width="114" SelectionChanged="BoxSelectMedia_SelectionChanged" Background="#FF181515" BorderThickness="0" VerticalAlignment="Center" Style="{DynamicResource ComboBoxMediaStyle}">
