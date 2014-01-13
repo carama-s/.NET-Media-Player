@@ -363,13 +363,13 @@ namespace WindowsMedia.classes
             var tmps = new List<Tuple<String, String[], ManualResetEvent, ClickStyle, int>> {
                 Tuple.Create(MusicPath, MediaItem.MusicExtensions, new ManualResetEvent(false), ClickStyle.MUSIC, 100),
                 Tuple.Create(VideoPath, MediaItem.VideoExtensions, new ManualResetEvent(false), ClickStyle.VIDEO, 1),
-                Tuple.Create(ImagePath, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 100),
+                Tuple.Create(ImagePath, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 200),
             };
             foreach (var dir in ConfigFile.Instance.Data.BiblioFiles)
             {
                 tmps.Add(Tuple.Create(dir, MediaItem.MusicExtensions, new ManualResetEvent(false), ClickStyle.MUSIC, 100));
                 tmps.Add(Tuple.Create(dir, MediaItem.VideoExtensions, new ManualResetEvent(false), ClickStyle.VIDEO, 1));
-                tmps.Add(Tuple.Create(dir, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 100));
+                tmps.Add(Tuple.Create(dir, MediaItem.ImageExtensions, new ManualResetEvent(false), ClickStyle.IMAGE, 200));
             }
             foreach (var tmp in tmps)
                 ThreadPool.QueueUserWorkItem(GenerateLibraryThreadMedia, tmp);

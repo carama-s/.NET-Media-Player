@@ -13,6 +13,7 @@ namespace WindowsMedia.classes
     public class ImageFile : MediaItem, INotifyPropertyChanged
     {
         public String Description { get; private set; }
+        public Uri toto { get; private set; }
 
         public ImageFile(String path)
         {
