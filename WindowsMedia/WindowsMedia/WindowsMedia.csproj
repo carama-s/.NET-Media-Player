@@ -210,7 +210,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.es-ES.resx" />
     <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
-    <EmbeddedResource Include="Resources.de-DE.resx" />
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
