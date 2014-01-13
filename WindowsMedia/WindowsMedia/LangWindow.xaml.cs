@@ -18,23 +18,32 @@ namespace WindowsMedia
     /// <summary>
     /// Interaction logic for BiblioWindow.xaml
     /// </summary>
-    public partial class BiblioWindow : MetroWindow
+    /// 
+    public class LangItem
+    {
+        public string Text { get; set; }
+        public BitmapImage Image { get; set; }
+
+        public LangItem(string lang, BitmapImage image)
+        {
+            Text = lang;
+            Image = image;
+        }
+    }
+
+    public partial class LangWindow : MetroWindow
     {
         private MainWindow ParentWindow { get; set; }
 
-        public BiblioWindow(MainWindow parent)
+        public LangWindow(MainWindow parent)
         {
-            List<String> Display;
+            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, DefaultImageGetter.Instance.French), new LangItem(Properties.Resources.StringEnglish, DefaultImageGetter.Instance.English), new LangItem(Properties.Resources.StringDeutch, DefaultImageGetter.Instance.German), new LangItem(Properties.Resources.StringSpanish, DefaultImageGetter.Instance.Spanish), new LangItem(Properties.Resources.StringItalian, DefaultImageGetter.Instance.Italian) };
             ParentWindow = parent;
             InitializeComponent();
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
-            Display = new List<string>(ConfigFile.Instance.Data.BiblioFiles);
-            foreach (string path in Display)
-            {
-                ListBoxBiblio.Items.Add(path);
-            }
+            this.ListBoxLang.ItemsSource = Display;
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
@@ -43,26 +52,10 @@ namespace WindowsMedia
                 ButtonCancel_Click(sender, null);
         }
 
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
-            dlg.ShowDialog();
-            if (dlg.SelectedPath != "" && !ListBoxBiblio.Items.Contains(dlg.SelectedPath))
-                ListBoxBiblio.Items.Add(dlg.SelectedPath);
-        }
-
-        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListBoxBiblio.SelectedItem != null)
-            {
-                ListBoxBiblio.Items.RemoveAt(ListBoxBiblio.SelectedIndex);
-            }
-        }
-
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             ConfigFile.Instance.Data.BiblioFiles = new List<string>();
-            foreach (var item in ListBoxBiblio.Items)
+            foreach (var item in ListBoxLang.Items)
             {
                 ConfigFile.Instance.Data.BiblioFiles.Add((String)item);
             }

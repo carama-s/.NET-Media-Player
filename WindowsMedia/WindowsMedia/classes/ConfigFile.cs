@@ -37,6 +37,7 @@ namespace WindowsMedia
         public MusicStyle Style = MusicStyle.ALBUM;
         public List<String> BiblioFiles = new List<String>();
         public WindowState WinState = WindowState.Normal;
+        public Language Lang = Language.FRENCH;
     }
 
     class ConfigFile

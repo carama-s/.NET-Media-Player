@@ -141,6 +141,16 @@
             </StackPanel>
         </Grid>
     </DataTemplate>
+    <!-- Temlate pour ListBoxLang-->
+    <DataTemplate x:Key="ListLangTemplate">
+        <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Margin="0,5,0,0">
+                <Image Source="{Binding Image}"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Text}" Foreground="White" FontSize="14.667" FontWeight="Bold" TextTrimming="WordEllipsis"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
     <!-- Temlate pour ListBoxSearch (Music)-->
     <DataTemplate x:Key="BoxSearchTemplate">
         <Grid Height="64.8" d:DesignWidth="307.2" d:DesignHeight="132">

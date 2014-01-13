@@ -22,6 +22,10 @@ using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Reflection;
+using System.Globalization;
+using System.Resources;
+using System.Configuration;
 
 namespace WindowsMedia
 {
@@ -32,6 +36,7 @@ namespace WindowsMedia
     public enum State { PLAY, STOP, PAUSE };
     public enum MusicStyle { ALBUM, ARTIST, GENRE };
     public enum ClickStyle { SELECTION, MUSIC, IMAGE, VIDEO };
+    public enum Language { FRENCH, ENGLISH, GERMAN, SPANISH, ITALIAN}
 
     public partial class MainWindow : MetroWindow
     {
@@ -40,6 +45,7 @@ namespace WindowsMedia
         private State state_;
         public MusicStyle musicStyle_;
         public ClickStyle clickStyle_;
+        public Language Lang;
         private bool isMuted_;
         private bool isFullScreen_;
         private bool isRepeat_;
@@ -51,15 +57,16 @@ namespace WindowsMedia
         private double oldSize_;
         public Library lib_;
         private bool isInit;
-
         private int currentIndexLecture_;
 
 
         public MainWindow()
         {
-            this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
+            this.Lang = ConfigFile.Instance.Data.Lang;
+            String[] tab = { "CultureFR", "CultureEN", "CultureGE", "CultureSP", "CultureIT" };
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings[tab[(int)this.Lang]]);
 
             InitializeComponent();
             this.Width = ConfigFile.Instance.Data.Width;
@@ -69,6 +76,7 @@ namespace WindowsMedia
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.isInit = false;
+            this.oldSize_ = -1;
 
             this.timer_Slide = new DispatcherTimer();
             this.timer_Slide.Interval = TimeSpan.FromMilliseconds(100);
@@ -841,7 +849,7 @@ namespace WindowsMedia
 
         private void OpenBiblioWindow(object sender, RoutedEventArgs e)
         {
-            var newwindow = new BiblioWindow(this);
+            var newwindow = new LangWindow(this);
             newwindow.Owner = this;
             newwindow.ShowDialog();
         }
@@ -1049,6 +1057,7 @@ namespace WindowsMedia
             ConfigFile.Instance.Data.Volume = (int)this.SliderVolume.Value;
             ConfigFile.Instance.Data.Style = this.musicStyle_;
             ConfigFile.Instance.Data.WinState = this.WindowState;
+            ConfigFile.Instance.Data.Lang = this.Lang;
 
             if (this.WindowState == System.Windows.WindowState.Maximized)
             {

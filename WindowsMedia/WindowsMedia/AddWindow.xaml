@@ -1,8 +1,9 @@
 ﻿<Controls:MetroWindow x:Class="WindowsMedia.AddWindow"
+        xmlns:properties="clr-namespace:WindowsMedia.Properties"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="AddWindow" Height="176" Width="300" ResizeMode="NoResize">
+        Title="{x:Static properties:Resources.AddWindowTitle}" Height="176" Width="300" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,12 +14,12 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="AddWindow1" Background="#FF686868" Width="300" Height="270.4">
-        <Label x:Name="LabelName" Content="Nom de la sélection :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Height="26" FontWeight="Bold" Width="128" Foreground="White"/>
+        <Label x:Name="LabelName" Content="{x:Static properties:Resources.LabelAdd}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0" Height="26" FontWeight="Bold" Width="128" Foreground="White"/>
         <TextBox x:Name="TextBoxAdd" HorizontalAlignment="Right" Height="25.6" Text="" VerticalAlignment="Top" Width="148" Margin="0,20,10,0" BorderThickness="0" Grid.ColumnSpan="2" BorderBrush="Black" Background="#FF939393" Foreground="White"/>
-        <Button x:Name="ButtonAnnuler" Content="Annuler" HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Margin="0,100,50,0" BorderBrush="#FFBABABA" Click="ButtonAnnuler_Click" Foreground="#FF707070" Style="{DynamicResource ButtonStyleSubWindow}"/>
-        <Button x:Name="BoutonValider" Content="Valider" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="50,100,0,0" BorderBrush="#FFBABABA" Click="BoutonValider_Click" Background="#FFF7F7F7" Foreground="#FF707070" Style="{DynamicResource ButtonStyleSubWindow}"/>
-        <Label x:Name="LabelWarningUsed" Content="Le nom saisi est déjà utilisé par une autre sélection !" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
-        <Label x:Name="LabelWarningEmpty" Content="Le nom de la sélection ne peut pas être vide !" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
-        <Label x:Name="LabelWarningPlaylist" Content="La liste de lecture est vide !" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
+        <Button x:Name="ButtonAnnuler" Content="{x:Static properties:Resources.ButtonCancel}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Margin="0,100,50,0" BorderBrush="#FFBABABA" Click="ButtonAnnuler_Click" Foreground="#FF707070" Style="{DynamicResource ButtonStyleSubWindow}"/>
+        <Button x:Name="BoutonValider" Content="{x:Static properties:Resources.ButtonOk}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="50,100,0,0" BorderBrush="#FFBABABA" Click="BoutonValider_Click" Background="#FFF7F7F7" Foreground="#FF707070" Style="{DynamicResource ButtonStyleSubWindow}"/>
+        <Label x:Name="LabelWarningUsed" Content="{x:Static properties:Resources.LabelUsed}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
+        <Label x:Name="LabelWarningEmpty" Content="{x:Static properties:Resources.LabelEmpty}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
+        <Label x:Name="LabelWarningPlaylist" Content="{x:Static properties:Resources.LabelPlaylist}" Margin="0,57,0,0" VerticalAlignment="Top" Foreground="#FFFE5353" HorizontalContentAlignment="Center" Visibility="Hidden" FontWeight="Bold" FontSize="11"/>
     </Grid>
 </Controls:MetroWindow>

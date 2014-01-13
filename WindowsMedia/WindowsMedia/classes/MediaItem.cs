@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -39,7 +41,7 @@ namespace WindowsMedia.classes
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var nb = (Int32)value;
-            return String.Format("{0:d2} {1:d2}", nb.ToString(), "éléments");
+            return String.Format("{0:d2} {1:d2}", nb.ToString(), Properties.Resources.BoxElements);
         }
 
         public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo culture)
