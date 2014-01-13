@@ -21,7 +21,6 @@ using MahApps.Metro.Controls;
 using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
-using MyToolkit.Multimedia;
 using System.Net.Http;
 
 namespace WindowsMedia
@@ -97,7 +96,7 @@ namespace WindowsMedia
             BoxSelectMedia_SelectionChanged(sender, null);
             this.isInit = true;
             string[] cmdLine = Environment.GetCommandLineArgs();
-            if (cmdLine.Length > 1)
+            if (cmdLine.Length > 1 && (MediaItem.MusicExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1])) || MediaItem.ImageExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1])) || MediaItem.VideoExtensions.Contains(System.IO.Path.GetExtension(cmdLine[1]))))
                 PlayFromString(cmdLine[1]);
         }
 
