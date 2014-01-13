@@ -298,11 +298,13 @@
     <Resource Include="Resources\loupe.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\drapeau-allemagne-icone-32.png" />
-    <Resource Include="Resources\drapeau-espagne-icone-32.png" />
-    <Resource Include="Resources\drapeau-france-icone-32.png" />
-    <Resource Include="Resources\drapeau-italien-icone-32.png" />
-    <Resource Include="Resources\drapeau-royaume-uni-icone-32.png" />
+    <Resource Include="Resources\flag-de.png" />
+    <Resource Include="Resources\flag-es.png" />
+    <Resource Include="Resources\flag-fr.png" />
+    <Resource Include="Resources\flag-it.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\flag-gb.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
