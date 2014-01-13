@@ -273,6 +273,7 @@ namespace WindowsMedia
                         this.CurrentTime.Text = "00:00:00";
                         this.SliderTime.Value = 0;
                     }
+
                     String[] media = this.source_.Split('\\');
                     MediaItem item = (MediaItem)PlaylistBox.Items[currentIndexLecture_];
                     this.duree_ = item.Duration;
