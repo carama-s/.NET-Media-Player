@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="WindowsMedia" MinWidth="480" MinHeight="340" Icon="pack://application:,,,/Resources/icone.png" Closed="MetroWindow_Closed">
+        Title="MediaStation" MinWidth="480" MinHeight="340" Icon="pack://application:,,,/Resources/icone.png" Closed="MetroWindow_Closed">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
