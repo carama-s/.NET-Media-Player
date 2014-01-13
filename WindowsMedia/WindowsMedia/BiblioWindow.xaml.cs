@@ -28,7 +28,6 @@ namespace WindowsMedia
             ParentWindow = parent;
             InitializeComponent();
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
-            this.Title = "Gérer la bibliothèque";
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
             Display = new List<string>(ConfigFile.Instance.Data.BiblioFiles);

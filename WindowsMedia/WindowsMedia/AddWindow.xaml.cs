@@ -28,7 +28,6 @@ namespace WindowsMedia
         {
             ParentWindow = parent;
             InitializeComponent();
-            this.Title = "Ajouter une sélection";
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);

@@ -61,11 +61,7 @@ namespace WindowsMedia
 
         public MainWindow()
         {
-            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
-
             Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureUS"]);
-            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
-
             this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);

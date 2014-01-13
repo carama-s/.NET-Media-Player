@@ -117,7 +117,97 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddWindowTitle" xml:space="preserve">
+    <value>Add a playlist</value>
+  </data>
+  <data name="BiblioWindowTitle" xml:space="preserve">
+    <value>Manage libraries</value>
+  </data>
+  <data name="BoxElements" xml:space="preserve">
+    <value>elements</value>
+  </data>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Add...</value>
+  </data>
+  <data name="ButtonAlbum" xml:space="preserve">
+    <value>Albums</value>
+  </data>
   <data name="ButtonArtist" xml:space="preserve">
     <value>Artists</value>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ButtonDel" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ButtonGenre" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="ButtonOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ButtonPlaylistAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ButtonPlaylistDel" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ButtonPlaylistRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="DeleteWindowTitle" xml:space="preserve">
+    <value>Delete a playlist</value>
+  </data>
+  <data name="LabelAdd" xml:space="preserve">
+    <value>Playlist name :</value>
+  </data>
+  <data name="LabelBiblio" xml:space="preserve">
+    <value>Libraries location</value>
+  </data>
+  <data name="LabelDel" xml:space="preserve">
+    <value>Are you sure you want to delete this playlist</value>
+  </data>
+  <data name="LabelEmpty" xml:space="preserve">
+    <value>The name cannot be empty !</value>
+  </data>
+  <data name="LabelPlaylist" xml:space="preserve">
+    <value>The playlist is empty !</value>
+  </data>
+  <data name="LabelRename" xml:space="preserve">
+    <value>Playlist name :</value>
+  </data>
+  <data name="LabelUsed" xml:space="preserve">
+    <value>This name is already used by another playlist !</value>
+  </data>
+  <data name="MenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MenuImage" xml:space="preserve">
+    <value>PICTURES</value>
+  </data>
+  <data name="MenuLanguage" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="MenuLibrary" xml:space="preserve">
+    <value>Libraries...</value>
+  </data>
+  <data name="MenuMusic" xml:space="preserve">
+    <value>MUSICS</value>
+  </data>
+  <data name="MenuOpen" xml:space="preserve">
+    <value>Open...</value>
+  </data>
+  <data name="MenuRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MenuSelection" xml:space="preserve">
+    <value>PLAYLISTS</value>
+  </data>
+  <data name="MenuVideo" xml:space="preserve">
+    <value>VIDEOS</value>
+  </data>
+  <data name="RenameWindowTitle" xml:space="preserve">
+    <value>Rename a playlist</value>
   </data>
 </root>
