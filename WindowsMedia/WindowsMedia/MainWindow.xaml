@@ -53,6 +53,11 @@
                         <MenuItem InputGestureText="Ctrl+O" Style="{DynamicResource MenuItemStyle}" Header="Ouvrir..." Click="PlayItem"/>
                         <MenuItem InputGestureText="Ctrl+B" Style="{DynamicResource MenuItemStyle}" Header="Bibliothèque..." Click="OpenBiblioWindow"/>
                         <MenuItem InputGestureText="F5" Style="{DynamicResource MenuItemStyle}" Header="Rafraîchir" Click="RefreshLib"/>
+                        <MenuItem Header="Langues" Style="{DynamicResource MenuItemStyle}" HorizontalAlignment="Left">
+                            <MenuItem Header="Français" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
+                            <MenuItem Header="Anglais" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
+                            <MenuItem Header="Italien" HorizontalAlignment="Left" Style="{DynamicResource MenuItemStyle}"/>
+                        </MenuItem>
                         <MenuItem InputGestureText="Alt+F4" Style="{DynamicResource MenuItemStyle}" Header="Quitter" Click="Quit"/>
                     </MenuItem>
                 </Menu>
