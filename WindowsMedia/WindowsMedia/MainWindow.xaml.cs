@@ -22,6 +22,10 @@ using MahApps.Metro;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Reflection;
+using System.Globalization;
+using System.Resources;
+using System.Configuration;
 
 namespace WindowsMedia
 {
@@ -57,6 +61,11 @@ namespace WindowsMedia
 
         public MainWindow()
         {
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
+
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureUS"]);
+            Properties.Resources.Culture = new CultureInfo(ConfigurationManager.AppSettings["CultureFR"]);
+
             this.oldSize_ = -1;
             this.Loaded += MainWindow_Loaded;
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);

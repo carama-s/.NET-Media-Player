@@ -71,6 +71,15 @@ namespace WindowsMedia.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Artistes.
+        /// </summary>
+        public static string ButtonArtist {
+            get {
+                return ResourceManager.GetString("ButtonArtist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap DefaultMusicImage {

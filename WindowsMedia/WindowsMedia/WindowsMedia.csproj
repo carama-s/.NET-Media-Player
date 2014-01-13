@@ -67,6 +67,7 @@
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
@@ -110,6 +111,9 @@
     <Compile Include="DeleteWindow.xaml.cs">
       <DependentUpon>DeleteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EnglishLangage.xaml.cs">
+      <DependentUpon>EnglishLangage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +121,11 @@
     </Compile>
     <Compile Include="RenameWindow.xaml.cs">
       <DependentUpon>RenameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.en-US.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.en-US.resx</DependentUpon>
     </Compile>
     <Page Include="AddWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +146,10 @@
     <Page Include="dictionnaries\TemplateDictionnary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EnglishLangage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +194,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr-FR.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

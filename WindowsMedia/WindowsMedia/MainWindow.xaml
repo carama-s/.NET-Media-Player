@@ -1,4 +1,5 @@
 ﻿<Controls:MetroWindow
+        xmlns:properties="clr-namespace:WindowsMedia.Properties"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WindowsMedia.MainWindow"
@@ -32,7 +33,7 @@
             <ListBox x:Name="BoxSearchMusic" Margin="0,0,0,0" Grid.Column="0" ItemTemplate="{DynamicResource BoxSearchTemplate}" Grid.Row="1" Background="#FF181515" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden" MouseDoubleClick="BoxSearchMusic_MouseDoubleClick" MouseRightButtonUp="BoxSearchMusic_MouseRightButtonUp"/>
             <Grid x:Name="GridMenu" Margin="0" Grid.ColumnSpan="3" Background="#FF181515">
                 <Grid x:Name="GridMusicFilters" Margin="170,0">
-                    <Button x:Name="ButtonArtists" Content="Artistes" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
+                    <Button x:Name="ButtonArtists" Content="{x:Static properties:Resources.ButtonArtist}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" MinHeight="23" Height="23" Click="ButtonArtists_Click"/>
                     <Button x:Name="ButtonAlbums" Content="Albums" HorizontalAlignment="Center" Margin="-143,0,0,0" VerticalAlignment="Center" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Width="71" Height="23" MinHeight="23" Click="ButtonAlbums_Click"/>
                     <Button x:Name="ButtonGenres" Content="Genres" HorizontalAlignment="Center" Margin="143,0,0,0" VerticalAlignment="Center" Width="71" Padding="0" Style="{DynamicResource ButtonFilterMusicStyle}" Height="23" MinHeight="23" Click="ButtonGenres_Click"/>
                 </Grid>

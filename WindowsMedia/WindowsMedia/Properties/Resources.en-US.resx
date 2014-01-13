@@ -117,71 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BluePlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\blueplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ButtonArtist" xml:space="preserve">
-    <value>Artistes</value>
-  </data>
-  <data name="DefaultMusicImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultalbumart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DefaultPicImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultimage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DefaultVideoImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultvideoart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DisableRepeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-repeat-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DisableShuffle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-shuffle-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EnableRepeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-enable-repeat-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EnableShuffle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-enable-shuffle-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="GreenPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\greenplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Loupe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loupe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Mute" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-volumemute-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-next-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-pause-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PinkPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pinkplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-play-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PurplePlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\purpleplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RedPlaylistIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\redplaylisticon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-stop-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Volume1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-volume1-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Volume2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-volume2-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Volume3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-volumemax-barre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Artists</value>
   </data>
 </root>
