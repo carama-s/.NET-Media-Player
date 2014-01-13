@@ -34,16 +34,19 @@ namespace WindowsMedia
     public partial class LangWindow : MetroWindow
     {
         private MainWindow ParentWindow { get; set; }
+        private int lang { get; set; }
 
         public LangWindow(MainWindow parent)
         {
-            List<LangItem> Display = new List<LangItem> { new LangItem(Properties.Resources.StringFrench, DefaultImageGetter.Instance.French), new LangItem(Properties.Resources.StringEnglish, DefaultImageGetter.Instance.English), new LangItem(Properties.Resources.StringDeutch, DefaultImageGetter.Instance.German), new LangItem(Properties.Resources.StringSpanish, DefaultImageGetter.Instance.Spanish), new LangItem(Properties.Resources.StringItalian, DefaultImageGetter.Instance.Italian) };
+            string[] lang = { Properties.Resources.StringFrench, Properties.Resources.StringEnglish, Properties.Resources.StringDeutch, Properties.Resources.StringSpanish, Properties.Resources.StringItalian };
+            List<LangItem> Display = new List<LangItem> { new LangItem(lang[0], DefaultImageGetter.Instance.French), new LangItem(lang[1], DefaultImageGetter.Instance.English), new LangItem(lang[2], DefaultImageGetter.Instance.German), new LangItem(lang[3], DefaultImageGetter.Instance.Spanish), new LangItem(lang[4], DefaultImageGetter.Instance.Italian) };
             ParentWindow = parent;
             InitializeComponent();
             AddHandler(Keyboard.KeyDownEvent, (KeyEventHandler)WindowKeyDown);
             this.Top = ParentWindow.Top + (ParentWindow.Height / 2) - (this.Height / 2);
             this.Left = ParentWindow.Left + (ParentWindow.Width / 2) - (this.Width / 2);
             this.ListBoxLang.ItemsSource = Display;
+            LabelLang.Content = lang[(int)parent.Lang];
         }
 
         private void WindowKeyDown(object sender, KeyEventArgs e)
@@ -54,17 +57,23 @@ namespace WindowsMedia
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            ConfigFile.Instance.Data.BiblioFiles = new List<string>();
-            foreach (var item in ListBoxLang.Items)
-            {
-                ConfigFile.Instance.Data.BiblioFiles.Add((String)item);
-            }
+            if (ListBoxLang.SelectedIndex != -1)
+                ParentWindow.Lang = (Language)lang;
             this.Close();
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ListBoxLang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lang = ListBoxLang.SelectedIndex;
+            if (ListBoxLang.SelectedIndex != (int)ParentWindow.Lang)
+                WarningBox.Visibility = System.Windows.Visibility.Visible;  
+            else
+                WarningBox.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }
