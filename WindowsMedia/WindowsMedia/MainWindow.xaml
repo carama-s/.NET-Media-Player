@@ -50,7 +50,7 @@
                         <MenuItem.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Resources/menu-icon-bleu.png"/>
                         </MenuItem.Background>
-                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="{x:Static properties:Resources.MenuOpen}" Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Background="#FF181515" InputGestureText="Ctrl+O"  Header="{Binding Source={x:Static properties:Resources.MenuOpen}}" Click="PlayItem" Foreground="White" Padding="0,6" BorderThickness="0" Margin="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" InputGestureText="Ctrl+B"  Header="{x:Static properties:Resources.MenuLibrary}" Click="OpenBiblioWindow" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" InputGestureText="F5" Header="{x:Static properties:Resources.MenuRefresh}" Click="RefreshLib" Foreground="White" Padding="0,6" BorderThickness="0" FontSize="12" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Background="#FF181515" Header="{x:Static properties:Resources.MenuLanguage}" Foreground="White" BorderThickness="0" Padding="0,6" FontSize="12" Style="{DynamicResource MenuItemStyle}" >
